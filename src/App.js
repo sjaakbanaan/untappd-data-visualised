@@ -1,9 +1,9 @@
-import BeerList from './BeerList'; // Import your BeerList component
+import BeerDashboard from './BeerDashboard.jsx'; // Import your BeerDashboard component
 
 function App() {
   return (
     <div>
-      <BeerList />
+      <BeerDashboard />
     </div>
   );
 }

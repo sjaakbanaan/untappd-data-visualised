@@ -1,0 +1,98 @@
+{
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true,
+    "jest": true
+  },
+  "extends": ["eslint:recommended", "prettier"],
+  "root": true,
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "allowImportExportEverywhere": true,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "jsx-a11y", "import"],
+  "rules": {
+    "camelcase": [
+      "off",
+      {
+        "ignoreDestructuring": true,
+        "allow": ["UNSAFE_componentWillMount"]
+      }
+    ],
+    "comma-dangle": "off",
+    "eqeqeq": "off",
+    "no-unused-expressions": "warn",
+    "array-callback-return": "warn",
+    "prefer-const": "warn",
+    "global-require": 0,
+    "linebreak-style": ["error", "unix"],
+    "max-len": "off",
+    "no-console": 1,
+    "no-underscore-dangle": [
+      "error",
+      {
+        "allow": ["_id", "__typename", "__schema"]
+      }
+    ],
+    "no-param-reassign": 0,
+    "no-shadow": "off",
+    "object-curly-newline": "off",
+
+    "import/no-unresolved": [
+      2,
+      {
+        "commonjs": true
+      }
+    ],
+    "import/extensions": [
+      "error",
+      "never",
+      {
+        "json": "always"
+      }
+    ],
+    "import/no-dynamic-require": "off",
+    "import/prefer-default-export": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "jsx-a11y/media-has-caption": "off",
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      {
+        "required": {
+          "some": ["nesting", "id"]
+        }
+      }
+    ],
+    "jsx-a11y/label-has-for": [
+      "error",
+      {
+        "required": {
+          "some": ["nesting", "id"]
+        }
+      }
+    ],
+    "jsx-quotes": ["error", "prefer-double"],
+    "quotes": ["error", "single"],
+    "react/jsx-uses-vars": "error",
+    "react/no-array-index-key": "off",
+    "react/jsx-one-expression-per-line": 0,
+    "react/no-find-dom-node": 1,
+    "react/jsx-uses-react": "off",
+    "react/no-string-refs": 1,
+    "react/no-danger": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": [
+      2,
+      {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    ],
+    "react/jsx-props-no-spreading": "off",
+    "semi": ["error", "always"]
+  }
+}
