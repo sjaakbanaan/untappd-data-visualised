@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import LeafletMap from './LeafletMap';
+import { formatDate } from './utils';
 
 const BeerList = () => {
 
@@ -56,14 +57,9 @@ const BeerList = () => {
     setFilteredData(filteredResults);
   }, [beerData, filterBrewery, filterDateRange]);
 
-   // Helper function to format the date
-  const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString(undefined, options);
-  };
-
   return (
     <div className="container mx-auto mt-8 p-8 bg-gray-100 rounded shadow-md">
+      <h1 className="mb-5 text-4xl font-bold">Untappd 10 Years App</h1>
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2">Brewery:</label>
         <input
