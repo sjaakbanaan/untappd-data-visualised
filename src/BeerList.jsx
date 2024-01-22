@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import LeafletMap from './LeafletMap';
 
 const BeerList = () => {
 
@@ -28,7 +29,7 @@ const BeerList = () => {
         const response = await fetch('/beers.json');
         const data = await response.json();
         setBeerData(data);
-        setFilteredData(data); // Initial load without filters
+        setFilteredData(); // Initial load without filters
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -55,37 +56,53 @@ const BeerList = () => {
     setFilteredData(filteredResults);
   }, [beerData, filterBrewery, filterDateRange]);
 
+   // Helper function to format the date
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
   return (
-    <div>
-      <div>
-        <label>Brewery Name:</label>
+    <div className="container mx-auto mt-8 p-8 bg-gray-100 rounded shadow-md">
+      <div className="mb-4">
+        <label className="block text-gray-700 text-sm font-bold mb-2">Brewery:</label>
         <input
           type="text"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           value={filterBrewery}
           onChange={(e) => setFilterBrewery(e.target.value)}
         />
       </div>
-      <div>
-        <label>Created Between:</label>
-        <input
-          type="date"
-          value={filterDateRange.start}
-          onChange={(e) =>
-            setFilterDateRange({ ...filterDateRange, start: e.target.value })
-          }
-        />
-        <input
-          type="date"
-          value={filterDateRange.end}
-          onChange={(e) =>
-            setFilterDateRange({ ...filterDateRange, end: e.target.value })
-          }
-        />
-      </div>
-      <ul>
-        {filteredData.map((item) => (
-          <li key={item.checkin_id}>
-            <strong>{item.beer_name}</strong> - {item.brewery_name}, Rating: {item.rating_score}
+      <div className="mb-4">
+        <label className="block text-gray-700 text-sm font-bold mb-2">Created Between:</label>
+        <div className="flex">
+          <input
+            type="date"
+            className="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            value={filterDateRange.start}
+            onChange={(e) => setFilterDateRange({ ...filterDateRange, start: e.target.value })}
+          />
+          <input
+            type="date"
+            className="ml-2 shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            value={filterDateRange.end}
+            onChange={(e) => setFilterDateRange({ ...filterDateRange, end: e.target.value })}
+          />
+        </div>
+      </div>  
+      {filteredData?.length > 0 && (
+        <div className="overflow-hidden rounded shadow-md my-4">
+          <LeafletMap beerData={filteredData} />
+        </div>
+      )}    
+      <ul className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        {filteredData?.length > 0 && filteredData.map((item) => (
+          <li key={item.checkin_id} className="bg-white rounded-lg p-4 shadow-md">
+            <h2 className="text-xl font-semibold mb-2">{item.beer_name}</h2>
+            {/* <img src={item.photo_url} alt="" /> */}
+            <p className="text-gray-700 mb-2">{item.brewery_name}</p>
+            <p className="text-gray-600">Created at: {formatDate(item.created_at)}</p>
+            <p className="text-green-600">Rating: {item.rating_score}</p>
           </li>
         ))}
       </ul>
