@@ -1,31 +1,32 @@
 import 'chart.js/auto';
 import { Pie } from 'react-chartjs-2';
 
-const PieChart = ({ beerData }) => {
-  // Function to process brewery names and return a dataset for the Pie Chart
-  const processBreweryData = () => {
-    const breweryCount = beerData.reduce((acc, item) => {
-      const breweryName = item.brewery_name || 'Onbekend';
-      acc[breweryName] = (acc[breweryName] || 0) + 1;
+const PieChart = ({ beerData, dataType }) => {
+  const processData = () => {
+    let dataMap = {};
+    // Process brewery names
+    dataMap = beerData.reduce((acc, item) => {
+      const itemValue = item[dataType] || 'Unknown';
+      acc[itemValue] = (acc[itemValue] || 0) + 1;
       return acc;
     }, {});
 
     // Convert to array of objects
-    const breweryList = Object.keys(breweryCount).map((breweryName) => ({
-      name: breweryName,
-      count: breweryCount[breweryName],
+    const dataList = Object.keys(dataMap).map((name) => ({
+      name,
+      count: dataMap[name],
     }));
 
-    // Sort by count in descending order and take the top 50
-    const topBreweries = breweryList.sort((a, b) => b.count - a.count).slice(0, 10);
+    // Sort by count in descending order and take the top 10
+    const topItems = dataList.sort((a, b) => b.count - a.count).slice(0, 10);
 
-    const labels = topBreweries.map((brewery) => `${brewery.name}: ${brewery.count}`);
-    const data = topBreweries.map((brewery) => brewery.count);
+    const labels = topItems.map((item) => `${item.name}: ${item.count}`);
+    const data = topItems.map((item) => item.count);
 
     return { labels, data };
   };
 
-  const { labels, data } = processBreweryData();
+  const { labels, data } = processData();
 
   // const legendOptions = {
   //   display: true,
@@ -71,26 +72,23 @@ const PieChart = ({ beerData }) => {
   };
 
   return (
-    <div>
-      <h2 className="text-lg font-semibold mb-2">Top 10 Breweries</h2>
-      <Pie
-        options={{
-          elements: {
-            arc: {
-              borderWidth: 0,
+    <Pie
+      options={{
+        elements: {
+          arc: {
+            borderWidth: 0,
+          },
+        },
+        plugins: {
+          legend: {
+            labels: {
+              color: 'rgb(255, 255, 255)',
             },
           },
-          plugins: {
-            legend: {
-              labels: {
-                color: 'rgb(255, 255, 255)',
-              },
-            },
-          },
-        }}
-        data={chartData}
-      />
-    </div>
+        },
+      }}
+      data={chartData}
+    />
   );
 };
 

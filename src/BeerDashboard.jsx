@@ -82,7 +82,20 @@ const BeerDashboard = () => {
           <div className="container mx-auto mt-4 p-8 bg-gray-800 rounded shadow-md">
             <div className="grid lg:grid-cols-2 gap-8 text-white">
               <div>
-                <PieChart options={{ legend: legendOptions }} beerData={filteredData} />
+                <h2 className="text-lg font-semibold mb-2">Top 10 Breweries</h2>
+                <PieChart
+                  dataType="brewery_name"
+                  options={{ legend: legendOptions }}
+                  beerData={filteredData}
+                />
+              </div>
+              <div>
+                <h2 className="text-lg font-semibold mb-2">Top 10 Beer Styles</h2>
+                <PieChart
+                  dataType="beer_type"
+                  options={{ legend: legendOptions }}
+                  beerData={filteredData}
+                />
               </div>
               <div>
                 <div className="overflow-hidden border border-gray-900 rounded shadow-md my-4">
