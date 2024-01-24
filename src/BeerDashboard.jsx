@@ -18,11 +18,6 @@ const BeerDashboard = () => {
     return new Date().toISOString().split('T')[0];
   };
 
-  const legendOptions = {
-    display: true,
-    position: 'bottom',
-  };
-
   const [beerData, setBeerData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [filterBrewery, setFilterBrewery] = useState('');
@@ -34,6 +29,7 @@ const BeerDashboard = () => {
   useEffect(() => {
     // Fetch the JSON file or import it directly
     const fetchData = async () => {
+      console.error('kut..');
       try {
         const response = await fetch('/beers.json');
         const data = await response.json();
@@ -99,7 +95,7 @@ const BeerDashboard = () => {
       {filteredData?.length > 0 && (
         <>
           <div className="overflow-hidden m-0 mx-96 bg-white p-4 rounded shadow-md my-4">
-            <PieChart options={{ legend: legendOptions }} beerData={filteredData} />
+            <PieChart beerData={filteredData} />
           </div>
           <div className="overflow-hidden rounded shadow-md my-4">
             <LeafletMap beerData={filteredData} />
