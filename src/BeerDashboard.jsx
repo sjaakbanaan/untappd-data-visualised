@@ -69,7 +69,7 @@ const BeerDashboard = () => {
   }, [beerData, filterBrewery, filterDateRange]);
 
   return (
-    <div className="container mx-auto mt-8 p-8 bg-gray-100 rounded shadow-md">
+    <div className="container mx-auto p-8 bg-gray-900 text-white rounded shadow-md">
       {filteredData?.length && (
         <>
           <h1 className="text-center mb-5 text-4xl font-bold">My Untappd data</h1>
@@ -79,7 +79,7 @@ const BeerDashboard = () => {
             setFilterDateRange={setFilterDateRange}
           />
           <h2 className="text-xl font-bold">{filteredData?.length} results</h2>
-          <div className="container mx-auto mt-4 p-8 bg-gray-100 rounded shadow-md">
+          <div className="container mx-auto mt-4 p-8 bg-gray-800 rounded shadow-md">
             <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <PieChart options={{ legend: legendOptions }} beerData={filteredData} />
@@ -90,7 +90,7 @@ const BeerDashboard = () => {
                 </div>
               </div>
               <div>
-                <div className="overflow-hidden bg-slate-200 rounded shadow-md my-4 p-4">
+                <div className="overflow-hidden bg-gray-700 rounded shadow-md my-4 p-4">
                   <TaggedFriendsList beerData={filteredData} />
                 </div>
               </div>

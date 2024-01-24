@@ -2,7 +2,7 @@ import BeerDashboard from './BeerDashboard.jsx'; // Import your BeerDashboard co
 
 function App() {
   return (
-    <div>
+    <div className="bg-gray-900">
       <BeerDashboard />
     </div>
   );

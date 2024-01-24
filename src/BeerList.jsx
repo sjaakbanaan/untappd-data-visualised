@@ -23,9 +23,8 @@ const BeerList = ({ beerData, filterBrewery, setFilterBrewery }) => {
               beerData.map((item) => (
                 <li
                   key={item.checkin_id}
-                  className="bg-white rounded-lg p-4 shadow-md bg-cover"
+                  className="rounded-lg p-4 shadow-md bg-cover bg-gray-800 min-h-96"
                   style={{
-                    backgroundColor: 'rgba(40, 40, 40, 1)',
                     backgroundImage: `url(${item.photo_url})`,
                   }}
                 >
