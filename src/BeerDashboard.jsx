@@ -5,6 +5,7 @@ import LeafletMap from './LeafletMap.jsx';
 import TaggedFriendsList from './TaggedFriendsList.jsx';
 import BeerList from './BeerList.jsx';
 import PieChart from './PieChart.jsx';
+import DateSelector from './DateSelector.jsx';
 
 const BeerDashboard = () => {
   const getDefaultStartDate = () => {
@@ -18,6 +19,11 @@ const BeerDashboard = () => {
     return new Date().toISOString().split('T')[0];
   };
 
+  const legendOptions = {
+    display: true,
+    position: 'bottom',
+  };
+
   const [beerData, setBeerData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [filterBrewery, setFilterBrewery] = useState('');
@@ -29,7 +35,6 @@ const BeerDashboard = () => {
   useEffect(() => {
     // Fetch the JSON file or import it directly
     const fetchData = async () => {
-      console.error('kut..');
       try {
         const response = await fetch('/beers.json');
         const data = await response.json();
@@ -65,56 +70,37 @@ const BeerDashboard = () => {
 
   return (
     <div className="container mx-auto mt-8 p-8 bg-gray-100 rounded shadow-md">
-      <h1 className="mb-5 text-4xl font-bold">Untappd 10 Years App</h1>
       {filteredData?.length && (
-        <h2 className="mb-3 text-2xl font-bold">{filteredData?.length} resultaten</h2>
-      )}
-      <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2">
-          Created Between:
-        </label>
-        <div className="flex">
-          <input
-            type="date"
-            className="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            value={filterDateRange.start}
-            onChange={(e) =>
-              setFilterDateRange({ ...filterDateRange, start: e.target.value })
-            }
-          />
-          <input
-            type="date"
-            className="ml-2 shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            value={filterDateRange.end}
-            onChange={(e) =>
-              setFilterDateRange({ ...filterDateRange, end: e.target.value })
-            }
-          />
-        </div>
-      </div>
-      {filteredData?.length > 0 && (
         <>
-          <div className="overflow-hidden m-0 mx-96 bg-white p-4 rounded shadow-md my-4">
-            <PieChart beerData={filteredData} />
+          <h1 className="text-center mb-5 text-4xl font-bold">My Untappd data</h1>
+          <DateSelector
+            beerData={filteredData}
+            filterDateRange={filterDateRange}
+            setFilterDateRange={setFilterDateRange}
+          />
+          <h2 className="text-xl font-bold">{filteredData?.length} results</h2>
+          <div className="container mx-auto mt-4 p-8 bg-gray-100 rounded shadow-md">
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <PieChart options={{ legend: legendOptions }} beerData={filteredData} />
+              </div>
+              <div>
+                <div className="overflow-hidden rounded shadow-md my-4">
+                  <LeafletMap beerData={filteredData} />
+                </div>
+              </div>
+              <div>
+                <div className="overflow-hidden bg-slate-200 rounded shadow-md my-4 p-4">
+                  <TaggedFriendsList beerData={filteredData} />
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="overflow-hidden rounded shadow-md my-4">
-            <LeafletMap beerData={filteredData} />
-          </div>
-          <div className="overflow-hidden bg-slate-200 rounded shadow-md my-4 p-4">
-            <TaggedFriendsList beerData={filteredData} />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Brewery:</label>
-            <input
-              type="text"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              value={filterBrewery}
-              onChange={(e) => setFilterBrewery(e.target.value)}
-            />
-          </div>
-          <div>
-            <BeerList beerData={filteredData} />
-          </div>
+          <BeerList
+            beerData={filteredData}
+            filterBrewery={filterBrewery}
+            setFilterBrewery={setFilterBrewery}
+          />
         </>
       )}
     </div>

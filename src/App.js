@@ -1,7 +1,11 @@
-// import BeerDashboard from './BeerDashboard.jsx'; // Import your BeerDashboard component
+import BeerDashboard from './BeerDashboard.jsx'; // Import your BeerDashboard component
 
 function App() {
-  return <div>bla</div>;
+  return (
+    <div>
+      <BeerDashboard />
+    </div>
+  );
 }
 
 export default App;
