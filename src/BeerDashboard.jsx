@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import LeafletMap from './LeafletMap.jsx';
 import TaggedFriendsList from './TaggedFriendsList.jsx';
 import BeerList from './BeerList.jsx';
+import PieChart from './PieChart.jsx';
 
 const BeerDashboard = () => {
   const getDefaultStartDate = () => {
@@ -15,6 +16,11 @@ const BeerDashboard = () => {
 
   const getDefaultEndDate = () => {
     return new Date().toISOString().split('T')[0];
+  };
+
+  const legendOptions = {
+    display: true,
+    position: 'bottom',
   };
 
   const [beerData, setBeerData] = useState([]);
@@ -68,15 +74,6 @@ const BeerDashboard = () => {
         <h2 className="mb-3 text-2xl font-bold">{filteredData?.length} resultaten</h2>
       )}
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2">Brewery:</label>
-        <input
-          type="text"
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          value={filterBrewery}
-          onChange={(e) => setFilterBrewery(e.target.value)}
-        />
-      </div>
-      <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2">
           Created Between:
         </label>
@@ -101,11 +98,23 @@ const BeerDashboard = () => {
       </div>
       {filteredData?.length > 0 && (
         <>
+          <div className="overflow-hidden m-0 mx-96 bg-white p-4 rounded shadow-md my-4">
+            <PieChart options={{ legend: legendOptions }} beerData={filteredData} />
+          </div>
           <div className="overflow-hidden rounded shadow-md my-4">
             <LeafletMap beerData={filteredData} />
           </div>
           <div className="overflow-hidden bg-slate-200 rounded shadow-md my-4 p-4">
             <TaggedFriendsList beerData={filteredData} />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">Brewery:</label>
+            <input
+              type="text"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              value={filterBrewery}
+              onChange={(e) => setFilterBrewery(e.target.value)}
+            />
           </div>
           <div>
             <BeerList beerData={filteredData} />
