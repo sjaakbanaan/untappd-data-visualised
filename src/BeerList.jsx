@@ -27,11 +27,9 @@ const BeerList = ({ beerData, filterBrewery, setFilterBrewery }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block rounded-lg shadow-md bg-cover p-4 bg-gray-800 min-h-96 transition-transform transform hover:scale-105"
-                  // style={
-                  //   item.photo_url && {
-                  //     backgroundImage: `url(${item.photo_url})`,
-                  //   }
-                  // }
+                  style={{
+                    backgroundImage: `url(${item.photo_url})`,
+                  }}
                 >
                   <h2 className="text-xl text-white font-semibold mb-2">
                     {item.beer_name}
@@ -40,7 +38,7 @@ const BeerList = ({ beerData, filterBrewery, setFilterBrewery }) => {
                   <p className="text-white mb-2">{item.beer_type}</p>
                   <p className="text-white">Created at: {formatDate(item.created_at)}</p>
                   <p className="text-green-600">Rating: {item.rating_score}</p>
-                  <p className="text-white">@{item.venue_name}</p>
+                  {item.venue_name && <p className="text-white">@{item.venue_name}</p>}
                 </a>
               ))}
           </div>
