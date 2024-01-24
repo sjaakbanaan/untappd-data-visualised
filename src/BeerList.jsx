@@ -27,11 +27,11 @@ const BeerList = ({ beerData, filterBrewery, setFilterBrewery }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block rounded-lg shadow-md bg-cover p-4 bg-gray-800 min-h-96 transition-transform transform hover:scale-105"
-                  style={
-                    item.photo_url && {
-                      backgroundImage: `url(${item.photo_url})`,
-                    }
-                  }
+                  // style={
+                  //   item.photo_url && {
+                  //     backgroundImage: `url(${item.photo_url})`,
+                  //   }
+                  // }
                 >
                   <h2 className="text-xl text-white font-semibold mb-2">
                     {item.beer_name}
