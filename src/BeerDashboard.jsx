@@ -6,19 +6,9 @@ import TaggedFriendsList from './TaggedFriendsList.jsx';
 import BeerList from './BeerList.jsx';
 import PieChart from './PieChart.jsx';
 import DateSelector from './DateSelector.jsx';
+import { getDefaultStartDate, getDefaultEndDate, fetchData } from './utils';
 
 const BeerDashboard = () => {
-  const getDefaultStartDate = () => {
-    const currentDate = new Date();
-    const last30Days = new Date(currentDate);
-    last30Days.setDate(currentDate.getDate() - 30);
-    return last30Days.toISOString().split('T')[0];
-  };
-
-  const getDefaultEndDate = () => {
-    return new Date().toISOString().split('T')[0];
-  };
-
   const legendOptions = {
     display: true,
     position: 'bottom',
@@ -34,19 +24,15 @@ const BeerDashboard = () => {
 
   useEffect(() => {
     // Fetch the JSON file or import it directly
-    const fetchData = async () => {
-      try {
-        const response = await fetch('/beers.json');
-        const data = await response.json();
+    const fetchDataAndSetState = async () => {
+      const data = await fetchData('/beers.json');
+      if (data) {
         setBeerData(data);
         setFilteredData(); // Initial load without filters
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error('Error fetching data:', error);
       }
     };
 
-    fetchData();
+    fetchDataAndSetState();
   }, []);
 
   useEffect(() => {
@@ -97,14 +83,8 @@ const BeerDashboard = () => {
                   beerData={filteredData}
                 />
               </div>
-              <div>
-                <div className="overflow-hidden border border-gray-900 rounded shadow-md my-4">
-                  <LeafletMap beerData={filteredData} />
-                </div>
-              </div>
-              <div>
-                <TaggedFriendsList beerData={filteredData} />
-              </div>
+              <LeafletMap beerData={filteredData} />
+              <TaggedFriendsList beerData={filteredData} />
             </div>
           </div>
           <BeerList

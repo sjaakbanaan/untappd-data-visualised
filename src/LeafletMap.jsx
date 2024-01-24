@@ -20,33 +20,37 @@ const LeafletMap = ({ beerData }) => {
   });
 
   return (
-    <MapContainer
-      bounds={markerBounds}
-      czoom={2}
-      style={{ height: '500px', width: '100%' }}
-    >
-      <TileLayer
-        url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">LeafletMap</a> contributors'
-      />
-      {beerData.map(
-        (item) =>
-          item.venue_lat &&
-          item.venue_lng && (
-            <Marker
-              key={item.checkin_id}
-              position={[parseFloat(item.venue_lat), parseFloat(item.venue_lng)]}
-              icon={newIcon}
-            >
-              <Popup>
-                <strong>{item.beer_name}</strong>
-                <br />
-                {item.brewery_name}
-              </Popup>
-            </Marker>
-          )
-      )}
-    </MapContainer>
+    <div>
+      <div className="overflow-hidden border border-gray-900 rounded shadow-md my-4">
+        <MapContainer
+          bounds={markerBounds}
+          czoom={2}
+          style={{ height: '500px', width: '100%' }}
+        >
+          <TileLayer
+            url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">LeafletMap</a> contributors'
+          />
+          {beerData.map(
+            (item) =>
+              item.venue_lat &&
+              item.venue_lng && (
+                <Marker
+                  key={item.checkin_id}
+                  position={[parseFloat(item.venue_lat), parseFloat(item.venue_lng)]}
+                  icon={newIcon}
+                >
+                  <Popup>
+                    <strong>{item.beer_name}</strong>
+                    <br />
+                    {item.brewery_name}
+                  </Popup>
+                </Marker>
+              )
+          )}
+        </MapContainer>
+      </div>
+    </div>
   );
 };
 
