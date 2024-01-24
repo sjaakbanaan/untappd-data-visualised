@@ -18,7 +18,7 @@ const BeerList = ({ beerData, filterBrewery, setFilterBrewery }) => {
       </div>
       <div>
         <div>
-          <ul className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4  xl:grid-cols-6">
+          <ul className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6">
             {beerData?.length > 0 &&
               beerData.map((item) => (
                 <li
@@ -28,14 +28,23 @@ const BeerList = ({ beerData, filterBrewery, setFilterBrewery }) => {
                     backgroundImage: `url(${item.photo_url})`,
                   }}
                 >
-                  <h2 className="text-xl text-white font-semibold mb-2">
-                    {item.beer_name}
-                  </h2>
-                  {/* <img src={item.photo_url} alt="" /> */}
-                  <p className="text-white mb-2">{item.brewery_name}</p>
-                  <p className="text-white">Created at: {formatDate(item.created_at)}</p>
-                  <p className="text-green-600">Rating: {item.rating_score}</p>
-                  <p className="text-white">@{item.venue_name}</p>
+                  <a
+                    href={item.checkin_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
+                    <h2 className="text-xl text-white font-semibold mb-2">
+                      {item.beer_name}
+                    </h2>
+                    {/* <img src={item.photo_url} alt="" /> */}
+                    <p className="text-white mb-2">{item.brewery_name}</p>
+                    <p className="text-white">
+                      Created at: {formatDate(item.created_at)}
+                    </p>
+                    <p className="text-green-600">Rating: {item.rating_score}</p>
+                    <p className="text-white">@{item.venue_name}</p>
+                  </a>
                 </li>
               ))}
           </ul>
