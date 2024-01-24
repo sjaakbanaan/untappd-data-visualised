@@ -28,12 +28,15 @@ const TaggedFriendsList = ({ beerData }) => {
   const friendsList = processTaggedFriends();
 
   return (
-    <div>
-      <h2 className="text-lg font-semibold mb-2">Tagged Friends:</h2>
-      <ul>
+    <div className="bg-gray-800 rounded p-4">
+      <h2 className="text-lg font-semibold mb-4 text-white">Tagged Friends:</h2>
+      <ul className="divide-y divide-gray-700">
         {friendsList.map((friend) => (
-          <li key={friend.name}>
-            {friend.name} ({friend.count} times)
+          <li key={friend.name} className="py-2">
+            <div className="flex items-center justify-between">
+              <span className="text-white">{friend.name}</span>
+              <span className="text-gray-400">({friend.count} times)</span>
+            </div>
           </li>
         ))}
       </ul>

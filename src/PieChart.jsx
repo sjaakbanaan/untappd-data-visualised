@@ -27,34 +27,43 @@ const PieChart = ({ beerData }) => {
 
   const { labels, data } = processBreweryData();
 
+  // const legendOptions = {
+  //   display: true,
+  //   position: 'bottom',
+  //   labels: {
+  //     fontColor: 'white', // Change this to the desired color for legend labels
+  //   },
+  // };
+
   const chartData = {
     labels: labels,
     datasets: [
       {
         data: data,
         backgroundColor: [
-          '#FF6384',
-          '#36A2EB',
-          '#FFCE56',
-          '#4BC0C0',
-          '#9966FF',
-          '#FF9933',
-          '#66CC99',
-          '#FF6666',
-          '#C0C0C0',
-          '#FF99CC',
+          '#2C1450', // Dark Purple
+          '#1C7042', // Dark Green
+          '#71420A', // Dark Orange
+          '#144432', // Dark Teal
+          '#6B3D00', // Dark Brown
+          '#6F0D36', // Dark Pink
+          '#17402C', // Dark Greenish Teal
+          '#6B1A1A', // Dark Red
+          '#2C313E', // Very Dark Gray
+          '#581534', // Darker Pink
           // Add more colors as needed
         ],
         hoverBackgroundColor: [
-          '#D74D65',
-          '#2D7CB5',
-          '#CCAA4F',
-          '#349292',
-          '#7F5CA0',
-          '#CC7F40',
-          '#4F996E',
-          '#CC4D4D',
-          '#A0A0A0',
+          '#24113D', // Darker Purple
+          '#145B38', // Darker Green
+          '#613D0A', // Darker Orange
+          '#113027', // Darker Teal
+          '#5F3800', // Darker Brown
+          '#650A2D', // Darker Pink
+          '#113E29', // Darker Greenish Teal
+          '#5F1414', // Darker Red
+          '#1E2128', // Very Darker Gray
+          '#47112B', // Even Darker Pink
           // Add more colors as needed
         ],
       },
@@ -64,7 +73,23 @@ const PieChart = ({ beerData }) => {
   return (
     <div>
       <h2 className="text-lg font-semibold mb-2">Top 10 Breweries</h2>
-      <Pie data={chartData} />
+      <Pie
+        options={{
+          elements: {
+            arc: {
+              borderWidth: 0,
+            },
+          },
+          plugins: {
+            legend: {
+              labels: {
+                color: 'rgb(255, 255, 255)',
+              },
+            },
+          },
+        }}
+        data={chartData}
+      />
     </div>
   );
 };

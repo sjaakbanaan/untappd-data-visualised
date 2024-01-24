@@ -26,7 +26,7 @@ const LeafletMap = ({ beerData }) => {
       style={{ height: '500px', width: '100%' }}
     >
       <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">LeafletMap</a> contributors'
       />
       {beerData.map(
