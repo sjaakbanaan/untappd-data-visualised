@@ -7,7 +7,7 @@ const DateSelector = ({ filterDateRange, setFilterDateRange }) => {
       <div className="flex">
         <input
           type="date"
-          className="shadow appearance-none border rounded w-1/2 py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline"
           value={filterDateRange.start}
           onChange={(e) =>
             setFilterDateRange({ ...filterDateRange, start: e.target.value })
@@ -15,7 +15,7 @@ const DateSelector = ({ filterDateRange, setFilterDateRange }) => {
         />
         <input
           type="date"
-          className="ml-2 shadow appearance-none border rounded w-1/2 py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+          className="ml-2 shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline"
           value={filterDateRange.end}
           onChange={(e) =>
             setFilterDateRange({ ...filterDateRange, end: e.target.value })
