@@ -58,7 +58,7 @@ const BeerDashboard = () => {
     <div className="container mx-auto p-8 bg-gray-900 text-white rounded shadow-md">
       {filteredData?.length && (
         <>
-          <h1 className="text-center mb-5 text-4xl font-bold">My Untappd data</h1>
+          <h1 className="text-center mb-5 text-4xl font-bold">Untappd Data Visualised</h1>
           <DateSelector
             beerData={filteredData}
             filterDateRange={filterDateRange}
