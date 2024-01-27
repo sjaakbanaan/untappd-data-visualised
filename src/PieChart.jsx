@@ -12,14 +12,15 @@ const PieChart = ({ beerData, dataType }) => {
     }, {});
 
     // Convert to array of objects
-    const dataList = Object.keys(dataMap).map((name) => ({
-      name,
-      count: dataMap[name],
-    }));
+    const dataList = Object.keys(dataMap)
+      .filter((name) => name !== 'Unknown') // Exclude items where name is "Unknown"
+      .map((name) => ({
+        name,
+        count: dataMap[name],
+      }));
 
     // Sort by count in descending order and take the top 10
     const topItems = dataList.sort((a, b) => b.count - a.count).slice(0, 10);
-
     const labels = topItems.map((item) => `${item.name}: ${item.count}`);
     const data = topItems.map((item) => item.count);
 
@@ -27,14 +28,6 @@ const PieChart = ({ beerData, dataType }) => {
   };
 
   const { labels, data } = processData();
-
-  // const legendOptions = {
-  //   display: true,
-  //   position: 'bottom',
-  //   labels: {
-  //     fontColor: 'white', // Change this to the desired color for legend labels
-  //   },
-  // };
 
   const chartData = {
     labels: labels,
@@ -76,7 +69,8 @@ const PieChart = ({ beerData, dataType }) => {
       options={{
         elements: {
           arc: {
-            borderWidth: 0,
+            borderWidth: 2,
+            borderColor: 'rgb(31 41 55)',
           },
         },
         plugins: {

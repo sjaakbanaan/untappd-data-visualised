@@ -3,7 +3,7 @@
 const DateSelector = ({ filterDateRange, setFilterDateRange }) => {
   return (
     <div className="mb-4">
-      <label className="block text-white text-sm font-bold mb-2">Created Between:</label>
+      <label className="block text-white text-sm font-bold mb-2">Drank Between:</label>
       <div className="flex">
         <input
           type="date"

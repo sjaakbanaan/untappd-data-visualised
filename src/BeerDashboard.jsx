@@ -6,6 +6,7 @@ import TaggedFriendsList from './TaggedFriendsList.jsx';
 import BeerList from './BeerList.jsx';
 import PieChart from './PieChart.jsx';
 import DateSelector from './DateSelector.jsx';
+import YearFilterButtons from './YearFilterButtons.jsx';
 import { getDefaultStartDate, getDefaultEndDate, fetchData } from './utils';
 
 const BeerDashboard = () => {
@@ -54,6 +55,21 @@ const BeerDashboard = () => {
     setFilteredData(filteredResults);
   }, [beerData, filterBrewery, filterDateRange]);
 
+  const pieChartList = [
+    {
+      title: 'Top 10 Breweries',
+      name: 'brewery_name',
+    },
+    {
+      title: 'Top 10 Beer Styles',
+      name: 'beer_type',
+    },
+    {
+      title: 'Top 10 Venues Purchased',
+      name: 'purchase_venue',
+    },
+  ];
+
   return (
     <div className="container mx-auto p-8 bg-gray-900 text-white rounded shadow-md">
       {filteredData?.length && (
@@ -64,25 +80,25 @@ const BeerDashboard = () => {
             filterDateRange={filterDateRange}
             setFilterDateRange={setFilterDateRange}
           />
+          <YearFilterButtons
+            beerData={beerData}
+            filterDateRange={filterDateRange}
+            setFilterDateRange={setFilterDateRange}
+          />
           <h2 className="text-xl font-bold">{filteredData?.length} results</h2>
           <div className="container mx-auto mt-4 p-8 bg-gray-800 rounded shadow-md">
             <div className="grid lg:grid-cols-2 gap-8 text-white">
-              <div>
-                <h2 className="text-lg font-semibold mb-2">Top 10 Breweries</h2>
-                <PieChart
-                  dataType="brewery_name"
-                  options={{ legend: legendOptions }}
-                  beerData={filteredData}
-                />
-              </div>
-              <div>
-                <h2 className="text-lg font-semibold mb-2">Top 10 Beer Styles</h2>
-                <PieChart
-                  dataType="beer_type"
-                  options={{ legend: legendOptions }}
-                  beerData={filteredData}
-                />
-              </div>
+              {pieChartList &&
+                pieChartList.map((item) => (
+                  <div>
+                    <h2 className="text-lg font-semibold mb-2">{item.title}</h2>
+                    <PieChart
+                      dataType={item.name}
+                      options={{ legend: legendOptions }}
+                      beerData={filteredData}
+                    />
+                  </div>
+                ))}
               <LeafletMap beerData={filteredData} />
               <TaggedFriendsList beerData={filteredData} />
             </div>

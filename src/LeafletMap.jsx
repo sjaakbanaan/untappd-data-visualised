@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import Leaflet from 'leaflet';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -11,21 +12,38 @@ export const newIcon = new Leaflet.Icon({
 });
 
 const LeafletMap = ({ beerData }) => {
-  const markerBounds = [];
+  const mapRef = useRef(null);
 
-  beerData.forEach((item) => {
-    if (item.venue_lat && item.venue_lng) {
-      markerBounds.push([parseFloat(item.venue_lat), parseFloat(item.venue_lng)]);
+  useEffect(() => {
+    // Update map viewport to fit all markers within bounds
+    console.log('set bounds');
+    if (mapRef.current && beerData.length > 1) {
+      const bounds = new Leaflet.LatLngBounds();
+
+      beerData.forEach((item) => {
+        if (item.venue_lat && item.venue_lng) {
+          bounds.extend([parseFloat(item.venue_lat), parseFloat(item.venue_lng)]);
+        }
+      });
+
+      // Ensure the map has a valid size before attempting to fit bounds
+      if (bounds.isValid() && mapRef.current) {
+        setTimeout(() => {
+          mapRef.current.fitBounds(bounds, { padding: [50, 50] });
+        }, 500); // Delay the fitBounds call to ensure the map is ready
+      }
     }
-  });
+  }, [beerData]);
 
   return (
     <div>
       <div className="overflow-hidden border border-gray-900 rounded shadow-md my-4">
         <MapContainer
-          bounds={markerBounds}
-          czoom={2}
+          ref={mapRef}
           style={{ height: '500px', width: '100%' }}
+          center={[0, 0]}
+          zoom={2}
+          scrollWheelZoom={false}
         >
           <TileLayer
             url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"
