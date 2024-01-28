@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import LeafletMap from './LeafletMap.jsx';
-import TaggedFriendsList from './TaggedFriendsList.jsx';
+import TopList from './TopList.jsx';
 import BeerList from './BeerList.jsx';
 import PieChartList from './PieChartList.jsx';
 import DateSelector from './DateSelector/DateSelector.jsx';
@@ -65,10 +65,11 @@ const BeerDashboard = () => {
           />
           <h2 className="text-xl font-bold">{filteredData?.length} results</h2>
           <div className="container mx-auto mt-4 p-8 bg-gray-800 rounded shadow-md">
-            <div className="grid lg:grid-cols-3 gap-8 text-white">
+            <div className="grid lg:grid-cols-2 gap-8 text-white">
               <PieChartList beerData={filteredData} />
+              <TopList dataType="ratings" beerData={filteredData} />
               <LeafletMap beerData={filteredData} />
-              <TaggedFriendsList beerData={filteredData} />
+              <TopList dataType="friends" beerData={filteredData} />
             </div>
           </div>
           <BeerList

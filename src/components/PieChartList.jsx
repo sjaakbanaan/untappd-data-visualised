@@ -46,10 +46,6 @@ const PieChartList = ({ beerData }) => {
       title: 'Top 10 Serving Type',
       name: 'serving_type',
     },
-    {
-      title: 'Top 10 Global Rating Score',
-      name: 'global_rating_score',
-    },
   ];
   const [selectedPieChartData, setSelectedPieChartData] = useState(pieChartList[0].name);
   //  get extra data based on chosen option:

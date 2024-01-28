@@ -18,7 +18,7 @@ const BeerList = ({ beerData, filterBrewery, setFilterBrewery }) => {
       </div>
       <div>
         <div>
-          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6">
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
             {beerData?.length > 0 &&
               beerData.map((item) => (
                 <a
