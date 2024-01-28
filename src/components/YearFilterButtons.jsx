@@ -10,7 +10,7 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
   ];
 
   return (
-    <div className="grid grid-cols-6 lg:grid-cols-none lg:grid-flow-col gap-4 my-4">
+    <div className="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-none lg:grid-flow-col gap-4 my-4">
       <div className="block">
         <button
           key="set-all-time"

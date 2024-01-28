@@ -1,6 +1,9 @@
 import 'chart.js/auto';
 import PropTypes from 'prop-types';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 const PieChart = ({ beerData, dataType, trailingChar, hideCount }) => {
   const processData = () => {
@@ -56,7 +59,7 @@ const PieChart = ({ beerData, dataType, trailingChar, hideCount }) => {
   };
 
   // skip pie chart when there's only 1 result:
-  if (topItems.length <= 1) return 'Not enough results for a pie chart.';
+  if (topItems.length <= 1) return 'A minimum of two results is needed for a pie chart.';
 
   return (
     <Pie

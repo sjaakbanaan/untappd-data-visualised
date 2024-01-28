@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import LeafletMap from './LeafletMap.jsx';
-import TopList from './TopList.jsx';
+import TopList from './TopList/TopList.jsx';
 import BeerList from './BeerList.jsx';
 import PieChartList from './PieChartList.jsx';
 import DateSelector from './DateSelector/DateSelector.jsx';
@@ -19,7 +19,7 @@ const BeerDashboard = () => {
   useEffect(() => {
     // Fetch the JSON file or import it directly
     const fetchDataAndSetState = async () => {
-      const data = await fetchData('/beers.json');
+      const data = await fetchData('/beers-processed.json');
       if (data) {
         setBeerData(data);
         setFilteredData(); // Initial load without filters
@@ -67,9 +67,30 @@ const BeerDashboard = () => {
           <div className="container mx-auto mt-4 p-8 bg-gray-800 rounded shadow-md">
             <div className="grid lg:grid-cols-2 gap-8 text-white">
               <PieChartList beerData={filteredData} />
-              <TopList dataType="ratings" beerData={filteredData} />
+              <TopList
+                dataType="topBeers"
+                scoreType="rating_score"
+                beerData={filteredData}
+                listTitle="Top 10 Rated Beers (by you)"
+              />
+              <TopList
+                dataType="topBeers"
+                scoreType="global_weighted_rating_score"
+                beerData={filteredData}
+                listTitle="Top 10 Rated Beers (global, weighted)"
+              />
+              <TopList
+                dataType="topBeers"
+                scoreType="beer_abv"
+                beerData={filteredData}
+                listTitle="Top 10 Strongest Beers"
+              />
               <LeafletMap beerData={filteredData} />
-              <TopList dataType="friends" beerData={filteredData} />
+              <TopList
+                dataType="friends"
+                beerData={filteredData}
+                listTitle="Tagged Friends"
+              />
             </div>
           </div>
           <BeerList

@@ -35,7 +35,7 @@ const LeafletMap = ({ beerData }) => {
   }, [beerData]);
 
   return (
-    <div>
+    <div className="p-4">
       <div className="overflow-hidden border border-gray-900 rounded shadow-md my-4">
         <MapContainer
           ref={mapRef}

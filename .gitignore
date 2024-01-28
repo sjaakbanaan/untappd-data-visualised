@@ -18,6 +18,10 @@
 .env.test.local
 .env.production.local
 
+# untappd data
+/public/beers.json
+/public/beers-processed.json
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

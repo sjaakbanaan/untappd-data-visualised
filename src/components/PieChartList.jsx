@@ -27,6 +27,10 @@ const PieChartList = ({ beerData }) => {
       // hide_count: true,
     },
     {
+      title: 'Top 10 Venues',
+      name: 'venue_name',
+    },
+    {
       title: 'Top 10 Venue Cities',
       name: 'venue_city',
     },
@@ -56,7 +60,7 @@ const PieChartList = ({ beerData }) => {
   const hideCount = selectedChartData?.hide_count || false;
 
   return (
-    <div>
+    <div className="p-4">
       <h2 className="text-lg font-semibold mb-2">Select data type:</h2>
       <select
         className="shadow border rounded w-full py-2 px- mb-4 text-gray-900 focus:outline-none focus:shadow-outline"
