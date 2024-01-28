@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/label-has-for */
-import { formatDate } from './utils';
+import { formatDate } from '../utils';
 
 const BeerList = ({ beerData, filterBrewery, setFilterBrewery }) => {
   return (

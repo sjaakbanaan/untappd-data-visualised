@@ -1,7 +1,8 @@
 import 'chart.js/auto';
+import PropTypes from 'prop-types';
 import { Pie } from 'react-chartjs-2';
 
-const PieChart = ({ beerData, dataType }) => {
+const PieChart = ({ beerData, dataType, trailingChar, hideCount }) => {
   const processData = () => {
     let dataMap = {};
     // Process brewery names
@@ -21,13 +22,16 @@ const PieChart = ({ beerData, dataType }) => {
 
     // Sort by count in descending order and take the top 10
     const topItems = dataList.sort((a, b) => b.count - a.count).slice(0, 10);
-    const labels = topItems.map((item) => `${item.name}: ${item.count}`);
+    const labels = topItems.map((item) => {
+      const countLabel = !hideCount ? ` (${item.count}x)` : '';
+      return `${item.name}${trailingChar}${countLabel}`;
+    });
     const data = topItems.map((item) => item.count);
 
-    return { labels, data };
+    return { labels, data, topItems };
   };
 
-  const { labels, data } = processData();
+  const { labels, data, topItems } = processData();
 
   const chartData = {
     labels: labels,
@@ -35,34 +39,24 @@ const PieChart = ({ beerData, dataType }) => {
       {
         data: data,
         backgroundColor: [
-          '#2C1450', // Dark Purple
-          '#1C7042', // Dark Green
-          '#71420A', // Dark Orange
-          '#144432', // Dark Teal
-          '#6B3D00', // Dark Brown
-          '#6F0D36', // Dark Pink
-          '#17402C', // Dark Greenish Teal
-          '#6B1A1A', // Dark Red
-          '#2C313E', // Very Dark Gray
-          '#581534', // Darker Pink
-          // Add more colors as needed
+          '#fefce8', // Yellow-50
+          '#fdf9c2', // Yellow-100
+          '#fdf29e', // Yellow-200
+          '#fde477', // Yellow-300
+          '#fdd447', // Yellow-400
+          '#fdba11', // Yellow-500
+          '#f39c12', // Yellow-600
+          '#e08e0b', // Yellow-700
+          '#d07d0d', // Yellow-800
+          '#713f12', // Yellow-900
         ],
-        hoverBackgroundColor: [
-          '#24113D', // Darker Purple
-          '#145B38', // Darker Green
-          '#613D0A', // Darker Orange
-          '#113027', // Darker Teal
-          '#5F3800', // Darker Brown
-          '#650A2D', // Darker Pink
-          '#113E29', // Darker Greenish Teal
-          '#5F1414', // Darker Red
-          '#1E2128', // Very Darker Gray
-          '#47112B', // Even Darker Pink
-          // Add more colors as needed
-        ],
+        hoverOffset: 8,
       },
     ],
   };
+
+  // skip pie chart when there's only 1 result:
+  if (topItems.length <= 1) return 'Not enough results for a pie chart.';
 
   return (
     <Pie
@@ -75,6 +69,8 @@ const PieChart = ({ beerData, dataType }) => {
         },
         plugins: {
           legend: {
+            position: 'top',
+            align: 'start',
             labels: {
               color: 'rgb(255, 255, 255)',
             },
@@ -84,6 +80,19 @@ const PieChart = ({ beerData, dataType }) => {
       data={chartData}
     />
   );
+};
+
+PieChart.propTypes = {
+  beerData: PropTypes.array.isRequired,
+  dataType: PropTypes.string,
+  trailingChar: PropTypes.string,
+  hideCount: PropTypes.bool,
+};
+
+PieChart.defaultProps = {
+  dataType: '',
+  trailingChar: '',
+  hideCount: false,
 };
 
 export default PieChart;

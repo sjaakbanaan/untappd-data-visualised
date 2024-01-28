@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import Leaflet from 'leaflet';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import iconUrl from './pin.svg';
+import iconUrl from '../images/pin.svg';
 
 export const newIcon = new Leaflet.Icon({
   iconUrl,
@@ -16,7 +16,6 @@ const LeafletMap = ({ beerData }) => {
 
   useEffect(() => {
     // Update map viewport to fit all markers within bounds
-    console.log('set bounds');
     if (mapRef.current && beerData.length > 1) {
       const bounds = new Leaflet.LatLngBounds();
 
@@ -29,7 +28,7 @@ const LeafletMap = ({ beerData }) => {
       // Ensure the map has a valid size before attempting to fit bounds
       if (bounds.isValid() && mapRef.current) {
         setTimeout(() => {
-          mapRef.current.fitBounds(bounds, { padding: [50, 50] });
+          mapRef?.current?.fitBounds(bounds, { padding: [50, 50] });
         }, 500); // Delay the fitBounds call to ensure the map is ready
       }
     }
@@ -45,10 +44,7 @@ const LeafletMap = ({ beerData }) => {
           zoom={2}
           scrollWheelZoom={false}
         >
-          <TileLayer
-            url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">LeafletMap</a> contributors'
-          />
+          <TileLayer url="https://cartocdn_{s}.global.ssl.fastly.net/base-midnight/{z}/{x}/{y}.png" />
           {beerData.map(
             (item) =>
               item.venue_lat &&

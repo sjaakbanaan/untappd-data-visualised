@@ -1,4 +1,3 @@
-// TaggedFriendsList.js
 const TaggedFriendsList = ({ beerData }) => {
   // Function to process tagged friends from all items and return a sorted list
   const processTaggedFriends = () => {

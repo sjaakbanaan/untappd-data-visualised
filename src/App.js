@@ -1,4 +1,4 @@
-import BeerDashboard from './BeerDashboard.jsx'; // Import your BeerDashboard component
+import BeerDashboard from './components/BeerDashboard.jsx'; // Import your BeerDashboard component
 
 function App() {
   return (

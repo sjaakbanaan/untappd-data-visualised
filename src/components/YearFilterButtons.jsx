@@ -10,7 +10,7 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
   ];
 
   return (
-    <div className="grid grid-flow-col gap-4 my-4">
+    <div className="grid grid-cols-6 lg:grid-cols-none lg:grid-flow-col gap-4 my-4">
       <div className="block">
         <button
           key="set-all-time"
@@ -29,8 +29,8 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
           all time
         </button>
       </div>
-      {uniqueYears.map((year) => (
-        <div className="block">
+      {uniqueYears.map((year, i) => (
+        <div className="block" key={i}>
           <button
             key={`set-year-${year}`}
             className={`shadow w-full border rounded py-2 px-3 mb-4 ${
