@@ -32,7 +32,7 @@ yarn install
 
 - Rename the file to `beers.json` and add the file to the `public` folder.
 
-- _Importent step:_ By default Untappd sets the long/lat for 'Untappd at Home' in the US, replace it with own home address by running:
+- _Importent step:_ By default Untappd sets the long/lat for 'Untappd at Home' in the US, replace it with own home address by running the following command where you're asked to give a latitude and longitude:
 ```bash
 yarn set-home
 ```
