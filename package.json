@@ -1,7 +1,7 @@
 {
   "name": "untappd-10-yrs",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "private": false,
   "dependencies": {
     "autoprefixer": "^10.4.17",
     "chart.js": "^4.4.1",
