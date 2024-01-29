@@ -11,6 +11,7 @@ const BeerDashboard = () => {
   const [beerData, setBeerData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [filterBrewery, setFilterBrewery] = useState('');
+  const [filterCountry, setFilterCountry] = useState('');
   const [filterDateRange, setFilterDateRange] = useState({
     start: getDefaultStartDate(),
     end: getDefaultEndDate(),
@@ -33,7 +34,11 @@ const BeerDashboard = () => {
     // Apply filters whenever filterBrewery or filterDateRange changes
     const filteredResults = beerData.filter((item) => {
       const breweryMatch = filterBrewery
-        ? item.brewery_name.toLowerCase().includes(filterBrewery.toLowerCase())
+        ? item?.brewery_name?.toLowerCase().includes(filterBrewery.toLowerCase())
+        : true;
+
+      const countryMatch = filterCountry
+        ? item?.venue_country?.toLowerCase().includes(filterCountry.toLowerCase())
         : true;
 
       const dateMatch =
@@ -42,11 +47,11 @@ const BeerDashboard = () => {
         new Date(item.created_at) >= new Date(filterDateRange.start) &&
         new Date(item.created_at) <= new Date(filterDateRange.end);
 
-      return breweryMatch && dateMatch;
+      return breweryMatch && countryMatch && dateMatch;
     });
 
     setFilteredData(filteredResults);
-  }, [beerData, filterBrewery, filterDateRange]);
+  }, [beerData, filterBrewery, filterCountry, filterDateRange]);
 
   return (
     <div className="container mx-auto p-8 bg-gray-900 text-white rounded shadow-md">
@@ -54,7 +59,7 @@ const BeerDashboard = () => {
         <>
           <h1 className="text-center mb-5 text-4xl font-bold">Untappd Data Visualised</h1>
           <DateSelector
-            beerData={filteredData}
+            beerData={beerData}
             filterDateRange={filterDateRange}
             setFilterDateRange={setFilterDateRange}
           />
@@ -97,6 +102,8 @@ const BeerDashboard = () => {
             beerData={filteredData}
             filterBrewery={filterBrewery}
             setFilterBrewery={setFilterBrewery}
+            filterCountry={filterCountry}
+            setFilterCountry={setFilterCountry}
           />
         </>
       )}

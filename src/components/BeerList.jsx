@@ -1,20 +1,65 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/label-has-for */
+import { useState, useEffect } from 'react';
 import { formatDate } from '../utils';
 
-const BeerList = ({ beerData, filterBrewery, setFilterBrewery }) => {
+const BeerList = ({
+  beerData,
+  filterBrewery,
+  setFilterBrewery,
+  filterCountry,
+  setFilterCountry,
+}) => {
+  const [breweryOptions, setBreweryOptions] = useState([]);
+  const [countryOptions, setCountryOptions] = useState([]);
+
+  useEffect(() => {
+    // Extract unique brewery names and countries from filteredData
+    const uniqueBreweries = [...new Set(beerData.map((item) => item.brewery_name))];
+    const uniqueCountries = [...new Set(beerData.map((item) => item.venue_country))];
+
+    // Update state with unique brewery and country options, filtering out empty values
+    setBreweryOptions(uniqueBreweries.filter(Boolean));
+    setCountryOptions(uniqueCountries.filter(Boolean));
+  }, [beerData]);
+
   return (
     <>
-      <div className="mb-5 mt-8">
-        <label className="block text-white text-sm font-bold mb-2">
-          Filter by brewery:
-        </label>
-        <input
-          type="text"
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline"
-          value={filterBrewery}
-          onChange={(e) => setFilterBrewery(e.target.value)}
-        />
+      <div className="flex mb-5 mt-8">
+        <div className="w-1/2 py-2 px-3">
+          <label className="block text-white text-sm font-bold mb-2">
+            Filter by brewery:
+          </label>
+          <select
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline"
+            value={filterBrewery}
+            onChange={(e) => setFilterBrewery(e.target.value)}
+          >
+            <option value="">All Breweries</option>
+            {breweryOptions.map((brewery) => (
+              <option key={brewery} value={brewery}>
+                {brewery}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className=" py-2 px-3 w-1/2">
+          <label className="block text-white text-sm font-bold mb-2">
+            Filter by country:
+          </label>
+          <select
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline"
+            value={filterCountry}
+            onChange={(e) => setFilterCountry(e.target.value)}
+          >
+            <option value="">All Countries</option>
+            {countryOptions.map((country) => (
+              <option key={country} value={country}>
+                {country}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
       <div>
         <div>
