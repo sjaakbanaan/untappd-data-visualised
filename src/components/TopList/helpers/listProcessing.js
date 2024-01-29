@@ -21,14 +21,14 @@ export const processTaggedFriends = (beerData) => {
       : []
   );
 
-  const itemCount = allItemsArr.reduce((acc, friend) => {
-    acc[friend] = (acc[friend] || 0) + 1;
+  const itemCount = allItemsArr.reduce((acc, item) => {
+    acc[item] = (acc[item] || 0) + 1;
     return acc;
   }, {});
 
-  const processedList = Object.keys(itemCount).map((friend) => ({
-    name: friend,
-    value: itemCount[friend],
+  const processedList = Object.keys(itemCount).map((item) => ({
+    name: item,
+    value: itemCount[item],
   }));
 
   processedList.sort((a, b) => b.value - a.value);
