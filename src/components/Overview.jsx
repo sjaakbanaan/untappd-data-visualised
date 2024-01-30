@@ -1,6 +1,6 @@
 import { formatDate } from '../utils';
 
-const BeerList = ({ beerData }) => {
+const Overview = ({ beerData }) => {
   return (
     <div>
       <div>
@@ -33,4 +33,4 @@ const BeerList = ({ beerData }) => {
   );
 };
 
-export default BeerList;
+export default Overview;

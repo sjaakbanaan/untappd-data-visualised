@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import LeafletMap from './LeafletMap.jsx';
 import TopList from './TopList/TopList.jsx';
-import BeerList from './BeerList.jsx';
-import BeerListFilters from './BeerListFilters.jsx';
+import Overview from './Overview.jsx';
+import OverviewFilters from './OverviewFilters.jsx';
 import PieChartList from './PieChartList.jsx';
 import DateSelector from './DateSelector/DateSelector.jsx';
 import YearFilterButtons from './YearFilterButtons.jsx';
@@ -99,14 +99,14 @@ const BeerDashboard = () => {
               />
             </div>
           </div>
-          <BeerListFilters
+          <OverviewFilters
             beerData={filteredData}
             filterBrewery={filterBrewery}
             setFilterBrewery={setFilterBrewery}
             filterCountry={filterCountry}
             setFilterCountry={setFilterCountry}
           />
-          <BeerList beerData={filteredData} />
+          <Overview beerData={filteredData} />
         </>
       )}
     </div>

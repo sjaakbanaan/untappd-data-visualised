@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/label-has-for */
 import { useState, useEffect } from 'react';
 
-const BeerListFilters = ({
+const OverviewFilters = ({
   beerData,
   filterBrewery,
   setFilterBrewery,
@@ -66,4 +66,4 @@ const BeerListFilters = ({
   );
 };
 
-export default BeerListFilters;
+export default OverviewFilters;
