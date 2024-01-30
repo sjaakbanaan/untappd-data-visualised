@@ -37,6 +37,7 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
+    // this is ran each time a filter changes
     const filteredResults = filterBeerData(
       beerData,
       filterBrewery,

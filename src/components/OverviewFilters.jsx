@@ -30,7 +30,7 @@ const OverviewFilters = ({
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5 mt-8">
       <div>
         <label className="block text-white text-sm font-bold mb-2">
-          Filter by brewery:
+          Filter by brewery
         </label>
         <select
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline"
@@ -47,7 +47,7 @@ const OverviewFilters = ({
       </div>
       <div>
         <label className="block text-white text-sm font-bold mb-2">
-          Filter by country:
+          Filter by country
         </label>
         <select
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline"

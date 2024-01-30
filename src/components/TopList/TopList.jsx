@@ -16,7 +16,7 @@ const TopList = ({ beerData, dataType, listTitle, scoreType }) => {
 
   return (
     <div className="p-4">
-      <h2 className="text-lg font-semibold mb-4 text-white">{listTitle}:</h2>
+      <h2 className="text-lg font-semibold mb-4 text-white">{listTitle}</h2>
       <ul className="divide-y divide-gray-700">
         {processedList.length > 0 ? (
           processedList.map((item, i) => (

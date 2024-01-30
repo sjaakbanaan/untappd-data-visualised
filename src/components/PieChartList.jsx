@@ -61,7 +61,7 @@ const PieChartList = ({ beerData }) => {
 
   return (
     <div className="p-4">
-      <h2 className="text-lg font-semibold mb-2">Select data type:</h2>
+      <h2 className="text-lg font-semibold mb-8">Select data type</h2>
       <select
         className="shadow border rounded w-full py-2 px- mb-4 text-gray-900 focus:outline-none focus:shadow-outline"
         value={selectedPieChartData}

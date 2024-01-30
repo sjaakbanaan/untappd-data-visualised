@@ -1,4 +1,5 @@
 import { formatDate } from '../utils';
+import Icon from './Icon/Icon.jsx';
 
 const Overview = ({ beerData }) => {
   return (
@@ -12,7 +13,7 @@ const Overview = ({ beerData }) => {
                 href={item.checkin_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block rounded-lg shadow-md bg-cover p-4 bg-gray-800 min-h-96 transition-transform transform hover:scale-105"
+                className="block rounded-lg shadow-md bg-cover p-4 bg-gray-800 min-h-96 transition-transform duration-300 transform hover:scale-110"
                 style={{
                   backgroundImage: `url(${item.photo_url})`,
                 }}
@@ -20,14 +21,49 @@ const Overview = ({ beerData }) => {
                 <h2 className="text-xl text-white font-semibold mb-2">
                   {item.beer_name}
                 </h2>
-                <p className="text-white mb-2">{item.brewery_name}</p>
-                <p className="text-white mb-2">{item.beer_type}</p>
-                <p className="text-white">Drank on: {formatDate(item.created_at)}</p>
-                <p className="text-green-600">Your rating: {item.rating_score}</p>
-                <p className="text-green-600">
-                  Global rating: {item.global_rating_score}
-                </p>
-                {item.venue_name && <p className="text-white">@{item.venue_name}</p>}
+                <p className="mb-2">{item.brewery_name}</p>
+                <div className="flex items-top mb-2">
+                  <Icon
+                    icon="INFO"
+                    viewBox="0 0 16 16"
+                    className="mr-2 mt-1 fill-yellow-500"
+                  />
+                  <div className="flex-1">{item.beer_type}</div>
+                </div>
+                <div className="flex items-top mb-2">
+                  <Icon
+                    icon="INFO"
+                    viewBox="0 0 16 16"
+                    className="mr-2 mt-1 fill-yellow-500"
+                  />
+                  <div className="flex-1">{formatDate(item.created_at)}</div>
+                </div>
+                {item.venue_name && (
+                  <div className="flex items-top mb-2">
+                    <Icon
+                      icon="INFO"
+                      viewBox="0 0 16 16"
+                      className="mr-2 mt-1 fill-yellow-500"
+                    />
+                    <div className="flex-1">{item.venue_name}</div>
+                  </div>
+                )}
+                <div className="text-yellow-500 flex items-top mb-2">
+                  <Icon
+                    icon="INFO"
+                    viewBox="0 0 16 16"
+                    className="mr-2 mt-1 fill-yellow-500"
+                  />
+                  <div className="flex-1">{item.rating_score}</div>
+                </div>
+                <div className="text-yellow-500 flex items-top mb-2">
+                  <Icon
+                    icon="INFO"
+                    viewBox="0 0 16 16"
+                    className="mr-2 mt-1 fill-yellow-500"
+                  />
+                  <div className="flex-1">{item.global_rating_score}</div>
+                </div>
               </a>
             ))}
         </div>
