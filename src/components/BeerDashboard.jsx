@@ -69,7 +69,7 @@ const BeerDashboard = () => {
             filterDateRange={filterDateRange}
             setFilterDateRange={setFilterDateRange}
           />
-          <h2 className="text-xl font-bold">{filteredData?.length} results</h2>
+          <h2 className="text-2xl font-bold">{filteredData?.length} results</h2>
           <div className="container mx-auto mt-4 p-8 bg-gray-800 rounded shadow-md">
             <div className="grid lg:grid-cols-2 gap-8 text-white">
               <PieChartList beerData={filteredData} />

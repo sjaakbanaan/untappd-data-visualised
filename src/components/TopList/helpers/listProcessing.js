@@ -3,9 +3,21 @@ import { transformRatingData } from '../../../utils';
 export const processTopBeers = (beerData, scoreType) => {
   const onEmpty = 'No beers to display, please change your search range.';
   const formattedData = transformRatingData(beerData, scoreType);
-  const suffix = scoreType == 'beer_abv' ? '%' : '';
+  const suffix = scoreType === 'beer_abv' ? '%' : '';
 
-  const sortedData = [...formattedData].sort((a, b) => b.value - a.value);
+  // Use a Set to keep track of unique beer names
+  const uniqueBeerNames = new Set();
+
+  // Filter out duplicates based on beer name
+  const uniqueFormattedData = formattedData.filter((item) => {
+    if (uniqueBeerNames.has(item.name)) {
+      return false; // Skip duplicate
+    }
+    uniqueBeerNames.add(item.name);
+    return true;
+  });
+
+  const sortedData = [...uniqueFormattedData].sort((a, b) => b.value - a.value);
   const processedList = sortedData.slice(0, 10);
   return { processedList, onEmpty, suffix };
 };
