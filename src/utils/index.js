@@ -3,6 +3,7 @@ import { fetchData } from './fetchData';
 import { getDefaultEndDate } from './getDefaulEndDate';
 import { getDefaultStartDate } from './getDefaultStartDate';
 import { transformRatingData } from './transformRatingData';
+import { filterBeerData } from './filterBeerData';
 
 export {
   formatDate,
@@ -10,4 +11,5 @@ export {
   getDefaultEndDate,
   getDefaultStartDate,
   transformRatingData,
+  filterBeerData,
 };

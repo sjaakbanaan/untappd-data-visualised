@@ -1,9 +1,9 @@
-import BeerDashboard from './components/BeerDashboard.jsx'; // Import your BeerDashboard component
+import Dashboard from './components/Dashboard.jsx'; // Import your Dashboard component
 
 function App() {
   return (
     <div className="bg-gray-900">
-      <BeerDashboard />
+      <Dashboard />
     </div>
   );
 }

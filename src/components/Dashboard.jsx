@@ -6,9 +6,14 @@ import OverviewFilters from './OverviewFilters.jsx';
 import PieChartList from './PieChartList.jsx';
 import DateSelector from './DateSelector/DateSelector.jsx';
 import YearFilterButtons from './YearFilterButtons.jsx';
-import { getDefaultStartDate, getDefaultEndDate, fetchData } from '../utils';
+import {
+  filterBeerData,
+  getDefaultStartDate,
+  getDefaultEndDate,
+  fetchData,
+} from '../utils/';
 
-const BeerDashboard = () => {
+const Dashboard = () => {
   const [beerData, setBeerData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [filterBrewery, setFilterBrewery] = useState('');
@@ -32,31 +37,20 @@ const BeerDashboard = () => {
   }, []);
 
   useEffect(() => {
-    // Apply filters whenever filterBrewery or filterDateRange changes
-    const filteredResults = beerData.filter((item) => {
-      const breweryMatch = filterBrewery
-        ? item?.brewery_name?.toLowerCase().includes(filterBrewery.toLowerCase())
-        : true;
+    const filteredResults = filterBeerData(
+      beerData,
+      filterBrewery,
+      filterCountry,
+      filterDateRange
+    );
 
-      const countryMatch = filterCountry
-        ? item?.venue_country?.toLowerCase().includes(filterCountry.toLowerCase())
-        : true;
-
-      const dateMatch =
-        filterDateRange.start &&
-        filterDateRange.end &&
-        new Date(item.created_at) >= new Date(filterDateRange.start) &&
-        new Date(item.created_at) <= new Date(filterDateRange.end);
-
-      return breweryMatch && countryMatch && dateMatch;
-    });
-
+    // console.log('debug:', filterDateRange.start, filterDateRange.end, filteredResults);
     setFilteredData(filteredResults);
   }, [beerData, filterBrewery, filterCountry, filterDateRange]);
 
   return (
     <div className="container mx-auto p-8 bg-gray-900 text-white rounded shadow-md">
-      {filteredData?.length && (
+      {filteredData && filteredData?.length > 0 && (
         <>
           <h1 className="text-center mb-5 text-4xl font-bold">Untappd Data Visualised</h1>
           <DateSelector
@@ -113,4 +107,4 @@ const BeerDashboard = () => {
   );
 };
 
-export default BeerDashboard;
+export default Dashboard;
