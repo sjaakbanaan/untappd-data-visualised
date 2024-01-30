@@ -22,8 +22,11 @@ const Overview = ({ beerData }) => {
                 </h2>
                 <p className="text-white mb-2">{item.brewery_name}</p>
                 <p className="text-white mb-2">{item.beer_type}</p>
-                <p className="text-white">Created at: {formatDate(item.created_at)}</p>
-                <p className="text-green-600">Rating: {item.rating_score}</p>
+                <p className="text-white">Drank on: {formatDate(item.created_at)}</p>
+                <p className="text-green-600">Your rating: {item.rating_score}</p>
+                <p className="text-green-600">
+                  Global rating: {item.global_rating_score}
+                </p>
                 {item.venue_name && <p className="text-white">@{item.venue_name}</p>}
               </a>
             ))}

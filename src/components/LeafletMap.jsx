@@ -55,9 +55,22 @@ const LeafletMap = ({ beerData }) => {
                   icon={newIcon}
                 >
                   <Popup>
-                    <strong>{item.beer_name}</strong>
+                    <strong>
+                      <a href={item.beer_url} target="_blank" rel="noopener">
+                        {item.beer_name}
+                      </a>
+                    </strong>
                     <br />
                     {item.brewery_name}
+                    <br />
+                    <br />
+                    your rating: {item.rating_score}
+                    <br />
+                    global rating {item.global_rating_score}
+                    <br />
+                    drank on: {item.rating_score}
+                    <br />
+                    {item.tagged_friends && <div>friends: {item.tagged_friends}</div>}
                   </Popup>
                 </Marker>
               )
