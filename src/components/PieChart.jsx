@@ -26,7 +26,7 @@ const PieChart = ({ beerData, dataType, trailingChar, hideCount }) => {
     // Sort by count in descending order and take the top 10
     const topItems = dataList.sort((a, b) => b.count - a.count).slice(0, 10);
     const labels = topItems.map((item) => {
-      const countLabel = !hideCount ? ` (${item.count}x)` : '';
+      const countLabel = !hideCount ? ` (${item.count}×)` : '';
       return `${item.name}${trailingChar}${countLabel}`;
     });
     const data = topItems.map((item) => item.count);
