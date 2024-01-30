@@ -68,7 +68,7 @@ const LeafletMap = ({ beerData }) => {
                     <br />
                     global rating {item.global_rating_score}
                     <br />
-                    drank on: {item.rating_score}
+                    drank on: {item.created_at}
                     <br />
                     {item.tagged_friends && <div>friends: {item.tagged_friends}</div>}
                   </Popup>
