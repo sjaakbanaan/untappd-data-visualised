@@ -49,15 +49,15 @@ const Dashboard = () => {
   }, [beerData, filterBrewery, filterCountry, filterDateRange]);
 
   return (
-    <div className="container mx-auto p-8 bg-gray-900 text-white rounded shadow-md">
-      {filteredData && filteredData?.length > 0 && (
-        <>
-          <h1 className="text-center mb-5 text-4xl font-bold">Untappd Data Visualised</h1>
-          <DateSelector
-            beerData={beerData}
-            filterDateRange={filterDateRange}
-            setFilterDateRange={setFilterDateRange}
-          />
+    <div className="container mx-auto p-8  text-white">
+      <h1 className="text-center mb-5 text-4xl font-bold">Untappd Data Visualised</h1>
+      <DateSelector
+        beerData={beerData}
+        filterDateRange={filterDateRange}
+        setFilterDateRange={setFilterDateRange}
+      />
+      {filteredData && filteredData?.length > 0 ? (
+        <div className="rounded shadow-md">
           <YearFilterButtons
             beerData={beerData}
             filterDateRange={filterDateRange}
@@ -101,7 +101,9 @@ const Dashboard = () => {
             setFilterCountry={setFilterCountry}
           />
           <Overview beerData={filteredData} />
-        </>
+        </div>
+      ) : (
+        <div>Loading results or waiting for correct date range...</div>
       )}
     </div>
   );
