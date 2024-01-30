@@ -3,6 +3,7 @@ import Leaflet from 'leaflet';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import iconUrl from '../images/pin.svg';
+import { formatDate } from '../utils';
 
 export const newIcon = new Leaflet.Icon({
   iconUrl,
@@ -68,7 +69,7 @@ const LeafletMap = ({ beerData }) => {
                     <br />
                     global rating {item.global_rating_score}
                     <br />
-                    drank on: {item.created_at}
+                    drank on: {formatDate(item.created_at)}
                     <br />
                     {item.tagged_friends && <div>friends: {item.tagged_friends}</div>}
                   </Popup>
