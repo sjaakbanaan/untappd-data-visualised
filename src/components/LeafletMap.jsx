@@ -46,7 +46,7 @@ const LeafletMap = ({ beerData }) => {
           zoom={2}
           scrollWheelZoom={false}
         >
-          <TileLayer url="https://cartocdn_{s}.global.ssl.fastly.net/base-midnight/{z}/{x}/{y}.png" />
+          <TileLayer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png" />
           {beerData.map(
             (item) =>
               item.venue_lat &&
