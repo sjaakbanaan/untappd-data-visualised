@@ -1,5 +1,4 @@
-import { formatDate } from '../utils';
-import Icon from './Icon/Icon.jsx';
+import OverviewCardPropery from './OverviewCardPropery.jsx';
 
 const Overview = ({ beerData }) => {
   return (
@@ -22,48 +21,13 @@ const Overview = ({ beerData }) => {
                   {item.beer_name}
                 </h2>
                 <p className="mb-2">{item.brewery_name}</p>
-                <div className="flex items-top mb-2">
-                  <Icon
-                    icon="INFO"
-                    viewBox="0 0 16 16"
-                    className="mr-2 mt-1 fill-yellow-500"
-                  />
-                  <div className="flex-1">{item.beer_type}</div>
-                </div>
-                <div className="flex items-top mb-2">
-                  <Icon
-                    icon="INFO"
-                    viewBox="0 0 16 16"
-                    className="mr-2 mt-1 fill-yellow-500"
-                  />
-                  <div className="flex-1">{formatDate(item.created_at)}</div>
-                </div>
+                <OverviewCardPropery icon="INFO" value={item.beer_type} />
+                <OverviewCardPropery icon="INFO" value={item.created_at} formatOutput />
                 {item.venue_name && (
-                  <div className="flex items-top mb-2">
-                    <Icon
-                      icon="INFO"
-                      viewBox="0 0 16 16"
-                      className="mr-2 mt-1 fill-yellow-500"
-                    />
-                    <div className="flex-1">{item.venue_name}</div>
-                  </div>
+                  <OverviewCardPropery icon="INFO" value={item.venue_name} />
                 )}
-                <div className="text-yellow-500 flex items-top mb-2">
-                  <Icon
-                    icon="INFO"
-                    viewBox="0 0 16 16"
-                    className="mr-2 mt-1 fill-yellow-500"
-                  />
-                  <div className="flex-1">{item.rating_score}</div>
-                </div>
-                <div className="text-yellow-500 flex items-top mb-2">
-                  <Icon
-                    icon="INFO"
-                    viewBox="0 0 16 16"
-                    className="mr-2 mt-1 fill-yellow-500"
-                  />
-                  <div className="flex-1">{item.global_rating_score}</div>
-                </div>
+                <OverviewCardPropery icon="INFO" value={item.rating_score} />
+                <OverviewCardPropery icon="INFO" value={item.global_rating_score} />
               </a>
             ))}
         </div>
