@@ -51,8 +51,7 @@ const Dashboard = () => {
   }, [beerData, filterBrewery, filterCountry, filterDateRange]);
 
   return (
-    <div className="container mx-auto p-8  text-white">
-      <h1 className="text-center mb-5 text-4xl font-bold">Untappd Data Visualised</h1>
+    <>
       <DateSelector
         beerData={beerData}
         filterDateRange={filterDateRange}
@@ -127,7 +126,7 @@ const Dashboard = () => {
       ) : (
         <div className="mt-4">Loading results or waiting for correct date range...</div>
       )}
-    </div>
+    </>
   );
 };
 
