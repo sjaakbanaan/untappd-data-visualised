@@ -27,24 +27,7 @@ const OverviewFilters = ({
   }, [beerData]);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5 mt-8">
-      <div>
-        <label className="block text-white text-sm font-bold mb-2">
-          Filter by brewery
-        </label>
-        <select
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline"
-          value={filterBrewery}
-          onChange={(e) => setFilterBrewery(e.target.value)}
-        >
-          <option value="">All Breweries</option>
-          {breweryOptions.map((brewery) => (
-            <option key={brewery} value={brewery}>
-              {brewery}
-            </option>
-          ))}
-        </select>
-      </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
       <div>
         <label className="block text-white text-sm font-bold mb-2">
           Filter by country
@@ -58,6 +41,23 @@ const OverviewFilters = ({
           {countryOptions.map((country) => (
             <option key={country} value={country}>
               {country}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <label className="block text-white text-sm font-bold mb-2">
+          Filter by brewery
+        </label>
+        <select
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline"
+          value={filterBrewery}
+          onChange={(e) => setFilterBrewery(e.target.value)}
+        >
+          <option value="">All Breweries</option>
+          {breweryOptions.map((brewery) => (
+            <option key={brewery} value={brewery}>
+              {brewery}
             </option>
           ))}
         </select>

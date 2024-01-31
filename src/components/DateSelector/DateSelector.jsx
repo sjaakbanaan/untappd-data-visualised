@@ -25,8 +25,8 @@ const DateSelector = ({ beerData, filterDateRange, setFilterDateRange }) => {
   }, [beerData]);
 
   return (
-    <div className="mb-4">
-      <label className="block text-white text-sm font-bold mb-2">Drank Between:</label>
+    <div>
+      <label className="block text-white text-sm font-bold mb-2">Drank Between</label>
       <div className="flex">
         <input
           type="date"

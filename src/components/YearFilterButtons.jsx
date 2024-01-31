@@ -22,7 +22,7 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
           onClick={() =>
             setFilterDateRange({
               start: `${uniqueDates[0]}`,
-              end: '2025-12-31',
+              end: new Date().toISOString().split('T')[0],
             })
           }
         >

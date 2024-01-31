@@ -16,24 +16,25 @@ const LeafletMap = ({ beerData }) => {
   const mapRef = useRef(null);
 
   useEffect(() => {
-    // Update map viewport to fit all markers within bounds
-    if (mapRef.current && beerData.length > 1) {
-      const bounds = new Leaflet.LatLngBounds();
+    const fitMapBounds = () => {
+      if (mapRef.current && beerData.length > 1) {
+        const bounds = new Leaflet.LatLngBounds();
+        beerData.forEach((item) => {
+          if (item.venue_lat && item.venue_lng) {
+            bounds.extend([parseFloat(item.venue_lat), parseFloat(item.venue_lng)]);
+          }
+        });
 
-      beerData.forEach((item) => {
-        if (item.venue_lat && item.venue_lng) {
-          bounds.extend([parseFloat(item.venue_lat), parseFloat(item.venue_lng)]);
+        // Ensure the map has a valid size before attempting to fit bounds
+        if (bounds.isValid() && mapRef.current) {
+          mapRef.current.fitBounds(bounds, { padding: [50, 50] });
         }
-      });
-
-      // Ensure the map has a valid size before attempting to fit bounds
-      if (bounds.isValid() && mapRef.current) {
-        setTimeout(() => {
-          mapRef?.current?.fitBounds(bounds, { padding: [50, 50] });
-        }, 500); // Delay the fitBounds call to ensure the map is ready
       }
-    }
-  }, [beerData]);
+    };
+    // Apply a small delay on initial render or else bounds are incorrect
+    const timeoutId = setTimeout(fitMapBounds, 200);
+    return () => clearTimeout(timeoutId);
+  }, [beerData, mapRef]);
 
   return (
     <div className="p-4">

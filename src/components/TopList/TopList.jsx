@@ -27,7 +27,6 @@ const TopList = ({ beerData, dataType, listTitle, scoreType }) => {
                 </a>
                 <span className="text-gray-400">
                   {item.value}
-
                   {suffix}
                 </span>
               </div>

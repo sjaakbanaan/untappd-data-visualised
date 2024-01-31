@@ -6,6 +6,7 @@ import OverviewFilters from './OverviewFilters.jsx';
 import PieChartList from './PieChartList.jsx';
 import DateSelector from './DateSelector/DateSelector.jsx';
 import YearFilterButtons from './YearFilterButtons.jsx';
+import ResetFilters from './ResetFilters.jsx';
 import {
   filterBeerData,
   getDefaultStartDate,
@@ -59,12 +60,27 @@ const Dashboard = () => {
       />
       {filteredData && filteredData?.length > 0 ? (
         <div className="rounded shadow-md">
+          <OverviewFilters
+            beerData={filteredData}
+            filterBrewery={filterBrewery}
+            setFilterBrewery={setFilterBrewery}
+            filterCountry={filterCountry}
+            setFilterCountry={setFilterCountry}
+          />
           <YearFilterButtons
             beerData={beerData}
             filterDateRange={filterDateRange}
             setFilterDateRange={setFilterDateRange}
           />
-          <h2 className="text-2xl font-bold">{filteredData?.length} results</h2>
+          <div className="flex items-center mb-6">
+            <h2 className="text-2xl font-bold">{filteredData?.length} results</h2>
+            {(filterBrewery || filterCountry) && (
+              <ResetFilters
+                setFilterBrewery={setFilterBrewery}
+                setFilterCountry={setFilterCountry}
+              />
+            )}
+          </div>
           <div className="container mx-auto mt-4 p-8 bg-gray-800 rounded shadow-md">
             <div className="grid lg:grid-cols-2 gap-8 text-white">
               <PieChartList beerData={filteredData} />
@@ -86,6 +102,18 @@ const Dashboard = () => {
                 beerData={filteredData}
                 listTitle="Top 10 Strongest Beers"
               />
+              <TopList
+                scoreType="total_toasts"
+                dataType="topBeers"
+                beerData={filteredData}
+                listTitle="Top 10 Toasts"
+              />
+              <TopList
+                scoreType="total_comments"
+                dataType="topBeers"
+                beerData={filteredData}
+                listTitle="Top 10 Comments"
+              />
               <LeafletMap beerData={filteredData} />
               <TopList
                 dataType="friends"
@@ -94,17 +122,10 @@ const Dashboard = () => {
               />
             </div>
           </div>
-          <OverviewFilters
-            beerData={filteredData}
-            filterBrewery={filterBrewery}
-            setFilterBrewery={setFilterBrewery}
-            filterCountry={filterCountry}
-            setFilterCountry={setFilterCountry}
-          />
           <Overview beerData={filteredData} />
         </div>
       ) : (
-        <div>Loading results or waiting for correct date range...</div>
+        <div className="mt-4">Loading results or waiting for correct date range...</div>
       )}
     </div>
   );
