@@ -47,6 +47,10 @@ const PieChartList = ({ beerData }) => {
       name: 'brewery_country',
     },
     {
+      title: 'Top 10 Brewery Cities',
+      name: 'brewery_city',
+    },
+    {
       title: 'Top 10 Serving Type',
       name: 'serving_type',
     },

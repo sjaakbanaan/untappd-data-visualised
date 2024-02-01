@@ -1,7 +1,8 @@
-const ResetFilters = ({ setFilterBrewery, setFilterCountry }) => {
+const ResetFilters = ({ setFilterBrewery, setFilterCountry, setFilterCity }) => {
   const handleResetFilters = () => {
     setFilterBrewery('');
     setFilterCountry('');
+    setFilterCity('');
   };
 
   return (

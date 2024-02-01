@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/label-has-for */
 import { useState, useEffect } from 'react';
+import OverviewFilter from './OverviewFilter.jsx';
 
 const OverviewFilters = ({
   beerData,
@@ -8,9 +9,12 @@ const OverviewFilters = ({
   setFilterBrewery,
   filterCountry,
   setFilterCountry,
+  filterCity,
+  setFilterCity,
 }) => {
   const [breweryOptions, setBreweryOptions] = useState([]);
   const [countryOptions, setCountryOptions] = useState([]);
+  const [cityOptions, setCityOptions] = useState([]);
 
   useEffect(() => {
     // Extract unique brewery names and countries from filteredData
@@ -20,48 +24,39 @@ const OverviewFilters = ({
     const uniqueCountries = [...new Set(beerData.map((item) => item.venue_country))]
       .filter(Boolean)
       .sort();
+    const uniqueCities = [...new Set(beerData.map((item) => item.brewery_city))]
+      .filter(Boolean)
+      .sort();
 
     // Update state with unique brewery and country options
     setBreweryOptions(uniqueBreweries);
     setCountryOptions(uniqueCountries);
+    setCityOptions(uniqueCities);
   }, [beerData]);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
-      <div>
-        <label className="block text-white text-sm font-bold mb-2">
-          Filter by country
-        </label>
-        <select
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline"
-          value={filterCountry}
-          onChange={(e) => setFilterCountry(e.target.value)}
-        >
-          <option value="">All Countries</option>
-          {countryOptions.map((country) => (
-            <option key={country} value={country}>
-              {country}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div>
-        <label className="block text-white text-sm font-bold mb-2">
-          Filter by brewery
-        </label>
-        <select
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline"
-          value={filterBrewery}
-          onChange={(e) => setFilterBrewery(e.target.value)}
-        >
-          <option value="">All Breweries</option>
-          {breweryOptions.map((brewery) => (
-            <option key={brewery} value={brewery}>
-              {brewery}
-            </option>
-          ))}
-        </select>
-      </div>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-4">
+      <OverviewFilter
+        label={`Country drank at (${countryOptions.length})`}
+        labelPlural="countries"
+        options={countryOptions}
+        value={filterCountry}
+        onChange={setFilterCountry}
+      />
+      <OverviewFilter
+        label={`Brewery city (${cityOptions.length})`}
+        labelPlural="cities"
+        options={cityOptions}
+        value={filterCity}
+        onChange={setFilterCity}
+      />
+      <OverviewFilter
+        label={`Brewery (${breweryOptions.length})`}
+        labelPlural="breweries"
+        options={breweryOptions}
+        value={filterBrewery}
+        onChange={setFilterBrewery}
+      />
     </div>
   );
 };

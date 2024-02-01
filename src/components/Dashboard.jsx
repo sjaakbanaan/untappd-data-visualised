@@ -19,6 +19,7 @@ const Dashboard = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [filterBrewery, setFilterBrewery] = useState('');
   const [filterCountry, setFilterCountry] = useState('');
+  const [filterCity, setFilterCity] = useState('');
   const [filterDateRange, setFilterDateRange] = useState({
     start: getDefaultStartDate(),
     end: getDefaultEndDate(),
@@ -43,12 +44,13 @@ const Dashboard = () => {
       beerData,
       filterBrewery,
       filterCountry,
+      filterCity,
       filterDateRange
     );
 
     // console.log('debug:', filterDateRange.start, filterDateRange.end, filteredResults);
     setFilteredData(filteredResults);
-  }, [beerData, filterBrewery, filterCountry, filterDateRange]);
+  }, [beerData, filterBrewery, filterCountry, filterCity, filterDateRange]);
 
   return (
     <>
@@ -65,6 +67,7 @@ const Dashboard = () => {
             setFilterBrewery={setFilterBrewery}
             filterCountry={filterCountry}
             setFilterCountry={setFilterCountry}
+            setFilterCity={setFilterCity}
           />
           <YearFilterButtons
             beerData={beerData}
@@ -77,6 +80,7 @@ const Dashboard = () => {
               <ResetFilters
                 setFilterBrewery={setFilterBrewery}
                 setFilterCountry={setFilterCountry}
+                setFilterCity={setFilterCity}
               />
             )}
           </div>
