@@ -44,7 +44,7 @@ const Dashboard = () => {
     // this is ran each time a filter changes
     const filteredResults = filterBeerData(beerData, filterOverview, filterDateRange);
 
-    console.log('debug:', filterDateRange.start, filterDateRange.end, filteredResults);
+    // console.log('debug:', filterDateRange.start, filterDateRange.end, filteredResults);
     setFilteredData(filteredResults);
   }, [beerData, filterOverview, filterDateRange]);
 

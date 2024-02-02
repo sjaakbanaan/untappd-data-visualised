@@ -4,52 +4,60 @@ import { useState, useEffect } from 'react';
 import OverviewFilter from './OverviewFilter.jsx';
 
 const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
-  const [breweryOptions, setBreweryOptions] = useState([]);
-  // const [countryOptions, setCountryOptions] = useState([]);
-  // const [cityOptions, setCityOptions] = useState([]);
-
-  console.log(filterOverview);
+  const [filterOptions, setFilterOptions] = useState({
+    brewery: [],
+    country: [],
+    city: [],
+  });
 
   useEffect(() => {
-    // Extract unique brewery names and countries from filteredData
+    // Extract unique brewery names, countries, and cities from filteredData
     const uniqueBreweries = [...new Set(beerData.map((item) => item.brewery_name))]
       .filter(Boolean)
       .sort();
-    // const uniqueCountries = [...new Set(beerData.map((item) => item.venue_country))]
-    //   .filter(Boolean)
-    //   .sort();
-    // const uniqueCities = [...new Set(beerData.map((item) => item.brewery_city))]
-    //   .filter(Boolean)
-    //   .sort();
+    const uniqueCountries = [...new Set(beerData.map((item) => item.venue_country))]
+      .filter(Boolean)
+      .sort();
+    const uniqueCities = [...new Set(beerData.map((item) => item.brewery_city))]
+      .filter(Boolean)
+      .sort();
 
-    // Update state with unique brewery and country options
-    setBreweryOptions(uniqueBreweries);
-    // setCountryOptions(uniqueCountries);
-    // setCityOptions(uniqueCities);
+    // Update state with unique brewery, country, and city options
+    setFilterOptions({
+      brewery: uniqueBreweries,
+      country: uniqueCountries,
+      city: uniqueCities,
+    });
   }, [beerData]);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-4">
-      {/* <OverviewFilter
-        label={`Country drank at (${countryOptions.length})`}
+      <OverviewFilter
+        label={`Country drank at (${filterOptions.country.length})`}
         labelPlural="countries"
-        options={countryOptions}
-        value={filterCountry}
-        onChange={setFilterCountry}
+        options={filterOptions.country}
+        value={filterOverview?.venue_country}
+        onChange={(value) =>
+          setFilterOverview((prevFilter) => ({ ...prevFilter, venue_country: value }))
+        }
       />
       <OverviewFilter
-        label={`Brewery city (${cityOptions.length})`}
+        label={`Brewery city (${filterOptions.city.length})`}
         labelPlural="cities"
-        options={cityOptions}
-        value={filterCity}
-        onChange={setFilterCity}
-      /> */}
+        options={filterOptions.city}
+        value={filterOverview?.brewery_city}
+        onChange={(value) =>
+          setFilterOverview((prevFilter) => ({ ...prevFilter, brewery_city: value }))
+        }
+      />
       <OverviewFilter
-        label={`Brewery (${breweryOptions.length})`}
+        label={`Brewery (${filterOptions.brewery.length})`}
         labelPlural="breweries"
-        options={breweryOptions}
-        value={filterOverview}
-        onChange={setFilterOverview}
+        options={filterOptions.brewery}
+        value={filterOverview?.brewery_name}
+        onChange={(value) =>
+          setFilterOverview((prevFilter) => ({ ...prevFilter, brewery_name: value }))
+        }
       />
     </div>
   );
