@@ -9,11 +9,13 @@ const OverviewFilter = ({ label, labelPlural, options, value, onChange }) => {
         onChange={(e) => onChange(e.target.value)}
       >
         <option value="">All {labelPlural}</option>
-        {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
+        {options &&
+          options.length > 0 &&
+          options.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
       </select>
     </div>
   );

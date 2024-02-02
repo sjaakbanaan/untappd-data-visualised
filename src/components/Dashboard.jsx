@@ -17,9 +17,11 @@ import {
 const Dashboard = () => {
   const [beerData, setBeerData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-  const [filterBrewery, setFilterBrewery] = useState('');
-  const [filterCountry, setFilterCountry] = useState('');
-  const [filterCity, setFilterCity] = useState('');
+  const [filterOverview, setFilterOverview] = useState({
+    brewery_name: '',
+    venue_country: '',
+    brewery_city: '',
+  });
   const [filterDateRange, setFilterDateRange] = useState({
     start: getDefaultStartDate(),
     end: getDefaultEndDate(),
@@ -40,17 +42,11 @@ const Dashboard = () => {
 
   useEffect(() => {
     // this is ran each time a filter changes
-    const filteredResults = filterBeerData(
-      beerData,
-      filterBrewery,
-      filterCountry,
-      filterCity,
-      filterDateRange
-    );
+    const filteredResults = filterBeerData(beerData, filterOverview, filterDateRange);
 
     // console.log('debug:', filterDateRange.start, filterDateRange.end, filteredResults);
     setFilteredData(filteredResults);
-  }, [beerData, filterBrewery, filterCountry, filterCity, filterDateRange]);
+  }, [beerData, filterOverview, filterDateRange]);
 
   return (
     <>
@@ -63,11 +59,8 @@ const Dashboard = () => {
         <div className="rounded shadow-md">
           <OverviewFilters
             beerData={filteredData}
-            filterBrewery={filterBrewery}
-            setFilterBrewery={setFilterBrewery}
-            filterCountry={filterCountry}
-            setFilterCountry={setFilterCountry}
-            setFilterCity={setFilterCity}
+            filterOverview={filterOverview}
+            setFilterOverview={setFilterOverview}
           />
           <YearFilterButtons
             beerData={beerData}
@@ -76,13 +69,7 @@ const Dashboard = () => {
           />
           <div className="flex items-center mb-6">
             <h2 className="text-2xl font-bold">{filteredData?.length} results</h2>
-            {(filterBrewery || filterCountry) && (
-              <ResetFilters
-                setFilterBrewery={setFilterBrewery}
-                setFilterCountry={setFilterCountry}
-                setFilterCity={setFilterCity}
-              />
-            )}
+            {filterOverview && <ResetFilters setFilterOverview={setFilterOverview} />}
           </div>
           <div className="container mx-auto mt-4 p-8 bg-gray-800 rounded shadow-md">
             <div className="grid lg:grid-cols-2 gap-8 text-white">
