@@ -33,7 +33,7 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-4">
       <OverviewFilter
-        label={`Country drank at (${filterOptions.country.length})`}
+        label={`country drank at (${filterOptions.country.length})`}
         labelPlural="countries"
         options={filterOptions.country}
         value={filterOverview?.venue_country}
@@ -42,7 +42,7 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
         }
       />
       <OverviewFilter
-        label={`Brewery city (${filterOptions.city.length})`}
+        label={`brewery city (${filterOptions.city.length})`}
         labelPlural="cities"
         options={filterOptions.city}
         value={filterOverview?.brewery_city}
@@ -51,7 +51,7 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
         }
       />
       <OverviewFilter
-        label={`Brewery (${filterOptions.brewery.length})`}
+        label={`brewery (${filterOptions.brewery.length})`}
         labelPlural="breweries"
         options={filterOptions.brewery}
         value={filterOverview?.brewery_name}

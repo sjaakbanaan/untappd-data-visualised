@@ -22,7 +22,7 @@ const TopList = ({ beerData, dataType, listTitle, scoreType }) => {
           processedList.map((item, i) => (
             <li key={i} className="py-2">
               <div className="flex items-center justify-between">
-                <a href={item.beer_url} target="_blank" rel="noopener">
+                <a href={item.checkin_url} target="_blank" rel="noopener">
                   {item.name}
                 </a>
                 <span className="text-gray-400">

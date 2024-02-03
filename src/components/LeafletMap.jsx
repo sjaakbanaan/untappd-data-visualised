@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import iconUrl from '../images/pin.svg';
 import { formatDate } from '../utils';
+import Icon from './Icon/Icon.jsx';
 
 export const newIcon = new Leaflet.Icon({
   iconUrl,
@@ -58,21 +59,54 @@ const LeafletMap = ({ beerData }) => {
                 >
                   <Popup>
                     <strong>
-                      <a href={item.beer_url} target="_blank" rel="noopener">
+                      <a href={item.checkin_url} target="_blank" rel="noopener">
                         {item.beer_name}
                       </a>
                     </strong>
                     <br />
                     {item.brewery_name}
-                    <br />
-                    <br />
-                    your rating: {item.rating_score}
-                    <br />
-                    global rating {item.global_rating_score}
-                    <br />
-                    drank on: {formatDate(item.created_at)}
-                    <br />
-                    {item.tagged_friends && <div>friends: {item.tagged_friends}</div>}
+                    <div className="flex mt-2 items-center mb-1">
+                      <Icon
+                        icon="LOCATION"
+                        viewBox="0 0 70.749 90"
+                        className="mr-1 fill-gray-800"
+                      />
+                      {item.venue_name}, {item.venue_city}
+                    </div>
+                    <div className="flex items-center mb-1">
+                      <Icon
+                        icon="STAR"
+                        viewBox="0 0 512 512"
+                        className="mr-1 fill-gray-800"
+                      />
+                      {item.rating_score}
+                    </div>
+                    <div className="flex items-center mb-1">
+                      <Icon
+                        icon="STAR"
+                        viewBox="0 0 512 512"
+                        className="mr-1 fill-gray-800"
+                      />
+                      {item.global_rating_score}
+                    </div>
+                    <div className="flex items-center mb-1">
+                      <Icon
+                        icon="CALENDAR"
+                        viewBox="0 0 488 512"
+                        className="mr-1 fill-gray-800"
+                      />
+                      {formatDate(item.created_at)}
+                    </div>
+                    {item.tagged_friends && (
+                      <div className="flex items-center mb-1">
+                        <Icon
+                          icon="FRIENDS"
+                          viewBox="0 0 512 398.108"
+                          className="mr-1 fill-gray-800"
+                        />
+                        {item.tagged_friends}
+                      </div>
+                    )}
                   </Popup>
                 </Marker>
               )

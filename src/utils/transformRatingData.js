@@ -4,5 +4,6 @@ export const transformRatingData = (beerData, scoreType) => {
     name: `${item.beer_name}, ${item.brewery_name}`,
     value: +item[scoreType],
     beer_url: item.beer_url,
+    checkin_url: item.checkin_url,
   }));
 };

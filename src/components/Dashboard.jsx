@@ -56,64 +56,66 @@ const Dashboard = () => {
         setFilterDateRange={setFilterDateRange}
       />
       {filteredData && filteredData?.length > 0 ? (
-        <div className="rounded shadow-md">
-          <OverviewFilters
-            beerData={filteredData}
-            filterOverview={filterOverview}
-            setFilterOverview={setFilterOverview}
-          />
-          <YearFilterButtons
-            beerData={beerData}
-            filterDateRange={filterDateRange}
-            setFilterDateRange={setFilterDateRange}
-          />
-          <div className="flex items-center mb-6">
-            <h2 className="text-2xl font-bold">{filteredData?.length} results</h2>
-            {filterOverview && <ResetFilters setFilterOverview={setFilterOverview} />}
-          </div>
-          <div className="container mx-auto mt-4 p-8 bg-gray-800 rounded shadow-md">
-            <div className="grid lg:grid-cols-2 gap-8 text-white">
-              <PieChartList beerData={filteredData} />
-              <TopList
-                dataType="topBeers"
-                scoreType="rating_score"
-                beerData={filteredData}
-                listTitle="Top 10 Rated Beers (by you)"
-              />
-              <TopList
-                dataType="topBeers"
-                scoreType="global_weighted_rating_score"
-                beerData={filteredData}
-                listTitle="Top 10 Rated Beers (global, weighted)"
-              />
-              <TopList
-                dataType="topBeers"
-                scoreType="beer_abv"
-                beerData={filteredData}
-                listTitle="Top 10 Strongest Beers"
-              />
-              <TopList
-                scoreType="total_toasts"
-                dataType="topBeers"
-                beerData={filteredData}
-                listTitle="Top 10 Toasts"
-              />
-              <TopList
-                scoreType="total_comments"
-                dataType="topBeers"
-                beerData={filteredData}
-                listTitle="Top 10 Comments"
-              />
-              <LeafletMap beerData={filteredData} />
-              <TopList
-                dataType="friends"
-                beerData={filteredData}
-                listTitle="Tagged Friends"
-              />
+        <>
+          <div className="rounded shadow-md">
+            <OverviewFilters
+              beerData={filteredData}
+              filterOverview={filterOverview}
+              setFilterOverview={setFilterOverview}
+            />
+            <YearFilterButtons
+              beerData={beerData}
+              filterDateRange={filterDateRange}
+              setFilterDateRange={setFilterDateRange}
+            />
+            <div className="flex items-center mb-6">
+              <h2 className="text-2xl font-bold">{filteredData?.length} results</h2>
+              {filterOverview && <ResetFilters setFilterOverview={setFilterOverview} />}
+            </div>
+            <div className="container mx-auto mt-4 p-8 bg-gray-800 rounded shadow-md">
+              <div className="grid lg:grid-cols-2 gap-8 text-white">
+                <PieChartList beerData={filteredData} />
+                <TopList
+                  dataType="topBeers"
+                  scoreType="rating_score"
+                  beerData={filteredData}
+                  listTitle="Top 10 Rated Beers (by you)"
+                />
+                <TopList
+                  dataType="topBeers"
+                  scoreType="global_weighted_rating_score"
+                  beerData={filteredData}
+                  listTitle="Top 10 Rated Beers (global, weighted)"
+                />
+                <TopList
+                  dataType="topBeers"
+                  scoreType="beer_abv"
+                  beerData={filteredData}
+                  listTitle="Top 10 Strongest Beers"
+                />
+                <TopList
+                  scoreType="total_toasts"
+                  dataType="topBeers"
+                  beerData={filteredData}
+                  listTitle="Top 10 Toasts"
+                />
+                <TopList
+                  scoreType="total_comments"
+                  dataType="topBeers"
+                  beerData={filteredData}
+                  listTitle="Top 10 Comments"
+                />
+                <LeafletMap beerData={filteredData} />
+                <TopList
+                  dataType="friends"
+                  beerData={filteredData}
+                  listTitle="Tagged Friends"
+                />
+              </div>
             </div>
           </div>
           <Overview beerData={filteredData} />
-        </div>
+        </>
       ) : (
         <div className="mt-4">Loading results or waiting for correct date range...</div>
       )}

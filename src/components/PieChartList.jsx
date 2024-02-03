@@ -17,6 +17,10 @@ const PieChartList = ({ beerData }) => {
       name: 'beer_type',
     },
     {
+      title: 'Top 10 Most drank beers',
+      name: 'beer_name',
+    },
+    {
       title: 'Top 10 Venues Purchased',
       name: 'purchase_venue',
     },
