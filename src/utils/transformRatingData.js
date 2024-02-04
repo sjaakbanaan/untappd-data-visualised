@@ -5,5 +5,6 @@ export const transformRatingData = (beerData, scoreType) => {
     value: +item[scoreType],
     beer_url: item.beer_url,
     checkin_url: item.checkin_url,
+    your_score: item.rating_score,
   }));
 };

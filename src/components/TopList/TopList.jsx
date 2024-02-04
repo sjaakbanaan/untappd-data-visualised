@@ -7,7 +7,7 @@ const processingFunctions = {
   // Add more data types as needed
 };
 
-const TopList = ({ beerData, dataType, listTitle, scoreType }) => {
+const TopList = ({ beerData, dataType, listTitle, scoreType, selfCompare }) => {
   const processingFunction = processingFunctions[dataType] || processTopBeers;
   // add a possible second argument as extra filter
   const scoreTypeVal = scoreType ?? '';
@@ -25,9 +25,22 @@ const TopList = ({ beerData, dataType, listTitle, scoreType }) => {
                 <a href={item.checkin_url} target="_blank" rel="noopener">
                   {item.name}
                 </a>
-                <span className="text-gray-400">
+                <span className="text-gray-400 whitespace-nowrap">
                   {item.value}
                   {suffix}
+                  {selfCompare && (
+                    <>
+                      <strong> / {item.your_score}</strong>{' '}
+                      <span
+                        className={
+                          item.your_score > item.value ? 'text-green-700' : 'text-red-700'
+                        }
+                      >
+                        ({item.your_score > item.value ? '+' : '-'}
+                        {Math.abs(item.your_score - item.value).toFixed(2)})
+                      </span>
+                    </>
+                  )}
                 </span>
               </div>
             </li>

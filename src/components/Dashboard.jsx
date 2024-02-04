@@ -86,6 +86,7 @@ const Dashboard = () => {
                   scoreType="global_weighted_rating_score"
                   beerData={filteredData}
                   listTitle="Top 10 Rated Beers (global, weighted)"
+                  selfCompare
                 />
                 <TopList
                   dataType="topBeers"
