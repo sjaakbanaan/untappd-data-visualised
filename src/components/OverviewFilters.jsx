@@ -22,6 +22,8 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
       .filter(Boolean)
       .sort();
 
+    // console.log('beerData', beerData);
+
     // Update state with unique brewery, country, and city options
     setFilterOptions({
       brewery: uniqueBreweries,

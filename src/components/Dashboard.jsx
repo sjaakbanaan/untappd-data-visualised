@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import LeafletMap from './LeafletMap.jsx';
+import Map from './Map.jsx';
 import TopList from './TopList/TopList.jsx';
 import Overview from './Overview.jsx';
 import OverviewFilters from './OverviewFilters.jsx';
@@ -17,6 +17,7 @@ import {
 const Dashboard = () => {
   const [beerData, setBeerData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
+  const [unfilteredData, setUnfilteredData] = useState([]);
   const [filterOverview, setFilterOverview] = useState({
     brewery_name: '',
     venue_country: '',
@@ -43,9 +44,16 @@ const Dashboard = () => {
   useEffect(() => {
     // this is ran each time a filter changes
     const filteredResults = filterBeerData(beerData, filterOverview, filterDateRange);
+    const unfilteredResults = filterBeerData(
+      beerData,
+      filterOverview,
+      filterDateRange,
+      true
+    );
 
-    // console.log('debug:', filterDateRange.start, filterDateRange.end, filteredResults);
+    // console.log('debug:', filteredResults);
     setFilteredData(filteredResults);
+    setUnfilteredData(unfilteredResults);
   }, [beerData, filterOverview, filterDateRange]);
 
   return (
@@ -59,9 +67,9 @@ const Dashboard = () => {
         <>
           <div className="rounded shadow-md">
             <OverviewFilters
-              beerData={filteredData}
               filterOverview={filterOverview}
               setFilterOverview={setFilterOverview}
+              beerData={unfilteredData} // unfiltered data to make option lists not get filtered
             />
             <YearFilterButtons
               beerData={beerData}
@@ -106,7 +114,7 @@ const Dashboard = () => {
                   beerData={filteredData}
                   listTitle="Top 10 Comments"
                 />
-                <LeafletMap beerData={filteredData} />
+                <Map beerData={filteredData} />
                 <TopList
                   dataType="friends"
                   beerData={filteredData}

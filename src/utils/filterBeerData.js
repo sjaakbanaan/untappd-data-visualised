@@ -1,4 +1,9 @@
-export const filterBeerData = (beerData, filterOverview, filterDateRange) => {
+export const filterBeerData = (
+  beerData,
+  filterOverview,
+  filterDateRange,
+  unfiltered = false
+) => {
   // Check if start date is greater than end date
   if (
     filterDateRange.start &&
@@ -34,6 +39,10 @@ export const filterBeerData = (beerData, filterOverview, filterDateRange) => {
       new Date(item.created_at) >= new Date(filterDateRange.start) &&
       new Date(item.created_at) <= new Date(filterDateRange.end);
 
-    return breweryMatch && countryMatch && dateMatch && cityMatch;
+    if (!unfiltered) {
+      return breweryMatch && countryMatch && dateMatch && cityMatch;
+    } else {
+      return dateMatch;
+    }
   });
 };
