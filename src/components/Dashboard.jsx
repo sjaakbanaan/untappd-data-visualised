@@ -3,7 +3,8 @@ import Map from './Map.jsx';
 import TopList from './TopList/TopList.jsx';
 import Overview from './Overview.jsx';
 import OverviewFilters from './OverviewFilters.jsx';
-import PieChartList from './PieChartList.jsx';
+import PieChartList from './Charts/PieChartList.jsx';
+import BarChartList from './Charts/BarChartList.jsx';
 import DateSelector from './DateSelector/DateSelector.jsx';
 import YearFilterButtons from './YearFilterButtons.jsx';
 import ResetFilters from './ResetFilters.jsx';
@@ -17,7 +18,6 @@ import {
 const Dashboard = () => {
   const [beerData, setBeerData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-  const [unfilteredData, setUnfilteredData] = useState([]);
   const [filterOverview, setFilterOverview] = useState({
     brewery_name: '',
     venue_country: '',
@@ -44,16 +44,8 @@ const Dashboard = () => {
   useEffect(() => {
     // this is ran each time a filter changes
     const filteredResults = filterBeerData(beerData, filterOverview, filterDateRange);
-    const unfilteredResults = filterBeerData(
-      beerData,
-      filterOverview,
-      filterDateRange,
-      true
-    );
-
     // console.log('debug:', filteredResults);
     setFilteredData(filteredResults);
-    setUnfilteredData(unfilteredResults);
   }, [beerData, filterOverview, filterDateRange]);
 
   return (
@@ -67,9 +59,9 @@ const Dashboard = () => {
         <>
           <div className="rounded shadow-md">
             <OverviewFilters
+              beerData={filteredData}
               filterOverview={filterOverview}
               setFilterOverview={setFilterOverview}
-              beerData={unfilteredData} // unfiltered data to make option lists not get filtered
             />
             <YearFilterButtons
               beerData={beerData}
@@ -83,6 +75,7 @@ const Dashboard = () => {
             <div className="container mx-auto mt-4 p-8 bg-gray-800 rounded shadow-md">
               <div className="grid lg:grid-cols-2 gap-8 text-white">
                 <PieChartList beerData={filteredData} />
+                <BarChartList beerData={filteredData} />
                 <TopList
                   dataType="topBeers"
                   scoreType="rating_score"
@@ -114,6 +107,12 @@ const Dashboard = () => {
                   beerData={filteredData}
                   listTitle="Top 10 Comments"
                 />
+                <TopList
+                  dataType="flavorProfiles"
+                  beerData={filteredData}
+                  lowerCase
+                  listTitle="Top Flavour Profiles"
+                />
                 <Map beerData={filteredData} />
                 <TopList
                   dataType="friends"
@@ -126,7 +125,9 @@ const Dashboard = () => {
           <Overview beerData={filteredData} />
         </>
       ) : (
-        <div className="mt-4">Loading results or waiting for correct date range...</div>
+        <div className="mt-4">
+          Loading results or your filters didn't return a result.
+        </div>
       )}
     </>
   );

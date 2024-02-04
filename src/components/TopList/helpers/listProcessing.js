@@ -47,3 +47,30 @@ export const processTaggedFriends = (beerData) => {
 
   return { processedList, suffix, onEmpty };
 };
+
+export const processFlavorProfiles = (beerData) => {
+  const suffix = ' times';
+  const onEmpty =
+    'No flavor profiles to display, are these checkins from before the launch of the "Tagged Friends"?';
+
+  const allItemsArr = beerData.flatMap((item) =>
+    item.flavor_profiles
+      ? item.flavor_profiles.split(',').map((friend) => friend.trim())
+      : []
+  );
+
+  const itemCount = allItemsArr.reduce((acc, item) => {
+    acc[item] = (acc[item] || 0) + 1;
+    return acc;
+  }, {});
+
+  const sortedData = Object.keys(itemCount).map((item) => ({
+    name: item,
+    value: itemCount[item],
+  }));
+
+  sortedData.sort((a, b) => b.value - a.value);
+  const processedList = sortedData.slice(0, 10);
+
+  return { processedList, suffix, onEmpty };
+};

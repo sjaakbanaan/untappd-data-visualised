@@ -1,13 +1,25 @@
 import PropTypes from 'prop-types';
-import { processTopBeers, processTaggedFriends } from './helpers/listProcessing';
+import {
+  processTopBeers,
+  processTaggedFriends,
+  processFlavorProfiles,
+} from './helpers/listProcessing';
 
 const processingFunctions = {
   friends: processTaggedFriends,
   topBeers: processTopBeers,
+  flavorProfiles: processFlavorProfiles,
   // Add more data types as needed
 };
 
-const TopList = ({ beerData, dataType, listTitle, scoreType, selfCompare }) => {
+const TopList = ({
+  beerData,
+  dataType,
+  listTitle,
+  scoreType,
+  selfCompare,
+  lowerCase = false,
+}) => {
   const processingFunction = processingFunctions[dataType] || processTopBeers;
   // add a possible second argument as extra filter
   const scoreTypeVal = scoreType ?? '';
@@ -21,7 +33,9 @@ const TopList = ({ beerData, dataType, listTitle, scoreType, selfCompare }) => {
         {processedList.length > 0 ? (
           processedList.map((item, i) => (
             <li key={i} className="py-2">
-              <div className="flex items-center justify-between">
+              <div
+                className={`flex items-center justify-between  ${lowerCase && 'lowercase'}`}
+              >
                 <a href={item.checkin_url} target="_blank" rel="noopener">
                   {item.name}
                 </a>

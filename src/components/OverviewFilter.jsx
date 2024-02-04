@@ -1,4 +1,10 @@
+import countriesData from './countries.json';
 const OverviewFilter = ({ label, labelPlural, options, value, onChange }) => {
+  const translateToEnglish = (originalName) => {
+    const country = countriesData.countries.find((c) => c.original === originalName);
+    return country ? country.english : originalName;
+  };
+
   return (
     <div>
       <label htmlFor={labelPlural} className="block text-white text-sm font-bold mb-2">
@@ -15,7 +21,7 @@ const OverviewFilter = ({ label, labelPlural, options, value, onChange }) => {
           options.length > 0 &&
           options.map((option) => (
             <option key={option} value={option} selected={value === option}>
-              {option}
+              {translateToEnglish(option)}
             </option>
           ))}
       </select>

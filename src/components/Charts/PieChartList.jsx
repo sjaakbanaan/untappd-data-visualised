@@ -25,12 +25,6 @@ const PieChartList = ({ beerData }) => {
       name: 'purchase_venue',
     },
     {
-      title: 'Top 10 Beer ABV',
-      name: 'beer_abv',
-      trailing_char: '%',
-      // hide_count: true,
-    },
-    {
       title: 'Top 10 Venues',
       name: 'venue_name',
     },
@@ -43,20 +37,12 @@ const PieChartList = ({ beerData }) => {
       name: 'venue_country',
     },
     {
-      title: 'Top 10 Rating Scores',
-      name: 'rating_score',
-    },
-    {
       title: 'Top 10 Brewery Country',
       name: 'brewery_country',
     },
     {
       title: 'Top 10 Brewery Cities',
       name: 'brewery_city',
-    },
-    {
-      title: 'Top 10 Serving Type',
-      name: 'serving_type',
     },
   ];
   const [selectedPieChartData, setSelectedPieChartData] = useState(pieChartList[0].name);
@@ -69,7 +55,7 @@ const PieChartList = ({ beerData }) => {
 
   return (
     <div className="p-4">
-      <h2 className="text-lg font-semibold mb-8">Select data type</h2>
+      <h2 className="text-lg font-semibold mb-8">Select Top 10 List</h2>
       <select
         className="shadow border rounded w-full py-2 px- mb-4 text-gray-900 focus:outline-none focus:shadow-outline"
         value={selectedPieChartData}
