@@ -3,12 +3,14 @@ import {
   processTopBeers,
   processTaggedFriends,
   processFlavorProfiles,
+  processFlavorProfileCombis,
 } from './helpers/listProcessing';
 
 const processingFunctions = {
   friends: processTaggedFriends,
   topBeers: processTopBeers,
   flavorProfiles: processFlavorProfiles,
+  flavorProfileCombis: processFlavorProfileCombis,
   // Add more data types as needed
 };
 

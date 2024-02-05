@@ -113,6 +113,12 @@ const Dashboard = () => {
                   lowerCase
                   listTitle="Top Flavour Profiles"
                 />
+                <TopList
+                  dataType="flavorProfileCombis"
+                  beerData={filteredData}
+                  lowerCase
+                  listTitle="Top Flavour Profile combinations"
+                />
                 <Map beerData={filteredData} />
                 <TopList
                   dataType="friends"
