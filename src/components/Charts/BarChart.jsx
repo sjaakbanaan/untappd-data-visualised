@@ -2,7 +2,7 @@ import 'chart.js/auto';
 import PropTypes from 'prop-types';
 import { Bar } from 'react-chartjs-2';
 
-const BarChart = ({ beerData, dataType }) => {
+const BarChart = ({ beerData, dataType, trailingChar }) => {
   const processData = () => {
     let dataMap = {};
     // Process brewery names
@@ -23,7 +23,7 @@ const BarChart = ({ beerData, dataType }) => {
     // Sort by count in descending order
     const sortedDataList = dataList.sort((a, b) => a.name - b.name);
     const labels = sortedDataList.map((item) => {
-      return `${item.name}`;
+      return `${item.name}${trailingChar}`;
     });
     const data = sortedDataList.map((item) => item.count);
 

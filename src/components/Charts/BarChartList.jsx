@@ -8,7 +8,10 @@ const BarChartList = ({ beerData }) => {
       title: 'Beer ABV',
       name: 'beer_abv',
       trailing_char: '%',
-      // hide_count: true,
+    },
+    {
+      title: 'Beer IBU',
+      name: 'beer_ibu',
     },
     {
       title: 'Rating Scores',
@@ -20,6 +23,11 @@ const BarChartList = ({ beerData }) => {
     },
   ];
   const [selectedBarChartData, setSelectedBarChartData] = useState(barChartList[0].name);
+
+  const selectedChartData = barChartList.find(
+    (chart) => chart.name === selectedBarChartData
+  );
+  const trailingChar = selectedChartData?.trailing_char || '';
 
   return (
     <div className="p-4">
@@ -36,7 +44,11 @@ const BarChartList = ({ beerData }) => {
             </option>
           ))}
       </select>
-      <BarChart dataType={selectedBarChartData} beerData={beerData} />
+      <BarChart
+        dataType={selectedBarChartData}
+        beerData={beerData}
+        trailingChar={trailingChar}
+      />
     </div>
   );
 };
