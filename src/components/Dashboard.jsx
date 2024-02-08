@@ -28,6 +28,15 @@ const Dashboard = () => {
     end: getDefaultEndDate(),
   });
 
+  const isFilterOverviewSet = (filterOverview) => {
+    for (const key in filterOverview) {
+      if (Object.hasOwnProperty.call(filterOverview, key) && filterOverview[key] !== '') {
+        return true;
+      }
+    }
+    return false;
+  };
+
   useEffect(() => {
     // Fetch the JSON file or import it directly
     const fetchDataAndSetState = async () => {
@@ -44,7 +53,7 @@ const Dashboard = () => {
   useEffect(() => {
     // this is ran each time a filter changes
     const filteredResults = filterBeerData(beerData, filterOverview, filterDateRange);
-    // console.log('debug:', filteredResults);
+    // console.log('debug:', filterOverview);
     setFilteredData(filteredResults);
   }, [beerData, filterOverview, filterDateRange]);
 
@@ -70,7 +79,9 @@ const Dashboard = () => {
             />
             <div className="flex items-center mb-6">
               <h2 className="text-2xl font-bold">{filteredData?.length} results</h2>
-              {filterOverview && <ResetFilters setFilterOverview={setFilterOverview} />}
+              {isFilterOverviewSet(filterOverview) && (
+                <ResetFilters setFilterOverview={setFilterOverview} />
+              )}
             </div>
             <div className="container mx-auto mt-4 p-8 bg-gray-800 rounded shadow-md">
               <div className="grid lg:grid-cols-2 gap-8 text-white">
