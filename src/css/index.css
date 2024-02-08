@@ -23,3 +23,10 @@ input[type='date']::-webkit-calendar-picker-indicator {
 input[type='date']::-webkit-calendar-picker-indicator:before {
   display: none;
 }
+select {
+  background-repeat: no-repeat;
+  background-position-x: calc(100% - 12px);
+  background-position-y: 10px;
+  background-size: 14px 14px;
+  background-image: url("data:image/svg+xml,<svg width='24' fill='white' height='24' xmlns='http://www.w3.org/2000/svg'><path d='m0,6l12,12l12,-12l-24,0z'/><path fill='none' d='m0,0l24,0l0,24l-24,0l0,-24z'/></svg>");
+}
