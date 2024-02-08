@@ -67,15 +67,15 @@ const Dashboard = () => {
       {filteredData && filteredData?.length > 0 ? (
         <>
           <div className="rounded shadow-md">
-            <OverviewFilters
-              beerData={filteredData}
-              filterOverview={filterOverview}
-              setFilterOverview={setFilterOverview}
-            />
             <YearFilterButtons
               beerData={beerData}
               filterDateRange={filterDateRange}
               setFilterDateRange={setFilterDateRange}
+            />
+            <OverviewFilters
+              beerData={filteredData}
+              filterOverview={filterOverview}
+              setFilterOverview={setFilterOverview}
             />
             <div className="flex items-center mb-6">
               <h2 className="text-2xl font-bold">{filteredData?.length} results</h2>

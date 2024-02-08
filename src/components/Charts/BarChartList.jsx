@@ -33,7 +33,7 @@ const BarChartList = ({ beerData }) => {
     <div className="p-4">
       <h2 className="text-lg font-semibold mb-8">Select Frequency List</h2>
       <select
-        className="shadow border rounded w-full py-2 px- mb-4 text-gray-900 focus:outline-none focus:shadow-outline"
+        className="shadow mb-8 appearance-none border bg-gray-900 rounded w-full border-white py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
         value={selectedBarChartData}
         onChange={(e) => setSelectedBarChartData(e.target.value)}
       >

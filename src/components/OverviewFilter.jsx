@@ -13,15 +13,17 @@ const OverviewFilter = ({ label, labelPlural, options, value, onChange }) => {
       </label>
       <select
         id={labelPlural}
-        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline"
+        className="shadow appearance-none border bg-gray-900 rounded w-full border-white py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
         value={value}
         onChange={(e) => onChange(e.target.value)}
       >
-        <option value="">All {labelPlural}</option>
+        <option className="bg-gray-900" value="">
+          All {labelPlural}
+        </option>
         {options &&
           options.length > 0 &&
           options.map((option) => (
-            <option key={option} value={option}>
+            <option className="bg-gray-900" key={option} value={option}>
               {translateToEnglish(option)}
             </option>
           ))}

@@ -61,8 +61,23 @@ const PieChart = ({ beerData, dataType, trailingChar, hideCount }) => {
   // skip pie chart when there's only 1 result:
   if (topItems.length <= 1) return 'A minimum of two results is needed for a pie chart.';
 
+  // hack to create padding between pie and legend
+  const plugin = {
+    beforeInit: function (chart) {
+      // Get reference to the original fit function
+      const originalFit = chart.legend.fit;
+      // Override the fit function
+      chart.legend.fit = function fit() {
+        // Bind scope in order to use `this` correctly inside it
+        originalFit.bind(chart.legend)();
+        this.height += 20; // Change the height
+      };
+    },
+  };
+
   return (
     <Pie
+      plugins={[plugin]}
       options={{
         elements: {
           arc: {
