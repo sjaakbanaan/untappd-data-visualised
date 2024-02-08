@@ -1,6 +1,10 @@
 const ResetFilters = ({ setFilterOverview }) => {
   const handleResetFilters = () => {
-    setFilterOverview('');
+    setFilterOverview({
+      brewery_name: '',
+      venue_country: '',
+      venue_city: '',
+    });
   };
 
   return (

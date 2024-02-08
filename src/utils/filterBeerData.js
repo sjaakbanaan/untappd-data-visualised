@@ -22,10 +22,8 @@ export const filterBeerData = (beerData, filterOverview, filterDateRange) => {
           .includes(filterOverview.venue_country.toLowerCase())
       : true;
 
-    const cityMatch = filterOverview.brewery_city
-      ? item?.brewery_city
-          ?.toLowerCase()
-          .includes(filterOverview.brewery_city.toLowerCase())
+    const cityMatch = filterOverview.venue_city
+      ? item?.venue_city?.toLowerCase().includes(filterOverview.venue_city.toLowerCase())
       : true;
 
     const dateMatch =

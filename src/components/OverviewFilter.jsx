@@ -1,4 +1,5 @@
 import countriesData from './countries.json';
+
 const OverviewFilter = ({ label, labelPlural, options, value, onChange }) => {
   const translateToEnglish = (originalName) => {
     const country = countriesData.countries.find((c) => c.original === originalName);
@@ -20,7 +21,7 @@ const OverviewFilter = ({ label, labelPlural, options, value, onChange }) => {
         {options &&
           options.length > 0 &&
           options.map((option) => (
-            <option key={option} value={option} selected={value === option}>
+            <option key={option} value={option}>
               {translateToEnglish(option)}
             </option>
           ))}
