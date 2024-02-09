@@ -124,10 +124,10 @@ export const processDuplicateEntries = (filteredData) => {
   const processedList = sortedBids.map(([bid, count]) => {
     const entry = filteredData.find((entry) => entry.bid === bid);
     return {
-      name: entry?.beer_name || 'Unknown',
+      name: `${entry.beer_name}, ${entry.brewery_name}`,
       value: count,
       bid,
-      url: entry?.beer_url || '',
+      url: entry.beer_url || '',
     };
   });
 
