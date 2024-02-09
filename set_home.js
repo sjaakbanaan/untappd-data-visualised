@@ -12,7 +12,10 @@ const uniqueCheckinIds = new Set();
 
 // Update the values in the original data based on the condition
 const updatedData = originalData.map((item) => {
-  if (item.venue_name === 'Untappd at Home') {
+  if (
+    item.venue_name === 'Untappd at Home' ||
+    item.venue_name === 'Untappd Virtual Festival'
+  ) {
     return {
       ...item,
       ...newValues,

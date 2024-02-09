@@ -71,7 +71,8 @@ const Map = ({ beerData }) => {
                         viewBox="0 0 70.749 90"
                         className="mr-1 fill-gray-800"
                       />
-                      {item.venue_name}, {item.venue_city}
+                      {item.venue_name}
+                      {item.venue_city && `, ${item.venue_city}`}
                     </div>
                     <div className="flex items-center mb-1">
                       <Icon
