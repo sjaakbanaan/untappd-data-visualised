@@ -14,7 +14,8 @@ const uniqueCheckinIds = new Set();
 const updatedData = originalData.map((item) => {
   if (
     item.venue_name === 'Untappd at Home' ||
-    item.venue_name === 'Untappd Virtual Festival'
+    item.venue_name === 'Untappd Virtual Festival' ||
+    item.venue_name === 'Untappd 10th Anniversary Party'
   ) {
     return {
       ...item,
