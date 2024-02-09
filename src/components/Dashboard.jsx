@@ -13,6 +13,7 @@ import {
   getDefaultStartDate,
   getDefaultEndDate,
   fetchData,
+  filterDuplicateBeers,
 } from '../utils/';
 
 const Dashboard = () => {
@@ -57,6 +58,10 @@ const Dashboard = () => {
     setFilteredData(filteredResults);
   }, [beerData, filterOverview, filterDateRange]);
 
+  const totalBeerCount = filteredData && filteredData?.length;
+  const totalUniqueBeerCount = filteredData && filterDuplicateBeers(filteredData)?.length;
+  const totalDiff = totalBeerCount - totalUniqueBeerCount;
+
   return (
     <>
       <DateSelector
@@ -64,7 +69,7 @@ const Dashboard = () => {
         filterDateRange={filterDateRange}
         setFilterDateRange={setFilterDateRange}
       />
-      {filteredData && filteredData?.length > 0 ? (
+      {filteredData && totalBeerCount > 0 ? (
         <>
           <div className="rounded shadow-md">
             <YearFilterButtons
@@ -78,7 +83,11 @@ const Dashboard = () => {
               setFilterOverview={setFilterOverview}
             />
             <div className="flex items-center mb-6">
-              <h2 className="text-2xl font-bold">{filteredData?.length} results</h2>
+              <h2 className="text-2xl font-bold">
+                {totalBeerCount} beers <span className="text-gray-600">/</span>{' '}
+                {totalUniqueBeerCount} uniques{' '}
+                <span className="text-gray-600">(+{totalDiff})</span>
+              </h2>
               {isFilterOverviewSet(filterOverview) && (
                 <ResetFilters setFilterOverview={setFilterOverview} />
               )}

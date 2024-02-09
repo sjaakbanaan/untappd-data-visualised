@@ -97,10 +97,6 @@
       "english": "Kosovo"
     },
     {
-      "original": "Latvia",
-      "english": "Latvia"
-    },
-    {
       "original": "Liechtenstein",
       "english": "Liechtenstein"
     },
@@ -239,6 +235,14 @@
     {
       "original": "المغرب",
       "english": "Morocco"
+    },
+    {
+      "original": "Eesti",
+      "english": "Estonia"
+    },
+    {
+      "original": "Latvija",
+      "english": "Latvia"
     }
   ]
 }

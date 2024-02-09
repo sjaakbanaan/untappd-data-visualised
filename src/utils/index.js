@@ -4,6 +4,7 @@ import { getDefaultEndDate } from './getDefaulEndDate';
 import { getDefaultStartDate } from './getDefaultStartDate';
 import { transformRatingData } from './transformRatingData';
 import { filterBeerData } from './filterBeerData';
+import { filterDuplicateBeers } from './filterDuplicateBeers';
 
 export {
   formatDate,
@@ -12,4 +13,5 @@ export {
   getDefaultStartDate,
   transformRatingData,
   filterBeerData,
+  filterDuplicateBeers,
 };
