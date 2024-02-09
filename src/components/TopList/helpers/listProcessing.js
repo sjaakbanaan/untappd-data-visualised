@@ -121,11 +121,15 @@ export const processDuplicateEntries = (filteredData) => {
     .sort((a, b) => b[1] - a[1])
     .slice(0, 10);
 
-  const processedList = sortedBids.map(([bid, count]) => ({
-    name: filteredData.find((entry) => entry.bid === bid)?.beer_name || 'Unknown',
-    value: count,
-    bid,
-  }));
+  const processedList = sortedBids.map(([bid, count]) => {
+    const entry = filteredData.find((entry) => entry.bid === bid);
+    return {
+      name: entry?.beer_name || 'Unknown',
+      value: count,
+      bid,
+      url: entry?.beer_url || '',
+    };
+  });
 
   return { processedList, suffix, onEmpty };
 };

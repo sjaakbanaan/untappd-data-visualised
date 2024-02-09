@@ -39,7 +39,7 @@ const TopList = ({
               <div
                 className={`flex items-center justify-between  ${lowerCase && 'lowercase'}`}
               >
-                <a href={item.checkin_url} target="_blank" rel="noopener">
+                <a href={item.url} target="_blank" rel="noopener">
                   {item.name}
                 </a>
                 <span className="text-gray-400 whitespace-nowrap">
