@@ -89,6 +89,12 @@ const Dashboard = () => {
                 <BarChartList beerData={filteredData} />
                 <TopList
                   dataType="topBeers"
+                  scoreType="rating_score"
+                  beerData={filteredData}
+                  listTitle="Top 10 Rated Beers (by you)"
+                />
+                <TopList
+                  dataType="topBeers"
                   scoreType="global_weighted_rating_score"
                   beerData={filteredData}
                   listTitle="Top 10 Rated Beers (global / you (diff))"
