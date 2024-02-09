@@ -107,3 +107,25 @@ export const processFlavorProfileCombis = (beerData) => {
 
   return { processedList, suffix, onEmpty };
 };
+
+export const processDuplicateEntries = (filteredData) => {
+  const suffix = ' times';
+  const onEmpty = 'No duplicate entries to display.';
+
+  const bidCounts = filteredData.reduce((counts, entry) => {
+    counts[entry.bid] = (counts[entry.bid] || 0) + 1;
+    return counts;
+  }, {});
+
+  const sortedBids = Object.entries(bidCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 10);
+
+  const processedList = sortedBids.map(([bid, count]) => ({
+    name: filteredData.find((entry) => entry.bid === bid)?.beer_name || 'Unknown',
+    value: count,
+    bid,
+  }));
+
+  return { processedList, suffix, onEmpty };
+};

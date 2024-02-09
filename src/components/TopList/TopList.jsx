@@ -4,6 +4,7 @@ import {
   processTaggedFriends,
   processFlavorProfiles,
   processFlavorProfileCombis,
+  processDuplicateEntries,
 } from './helpers/listProcessing';
 
 const processingFunctions = {
@@ -11,6 +12,7 @@ const processingFunctions = {
   topBeers: processTopBeers,
   flavorProfiles: processFlavorProfiles,
   flavorProfileCombis: processFlavorProfileCombis,
+  duplicateEntries: processDuplicateEntries,
   // Add more data types as needed
 };
 
@@ -23,7 +25,6 @@ const TopList = ({
   lowerCase = false,
 }) => {
   const processingFunction = processingFunctions[dataType] || processTopBeers;
-  // add a possible second argument as extra filter
   const scoreTypeVal = scoreType ?? '';
   const getList = processingFunction(beerData, scoreTypeVal);
   const { processedList, suffix, onEmpty } = getList;

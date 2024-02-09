@@ -100,26 +100,26 @@ const Dashboard = () => {
                   dataType="topBeers"
                   scoreType="rating_score"
                   beerData={filteredData}
-                  listTitle="Top 10 Rated Beers (by you)"
+                  listTitle="Top 10 rated beers (by you)"
                 />
                 <TopList
                   dataType="topBeers"
                   scoreType="global_weighted_rating_score"
                   beerData={filteredData}
-                  listTitle="Top 10 Rated Beers (global / you (diff))"
+                  listTitle="Top 10 rated beers (global / you (diff))"
                   selfCompare
                 />
                 <TopList
                   dataType="topBeers"
                   scoreType="beer_abv"
                   beerData={filteredData}
-                  listTitle="Top 10 Strongest Beers"
+                  listTitle="Top 10 strongest beers"
                 />
                 <TopList
                   scoreType="total_toasts"
                   dataType="topBeers"
                   beerData={filteredData}
-                  listTitle="Top 10 Toasts"
+                  listTitle="Top 10 toasts"
                 />
                 <TopList
                   scoreType="total_comments"
@@ -131,19 +131,24 @@ const Dashboard = () => {
                   dataType="flavorProfiles"
                   beerData={filteredData}
                   lowerCase
-                  listTitle="Top Flavour Profiles"
+                  listTitle="Top flavour profiles"
                 />
                 <TopList
                   dataType="flavorProfileCombis"
                   beerData={filteredData}
                   lowerCase
-                  listTitle="Top Flavour Profile combinations"
+                  listTitle="Top flavour profile combinations"
                 />
                 <Map beerData={filteredData} />
                 <TopList
                   dataType="friends"
                   beerData={filteredData}
-                  listTitle="Tagged Friends"
+                  listTitle="Tagged friends"
+                />
+                <TopList
+                  dataType="duplicateEntries"
+                  beerData={filteredData}
+                  listTitle="Top 10 most drank beers"
                 />
               </div>
             </div>
