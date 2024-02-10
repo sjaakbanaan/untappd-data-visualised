@@ -8,7 +8,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const PieChart = ({ beerData, dataType, trailingChar, hideCount }) => {
   const processData = () => {
     let dataMap = {};
-    // Process brewery names
+    // Get values for given dataType
     dataMap = beerData.reduce((acc, item) => {
       const itemValue = item[dataType] || 'Unknown';
       acc[itemValue] = (acc[itemValue] || 0) + 1;
@@ -18,10 +18,17 @@ const PieChart = ({ beerData, dataType, trailingChar, hideCount }) => {
     // Convert to array of objects
     const dataList = Object.keys(dataMap)
       .filter((name) => name !== 'Unknown') // Exclude items where name is "Unknown"
-      .map((name) => ({
-        name,
-        count: dataMap[name],
-      }));
+      .map((name) => {
+        const foundEntry = beerData.find((entry) => entry.bid === name);
+        return {
+          name: dataType == 'bid' ? foundEntry.beer_name : name,
+          count: dataMap[name],
+        };
+      });
+
+    // const entry = filteredData.find((entry) => entry.bid === bid);
+
+    console.log('dataList', dataList);
 
     // Sort by count in descending order and take the top 10
     const topItems = dataList.sort((a, b) => b.count - a.count).slice(0, 10);
