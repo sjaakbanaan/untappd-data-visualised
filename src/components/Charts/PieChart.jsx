@@ -26,10 +26,6 @@ const PieChart = ({ beerData, dataType, trailingChar, hideCount }) => {
         };
       });
 
-    // const entry = filteredData.find((entry) => entry.bid === bid);
-
-    console.log('dataList', dataList);
-
     // Sort by count in descending order and take the top 10
     const topItems = dataList.sort((a, b) => b.count - a.count).slice(0, 10);
     const labels = topItems.map((item) => {
