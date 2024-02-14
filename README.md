@@ -25,6 +25,9 @@ You start by setting a date range, and from there you can start filtering. After
 - Top 10 most drank beers
 - Friends drank with
 
+<img width="1362" alt="screen3" src="https://github.com/sjaakbanaan/untappd-data-visualised/assets/2773301/1b342d5d-cb33-4512-a69e-08bb0575bd6a">
+
+
 ## Getting Started
 
 ### Prerequisites
