@@ -1,19 +1,34 @@
 # Untappd Data Visualised v1.0
 
 ## Overview
-
 #### You need to be an _Untappd Insider_ to use this dashboard!
-This little side project, "untappd-data-visualised," is designed to visualize Untappd data in various formats, such as charts, lists, and maps. It leverages React, Chart.js, Leaflet, and other technologies to provide an interactive and insightful representation of your Untappd check-in history (screenshots soon).
+
+This little side project, "untappd-data-visualised," is designed to visualize Untappd data in various formats, such as charts, lists, and maps. It leverages React, Chart.js, Leaflet, and some others to provide an interactive and insightful representation of your Untappd check-in history (screenshots soon).
+
+You start by setting a date range, and from there you can start filtering. After setting filters, the following lists are presented in either a chart or list:
+- Top 10 breweries
+- Top 10 beer Styles
+- Top 10 most drank beers
+- Top 10 venues purchased
+- Top 10 venues
+- Top 10 venue cities
+- Top 10 venue countries
+- Top 10 brewery country
+- Top 10 brewery cities
+- Top 10 rated beers (by you)
+- Top 10 rated beers (global / you (diff))
+- Top 10 strongest beers
+- Top 10 toasts
+- Top 10 comments
+- Top 10 most drank beers
+- Friends drank with
 
 ## Getting Started
 
 ### Prerequisites
 
-- **Node.js**: and **Yarn**.
-
-### Configuration
-
-See following steps.
+- **Node.js**: and preferably **Yarn**.
+- An export of your data from Untappd (https://untappd.com/user/xxxx/beers) as JSON.
 
 ### Installation:
 
@@ -25,16 +40,16 @@ git clone https://github.com/sjaakbanaan/untappd-data-visualised
 cd untappd-data-visualised
 
 # Install dependencies
-yarn install
+yarn install // npm run install
 ```
 
-- Export your data from Untappd (https://untappd.com/user/xxxx/beers) as JSON.
-
-- Rename the file to `beers.json` and add the file to the `public` folder.
-
-- _Importent step:_ By default Untappd sets the long/lat for 'Untappd at Home' in the US, replace it with own home address by copying `home-config-example.json` from the  `public` folder to `home-config.json` and then from root run:
+- Rename the exported file to `beers.json` and add the file to the `public` folder.
+- _Importent step:_ By default Untappd sets the long/lat for 'Untappd at Home' and 'Untappd Virtual Festival' in the US, to change this follow these steps:
+1. Copy `home-config-example.json` from the `public` folder to `home-config.json` 
+2. Update `home-config.json` by setting your location data;
+3. run: 
 ```bash
-yarn set-home
+yarn set-home // node set-home.js
 ```
 
 ### Usage
@@ -42,10 +57,15 @@ yarn set-home
 To start the server:
 
 ```bash
-yarn run start
+yarn start  // npm run start
 ```
 
-This will open the app in your default web browser.
+This will open the app on localhost:3000 in your default web browser.
+
+## Future wishes
+
+- Make this into an actual web app so you don't have to run it yourself.
+- A sortable dashboard where you can toggle certain data.
 
 ## Contributing
 
