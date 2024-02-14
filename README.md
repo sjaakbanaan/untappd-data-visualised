@@ -1,5 +1,7 @@
 # Untappd Data Visualised v1.0
 
+<img width="1527" alt="screen1" src="https://github.com/sjaakbanaan/untappd-data-visualised/assets/2773301/9dfa8bb4-dcaf-4325-b03a-8d31092c1990">
+
 ## Overview
 #### You need to be an _Untappd Insider_ to use this dashboard!
 
@@ -40,7 +42,7 @@ git clone https://github.com/sjaakbanaan/untappd-data-visualised
 cd untappd-data-visualised
 
 # Install dependencies
-yarn install // npm run install
+yarn install # npm run install
 ```
 
 - Rename the exported file to `beers.json` and add the file to the `public` folder.
@@ -49,7 +51,7 @@ yarn install // npm run install
 2. Update `home-config.json` by setting your location data;
 3. run: 
 ```bash
-yarn set-home // node set-home.js
+yarn set-home # node set-home.js
 ```
 
 ### Usage
@@ -57,7 +59,7 @@ yarn set-home // node set-home.js
 To start the server:
 
 ```bash
-yarn start  // npm run start
+yarn start # npm run start
 ```
 
 This will open the app on localhost:3000 in your default web browser.
