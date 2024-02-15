@@ -7,6 +7,7 @@ import PieChartList from './Charts/PieChartList.jsx';
 import BarChartList from './Charts/BarChartList.jsx';
 import DateSelector from './DateSelector/DateSelector.jsx';
 import YearFilterButtons from './YearFilterButtons.jsx';
+import BeerStyleRatingSummary from './BeerStyleRatingSummary.jsx';
 import ResetFilters from './ResetFilters.jsx';
 import {
   filterBeerData,
@@ -94,6 +95,7 @@ const Dashboard = () => {
             </div>
             <div className="container mx-auto mt-4 p-8 bg-gray-800 rounded shadow-md">
               <div className="grid lg:grid-cols-2 gap-8 text-white">
+                <BeerStyleRatingSummary beerData={filteredData} />
                 <PieChartList beerData={filteredData} />
                 <BarChartList beerData={filteredData} />
                 <TopList
