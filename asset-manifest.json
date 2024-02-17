@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "//untappd-data-visualised/static/css/main.d61cca27.css",
+    "main.js": "//untappd-data-visualised/static/js/main.65700d36.js",
+    "static/media/pin.svg": "//untappd-data-visualised/static/media/pin.fd034fb888d75d38b1e01ff08be89888.svg",
+    "index.html": "//untappd-data-visualised/index.html",
+    "main.d61cca27.css.map": "//untappd-data-visualised/static/css/main.d61cca27.css.map",
+    "main.65700d36.js.map": "//untappd-data-visualised/static/js/main.65700d36.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d61cca27.css",
+    "static/js/main.65700d36.js"
+  ]
+}

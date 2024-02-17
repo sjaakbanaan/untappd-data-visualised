@@ -1,0 +1,9 @@
+{
+  "home": {
+    "venue_lat": "12.3456789",
+    "venue_lng": "1.23456789",
+    "venue_city": "City",
+    "venue_country": "Country",
+    "venue_state": "State"
+  }
+}
