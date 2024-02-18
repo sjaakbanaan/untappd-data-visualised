@@ -5,7 +5,7 @@ import { Pie } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const PieChart = ({ beerData, dataType, trailingChar, hideCount }) => {
+const PieChart = ({ beerData, dataType, itemUrl }) => {
   const processData = () => {
     let dataMap = {};
     // Get values for given dataType
@@ -14,23 +14,30 @@ const PieChart = ({ beerData, dataType, trailingChar, hideCount }) => {
       acc[itemValue] = (acc[itemValue] || 0) + 1;
       return acc;
     }, {});
+    // console.log('dataMap', dataMap);
 
     // Convert to array of objects
     const dataList = Object.keys(dataMap)
       .filter((name) => name !== 'Unknown') // Exclude items where name is "Unknown"
       .map((name) => {
+        const entryUrl =
+          (itemUrl != '' &&
+            beerData.find((entry) => entry[dataType] === name)?.[itemUrl]) ||
+          '';
+
         const foundEntry = beerData.find((entry) => entry.bid === name);
         return {
           name: dataType == 'bid' ? foundEntry.beer_name : name,
           count: dataMap[name],
+          url: entryUrl && entryUrl,
         };
       });
 
     // Sort by count in descending order and take the top 10
     const topItems = dataList.sort((a, b) => b.count - a.count).slice(0, 10);
     const labels = topItems.map((item) => {
-      const countLabel = !hideCount ? ` (${item.count}×)` : '';
-      return `${item.name}${trailingChar}${countLabel}`;
+      const countLabel = `(${item.count}×)`;
+      return `${item.name} ${countLabel}`;
     });
     const data = topItems.map((item) => item.count);
 
@@ -78,6 +85,7 @@ const PieChart = ({ beerData, dataType, trailingChar, hideCount }) => {
     },
   };
 
+  const url_array = topItems.map((item) => item.url);
   return (
     <Pie
       plugins={[plugin]}
@@ -87,6 +95,17 @@ const PieChart = ({ beerData, dataType, trailingChar, hideCount }) => {
             borderWidth: 2,
             borderColor: 'rgb(31 41 55)',
           },
+        },
+        onClick: (event, elements) => {
+          if (elements.length > 0) {
+            const index = elements[0].index;
+            // URL mapping based on index
+            if (index >= 0 && index < url_array.length && url_array[index] != '') {
+              window.open(url_array[index], '_blank');
+            } else {
+              return false;
+            }
+          }
         },
         plugins: {
           legend: {

@@ -1,32 +1,22 @@
 import 'chart.js/auto';
 import PropTypes from 'prop-types';
 import { Bar } from 'react-chartjs-2';
+import { getBarChartData, getBarChartYearData } from '../../utils/';
 
 const BarChart = ({ beerData, dataType, trailingChar }) => {
   const processData = () => {
-    let dataMap = {};
-    // Process brewery names
-    dataMap = beerData.reduce((acc, item) => {
-      const itemValue = item[dataType] || 'Unknown';
-      acc[itemValue] = (acc[itemValue] || 0) + 1;
-      return acc;
-    }, {});
-
-    // Convert to array of objects
-    const dataList = Object.keys(dataMap)
-      .filter((name) => name !== 'Unknown') // Exclude items where name is "Unknown"
-      .map((name) => ({
-        name,
-        count: dataMap[name],
-      }));
-
+    let dataList = '';
+    if (dataType == 'beer_per_year') {
+      dataList = getBarChartYearData(beerData);
+    } else {
+      dataList = getBarChartData(beerData, dataType);
+    }
     // Sort by count in descending order
     const sortedDataList = dataList.sort((a, b) => a.name - b.name);
     const labels = sortedDataList.map((item) => {
       return `${item.name}${trailingChar}`;
     });
     const data = sortedDataList.map((item) => item.count);
-
     return { labels, data };
   };
 

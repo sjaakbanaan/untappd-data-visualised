@@ -11,6 +11,7 @@ const PieChartList = ({ beerData }) => {
     {
       title: 'Top 10 Breweries',
       name: 'brewery_name',
+      url: 'brewery_url',
     },
     {
       title: 'Top 10 Beer Styles',
@@ -19,6 +20,7 @@ const PieChartList = ({ beerData }) => {
     {
       title: 'Top 10 Most drank beers',
       name: 'bid',
+      url: 'beer_url',
     },
     {
       title: 'Top 10 Venues Purchased',
@@ -50,8 +52,7 @@ const PieChartList = ({ beerData }) => {
   const selectedChartData = pieChartList.find(
     (chart) => chart.name === selectedPieChartData
   );
-  const trailingChar = selectedChartData?.trailing_char || '';
-  const hideCount = selectedChartData?.hide_count || false;
+  const urlType = selectedChartData?.url;
 
   return (
     <div className="p-4">
@@ -72,8 +73,7 @@ const PieChartList = ({ beerData }) => {
         dataType={selectedPieChartData}
         options={{ legend: legendOptions }}
         beerData={beerData}
-        trailingChar={trailingChar}
-        hideCount={hideCount}
+        itemUrl={urlType}
       />
     </div>
   );

@@ -14,12 +14,16 @@ const BarChartList = ({ beerData }) => {
       name: 'beer_ibu',
     },
     {
-      title: 'Rating Scores',
+      title: 'Rating scores',
       name: 'rating_score',
     },
     {
-      title: 'Serving Type',
+      title: 'Serving type',
       name: 'serving_type',
+    },
+    {
+      title: 'Beers per year',
+      name: 'beer_per_year',
     },
   ];
   const [selectedBarChartData, setSelectedBarChartData] = useState(barChartList[0].name);
@@ -31,7 +35,7 @@ const BarChartList = ({ beerData }) => {
 
   return (
     <div className="p-4">
-      <h2 className="text-lg font-semibold mb-8">Select Frequency List</h2>
+      <h2 className="text-lg font-semibold mb-8">Frequency bar charts</h2>
       <select
         className="shadow mb-8 appearance-none border bg-gray-900 rounded w-full border-white py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
         value={selectedBarChartData}

@@ -150,6 +150,18 @@ const Dashboard = () => {
                   beerData={filteredData}
                   listTitle="Top 10 most drank beers"
                 />
+                <TopList
+                  dataType="topByRating"
+                  scoreType="brewery_name"
+                  beerData={filteredData}
+                  listTitle="Breweries by rating"
+                />
+                <TopList
+                  dataType="topByRating"
+                  scoreType="beer_type"
+                  beerData={filteredData}
+                  listTitle="Beer types by rating"
+                />
               </div>
             </div>
           </div>
