@@ -69,6 +69,8 @@ This will open the app on localhost:3000 in your default web browser.
 
 ## Future wishes
 
+- add years to Frequency list;
+- top beer styles visualised;
 - Make this into an actual web app so you don't have to run it yourself.
 - A sortable dashboard where you can toggle certain data.
 
