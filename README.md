@@ -8,22 +8,37 @@
 This little side project, "untappd-data-visualised," is designed to visualize Untappd data in various formats, such as charts, lists, and maps. It leverages React, Chart.js, Leaflet, and some others to provide an interactive and insightful representation of your Untappd check-in history (screenshots soon).
 
 You start by setting a date range, and from there you can start filtering. After setting filters, the following lists are presented in either a chart or list:
-- Top 10 breweries
+```
 - Top 10 beer Styles
+- Top 10 breweries
+- Top 10 brewery country
+- Top 10 brewery cities
+- Top 10 flavor combinations
 - Top 10 most drank beers
-- Top 10 venues purchased
 - Top 10 venues
 - Top 10 venue cities
 - Top 10 venue countries
-- Top 10 brewery country
-- Top 10 brewery cities
+- Top 10 venues purchased
 - Top 10 rated beers (by you)
 - Top 10 rated beers (global / you (diff))
 - Top 10 strongest beers
 - Top 10 toasts
 - Top 10 comments
-- Top 10 most drank beers
-- Friends drank with
+- Top flavour profiles
+- Tagged friends
+- Breweries by rating
+- Beer types by rating
+- Filter by country drank at
+- Filter by city drank at
+- Filter by brewery
+- Show checkins on a map
+- Frequency: Beer ABV
+- Frequency: Beer IBU
+- Frequency: Beers per year
+- Frequency: Beers per day
+- Frequency: Rating scores
+- Frequency: Serving type
+```
 
 <img width="1362" alt="screen3" src="https://github.com/sjaakbanaan/untappd-data-visualised/assets/2773301/1b342d5d-cb33-4512-a69e-08bb0575bd6a">
 
