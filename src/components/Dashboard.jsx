@@ -139,16 +139,10 @@ const Dashboard = () => {
                   lowerCase
                   listTitle="Top flavour profile combinations"
                 />
-                <Map beerData={filteredData} />
                 <TopList
                   dataType="friends"
                   beerData={filteredData}
                   listTitle="Tagged friends"
-                />
-                <TopList
-                  dataType="duplicateEntries"
-                  beerData={filteredData}
-                  listTitle="Top 10 most drank beers"
                 />
                 <TopList
                   dataType="topByRating"
@@ -162,6 +156,7 @@ const Dashboard = () => {
                   beerData={filteredData}
                   listTitle="Beer types by rating"
                 />
+                <Map beerData={filteredData} />
               </div>
             </div>
           </div>
