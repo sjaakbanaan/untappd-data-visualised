@@ -52,7 +52,7 @@ const PieChartList = ({ beerData }) => {
   const selectedChartData = pieChartList.find(
     (chart) => chart.name === selectedPieChartData
   );
-  const urlType = selectedChartData?.url;
+  const urlType = selectedChartData?.url_type;
 
   return (
     <div className="p-4">
