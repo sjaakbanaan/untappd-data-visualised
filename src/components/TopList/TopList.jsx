@@ -5,7 +5,6 @@ import {
   processTaggedFriends,
   processFlavorProfiles,
   processFlavorProfileCombis,
-  processDuplicateEntries,
   processTopbyRating,
 } from './helpers/listProcessing';
 
@@ -14,7 +13,6 @@ const processingFunctions = {
   topBeers: processTopBeers,
   flavorProfiles: processFlavorProfiles,
   flavorProfileCombis: processFlavorProfileCombis,
-  duplicateEntries: processDuplicateEntries,
   topByRating: processTopbyRating,
   // Add more data types as needed
 };

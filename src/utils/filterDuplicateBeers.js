@@ -3,8 +3,8 @@ export const filterDuplicateBeers = (beerData) => {
   const filteredData = [];
 
   beerData.forEach((item) => {
-    if (!uniqueNames.includes(item.bid)) {
-      uniqueNames.push(item.bid);
+    if (!uniqueNames.includes(+item.bid)) {
+      uniqueNames.push(+item.bid);
       filteredData.push(item);
     }
   });

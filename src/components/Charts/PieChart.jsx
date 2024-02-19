@@ -21,13 +21,13 @@ const PieChart = ({ beerData, dataType, itemUrl }) => {
       .filter((name) => name !== 'Unknown') // Exclude items where name is "Unknown"
       .map((name) => {
         const entryUrl =
-          (itemUrl != '' &&
-            beerData.find((entry) => entry[dataType] === name)?.[itemUrl]) ||
-          '';
+          (itemUrl !== '' &&
+            beerData.find((entry) => entry[dataType] == name)?.[itemUrl]) ||
+          ''; // Adjusted to use loose equality (==)
 
-        const foundEntry = beerData.find((entry) => entry.bid === name);
+        const foundEntry = beerData.find((entry) => entry.bid == name); // Adjusted to use loose equality (==)
         return {
-          name: dataType == 'bid' ? foundEntry.beer_name : name,
+          name: dataType === 'bid' ? foundEntry.beer_name : name,
           count: dataMap[name],
           url: entryUrl && entryUrl,
         };
@@ -69,7 +69,8 @@ const PieChart = ({ beerData, dataType, itemUrl }) => {
   };
 
   // skip pie chart when there's only 1 result:
-  if (topItems.length <= 1) return 'A minimum of two results is needed for a pie chart.';
+  if (topItems.length <= 1)
+    return 'A minimum of two results is needed for a pie chart. Or maybe Untappd removed something from the export again (i.e. purchase_venue).';
 
   // hack to create padding between pie and legend
   const plugin = {
