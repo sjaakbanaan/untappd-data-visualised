@@ -7,6 +7,7 @@ import { filterBeerData } from './filterBeerData';
 import { filterDuplicateBeers } from './filterDuplicateBeers';
 import { getBarChartData } from './getBarChartData';
 import { getBarChartYearData } from './getBarChartYearData';
+import { normalizeString } from './normalizeString';
 
 export {
   formatDate,
@@ -18,4 +19,5 @@ export {
   filterDuplicateBeers,
   getBarChartData,
   getBarChartYearData,
+  normalizeString,
 };

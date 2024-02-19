@@ -2,10 +2,11 @@ import 'chart.js/auto';
 import PropTypes from 'prop-types';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
+import { normalizeString } from '../../utils';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const PieChart = ({ beerData, dataType, itemUrl }) => {
+const PieChart = ({ beerData, dataType, urlType }) => {
   const processData = () => {
     let dataMap = {};
     // Get values for given dataType
@@ -20,17 +21,44 @@ const PieChart = ({ beerData, dataType, itemUrl }) => {
     const dataList = Object.keys(dataMap)
       .filter((name) => name !== 'Unknown') // Exclude items where name is "Unknown"
       .map((name) => {
-        const entryUrl =
-          (itemUrl !== '' &&
-            beerData.find((entry) => entry[dataType] == name)?.[itemUrl]) ||
-          ''; // loose equality (==) in case it's string or numeric
+        let entryName;
+        let entryUrl;
+        let foundEntry;
 
-        const foundEntry = beerData.find((entry) => entry.bid == name); // Adjusted to use loose equality (==)
+        switch (dataType) {
+          case 'bid':
+            foundEntry = beerData.find((entry) => entry.bid == name);
+            entryName = foundEntry ? foundEntry.beer_name : name;
+            break;
+          case 'flavor_profiles':
+            entryName = normalizeString(name);
+            break;
+          default:
+            entryName = name;
+        }
+
+        if (urlType !== '') {
+          entryUrl = beerData.find((entry) => entry[dataType] == name)?.[urlType];
+        }
+
         return {
-          name: dataType === 'bid' ? foundEntry.beer_name : name,
+          name: entryName,
           count: dataMap[name],
-          url: entryUrl && entryUrl,
+          url: entryUrl,
         };
+
+        // let entryName;
+        // const entryUrl =
+        //   urlType !== '' && beerData.find((entry) => entry[dataType] == name)?.[urlType];
+        // const foundEntry = beerData.find((entry) => entry.bid == name);
+        // entryName = dataType === 'bid' ? foundEntry.beer_name : name;
+        // entryName = dataType == 'flavor_profiles' ? normalizeString(name) : name;
+
+        // return {
+        //   name: entryName,
+        //   count: dataMap[name],
+        //   url: entryUrl,
+        // };
       });
 
     // Sort by count in descending order and take the top 10

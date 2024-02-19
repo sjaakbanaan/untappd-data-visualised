@@ -7,7 +7,7 @@ const PieChartList = ({ beerData }) => {
     {
       title: 'Top 10 breweries',
       name: 'brewery_name',
-      url: 'brewery_url',
+      url_type: 'brewery_url',
     },
     {
       title: 'Top 10 beer Styles',
@@ -16,7 +16,7 @@ const PieChartList = ({ beerData }) => {
     {
       title: 'Top 10 most drank beers',
       name: 'bid',
-      url: 'beer_url',
+      url_type: 'beer_url',
     },
     {
       title: 'Top 10 venues purchased',
@@ -42,6 +42,10 @@ const PieChartList = ({ beerData }) => {
       title: 'Top 10 brewery cities',
       name: 'brewery_city',
     },
+    {
+      title: 'Top 10 flavor combinations',
+      name: 'flavor_profiles',
+    },
   ];
   const [selectedPieChartData, setSelectedPieChartData] = useState(pieChartList[0].name);
   //  get extra data based on chosen option:
@@ -65,7 +69,7 @@ const PieChartList = ({ beerData }) => {
             </option>
           ))}
       </select>
-      <PieChart dataType={selectedPieChartData} beerData={beerData} itemUrl={urlType} />
+      <PieChart dataType={selectedPieChartData} beerData={beerData} urlType={urlType} />
     </div>
   );
 };

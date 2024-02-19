@@ -75,39 +75,6 @@ export const processFlavorProfiles = (beerData) => {
   return { processedList, suffix, onEmpty };
 };
 
-export const processFlavorProfileCombis = (beerData) => {
-  function normalizeString(inputString) {
-    // Remove extra spaces around commas and split the string into an array
-    const stringArray = inputString.split(/\s*,\s*/);
-    // Join the array elements with a comma and space to create the normalized string
-    const normalizedString = stringArray.join(', ');
-    return normalizedString;
-  }
-
-  const suffix = ' times';
-  const onEmpty =
-    'No flavor profiles to display, are these checkins from before the launch of the "Tagged Friends"?';
-
-  const allItemsArr = beerData
-    .flatMap((item) => (item.flavor_profiles ? item.flavor_profiles : []))
-    .filter((item) => item.includes(','));
-
-  const itemCount = allItemsArr.reduce((acc, item) => {
-    acc[item] = (acc[item] || 0) + 1;
-    return acc;
-  }, {});
-
-  const sortedData = Object.keys(itemCount).map((item) => ({
-    name: normalizeString(item),
-    value: itemCount[item],
-  }));
-
-  sortedData.sort((a, b) => b.value - a.value);
-  const processedList = sortedData.slice(0, 10);
-
-  return { processedList, suffix, onEmpty };
-};
-
 export const processTopbyRating = (beerData, scoreType, minimumEntries) => {
   const suffix = '';
   const onEmpty = 'Not enough results to display.';

@@ -42,12 +42,6 @@ const TopTableList = ({ beerData }) => {
       title: 'Top flavour profiles',
     },
     {
-      dataType: 'flavorProfileCombis',
-      lowerCase: true,
-      key: 'flavorProfileCombis',
-      title: 'Top flavour profile combinations',
-    },
-    {
       dataType: 'friends',
       key: 'friends',
       title: 'Tagged friends',

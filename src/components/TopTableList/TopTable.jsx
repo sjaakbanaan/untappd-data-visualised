@@ -4,7 +4,6 @@ import {
   processTopBeers,
   processTaggedFriends,
   processFlavorProfiles,
-  processFlavorProfileCombis,
   processTopbyRating,
 } from './helpers/listProcessing';
 
@@ -12,9 +11,7 @@ const processingFunctions = {
   friends: processTaggedFriends,
   topBeers: processTopBeers,
   flavorProfiles: processFlavorProfiles,
-  flavorProfileCombis: processFlavorProfileCombis,
   topByRating: processTopbyRating,
-  // Add more data types as needed
 };
 
 const TopTable = ({ beerData, dataType, scoreType, selfCompare, lowerCase = false }) => {
