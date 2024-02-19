@@ -6,6 +6,7 @@ import {
   processTopbyRating,
 } from '../../utils/listProcessing';
 import { useCounter } from '../../utils/';
+import EntryCounter from '../EntryCounter/EntryCounter.jsx';
 
 const processingFunctions = {
   friends: processTaggedFriends,
