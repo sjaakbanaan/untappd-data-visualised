@@ -5,22 +5,30 @@ import PieChart from './PieChart.jsx';
 const PieChartList = ({ beerData }) => {
   const pieChartList = [
     {
+      title: 'Top 10 beer Styles',
+      name: 'beer_type',
+    },
+    {
       title: 'Top 10 breweries',
       name: 'brewery_name',
       url_type: 'brewery_url',
     },
     {
-      title: 'Top 10 beer Styles',
-      name: 'beer_type',
+      title: 'Top 10 brewery country',
+      name: 'brewery_country',
+    },
+    {
+      title: 'Top 10 brewery cities',
+      name: 'brewery_city',
+    },
+    {
+      title: 'Top 10 flavor combinations',
+      name: 'flavor_profiles',
     },
     {
       title: 'Top 10 most drank beers',
       name: 'bid',
       url_type: 'beer_url',
-    },
-    {
-      title: 'Top 10 venues purchased',
-      name: 'purchase_venue',
     },
     {
       title: 'Top 10 venues',
@@ -35,16 +43,8 @@ const PieChartList = ({ beerData }) => {
       name: 'venue_country',
     },
     {
-      title: 'Top 10 brewery country',
-      name: 'brewery_country',
-    },
-    {
-      title: 'Top 10 brewery cities',
-      name: 'brewery_city',
-    },
-    {
-      title: 'Top 10 flavor combinations',
-      name: 'flavor_profiles',
+      title: 'Top 10 venues purchased',
+      name: 'purchase_venue',
     },
   ];
   const [selectedPieChartData, setSelectedPieChartData] = useState(pieChartList[0].name);

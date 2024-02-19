@@ -14,20 +14,20 @@ const BarChartList = ({ beerData }) => {
       name: 'beer_ibu',
     },
     {
-      title: 'Rating scores',
-      name: 'rating_score',
-    },
-    {
-      title: 'Serving type',
-      name: 'serving_type',
-    },
-    {
       title: 'Beers per year',
       name: 'beers_per_year',
     },
     {
       title: 'Beers per day',
       name: 'beers_per_day',
+    },
+    {
+      title: 'Rating scores',
+      name: 'rating_score',
+    },
+    {
+      title: 'Serving type',
+      name: 'serving_type',
     },
   ];
   const [selectedBarChartData, setSelectedBarChartData] = useState(barChartList[0].name);
