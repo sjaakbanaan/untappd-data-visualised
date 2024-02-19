@@ -55,7 +55,7 @@ yarn install # npm run install
 3. Update `home-config.json` by setting your location data;
 4. run: 
 ```bash
-yarn set-home # node set-home.js
+yarn update-export # node update-export.js
 ```
 
 ### Usage

@@ -12,17 +12,33 @@ const uniqueCheckinIds = new Set();
 
 // Update the values in the original data based on the condition
 const updatedData = originalData.map((item) => {
+  let updatedItem = { ...item }; // Create a copy of the original item
+
+  // Define the properties to check and update
+  const propertiesToCheck = ['checkin_url', 'beer_url', 'brewery_url'];
+
+  // Iterate over the properties
+  propertiesToCheck.forEach((property) => {
+    // Check if the property exists and contains "api.untappd", then replace it
+    if (updatedItem[property] && updatedItem[property].includes('api.untappd')) {
+      updatedItem[property] = updatedItem[property].replace('api.untappd', 'www.untappd');
+    }
+  });
+
+  // Optionally, add additional conditions to update the item based on other criteria
   if (
-    item.venue_name === 'Untappd at Home' ||
-    item.venue_name === 'Untappd Virtual Festival' ||
-    item.venue_name === 'Untappd 10th Anniversary Party'
+    updatedItem.venue_name === 'Untappd at Home' ||
+    updatedItem.venue_name === 'Untappd Virtual Festival' ||
+    updatedItem.venue_name === 'Untappd 10th Anniversary Party'
   ) {
-    return {
-      ...item,
+    // Add additional properties or update existing ones
+    updatedItem = {
+      ...updatedItem,
       ...newValues,
     };
   }
-  return item;
+
+  return updatedItem;
 });
 
 // Filter out duplicates based on the 'checkin_id'
