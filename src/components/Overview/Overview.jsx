@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import OverviewCardPropery from './OverviewCardPropery.jsx';
+import OverviewCardPropery from '../Overview/OverviewCardPropery.jsx';
 
 const Overview = ({ beerData }) => {
   const [showOverview, setShowOverview] = useState(false);

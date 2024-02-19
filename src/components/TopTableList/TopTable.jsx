@@ -27,23 +27,11 @@ const TopTable = ({ beerData, dataType, scoreType, selfCompare, lowerCase = fals
     <>
       <div className="flex items-center justify-between">
         {dataType == 'topByRating' && (
-          <div className="text-lf font-semibold text-gray-600 mb-3">
-            at least {minimumEntries}
-            <button
-              className="px-2 border-2 border-gray-600 mx-2 font-bold"
-              onClick={increment}
-            >
-              +
-            </button>
-            {minimumEntries > 1 && (
-              <button
-                className="px-2 border-2 border-gray-600 font-bold"
-                onClick={decrement}
-              >
-                -
-              </button>
-            )}
-          </div>
+          <EntryCounter
+            minimumEntries={minimumEntries}
+            increment={increment}
+            decrement={decrement}
+          />
         )}
       </div>
       <ul className="divide-y divide-gray-700">

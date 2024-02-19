@@ -1,5 +1,5 @@
-import { formatDate } from '../utils';
-import Icon from './Icon/Icon.jsx';
+import { formatDate } from '../../utils';
+import Icon from '../Icon/Icon.jsx';
 
 const OverviewCardPropery = ({
   icon,

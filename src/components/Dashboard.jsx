@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import Map from './Map.jsx';
 import TopTableList from './TopTableList/TopTableList.jsx';
-import Overview from './Overview.jsx';
-import OverviewFilters from './OverviewFilters.jsx';
+import Overview from './Overview/Overview.jsx';
+import OverviewFilters from './Overview/OverviewFilters.jsx';
 import PieChartList from './Charts/PieChartList.jsx';
 import BarChartList from './Charts/BarChartList.jsx';
 import DateSelector from './DateSelector/DateSelector.jsx';

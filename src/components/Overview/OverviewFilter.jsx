@@ -1,4 +1,4 @@
-import countriesData from './countries.json';
+import countriesData from '../../countries.json';
 
 const OverviewFilter = ({ label, labelPlural, options, value, onChange }) => {
   const translateToEnglish = (originalName) => {
