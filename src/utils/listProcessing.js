@@ -1,4 +1,4 @@
-import { transformRatingData } from '../../../utils';
+import { transformRatingData } from '.';
 
 export const processTopBeers = (beerData, scoreType) => {
   const onEmpty = 'No beers to display, please change your search range.';

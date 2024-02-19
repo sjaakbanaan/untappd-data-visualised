@@ -14,6 +14,7 @@ import {
   getDefaultEndDate,
   fetchData,
   filterDuplicateBeers,
+  isFilterOverviewSet,
 } from '../utils/';
 
 const Dashboard = () => {
@@ -28,15 +29,6 @@ const Dashboard = () => {
     start: getDefaultStartDate(),
     end: getDefaultEndDate(),
   });
-
-  const isFilterOverviewSet = (filterOverview) => {
-    for (const key in filterOverview) {
-      if (Object.hasOwnProperty.call(filterOverview, key) && filterOverview[key] !== '') {
-        return true;
-      }
-    }
-    return false;
-  };
 
   useEffect(() => {
     // Fetch the JSON file or import it directly
@@ -82,7 +74,7 @@ const Dashboard = () => {
               filterOverview={filterOverview}
               setFilterOverview={setFilterOverview}
             />
-            <div className="flex items-center mb-6">
+            <div className="flex items-center mt-10 mb-6">
               <h2 className="text-2xl font-bold">
                 {totalBeerCount} beers <span className="text-gray-600">/</span>{' '}
                 {totalUniqueBeerCount} uniques{' '}

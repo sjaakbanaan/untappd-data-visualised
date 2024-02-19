@@ -1,11 +1,11 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   processTopBeers,
   processTaggedFriends,
   processFlavorProfiles,
   processTopbyRating,
-} from './helpers/listProcessing';
+} from '../../utils/listProcessing';
+import { useCounter } from '../../utils/';
 
 const processingFunctions = {
   friends: processTaggedFriends,
@@ -15,20 +15,6 @@ const processingFunctions = {
 };
 
 const TopTable = ({ beerData, dataType, scoreType, selfCompare, lowerCase = false }) => {
-  function useCounter(initialValue = 0) {
-    const [count, setCount] = useState(initialValue);
-
-    const increment = () => {
-      setCount(count + 1);
-    };
-
-    const decrement = () => {
-      setCount(count - 1);
-    };
-
-    return { count, increment, decrement };
-  }
-
   const initialMinimum = 3;
   const { count: minimumEntries, increment, decrement } = useCounter(initialMinimum);
 

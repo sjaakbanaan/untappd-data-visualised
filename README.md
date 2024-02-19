@@ -50,9 +50,10 @@ yarn install # npm run install
 
 - Rename the exported file to `beers.json` and add the file to the `public` folder.
 - _Importent step:_ By default Untappd sets the long/lat for 'Untappd at Home' and 'Untappd Virtual Festival' in the US, to change this follow these steps:
-1. Copy `home-config-example.json` from the `public` folder to `home-config.json` 
-2. Update `home-config.json` by setting your location data;
-3. run: 
+1. Copy `.env-example` from root to `.env` and set your username (for now it's only a cosmetic thing) 
+2. Copy `home-config-example.json` from the `public` folder to `home-config.json` 
+3. Update `home-config.json` by setting your location data;
+4. run: 
 ```bash
 yarn set-home # node set-home.js
 ```
