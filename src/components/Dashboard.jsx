@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Map from './Map.jsx';
-import TopList from './TopList/TopList.jsx';
+import TopTableList from './TopTableList/TopTableList.jsx';
 import Overview from './Overview.jsx';
 import OverviewFilters from './OverviewFilters.jsx';
 import PieChartList from './Charts/PieChartList.jsx';
@@ -96,66 +96,7 @@ const Dashboard = () => {
               <div className="grid lg:grid-cols-2 gap-8 text-white">
                 <PieChartList beerData={filteredData} />
                 <BarChartList beerData={filteredData} />
-                <TopList
-                  dataType="topBeers"
-                  scoreType="rating_score"
-                  beerData={filteredData}
-                  listTitle="Top 10 rated beers (by you)"
-                />
-                <TopList
-                  dataType="topBeers"
-                  scoreType="global_weighted_rating_score"
-                  beerData={filteredData}
-                  listTitle="Top 10 rated beers (global / you (diff))"
-                  selfCompare
-                />
-                <TopList
-                  dataType="topBeers"
-                  scoreType="beer_abv"
-                  beerData={filteredData}
-                  listTitle="Top 10 strongest beers"
-                />
-                <TopList
-                  scoreType="total_toasts"
-                  dataType="topBeers"
-                  beerData={filteredData}
-                  listTitle="Top 10 toasts"
-                />
-                <TopList
-                  scoreType="total_comments"
-                  dataType="topBeers"
-                  beerData={filteredData}
-                  listTitle="Top 10 Comments"
-                />
-                <TopList
-                  dataType="flavorProfiles"
-                  beerData={filteredData}
-                  lowerCase
-                  listTitle="Top flavour profiles"
-                />
-                <TopList
-                  dataType="flavorProfileCombis"
-                  beerData={filteredData}
-                  lowerCase
-                  listTitle="Top flavour profile combinations"
-                />
-                <TopList
-                  dataType="friends"
-                  beerData={filteredData}
-                  listTitle="Tagged friends"
-                />
-                <TopList
-                  dataType="topByRating"
-                  scoreType="brewery_name"
-                  beerData={filteredData}
-                  listTitle="Breweries by rating"
-                />
-                <TopList
-                  dataType="topByRating"
-                  scoreType="beer_type"
-                  beerData={filteredData}
-                  listTitle="Beer types by rating"
-                />
+                <TopTableList beerData={filteredData} />
                 <Map beerData={filteredData} />
               </div>
             </div>

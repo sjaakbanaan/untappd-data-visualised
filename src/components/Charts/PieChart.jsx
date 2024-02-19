@@ -23,7 +23,7 @@ const PieChart = ({ beerData, dataType, itemUrl }) => {
         const entryUrl =
           (itemUrl !== '' &&
             beerData.find((entry) => entry[dataType] == name)?.[itemUrl]) ||
-          ''; // Adjusted to use loose equality (==)
+          ''; // loose equality (==) in case it's string or numeric
 
         const foundEntry = beerData.find((entry) => entry.bid == name); // Adjusted to use loose equality (==)
         return {

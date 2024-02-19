@@ -17,14 +17,7 @@ const processingFunctions = {
   // Add more data types as needed
 };
 
-const TopList = ({
-  beerData,
-  dataType,
-  listTitle,
-  scoreType,
-  selfCompare,
-  lowerCase = false,
-}) => {
+const TopTable = ({ beerData, dataType, scoreType, selfCompare, lowerCase = false }) => {
   function useCounter(initialValue = 0) {
     const [count, setCount] = useState(initialValue);
 
@@ -48,9 +41,8 @@ const TopList = ({
   const { processedList, suffix, onEmpty } = getList;
 
   return (
-    <div className="p-4">
-      <div className="flex  items-center justify-between">
-        <h2 className="text-lg font-semibold mb-4 text-white">{listTitle} </h2>
+    <>
+      <div className="flex items-center justify-between">
         {dataType == 'topByRating' && (
           <div className="text-lf font-semibold text-gray-600 mb-3">
             at least {minimumEntries}
@@ -105,19 +97,19 @@ const TopList = ({
           <p>{onEmpty}</p>
         )}
       </ul>
-    </div>
+    </>
   );
 };
 
-TopList.propTypes = {
+TopTable.propTypes = {
   beerData: PropTypes.array.isRequired,
   dataType: PropTypes.string,
-  listTitle: PropTypes.string,
+  title: PropTypes.string,
 };
 
-TopList.defaultProps = {
+TopTable.defaultProps = {
   dataType: 'friends',
-  listTitle: 'No title',
+  title: 'No title',
 };
 
-export default TopList;
+export default TopTable;

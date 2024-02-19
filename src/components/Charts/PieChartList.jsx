@@ -3,47 +3,43 @@ import PropTypes from 'prop-types';
 import PieChart from './PieChart.jsx';
 
 const PieChartList = ({ beerData }) => {
-  const legendOptions = {
-    display: true,
-    position: 'bottom',
-  };
   const pieChartList = [
     {
-      title: 'Top 10 Breweries',
+      title: 'Top 10 breweries',
       name: 'brewery_name',
       url: 'brewery_url',
     },
     {
-      title: 'Top 10 Beer Styles',
+      title: 'Top 10 beer Styles',
       name: 'beer_type',
     },
     {
-      title: 'Top 10 Most drank beers',
+      title: 'Top 10 most drank beers',
       name: 'bid',
       url: 'beer_url',
     },
     {
-      title: 'Top 10 Venues Purchased',
+      title: 'Top 10 venues purchased',
       name: 'purchase_venue',
     },
     {
-      title: 'Top 10 Venues',
+      title: 'Top 10 venues',
       name: 'venue_name',
     },
     {
-      title: 'Top 10 Venue Cities',
+      title: 'Top 10 venue cities',
       name: 'venue_city',
     },
     {
-      title: 'Top 10 Venue Countries',
+      title: 'Top 10 venue countries',
       name: 'venue_country',
     },
     {
-      title: 'Top 10 Brewery Country',
+      title: 'Top 10 brewery country',
       name: 'brewery_country',
     },
     {
-      title: 'Top 10 Brewery Cities',
+      title: 'Top 10 brewery cities',
       name: 'brewery_city',
     },
   ];
@@ -56,7 +52,7 @@ const PieChartList = ({ beerData }) => {
 
   return (
     <div className="p-4">
-      <h2 className="text-lg font-semibold mb-8">Select Top 10 List</h2>
+      <h2 className="text-lg font-semibold mb-8">Frequency pie charts</h2>
       <select
         className="shadow appearance-none mb-8 border bg-gray-900 rounded w-full border-white py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
         value={selectedPieChartData}
@@ -69,12 +65,7 @@ const PieChartList = ({ beerData }) => {
             </option>
           ))}
       </select>
-      <PieChart
-        dataType={selectedPieChartData}
-        options={{ legend: legendOptions }}
-        beerData={beerData}
-        itemUrl={urlType}
-      />
+      <PieChart dataType={selectedPieChartData} beerData={beerData} itemUrl={urlType} />
     </div>
   );
 };
