@@ -30,7 +30,6 @@
     "array-callback-return": "warn",
     "prefer-const": "warn",
     "global-require": 0,
-    "linebreak-style": ["error", "unix"],
     "max-len": "off",
     "no-console": 1,
     "no-underscore-dangle": [
