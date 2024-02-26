@@ -9,6 +9,7 @@ import LineChart from './Charts/LineChart.jsx';
 import DateSelector from './DateSelector/DateSelector.jsx';
 import YearFilterButtons from './YearFilterButtons.jsx';
 import ResetFilters from './ResetFilters.jsx';
+import DragDashboard from './DragDashboard/DragDashboard.jsx';
 import {
   filterBeerData,
   getDefaultStartDate,
@@ -61,6 +62,7 @@ const Dashboard = () => {
       (1000 * 60 * 60 * 24);
   return (
     <>
+      <DragDashboard />
       <DateSelector
         beerData={beerData}
         filterDateRange={filterDateRange}
