@@ -8,6 +8,7 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
       beerData.map((item) => new Date(item.created_at).toISOString().slice(0, 10))
     ),
   ];
+  const currDate = new Date().toISOString().split('T')[0];
 
   return (
     <div className="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-none lg:grid-flow-col gap-4 my-4">
@@ -22,7 +23,7 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
           onClick={() =>
             setFilterDateRange({
               start: `${uniqueDates[0]}`,
-              end: new Date().toISOString().split('T')[0],
+              end: currDate,
             })
           }
         >
@@ -41,7 +42,8 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
             onClick={() =>
               setFilterDateRange({
                 start: `${year}-01-01`,
-                end: `${year}-12-31`,
+                // set today's date in case the selected year is the current one:
+                end: currDate < `${year}-12-31` ? currDate : `${year}-12-31`,
               })
             }
           >

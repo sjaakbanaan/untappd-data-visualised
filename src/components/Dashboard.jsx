@@ -5,6 +5,7 @@ import Overview from './Overview/Overview.jsx';
 import OverviewFilters from './Overview/OverviewFilters.jsx';
 import PieChartList from './Charts/PieChartList.jsx';
 import BarChartList from './Charts/BarChartList.jsx';
+import LineChart from './Charts/LineChart.jsx';
 import DateSelector from './DateSelector/DateSelector.jsx';
 import YearFilterButtons from './YearFilterButtons.jsx';
 import ResetFilters from './ResetFilters.jsx';
@@ -54,6 +55,10 @@ const Dashboard = () => {
   const totalUniqueBeerCount = filteredData && filterDuplicateBeers(filteredData)?.length;
   const totalDiff = totalBeerCount - totalUniqueBeerCount;
 
+  const totalDays =
+    filterDateRange &&
+    (new Date(filterDateRange.end) - new Date(filterDateRange.start)) /
+      (1000 * 60 * 60 * 24);
   return (
     <>
       <DateSelector
@@ -80,6 +85,9 @@ const Dashboard = () => {
                 {totalUniqueBeerCount} uniques{' '}
                 <span className="text-gray-600">(+{totalDiff})</span>
               </h2>
+              <div className="ml-2 text-yellow-500">
+                {(totalBeerCount / totalDays).toFixed(2)} per day
+              </div>
               {isFilterOverviewSet(filterOverview) && (
                 <ResetFilters setFilterOverview={setFilterOverview} />
               )}
@@ -90,6 +98,7 @@ const Dashboard = () => {
                 <BarChartList beerData={filteredData} />
                 <TopTableList beerData={filteredData} />
                 <Map beerData={filteredData} />
+                <LineChart beerData={filteredData} />
               </div>
             </div>
           </div>

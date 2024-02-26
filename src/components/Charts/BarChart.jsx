@@ -1,25 +1,37 @@
 import 'chart.js/auto';
 import PropTypes from 'prop-types';
 import { Bar } from 'react-chartjs-2';
-import { getBarChartData, getBarChartYearData, getBarChartDayData } from '../../utils/';
+import {
+  getBarChartData,
+  getBarChartYearData,
+  getBarChartMonthData,
+  getBarChartDayData,
+} from '../../utils/';
 
 const BarChart = ({ beerData, dataType, trailingChar }) => {
   const processData = () => {
-    let dataList;
+    let dataList, sortByName;
     switch (dataType) {
       case 'beers_per_year':
         dataList = getBarChartYearData(beerData);
+        sortByName = true;
         break;
       case 'beers_per_day':
         dataList = getBarChartDayData(beerData);
         break;
+      case 'beers_per_month':
+        dataList = getBarChartMonthData(beerData);
+        break;
       default:
         dataList = getBarChartData(beerData, dataType);
+        sortByName = true;
         break;
     }
 
-    // Sort the data list based on the name property
-    const sortedDataList = dataList.sort((a, b) => a.name.localeCompare(b.name));
+    // Optionally sort the data list based on the name property
+    const sortedDataList = sortByName
+      ? dataList.sort((a, b) => a.name.localeCompare(b.name))
+      : dataList;
 
     // Extract labels and data from sortedDataList
     const labels = sortedDataList.map((item) => `${item.name}${trailingChar}`);
