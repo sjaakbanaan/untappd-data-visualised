@@ -61,7 +61,7 @@ git clone https://github.com/sjaakbanaan/untappd-data-visualised
 cd untappd-data-visualised
 
 # Install dependencies
-yarn install # npm run install
+yarn install # npm install
 ```
 
 - Rename the exported file to `beers.json` and add the file to the `public` folder.
