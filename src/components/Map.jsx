@@ -47,7 +47,7 @@ const Map = ({ beerData }) => {
           zoom={2}
           scrollWheelZoom={false}
         >
-          <TileLayer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png" />
+          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           {beerData.map(
             (item) =>
               item.venue_lat &&
