@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import Map from './Map.jsx';
+import VenueMap from './VenueMap.jsx';
+// import BreweryMap from './BreweryMap.jsx';
 import TopTableList from './TopTableList/TopTableList.jsx';
 import Overview from './Overview/Overview.jsx';
 import OverviewFilters from './Overview/OverviewFilters.jsx';
@@ -98,11 +99,14 @@ const Dashboard = () => {
                 <PieChartList beerData={filteredData} />
                 <BarChartList beerData={filteredData} />
                 <TopTableList beerData={filteredData} />
-                <Map beerData={filteredData} />
+                <VenueMap beerData={filteredData} />
                 <LineChart beerData={filteredData} />
               </div>
             </div>
           </div>
+          {/* <div>
+            <BreweryMap beerData={filteredData} />
+          </div> */}
           <Overview beerData={filteredData} />
         </>
       ) : (

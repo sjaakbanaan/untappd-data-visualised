@@ -30,7 +30,7 @@ const BarChart = ({ beerData, dataType, trailingChar }) => {
 
     // Optionally sort the data list based on the name property
     const sortedDataList = sortByName
-      ? dataList.sort((a, b) => a.name.localeCompare(b.name))
+      ? dataList.sort((a, b) => parseFloat(a.name) - parseFloat(b.name))
       : dataList;
 
     // Extract labels and data from sortedDataList

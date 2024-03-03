@@ -3,7 +3,7 @@ import Leaflet from 'leaflet';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import iconUrl from '../images/pin.svg';
-import { formatDate } from '../utils/';
+import { formatDate } from '../utils';
 import Icon from './Icon/Icon.jsx';
 
 export const newIcon = new Leaflet.Icon({
@@ -13,7 +13,7 @@ export const newIcon = new Leaflet.Icon({
   iconSize: [25, 55],
 });
 
-const Map = ({ beerData }) => {
+const VenueMap = ({ beerData }) => {
   const mapRef = useRef(null);
 
   useEffect(() => {
@@ -118,4 +118,4 @@ const Map = ({ beerData }) => {
   );
 };
 
-export default Map;
+export default VenueMap;
