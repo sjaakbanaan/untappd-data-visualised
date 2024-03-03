@@ -18,7 +18,7 @@ const OverviewFilter = ({ label, labelPlural, options, value, onChange }) => {
         onChange={(e) => onChange(e.target.value)}
       >
         <option className="bg-gray-900" value="">
-          All {labelPlural}
+          All
         </option>
         {options &&
           options.length > 0 &&

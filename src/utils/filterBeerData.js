@@ -1,37 +1,25 @@
 export const filterBeerData = (beerData, filterOverview, filterDateRange) => {
-  // Check if start date is greater than end date
-  if (
-    filterDateRange.start &&
-    filterDateRange.end &&
-    new Date(filterDateRange.start) > new Date(filterDateRange.end)
-  ) {
-    return []; // Return an empty array if start date is greater than end date
-  }
+  // Helper function to generate filter functions dynamically
+  const generateFilterFunction = (filterKey) => (item) =>
+    !filterOverview[filterKey] ||
+    item[filterKey]?.toLowerCase().includes(filterOverview[filterKey].toLowerCase());
+
+  // Filter functions for each filter key
+  const filterFunctions = {
+    brewery_name: generateFilterFunction('brewery_name'),
+    beer_type: generateFilterFunction('beer_type'),
+    venue_country: generateFilterFunction('venue_country'),
+    venue_city: generateFilterFunction('venue_city'),
+    // Date range filter
+    date: (item) =>
+      (!filterDateRange.start ||
+        new Date(item.created_at) >= new Date(filterDateRange.start)) &&
+      (!filterDateRange.end ||
+        new Date(item.created_at) <= new Date(filterDateRange.end)),
+  };
 
   // Apply filters whenever filterOverview or filterDateRange changes
-  return beerData.filter((item) => {
-    const breweryMatch = filterOverview.brewery_name
-      ? item?.brewery_name
-          ?.toLowerCase()
-          .includes(filterOverview.brewery_name.toLowerCase())
-      : true;
-
-    const countryMatch = filterOverview.venue_country
-      ? item?.venue_country
-          ?.toLowerCase()
-          .includes(filterOverview.venue_country.toLowerCase())
-      : true;
-
-    const cityMatch = filterOverview.venue_city
-      ? item?.venue_city?.toLowerCase().includes(filterOverview.venue_city.toLowerCase())
-      : true;
-
-    const dateMatch =
-      filterDateRange.start &&
-      filterDateRange.end &&
-      new Date(item.created_at) >= new Date(filterDateRange.start) &&
-      new Date(item.created_at) <= new Date(filterDateRange.end);
-
-    return breweryMatch && countryMatch && dateMatch && cityMatch;
-  });
+  return beerData.filter((item) =>
+    Object.values(filterFunctions).every((func) => func(item))
+  );
 };
