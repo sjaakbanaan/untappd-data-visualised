@@ -55,7 +55,7 @@ const BarChart = ({ beerData, dataType, trailingChar }) => {
   };
 
   // Skip bar chart when there are no results
-  if (labels.length === 0) return 'No data available for a bar chart.';
+  if (labels.length <= 1) return 'A minimum of two results is needed for a pie chart.';
 
   return (
     <Bar
