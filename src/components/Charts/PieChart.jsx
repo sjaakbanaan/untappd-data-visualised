@@ -97,8 +97,7 @@ const PieChart = ({ beerData, dataType, urlType }) => {
   };
 
   // skip pie chart when there's only 1 result:
-  if (topItems.length <= 1)
-    return 'A minimum of two results is needed for a pie chart. Or maybe Untappd removed something from the export again (i.e. purchase_venue).';
+  if (topItems.length <= 1) return 'A minimum of two results is needed for a pie chart.';
 
   // hack to create padding between pie and legend
   const plugin = {
@@ -129,7 +128,12 @@ const PieChart = ({ beerData, dataType, urlType }) => {
           if (elements.length > 0) {
             const index = elements[0].index;
             // URL mapping based on index
-            if (index >= 0 && index < url_array.length && url_array[index] != '') {
+            if (
+              index >= 0 &&
+              index < url_array.length &&
+              url_array[index] !== undefined &&
+              url_array[index] !== ''
+            ) {
               window.open(url_array[index], '_blank');
             } else {
               return false;
