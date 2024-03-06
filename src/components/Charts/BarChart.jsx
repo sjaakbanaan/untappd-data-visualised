@@ -48,7 +48,7 @@ const BarChart = ({ beerData, dataType, trailingChar }) => {
       {
         label: 'total',
         data: data,
-        backgroundColor: '#d07d0d', // Gray-600
+        backgroundColor: '#d07d0d', // Yellow-600
         hoverOffset: 8,
       },
     ],

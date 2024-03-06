@@ -6,11 +6,11 @@
 ## Overview
 #### You need to be an _Untappd Insider_ to use this dashboard!
 
-This little side project, "untappd-data-visualised," is designed to visualize Untappd data in various formats, such as charts, lists, and maps. It leverages React, Chart.js, Leaflet, and some others to provide an interactive and insightful representation of your Untappd check-in history (screenshots soon).
+This little side project, "untappd-data-visualised," is designed to visualize Untappd data in various formats, such as charts, lists, and maps. It leverages React, Chart.js, MapBox, and some others to provide an interactive and insightful representation of your Untappd check-in history (screenshots soon).
 
 You start by setting a date range, and from there you can start filtering. After setting filters, the following lists are presented in either a chart or list:
 ```
-- Top 10 beer Styles
+- Top 10 beer styles
 - Top 10 breweries
 - Top 10 brewery country
 - Top 10 brewery cities
@@ -34,8 +34,8 @@ You start by setting a date range, and from there you can start filtering. After
 - Filter by brewery
 - Show checkins on a map
 - Frequency: Beer ABV
-- Frequency: Beer IBU
 - Frequency: Beers per year
+- Frequency: Beers per month
 - Frequency: Beers per day
 - Frequency: Rating scores
 - Frequency: Serving type
@@ -66,7 +66,7 @@ yarn install # npm install
 
 - Rename the exported file to `beers.json` and add the file to the `public` folder.
 - _Importent step:_ By default Untappd sets the long/lat for 'Untappd at Home' and 'Untappd Virtual Festival' in the US, to change this follow these steps:
-1. Copy `.env-example` from root to `.env` and set your username (for now it's only a cosmetic thing) 
+1. Copy `.env-example` from root to `.env` and set your username and your [MapBox API key](https://account.mapbox.com/).
 2. Copy `home-config-example.json` from the `public` folder to `home-config.json` 
 3. Update `home-config.json` by setting your location data;
 4. run: 
@@ -83,6 +83,10 @@ yarn start # npm run start
 ```
 
 This will open the app on localhost:3000 in your default web browser.
+
+## Recent changes
+
+- Leafjet js is replaced with MapBox, because I'm working on a map that highlights the brewery countries. Make sure to add your key to the .env file.
 
 ## Future wishes
 

@@ -5,7 +5,7 @@ import PieChart from './PieChart.jsx';
 const PieChartList = ({ beerData }) => {
   const pieChartList = [
     {
-      title: 'Top 10 beer Styles',
+      title: 'Top 10 beer styles',
       name: 'beer_type',
     },
     {

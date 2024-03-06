@@ -1,28 +1,14 @@
-import WorldMap from 'react-svg-worldmap';
+// import WorldMap from 'react-svg-worldmap';
+import { getBreweryCountryData } from '../utils';
+import Map, { FullscreenControl } from 'react-map-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
-const VenueMap = () => {
-  const data = [
-    { country: 'cn', value: 40 }, // china
-    { country: 'in', value: 33 }, // india
-    { country: 'us', value: 12 }, // united states
-    { country: 'id', value: 90 }, // indonesia
-    { country: 'pk', value: 20 }, // pakistan
-    { country: 'br', value: 66 }, // brazil
-    { country: 'ng', value: 23 }, // nigeria
-    { country: 'bd', value: 44 }, // bangladesh
-    { country: 'ru', value: 15 }, // russia
-    { country: 'mx', value: 52 }, // mexico
-  ];
-
-  // const stylingFunction = (context) => {
-  //   return {
-  //     fill: context.color,
-  //   };
-  // };
-
+const VenueMap = ({ beerData }) => {
+  const data = getBreweryCountryData(beerData);
+  console.log(data);
   return (
-    <div className="p-4 bg-red-600">
-      <WorldMap
+    <div className="p-4">
+      {/* <WorldMap
         richInteraction={true}
         backgroundColor="none"
         borderColor={'white'}
@@ -30,9 +16,23 @@ const VenueMap = () => {
         tooltipBgColor={'#31323f'}
         valueSuffix="times"
         valuePrefix=":"
-        size="responsive"
+        size="xxl"
         data={data}
-      />
+      /> */}
+      <Map
+        initialViewState={{
+          latitude: 52.089928,
+          longitude: 5.081888,
+          zoom: 4,
+        }}
+        style={{ width: '100%', height: 400 }}
+        mapStyle="mapbox://styles/mapbox/dark-v10"
+      >
+        {/* <Source type="geojson" data={data}>
+          <Layer {...dataLayer} />
+        </Source> */}
+        <FullscreenControl />
+      </Map>
     </div>
   );
 };

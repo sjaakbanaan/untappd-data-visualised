@@ -12,6 +12,7 @@ import { getBarChartMonthData } from './getBarChartMonthData';
 import { normalizeString } from './normalizeString';
 import { isFilterOverviewSet } from './isFilterOverviewSet';
 import { useCounter } from './useCounter';
+import { getBreweryCountryData } from './getBreweryCountryData';
 
 export {
   formatDate,
@@ -28,4 +29,5 @@ export {
   normalizeString,
   isFilterOverviewSet,
   useCounter,
+  getBreweryCountryData,
 };
