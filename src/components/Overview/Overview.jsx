@@ -71,6 +71,7 @@ const Overview = ({ beerData }) => {
                     icon="STAR"
                     viewBox="0 0 512 512"
                     value={item.global_rating_score}
+                    suffix="global"
                   />
                 </a>
               </div>

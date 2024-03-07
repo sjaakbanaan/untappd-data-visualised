@@ -46,19 +46,6 @@ const PieChart = ({ beerData, dataType, urlType }) => {
           count: dataMap[name],
           url: entryUrl,
         };
-
-        // let entryName;
-        // const entryUrl =
-        //   urlType !== '' && beerData.find((entry) => entry[dataType] == name)?.[urlType];
-        // const foundEntry = beerData.find((entry) => entry.bid == name);
-        // entryName = dataType === 'bid' ? foundEntry.beer_name : name;
-        // entryName = dataType == 'flavor_profiles' ? normalizeString(name) : name;
-
-        // return {
-        //   name: entryName,
-        //   count: dataMap[name],
-        //   url: entryUrl,
-        // };
       });
 
     // Sort by count in descending order and take the top 10

@@ -39,6 +39,8 @@ You start by setting a date range, and from there you can start filtering. After
 - Frequency: Beers per day
 - Frequency: Rating scores
 - Frequency: Serving type
+- Map displaying venues checked-in
+- Map displaying brewery countries
 ```
 
 <img width="1362" alt="screen3" src="https://github.com/sjaakbanaan/untappd-data-visualised/assets/2773301/1b342d5d-cb33-4512-a69e-08bb0575bd6a">
@@ -86,12 +88,11 @@ This will open the app on localhost:3000 in your default web browser.
 
 ## Recent changes
 
+- New map has been added, it displays the countries you had beer from. This is still work in progress and country names from Untappd don't always match with MapBox, so please let me know if you're missing countries on your map.
 - Leafjet js is replaced with MapBox, because I'm working on a map that highlights the brewery countries. Make sure to add your key to the .env file.
 
 ## Future wishes
 
-- add years to Frequency list;
-- top beer styles visualised;
 - Make this into an actual web app so you don't have to run it yourself.
 - A sortable dashboard where you can toggle certain data.
 

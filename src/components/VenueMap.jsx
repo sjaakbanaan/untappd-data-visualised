@@ -12,7 +12,15 @@ const VenueMap = ({ beerData }) => {
 
   useEffect(() => {
     const getBoundingBox = (beerData) => {
-      const filteredData = beerData.filter((item) => item.venue_lat && item.venue_lng);
+      const uniqueCombinations = new Set(); // Set to track unique combinations
+      const filteredData = beerData.filter((item) => {
+        if (!item.venue_lat || !item.venue_lng) return false; // Skip items with missing data
+        const key = `${item.venue_lat}-${item.venue_lng}`;
+        if (uniqueCombinations.has(key)) return false; // Skip if combination already exists
+        uniqueCombinations.add(key); // Add combination to the set
+        return true; // Include if it's a new combination
+      });
+      console.log(filteredData);
 
       if (filteredData.length === 0) {
         return [
@@ -61,6 +69,7 @@ const VenueMap = ({ beerData }) => {
 
   return (
     <div className="p-4">
+      <h2 className="text-lg font-semibold mb-8">Venues checked-in</h2>
       <div className="overflow-hidden border border-gray-900 rounded shadow-md my-4">
         <Map
           key={mapKey} // Use mapKey as the key prop
