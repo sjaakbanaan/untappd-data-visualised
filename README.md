@@ -1,7 +1,6 @@
 # Untappd Data Visualised v1.0
 
-![screencapture-localhost-3000-2024-02-19-22_35_32](https://github.com/sjaakbanaan/untappd-data-visualised/assets/2773301/7a9d881f-788f-49b7-b9eb-d976409a81e4)
-
+![image (12)](https://github.com/sjaakbanaan/untappd-data-visualised/assets/2773301/15cb9e08-a187-458a-83b4-bf0355f600b6)
 
 ## Overview
 #### You need to be an _Untappd Insider_ to use this dashboard!
