@@ -7,9 +7,10 @@ export const filterBeerData = (beerData, filterOverview, filterDateRange) => {
   // Filter functions for each filter key
   const filterFunctions = {
     brewery_name: generateFilterFunction('brewery_name'),
-    beer_type: generateFilterFunction('beer_type'),
     venue_country: generateFilterFunction('venue_country'),
     venue_city: generateFilterFunction('venue_city'),
+    venue_name: generateFilterFunction('venue_name'),
+    beer_type: generateFilterFunction('beer_type'),
     // Date range filter
     date: (item) =>
       (!filterDateRange.start ||

@@ -6,12 +6,19 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
     brewery_name: [],
     venue_country: [],
     venue_city: [],
+    venue_name: [],
     beer_type: [],
   });
 
   useEffect(() => {
     // Extract unique filter options from beerData
-    const filterKeys = ['brewery_name', 'venue_country', 'venue_city', 'beer_type'];
+    const filterKeys = [
+      'brewery_name',
+      'venue_country',
+      'venue_city',
+      'venue_name',
+      'beer_type',
+    ];
     const uniqueOptions = {};
 
     filterKeys.forEach((key) => {
@@ -30,7 +37,7 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 my-4">
+    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 my-4">
       {Object.entries(filterOptions).map(([key, options]) => (
         <OverviewFilter
           key={key}

@@ -24,6 +24,7 @@ const useDashboardData = () => {
     brewery_name: '',
     venue_country: '',
     venue_city: '',
+    venue_name: '',
     beer_type: '',
   });
   const [filterDateRange, setFilterDateRange] = useState({
