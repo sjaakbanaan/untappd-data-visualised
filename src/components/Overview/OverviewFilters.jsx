@@ -33,7 +33,9 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
 
   // Function to handle filter changes
   const handleFilterChange = (key, value) => {
-    setFilterOverview((prevFilter) => ({ ...prevFilter, [key]: value }));
+    // If value is null, remove the filter from the overview
+    const updatedValue = value === null ? '' : value;
+    setFilterOverview((prevFilter) => ({ ...prevFilter, [key]: updatedValue }));
   };
 
   return (
@@ -41,10 +43,11 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
       {Object.entries(filterOptions).map(([key, options]) => (
         <OverviewFilter
           key={key}
+          translate={key == 'venue_country'}
           label={`${key.replace('_', ' ')} (${options.length})`}
           labelPlural={`${key.replace('_', ' ')}s`}
           options={options}
-          value={filterOverview?.[key]}
+          value={filterOverview?.[key] || null} // Pass null if no value is selected
           onChange={(value) => handleFilterChange(key, value)}
         />
       ))}

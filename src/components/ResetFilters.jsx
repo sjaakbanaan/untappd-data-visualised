@@ -5,6 +5,7 @@ const ResetFilters = ({ setFilterOverview }) => {
       venue_country: '',
       venue_city: '',
     });
+    // clear filter input
   };
 
   return (

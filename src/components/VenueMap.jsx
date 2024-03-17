@@ -20,7 +20,7 @@ const VenueMap = ({ beerData }) => {
         uniqueCombinations.add(key); // Add combination to the set
         return true; // Include if it's a new combination
       });
-      console.log(filteredData);
+      // console.log(filteredData);
 
       if (filteredData.length === 0) {
         return [
