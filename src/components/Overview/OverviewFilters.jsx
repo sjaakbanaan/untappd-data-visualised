@@ -4,22 +4,22 @@ import OverviewFilter from './OverviewFilter.jsx';
 const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
   const [filterOptions, setFilterOptions] = useState({
     brewery_name: [],
-    venue_country: [],
-    venue_city: [],
-    venue_name: [],
-    beer_type: [],
+    brewery_city: [],
     brewery_country: [],
+    venue_name: [],
+    venue_city: [],
+    venue_country: [],
   });
 
   useEffect(() => {
     // Extract unique filter options from beerData
     const filterKeys = [
       'brewery_name',
-      'venue_country',
-      'venue_city',
-      'venue_name',
-      'beer_type',
+      'brewery_city',
       'brewery_country',
+      'venue_name',
+      'venue_city',
+      'venue_country',
     ];
     const uniqueOptions = {};
 
