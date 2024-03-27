@@ -8,8 +8,8 @@ export const getBarChartYearData = (beerData) => {
       beersPerYear[year]++;
     }
   });
-  return Object.entries(beersPerYear).map(([name, count]) => ({
+  return Object.entries(beersPerYear).map(([name, value]) => ({
     name,
-    count,
+    value,
   }));
 };

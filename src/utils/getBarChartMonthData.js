@@ -9,8 +9,8 @@ export const getBarChartMonthData = (beerData) => {
     }
   });
 
-  return Object.entries(beersPerMonth).map(([name, count]) => ({
+  return Object.entries(beersPerMonth).map(([name, value]) => ({
     name,
-    count,
+    value,
   }));
 };

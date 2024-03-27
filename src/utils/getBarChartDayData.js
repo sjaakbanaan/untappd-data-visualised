@@ -34,6 +34,6 @@ export const getBarChartDayData = (beerData) => {
   // Map the ordered days to an array of objects
   return orderedDays.map((dayName) => ({
     name: dayName,
-    count: checkInsPerDay[dayName] || 0, // Handle cases where there are no check-ins for a day
+    value: checkInsPerDay[dayName] || 0, // Handle cases where there are no check-ins for a day
   }));
 };

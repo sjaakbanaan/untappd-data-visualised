@@ -12,7 +12,7 @@ export const getBarChartData = (beerData, dataType) => {
     .filter((name) => name !== 'Unknown') // Exclude items where name is "Unknown"
     .map((name) => ({
       name,
-      count: dataMap[name],
+      value: dataMap[name],
     }));
 
   return dataList;

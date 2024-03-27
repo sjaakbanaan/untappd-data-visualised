@@ -9,6 +9,7 @@ import { getBarChartData } from './getBarChartData';
 import { getBarChartYearData } from './getBarChartYearData';
 import { getBarChartDayData } from './getBarChartDayData';
 import { getBarChartMonthData } from './getBarChartMonthData';
+import { getBarChartTopBottomData } from './getBarChartTopBottomData';
 import { normalizeString } from './normalizeString';
 import { isFilterOverviewSet } from './isFilterOverviewSet';
 import { useCounter } from './useCounter';
@@ -25,6 +26,7 @@ export {
   getBarChartYearData,
   getBarChartMonthData,
   getBarChartDayData,
+  getBarChartTopBottomData,
   normalizeString,
   isFilterOverviewSet,
   useCounter,

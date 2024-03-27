@@ -5,6 +5,10 @@ import BarChart from './BarChart.jsx';
 const BarChartList = ({ beerData }) => {
   const barChartList = [
     {
+      title: 'Top 20 top to bottom beer types',
+      name: 'top_bottom_types',
+    },
+    {
       title: 'Beer ABV',
       name: 'beer_abv',
       trailing_char: '%',

@@ -15,7 +15,6 @@ const PieChart = ({ beerData, dataType, urlType }) => {
       acc[itemValue] = (acc[itemValue] || 0) + 1;
       return acc;
     }, {});
-    // console.log('dataMap', dataMap);
 
     // Convert to array of objects
     const dataList = Object.keys(dataMap)
