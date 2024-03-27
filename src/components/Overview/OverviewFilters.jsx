@@ -8,6 +8,7 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
     venue_city: [],
     venue_name: [],
     beer_type: [],
+    brewery_country: [],
   });
 
   useEffect(() => {
@@ -18,6 +19,7 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
       'venue_city',
       'venue_name',
       'beer_type',
+      'brewery_country',
     ];
     const uniqueOptions = {};
 
@@ -39,7 +41,7 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 my-4">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-4">
       {Object.entries(filterOptions).map(([key, options]) => (
         <OverviewFilter
           key={key}
