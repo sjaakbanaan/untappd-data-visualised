@@ -1,7 +1,7 @@
-import { formatDate } from '../../utils';
+import { formatDate } from '../../utils/index';
 import Icon from '../Icon/Icon.jsx';
 
-const OverviewCardPropery = ({
+const OverviewCardProperty = ({
   icon,
   value,
   color = 'text-yellow-500',
@@ -20,4 +20,4 @@ const OverviewCardPropery = ({
   );
 };
 
-export default OverviewCardPropery;
+export default OverviewCardProperty;
