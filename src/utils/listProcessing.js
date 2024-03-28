@@ -75,7 +75,7 @@ export const processFlavorProfiles = (beerData) => {
   return { processedList, suffix, onEmpty };
 };
 
-export const processTopbyRating = (beerData, scoreType, minimumEntries) => {
+export const processTopbyRating = (beerData, scoreType, minimumEntries, ratingType) => {
   const suffix = '';
   const onEmpty = 'Not enough results to display.';
   // Filter entry value (i.e. brewery_name or beer_type) with at least {minimumEntries} beers
@@ -91,7 +91,7 @@ export const processTopbyRating = (beerData, scoreType, minimumEntries) => {
   const topRatingMap = eligibleEntries.map((entryName) => {
     const entrieBeers = beerData.filter((beer) => beer[scoreType] === entryName);
     const totalRating = entrieBeers.reduce(
-      (sum, beer) => sum + (+beer.rating_score || 0),
+      (sum, beer) => sum + (+beer[ratingType] || 0),
       0
     );
     const averageRating = entrieBeers.length > 0 ? totalRating / entrieBeers.length : 0;

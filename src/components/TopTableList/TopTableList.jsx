@@ -49,14 +49,23 @@ const TopTableList = ({ beerData }) => {
     {
       dataType: 'topByRating',
       scoreType: 'brewery_name',
-      key: 'topByRatingBreweryName',
+      key: 'breweryRating',
       title: 'Breweries by rating',
+      ratingType: 'rating_score',
+    },
+    {
+      dataType: 'topByRating',
+      scoreType: 'brewery_name',
+      key: 'breweryRatingGlobal',
+      title: 'Breweries by rating (global)',
+      ratingType: 'global_rating_score',
     },
     {
       dataType: 'topByRating',
       scoreType: 'beer_type',
       key: 'topByRatingBeerType',
       title: 'Beer types by rating',
+      ratingType: 'rating_score',
     },
   ];
 
@@ -86,6 +95,7 @@ const TopTableList = ({ beerData }) => {
         scoreType={selectedChartData.scoreType}
         selfCompare={selectedChartData.selfCompare}
         lowerCase={selectedChartData.lowerCase}
+        ratingType={selectedChartData.ratingType}
       />
     </div>
   );
