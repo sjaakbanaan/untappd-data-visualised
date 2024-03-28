@@ -15,13 +15,20 @@ const processingFunctions = {
   topByRating: processTopbyRating,
 };
 
-const TopTable = ({ beerData, dataType, scoreType, selfCompare, lowerCase = false }) => {
+const TopTable = ({
+  beerData,
+  dataType,
+  scoreType,
+  selfCompare,
+  lowerCase = false,
+  ratingType,
+}) => {
   const initialMinimum = 3;
   const { count: minimumEntries, increment, decrement } = useCounter(initialMinimum);
 
   const processingFunction = processingFunctions[dataType] || processTopBeers;
   const scoreTypeVal = scoreType ?? '';
-  const getList = processingFunction(beerData, scoreTypeVal, minimumEntries);
+  const getList = processingFunction(beerData, scoreTypeVal, minimumEntries, ratingType);
   const { processedList, suffix, onEmpty } = getList;
 
   return (

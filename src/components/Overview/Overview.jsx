@@ -24,7 +24,7 @@ const Overview = ({ beerData }) => {
         </div>
       )}
       {(showOverview || beerData?.length <= buttonNumber) && (
-        <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 mt-8">
+        <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-8">
           {beerData?.length > 0 &&
             beerData.map((item) => (
               <div
@@ -38,7 +38,7 @@ const Overview = ({ beerData }) => {
                   href={item.checkin_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-4 block bg-gray-800 min-h-96 rounded-lg bg-opacity-50"
+                  className="p-4 pb-8 block bg-gray-800 min-h-96 h-full rounded-lg bg-opacity-50"
                 >
                   <h2 className="text-xl text-white font-semibold mb-2">
                     {item.beer_name}
@@ -65,14 +65,15 @@ const Overview = ({ beerData }) => {
                   <OverviewCardPropery
                     icon="STAR"
                     viewBox="0 0 512 512"
-                    value={item.rating_score}
+                    value={`${item.rating_score} / ${item.global_rating_score}`}
                   />
-                  <OverviewCardPropery
-                    icon="STAR"
-                    viewBox="0 0 512 512"
-                    value={item.global_rating_score}
-                    suffix="global"
-                  />
+                  {item.tagged_friends && (
+                    <OverviewCardPropery
+                      icon="FRIENDS"
+                      viewBox="0 0 512 398.108"
+                      value={item.tagged_friends.split(',').join(', ')}
+                    />
+                  )}
                 </a>
               </div>
             ))}
