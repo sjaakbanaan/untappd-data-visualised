@@ -6,25 +6,11 @@ import {
   getBarChartYearData,
   getBarChartMonthData,
   getBarChartDayData,
-  getBarChartTopBottomData,
 } from '../../utils/';
 
 const BarChart = ({ beerData, dataType, trailingChar }) => {
-  // Function to calculate aspect ratio
-  const calculateAspectRatio = (numberOfItems) => {
-    const x1 = 5;
-    const y1 = 1.2;
-    const x2 = 170;
-    const y2 = 0.1;
-    console.log('numberOfItems', numberOfItems);
-
-    // Perform linear interpolation
-    const aspectRatio = y1 + (y2 - y1) * ((numberOfItems - x1) / (x2 - x1));
-    return +aspectRatio.toFixed(1);
-  };
-
   const processData = () => {
-    let dataList, sortByName, isFloating;
+    let dataList, sortByName;
     switch (dataType) {
       case 'beers_per_year':
         dataList = getBarChartYearData(beerData);
@@ -35,10 +21,6 @@ const BarChart = ({ beerData, dataType, trailingChar }) => {
         break;
       case 'beers_per_month':
         dataList = getBarChartMonthData(beerData);
-        break;
-      case 'top_bottom_types':
-        dataList = getBarChartTopBottomData(beerData);
-        isFloating = true;
         break;
       default:
         dataList = getBarChartData(beerData, dataType);
@@ -51,22 +33,15 @@ const BarChart = ({ beerData, dataType, trailingChar }) => {
       ? dataList.sort((a, b) => parseFloat(a.name) - parseFloat(b.name))
       : dataList;
 
-    const countTypes = sortedDataList.length;
-
     // Extract labels and data from sortedDataList
     const labels = sortedDataList.map((item) => `${item.name}${trailingChar}`);
 
-    let data;
-    if (dataType == 'top_bottom_types') {
-      data = sortedDataList.map((item) => [item.min, item.max]);
-    } else {
-      data = sortedDataList.map((item) => item.value);
-    }
+    const data = sortedDataList.map((item) => item.value);
 
-    return { labels, data, isFloating, countTypes };
+    return { labels, data };
   };
 
-  const { labels, data, isFloating, countTypes } = processData();
+  const { labels, data } = processData();
 
   const chartData = {
     labels: labels,
@@ -82,7 +57,6 @@ const BarChart = ({ beerData, dataType, trailingChar }) => {
 
   // Skip bar chart when there are no results
   if (labels.length <= 1) return 'A minimum of two results is needed for a pie chart.';
-  console.log('bla', calculateAspectRatio(countTypes));
 
   return (
     <Bar
@@ -110,9 +84,6 @@ const BarChart = ({ beerData, dataType, trailingChar }) => {
             display: false,
           },
         },
-        responsive: isFloating,
-        aspectRatio: isFloating && 0.3,
-        indexAxis: isFloating && 'y',
       }}
       data={chartData}
     />
