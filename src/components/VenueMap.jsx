@@ -69,7 +69,7 @@ const VenueMap = ({ beerData }) => {
 
   return (
     <div className="p-4">
-      <h2 className="text-lg font-semibold mb-8">Venues checked-in</h2>
+      <h2 className="text-lg font-semibold mb-6">Venues checked-in</h2>
       <div className="overflow-hidden border border-gray-900 rounded shadow-md my-4">
         <Map
           key={mapKey} // Use mapKey as the key prop

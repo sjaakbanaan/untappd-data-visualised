@@ -10,6 +10,8 @@ import LineChart from './Charts/LineChart.jsx';
 import DateSelector from './DateSelector/DateSelector.jsx';
 import YearFilterButtons from './YearFilterButtons.jsx';
 import DashboardHeader from './DashboardHeader.jsx';
+import BeerTypeChart from './BeerTypeChart.jsx';
+
 import {
   filterBeerData,
   getDefaultStartDate,
@@ -96,7 +98,7 @@ const Dashboard = () => {
               filterOverview={filterOverview}
               setFilterOverview={setFilterOverview}
             />
-            <div className="container mx-auto mt-4 p-8 bg-gray-800 rounded shadow-md">
+            <div className="container mx-auto mt-4 p-2 p-md-8 bg-gray-800 rounded shadow-md">
               <div className="grid lg:grid-cols-2 gap-8 text-white">
                 <PieChartList beerData={filteredData} />
                 <BarChartList beerData={filteredData} />
@@ -105,6 +107,7 @@ const Dashboard = () => {
                 <VenueMap beerData={filteredData} />
                 <BreweryMap beerData={filteredData} />
               </div>
+              <BeerTypeChart beerData={filteredData} />
             </div>
           </div>
           <Overview beerData={filteredData} />

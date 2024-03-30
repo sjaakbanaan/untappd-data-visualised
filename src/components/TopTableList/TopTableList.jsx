@@ -75,7 +75,7 @@ const TopTableList = ({ beerData }) => {
 
   return (
     <div className="p-4">
-      <h2 className="text-lg font-semibold mb-8">Other Top 10 lists</h2>
+      <h2 className="text-lg font-semibold mb-6">Other Top 10 lists</h2>
       <select
         className="shadow appearance-none mb-8 border bg-gray-900 rounded w-full border-white py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
         value={selectedTopList}

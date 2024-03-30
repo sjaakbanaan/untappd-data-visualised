@@ -1,15 +1,15 @@
 export const getBarChartTopBottomData = (beerData) => {
-  // Function to calculate top beer types by occurrence and their statistics
+  // utils
+  const removeNullItemsFromArray = (arr) => {
+    // Filter out null items
+    const filteredArray = arr.filter((item) => item !== null);
+    return filteredArray;
+  };
 
+  // Function to calculate top beer types by occurrence and their statistics
   const calculateBeerTypeStatistics = () => {
     // Object to store occurrences for each beer type
     const beerTypeOccurrences = {};
-
-    const removeNullItemsFromArray = (arr) => {
-      // Filter out null items
-      const filteredArray = arr.filter((item) => item !== null);
-      return filteredArray;
-    };
 
     // Iterate over beerData to count occurrences
     beerData.forEach((beer) => {
@@ -26,16 +26,10 @@ export const getBarChartTopBottomData = (beerData) => {
       ([, count]) => count > 1
     );
 
-    // Sort beer types by occurrence count in descending order
-    // const sortedBeerTypes = filteredBeerTypes.sort(
-    //   ([, countA], [, countB]) => countB - countA
-    // );
-
-    // Extract top beer types
-    // const topBeerTypes = filteredBeerTypes.slice(0, 200);
+    const roundedValue = (value) => Number((value * 100).toFixed(2));
 
     // Calculate statistics for top beer types
-    const topBeerTypeStatistics = filteredBeerTypes.map(([beerType]) => {
+    const topBeerTypeStatistics = filteredBeerTypes.map(([beerType], i) => {
       const beerTypeData = beerData.filter((beer) => beer.beer_type === beerType);
 
       // Filter out rating scores that are 0
@@ -52,10 +46,10 @@ export const getBarChartTopBottomData = (beerData) => {
       }
 
       return {
-        name: beerType,
-        min: lowestRatingScore,
-        max: highestRatingScore,
-        sum: lowestRatingScore + highestRatingScore,
+        beer_type: beerType,
+        min: roundedValue(lowestRatingScore),
+        max: roundedValue(highestRatingScore),
+        key: i,
       };
     });
 
@@ -64,8 +58,8 @@ export const getBarChartTopBottomData = (beerData) => {
     );
 
     // Filter out null values (where min and max are the same)
-    const filteredTopBeerTypeStatistics = sortedTopBeerTypes.filter(Boolean);
-    return filteredTopBeerTypeStatistics;
+    // const filteredTopBeerTypeStatistics = sortedTopBeerTypes.filter(Boolean);
+    return sortedTopBeerTypes;
   };
 
   // Calculate top beer type statistics and filter out min and max with the same value
