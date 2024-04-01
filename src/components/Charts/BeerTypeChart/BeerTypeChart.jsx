@@ -19,7 +19,7 @@ const BeerTypeChart = ({ beerData }) => {
                   }}
                   className="bg-yellow-700 whitespace-nowrap h-6 text-center text-xs leading-6"
                 >
-                  <BeerTypeMinMax spanClass="mr-2" item={item} />
+                  <BeerTypeMinMax spanClass="mx-2" item={item} showRating />
                   <div className="text-sm absolute left-0 top-0 leading-6">
                     {item.beer_type}{' '}
                     <span className="text-gray-400">({item.total_results})</span>{' '}
