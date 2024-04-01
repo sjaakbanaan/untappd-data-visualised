@@ -1,15 +1,15 @@
-const BeerTypeMinMax = ({ spanClass, min, minBid, max, maxBid, avgRating }) => {
+const BeerTypeMinMax = ({ spanClass, item }) => {
   return (
     <span className={spanClass}>
       {' '}
-      <a href={`https://www.untappd.com/beer/${minBid}`} target="_blank">
-        {min / 100}
+      <a href={`https://www.untappd.com/beer/${item.min_bid}`} target="_blank">
+        {item.min / 100}
       </a>
       {' / '}
-      <a href={`https://www.untappd.com/beer/${maxBid}`} target="_blank">
-        {max / 100}
+      <a href={`https://www.untappd.com/beer/${item.max_bid}`} target="_blank">
+        {item.max / 100}
       </a>
-      {avgRating && <span> - avg: {avgRating / 100}</span>}
+      {item.avg_rating && <span> - avg: {item.avg_rating / 100}</span>}
     </span>
   );
 };
