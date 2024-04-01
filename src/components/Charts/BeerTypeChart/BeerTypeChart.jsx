@@ -1,4 +1,5 @@
-import { getBarChartTopBottomData } from '../utils/';
+import { getBarChartTopBottomData } from '../../../utils';
+import BeerTypeMinMax from './BeerTypeMinMax.jsx';
 
 const BeerTypeChart = ({ beerData }) => {
   const dataList = getBarChartTopBottomData(beerData);
@@ -16,16 +17,26 @@ const BeerTypeChart = ({ beerData }) => {
                     gridColumnStart: item.min + 1,
                     gridColumnEnd: item.max + 1,
                   }}
-                  className="bg-yellow-600 whitespace-nowrap h-6 text-center text-xs leading-6"
+                  className="bg-yellow-700 whitespace-nowrap h-6 text-center text-xs leading-6"
                 >
-                  <span className="mr-2">
-                    {item.min / 100} / {item.max / 100}
-                  </span>
+                  <BeerTypeMinMax
+                    spanClass="mr-2"
+                    min={item.min}
+                    minBid={item.min_bid}
+                    max={item.max}
+                    maxBid={item.max_bid}
+                    avgRating={item.avg_rating}
+                  />
                   <div className="text-sm absolute left-0 top-0 leading-6">
                     {item.beer_type}{' '}
-                    <span className="text-yellow-600">
-                      {item.min / 100} / {item.max / 100}
-                    </span>
+                    <span className="text-gray-400">({item.total_results})</span>{' '}
+                    <BeerTypeMinMax
+                      spanClass="text-yellow-400"
+                      min={item.min}
+                      minBid={item.min_bid}
+                      max={item.max}
+                      maxBid={item.max_bid}
+                    />
                   </div>
                 </div>
               </div>

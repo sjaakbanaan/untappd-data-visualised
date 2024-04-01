@@ -10,7 +10,7 @@ import LineChart from './Charts/LineChart.jsx';
 import DateSelector from './DateSelector/DateSelector.jsx';
 import YearFilterButtons from './YearFilterButtons.jsx';
 import DashboardHeader from './DashboardHeader.jsx';
-import BeerTypeChart from './BeerTypeChart.jsx';
+import BeerTypeChart from './Charts/BeerTypeChart/BeerTypeChart.jsx';
 
 import {
   filterBeerData,
