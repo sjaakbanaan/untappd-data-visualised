@@ -6,7 +6,9 @@ const BeerTypeChart = ({ beerData }) => {
 
   return (
     <div className="p-4">
-      <h2 className="text-lg font-semibold mb-6">Beer type appreciation</h2>
+      <h2 className="text-lg font-semibold mb-6">
+        Beer type appreciation <span className="text-gray-400">({dataList.length})</span>
+      </h2>
       {dataList.length > 1 && (
         <ul className="m-0 p-0 list-none flex flex-col text-white divide-y divide-gray-700">
           {dataList.map((item) => (
