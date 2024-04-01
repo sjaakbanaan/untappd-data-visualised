@@ -41,7 +41,7 @@ const OverviewFilter = ({ label, labelPlural, options, onChange, translate }) =>
           dropdownIndicator: () => classNames('text-white', 'p-2'),
           indicatorSeparator: () => classNames('bg-white', 'my-2'),
           input: () => classNames('m-0.5', 'py-0.5', 'text-white'),
-          noOptionsMessage: () => classNames('text-yellow-400', 'py-2', 'px-3'),
+          noOptionsMessage: () => classNames('text-yellow-500', 'py-2', 'px-3'),
           option: () =>
             classNames(
               'bg-gray-900',

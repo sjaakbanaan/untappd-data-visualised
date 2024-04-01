@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import VenueMap from './VenueMap.jsx';
-import BreweryMap from './BreweryMap.jsx';
+import VenueMap from './Maps/VenueMap.jsx';
+import BreweryMap from './Maps/BreweryMap.jsx';
 import TopTableList from './TopTableList/TopTableList.jsx';
 import Overview from './Overview/Overview.jsx';
 import OverviewFilters from './Overview/OverviewFilters.jsx';

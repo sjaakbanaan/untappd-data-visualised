@@ -18,9 +18,9 @@ const DashboardHeader = ({
   return (
     <div className="flex items-center mt-10 mb-6">
       <h2 className="text-2xl font-bold">
-        {totalBeerCount} beers <span className="text-gray-600">/</span>{' '}
+        {totalBeerCount} beers <span className="text-gray-400">/</span>{' '}
         {totalUniqueBeerCount} uniques{' '}
-        <span className="text-gray-600">(+{totalDiff})</span>
+        <span className="text-gray-400">(+{totalDiff})</span>
       </h2>
       <div className="ml-2 text-yellow-500">
         {(totalBeerCount / totalDays).toFixed(2)} per day

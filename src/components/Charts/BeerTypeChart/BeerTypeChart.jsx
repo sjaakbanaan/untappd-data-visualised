@@ -25,7 +25,7 @@ const BeerTypeChart = ({ beerData }) => {
                   <div className="text-sm absolute left-0 top-0 leading-6">
                     {item.beer_type}{' '}
                     <span className="text-gray-400">({item.total_results})</span>{' '}
-                    <BeerTypeMinMax spanClass="text-yellow-400" item={item} />
+                    <BeerTypeMinMax spanClass="text-yellow-500" item={item} />
                   </div>
                 </div>
               </div>

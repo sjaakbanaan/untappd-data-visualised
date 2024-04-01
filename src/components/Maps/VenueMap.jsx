@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect } from 'react';
 import Map, { Marker, Popup, NavigationControl, FullscreenControl } from 'react-map-gl';
 import Pin from './Pin.jsx';
 import Icon from './Icon/Icon.jsx';
-import { formatDate } from '../utils/';
+import { formatDate } from '../../utils';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 const VenueMap = ({ beerData }) => {
