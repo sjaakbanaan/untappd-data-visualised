@@ -1,8 +1,7 @@
-import { useState, useMemo, useEffect } from 'react';
-import Map, { Marker, Popup, NavigationControl, FullscreenControl } from 'react-map-gl';
-import Pin from './Pin.jsx';
-import Icon from './Icon/Icon.jsx';
-import { formatDate } from '../../utils';
+import { useState, useEffect } from 'react';
+import Map, { NavigationControl, FullscreenControl } from 'react-map-gl';
+import Pins from './Pins.jsx';
+import VenuePopUp from './VenuePopUp.jsx';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 const VenueMap = ({ beerData }) => {
@@ -41,27 +40,6 @@ const VenueMap = ({ beerData }) => {
     setBoundingBox(getBoundingBox(beerData));
   }, [beerData]);
 
-  const pins = useMemo(() => {
-    return beerData.map(
-      (item) =>
-        item.venue_lat &&
-        item.venue_lng && (
-          <Marker
-            key={`marker-${item.checkin_id}`}
-            longitude={item.venue_lng}
-            latitude={item.venue_lat}
-            anchor="bottom"
-            onClick={(e) => {
-              e.originalEvent.stopPropagation();
-              setPopupInfo(item);
-            }}
-          >
-            <Pin />
-          </Marker>
-        )
-    );
-  }, [beerData]);
-
   useEffect(() => {
     // Update the map key whenever boundingBox changes
     setMapKey((prevKey) => prevKey + 1);
@@ -83,57 +61,8 @@ const VenueMap = ({ beerData }) => {
         >
           <FullscreenControl position="top-left" />
           <NavigationControl position="top-left" />
-          {pins}
-          {popupInfo && (
-            <Popup
-              anchor="top"
-              longitude={popupInfo.venue_lng}
-              latitude={popupInfo.venue_lat}
-              onClose={() => setPopupInfo(null)}
-              className="text-black"
-            >
-              <div className="flex mt-2 items-center mb-1">
-                <Icon
-                  icon="LOCATION"
-                  size="18"
-                  viewBox="0 0 70.749 90"
-                  className="mr-3 fill-yellow-600"
-                />
-                <h4 className="text-base leading-tight font-bold flex-1">
-                  {popupInfo.venue_name}
-                  {popupInfo.venue_city && `, ${popupInfo.venue_city}`}
-                </h4>
-              </div>
-              <div className="flex mt-2 items-center mb-1">
-                <Icon
-                  icon="CALENDAR"
-                  size="16"
-                  viewBox="0 0 488 512"
-                  className="mr-3 fill-yellow-600"
-                />
-                <div className="flex-1">
-                  <strong>most recent check-in:</strong>
-                  <br />
-                  <a class="underline" href={popupInfo.checkin_url} target="_blank">
-                    {formatDate(popupInfo.created_at)}
-                  </a>
-                </div>
-              </div>
-              {popupInfo.tagged_friends && (
-                <div className="flex mt-2 items-center mb-1">
-                  <Icon
-                    icon="FRIENDS"
-                    size="16"
-                    viewBox="0 0 512 398.108"
-                    className="mr-3 fill-yellow-600"
-                  />
-                  <div className="flex-1">
-                    {popupInfo.tagged_friends.split(',').join(', ')}
-                  </div>
-                </div>
-              )}
-            </Popup>
-          )}
+          <Pins beerData={beerData} setPopupInfo={setPopupInfo} />
+          {popupInfo && <VenuePopUp setPopupInfo={setPopupInfo} popupInfo={popupInfo} />}
         </Map>
       </div>
     </div>
