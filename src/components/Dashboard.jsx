@@ -98,7 +98,7 @@ const Dashboard = () => {
               filterOverview={filterOverview}
               setFilterOverview={setFilterOverview}
             />
-            <div className="container mx-auto mt-4 p-2 p-md-8 bg-gray-800 rounded shadow-md">
+            <div className="container mx-auto mt-4 p-2 md:p-8 bg-gray-800 rounded shadow-md">
               <div className="grid lg:grid-cols-2 gap-8 text-white">
                 <PieChartList beerData={filteredData} />
                 <BarChartList beerData={filteredData} />

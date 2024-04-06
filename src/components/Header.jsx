@@ -1,10 +1,13 @@
+import Navigation from './Navigation.jsx';
+
 // get username for .env file
 const user = process.env.REACT_APP_USER;
 
 const Header = () => {
   return (
     <>
-      <div className="absolute top-0 flex items-center right-0">
+      <div className="flex items-center justify-end mb-6 md:mb-0">
+        <Navigation />
         <a
           className="mr-3"
           title={`Untappd profile of ${user}`}

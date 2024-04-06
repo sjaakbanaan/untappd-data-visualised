@@ -1,17 +1,24 @@
-import Header from './components/Header.jsx'; // Import your Dashboard component
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
-import Dashboard from './components/Dashboard.jsx'; // Import your Dashboard component
+import Dashboard from './components/Dashboard.jsx';
+import ImportPage from './components/Pages/ImportPage.jsx';
 
-function App() {
+const App = () => {
   return (
-    <div className="bg-gray-900 p-8">
-      <div className="container relative mx-auto text-white">
-        <Header />
-        <Dashboard />
-        <Footer />
+    <Router>
+      <div className="bg-gray-900 p-8">
+        <div className="container relative mx-auto text-white">
+          <Header />
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/import" element={<ImportPage />} />
+          </Routes>
+          <Footer />
+        </div>
       </div>
-    </div>
+    </Router>
   );
-}
+};
 
 export default App;

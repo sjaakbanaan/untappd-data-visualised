@@ -25,7 +25,8 @@ const Overview = ({ beerData }) => {
       )}
       {(showOverview || beerData?.length <= buttonNumber) && (
         <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-8">
-          {beerData?.length > 0 && beerData.map((item) => <OverviewCard item={item} />)}
+          {beerData?.length > 0 &&
+            beerData.map((item, i) => <OverviewCard key={i} item={item} />)}
         </div>
       )}
     </>
