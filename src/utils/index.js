@@ -13,6 +13,7 @@ import { getBarChartTopBottomData } from './getBarChartTopBottomData';
 import { normalizeString } from './normalizeString';
 import { isFilterOverviewSet } from './isFilterOverviewSet';
 import { useCounter } from './useCounter';
+import { useUploadedJsonUpdater } from './useUploadedJsonUpdater';
 
 export {
   formatDate,
@@ -30,4 +31,5 @@ export {
   normalizeString,
   isFilterOverviewSet,
   useCounter,
+  useUploadedJsonUpdater,
 };
