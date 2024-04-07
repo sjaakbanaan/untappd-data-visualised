@@ -7,7 +7,7 @@ const OverviewCard = ({ item }) => {
       style={{
         backgroundImage: `url(${item.photo_url})`,
       }}
-      className="block shadow-md bg-center bg-cover transition-transform duration-500 transform hover:scale-110 rounded-lg overflow-hidden"
+      className="block shadow-md bg-center bg-cover transition-transform duration-500 transform hover:scale-110 rounded-lg overflow-hidden hover:z-1"
     >
       <a
         href={item.checkin_url}
