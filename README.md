@@ -41,6 +41,7 @@ You start by setting a date range, and from there you can start filtering. After
 - Map displaying venues checked-in
 - NEW: Map displaying brewery countries
 - NEW: Cumulative beer count (year)
+and more!
 
 ```
 
@@ -67,15 +68,7 @@ cd untappd-data-visualised
 yarn install # npm install
 ```
 
-- Rename the exported file to `beers.json` and add the file to the `public` folder.
-- _Importent step:_ By default Untappd sets the long/lat for 'Untappd at Home' and 'Untappd Virtual Festival' in the US, to change this follow these steps:
-1. Copy `.env-example` from root to `.env` and set your username and your [MapBox API key](https://account.mapbox.com/).
-2. Copy `home-config-example.json` from the `public` folder to `home-config.json` 
-3. Update `home-config.json` by setting your location data;
-4. run: 
-```bash
-yarn update-export # node update-export.js
-```
+1. Copy `.env-example` from root to `.env` and set your username and your [MapBox API key](https://account.mapbox.com/). It's free, you should be able to skip the setting up your payment card somehow.
 
 ### Usage
 
@@ -85,7 +78,7 @@ To start the server:
 yarn start # npm run start
 ```
 
-This will open the app on localhost:3000 in your default web browser.
+This will open the app on localhost:3000 in your default web browser. Click on 'import data' on top to upload your JSON export and set your home data (you will need to fetch these, via Google Maps for example).
 
 ## Recent changes
 
