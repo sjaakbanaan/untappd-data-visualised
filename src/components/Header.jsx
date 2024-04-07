@@ -14,7 +14,7 @@ const Header = () => {
   }, []); // Run only on component mount
 
   return (
-    <>
+    <div className="mb-6">
       <div className="flex items-center justify-end mb-6 md:mb-0">
         <Navigation />
         <a
@@ -50,11 +50,9 @@ const Header = () => {
         Untappd Data Visualised
       </h1>
       {storedUserName && (
-        <h2 className="text-center mb-5 text-2xl text-gray-400 font-bold">
-          {storedUserName}
-        </h2>
+        <h2 className="text-center text-2xl text-gray-400 font-bold">{storedUserName}</h2>
       )}
-    </>
+    </div>
   );
 };
 export default Header;

@@ -32,21 +32,23 @@ const Uploader = () => {
   const navigate = useNavigate(); // Get the navigate object
 
   const onDrop = (acceptedFiles) => {
-    const reader = new FileReader();
+    if (acceptedFiles.length > 0) {
+      const reader = new FileReader();
 
-    // eslint-disable-next-line no-console
-    reader.onabort = () => console.log('file reading was aborted');
-    // eslint-disable-next-line no-console
-    reader.onerror = () => console.log('file reading has failed');
-    reader.onload = () => {
-      // Do something with the JSON data
-      const data = reader.result;
-      const updatedData = manipulateData(JSON.parse(data), userDetails);
-      setBeerData(updatedData); // Convert back to string if needed
-    };
+      // eslint-disable-next-line no-console
+      reader.onabort = () => console.log('file reading was aborted');
+      // eslint-disable-next-line no-console
+      reader.onerror = () => console.log('file reading has failed');
+      reader.onload = () => {
+        // Do something with the JSON data
+        const data = reader.result;
+        const updatedData = manipulateData(JSON.parse(data), userDetails);
+        setBeerData(updatedData); // Convert back to string if needed
+      };
 
-    reader.readAsText(acceptedFiles[0]);
-    navigate('/');
+      reader.readAsText(acceptedFiles[0]);
+      navigate('/');
+    }
   };
 
   const handleInputChange = (e) => {
