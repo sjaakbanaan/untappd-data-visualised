@@ -1,12 +1,12 @@
 import { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDropzone } from 'react-dropzone';
 import { useUploadedJsonUpdater } from '../../utils/';
 import VenueForm from './VenueForm.jsx';
 import { DataContext } from '../../DataContext';
 
 const Uploader = () => {
-  const { beerData, setBeerData } = useContext(DataContext);
+  const { setBeerData } = useContext(DataContext);
   const { manipulateData } = useUploadedJsonUpdater(); // Import and use the hook
   const [venueDetails, setVenueDetails] = useState({
     venue_lat: '',
@@ -28,6 +28,8 @@ const Uploader = () => {
     localStorage.setItem(key, JSON.stringify(value));
   };
 
+  const navigate = useNavigate(); // Get the navigate object
+
   const onDrop = (acceptedFiles) => {
     const reader = new FileReader();
 
@@ -43,6 +45,7 @@ const Uploader = () => {
     };
 
     reader.readAsText(acceptedFiles[0]);
+    navigate('/');
   };
 
   const handleInputChange = (e) => {
@@ -94,18 +97,6 @@ const Uploader = () => {
           </div>
         )}
       </div>
-      {beerData && beerData.length > 0 && (
-        <div className="mt-4 text-gray-400">
-          <div className="text-gray-700 bg-green-300 p-4 rounded-lg">
-            {/* {JSON.stringify(beerData, null, 2)} */}
-            Upload successful! Go checkout{' '}
-            <Link className="text-black underline" to="/">
-              your dashboard
-            </Link>
-            .
-          </div>
-        </div>
-      )}
     </div>
   );
 };
