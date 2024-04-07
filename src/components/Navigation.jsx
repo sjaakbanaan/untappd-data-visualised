@@ -7,13 +7,13 @@ const Navigation = () => {
   return (
     <nav className="mr-3">
       <ul className="text-xs">
-        {pathname == '/import' ? (
+        {pathname == '/upload' ? (
           <li>
             <Link to="/">Home</Link>
           </li>
         ) : (
           <li>
-            <Link to="/import">Import data</Link>
+            <Link to="/upload">Import data</Link>
           </li>
         )}
       </ul>

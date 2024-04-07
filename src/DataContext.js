@@ -3,10 +3,10 @@ import { createContext, useState } from 'react';
 const DataContext = createContext();
 
 const DataProvider = ({ children }) => {
-  const [jsonData, setJsonData] = useState([]);
+  const [beerData, setBeerData] = useState([]);
 
   return (
-    <DataContext.Provider value={{ jsonData, setJsonData }}>
+    <DataContext.Provider value={{ beerData, setBeerData }}>
       {children}
     </DataContext.Provider>
   );

@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
 import Dashboard from './components/Dashboard.jsx';
-import ImportPage from './components/Pages/ImportPage.jsx';
+import Uploader from './components/Uploader/Uploader.jsx';
 
 const App = () => {
   return (
@@ -12,7 +12,7 @@ const App = () => {
           <Header />
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/import" element={<ImportPage />} />
+            <Route path="/upload" element={<Uploader />} />
           </Routes>
           <Footer />
         </div>

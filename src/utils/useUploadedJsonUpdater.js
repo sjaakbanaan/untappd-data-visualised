@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 export const useUploadedJsonUpdater = () => {
-  const [jsonData, setJsonData] = useState(null);
+  const [beerData, setBeerData] = useState(null);
 
   const manipulateData = (data, VenueDetails) => {
     const uniqueCheckinIds = new Set();
@@ -52,5 +52,5 @@ export const useUploadedJsonUpdater = () => {
     return filteredData;
   };
 
-  return { jsonData, setJsonData, manipulateData };
+  return { beerData, setBeerData, manipulateData };
 };
