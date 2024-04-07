@@ -15,7 +15,7 @@ import BeerTypeChart from './Charts/BeerTypeChart/BeerTypeChart.jsx';
 
 import { filterBeerData, getDefaultStartDate, getDefaultEndDate } from '../utils/';
 
-// Import the context where jsonData is stored
+// Import the context where beerData is stored
 import { DataContext } from '../DataContext';
 
 const useDashboardData = () => {
@@ -32,19 +32,19 @@ const useDashboardData = () => {
     end: getDefaultEndDate(),
   });
 
-  // Access jsonData from context
-  const { jsonData } = useContext(DataContext);
-  // console.log('data', jsonData);
+  // Access beerData from context
+  const { beerData } = useContext(DataContext);
+  // console.log('data', beerData);
 
   useEffect(() => {
-    if (jsonData) {
-      const filteredResults = filterBeerData(jsonData, filterOverview, filterDateRange);
+    if (beerData) {
+      const filteredResults = filterBeerData(beerData, filterOverview, filterDateRange);
       setFilteredData(filteredResults);
     }
-  }, [jsonData, filterOverview, filterDateRange]);
+  }, [beerData, filterOverview, filterDateRange]);
 
   return {
-    jsonData,
+    beerData,
     filteredData,
     filterOverview,
     setFilterOverview,
@@ -55,7 +55,7 @@ const useDashboardData = () => {
 
 const Dashboard = () => {
   const {
-    jsonData,
+    beerData,
     filteredData,
     filterOverview,
     setFilterOverview,
@@ -66,7 +66,7 @@ const Dashboard = () => {
   return (
     <>
       <DateSelector
-        beerData={jsonData}
+        beerData={beerData}
         filterDateRange={filterDateRange}
         setFilterDateRange={setFilterDateRange}
       />
@@ -74,7 +74,7 @@ const Dashboard = () => {
         <>
           <div className="rounded shadow-md">
             <YearFilterButtons
-              beerData={jsonData}
+              beerData={beerData}
               filterDateRange={filterDateRange}
               setFilterDateRange={setFilterDateRange}
             />
@@ -107,8 +107,8 @@ const Dashboard = () => {
       ) : (
         <div className="mt-4">
           Loading results or your filters didn't return a result. Did you already{' '}
-          <Link className="text-yellow-500 underline" to="/import">
-            import your Untappd JSON export
+          <Link className="text-yellow-500 underline" to="/upload">
+            upload your Untappd JSON export
           </Link>
           ?
         </div>

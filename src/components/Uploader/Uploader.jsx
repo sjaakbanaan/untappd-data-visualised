@@ -1,12 +1,12 @@
 import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useDropzone } from 'react-dropzone';
-import { useUploadedJsonUpdater } from '../utils/';
+import { useUploadedJsonUpdater } from '../../utils/';
 import VenueForm from './VenueForm.jsx';
-import { DataContext } from '../DataContext';
+import { DataContext } from '../../DataContext';
 
 const Uploader = () => {
-  const { jsonData, setJsonData } = useContext(DataContext);
+  const { beerData, setBeerData } = useContext(DataContext);
   const { manipulateData } = useUploadedJsonUpdater(); // Import and use the hook
   const [venueDetails, setVenueDetails] = useState({
     venue_lat: '',
@@ -39,7 +39,7 @@ const Uploader = () => {
       // Do something with the JSON data
       const data = reader.result;
       const updatedData = manipulateData(JSON.parse(data), venueDetails);
-      setJsonData(updatedData); // Convert back to string if needed
+      setBeerData(updatedData); // Convert back to string if needed
     };
 
     reader.readAsText(acceptedFiles[0]);
@@ -94,10 +94,10 @@ const Uploader = () => {
           </div>
         )}
       </div>
-      {jsonData && jsonData.length > 0 && (
+      {beerData && beerData.length > 0 && (
         <div className="mt-4 text-gray-400">
           <div className="text-gray-700 bg-green-300 p-4 rounded-lg">
-            {/* {JSON.stringify(jsonData, null, 2)} */}
+            {/* {JSON.stringify(beerData, null, 2)} */}
             Upload successful! Go checkout{' '}
             <Link className="text-black underline" to="/">
               your dashboard
