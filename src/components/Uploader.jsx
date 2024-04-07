@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { useDropzone } from 'react-dropzone';
 import { useUploadedJsonUpdater } from '../utils/';
 import VenueForm from './VenueForm.jsx';
@@ -93,11 +94,15 @@ const Uploader = () => {
           </div>
         )}
       </div>
-      {jsonData && (
+      {jsonData && jsonData.length > 0 && (
         <div className="mt-4 text-gray-400">
           <div className="text-gray-700 bg-green-300 p-4 rounded-lg">
             {/* {JSON.stringify(jsonData, null, 2)} */}
-            Upload succesful!
+            Upload successful! Go checkout{' '}
+            <Link className="text-black underline" to="/">
+              your dashboard
+            </Link>
+            .
           </div>
         </div>
       )}
