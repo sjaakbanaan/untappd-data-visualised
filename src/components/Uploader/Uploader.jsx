@@ -2,13 +2,14 @@ import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDropzone } from 'react-dropzone';
 import { useUploadedJsonUpdater } from '../../utils/';
-import VenueForm from './VenueForm.jsx';
+import UploadForm from './UploadForm.jsx';
 import { DataContext } from '../../DataContext';
 
 const Uploader = () => {
   const { setBeerData } = useContext(DataContext);
   const { manipulateData } = useUploadedJsonUpdater(); // Import and use the hook
-  const [venueDetails, setVenueDetails] = useState({
+  const [userDetails, setUserDetails] = useState({
+    untappd_username: '',
     venue_lat: '',
     venue_lng: '',
     venue_city: '',
@@ -17,10 +18,10 @@ const Uploader = () => {
   });
 
   useEffect(() => {
-    // Check for venueDetails in local storage
-    const storedVenueDetails = localStorage.getItem('venueDetails');
-    if (storedVenueDetails) {
-      setVenueDetails(JSON.parse(storedVenueDetails));
+    // Check for userDetails in local storage
+    const storedUserDetails = localStorage.getItem('userDetails');
+    if (storedUserDetails) {
+      setUserDetails(JSON.parse(storedUserDetails));
     }
   }, []); // Run only on component mount
 
@@ -40,7 +41,7 @@ const Uploader = () => {
     reader.onload = () => {
       // Do something with the JSON data
       const data = reader.result;
-      const updatedData = manipulateData(JSON.parse(data), venueDetails);
+      const updatedData = manipulateData(JSON.parse(data), userDetails);
       setBeerData(updatedData); // Convert back to string if needed
     };
 
@@ -50,8 +51,8 @@ const Uploader = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setVenueDetails({ ...venueDetails, [name]: value });
-    saveToLocalStorage('venueDetails', { ...venueDetails, [name]: value });
+    setUserDetails({ ...userDetails, [name]: value });
+    saveToLocalStorage('userDetails', { ...userDetails, [name]: value });
   };
 
   const { getRootProps, getInputProps, isDragActive, fileRejections } = useDropzone({
@@ -75,7 +76,7 @@ const Uploader = () => {
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-gray-800 text-white shadow-md rounded-lg">
-      <VenueForm venueDetails={venueDetails} handleInputChange={handleInputChange} />
+      <UploadForm userDetails={userDetails} handleInputChange={handleInputChange} />
       <div
         {...getRootProps()}
         className="dropzone border-dashed border-2 text-md border-gray-400 leading-5 rounded-md p-8 text-center"

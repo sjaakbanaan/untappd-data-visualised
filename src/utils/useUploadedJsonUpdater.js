@@ -3,7 +3,7 @@ import { useState } from 'react';
 export const useUploadedJsonUpdater = () => {
   const [beerData, setBeerData] = useState(null);
 
-  const manipulateData = (data, VenueDetails) => {
+  const manipulateData = (data, userDetails) => {
     const uniqueCheckinIds = new Set();
 
     const updatedData = data.map((item) => {
@@ -33,7 +33,7 @@ export const useUploadedJsonUpdater = () => {
         // Add additional properties or update existing ones
         updatedItem = {
           ...updatedItem,
-          ...VenueDetails,
+          ...userDetails,
         };
       }
 
