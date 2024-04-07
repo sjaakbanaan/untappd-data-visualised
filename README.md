@@ -1,4 +1,4 @@
-# Untappd Data Visualised v1.0
+# Untappd Data Visualised v2.0
 
 ![image (12)](https://github.com/sjaakbanaan/untappd-data-visualised/assets/2773301/15cb9e08-a187-458a-83b4-bf0355f600b6)
 
@@ -68,7 +68,7 @@ cd untappd-data-visualised
 yarn install # npm install
 ```
 
-1. Copy `.env-example` from root to `.env` and set your username and your [MapBox API key](https://account.mapbox.com/). It's free, you should be able to skip the setting up your payment card somehow.
+1. Copy `.env-example` from root to `.env` and set your [MapBox API key](https://account.mapbox.com/). It's free, you should be able to skip the setting up your payment card somehow.
 
 ### Usage
 
@@ -78,10 +78,12 @@ To start the server:
 yarn start # npm run start
 ```
 
-This will open the app on localhost:3000 in your default web browser. Click on 'import data' on top to upload your JSON export and set your home data (you will need to fetch these, via Google Maps for example).
+This will open the app on localhost:3000 in your default web browser. Fill in the form and upload your JSON export and set your home data (you can get these values via Google Maps for example).
 
 ## Recent changes
 
+- There's no longer a need to run a import script before using the app! Uploading and processing now happens in the app itself.
+- Added a nice overview of all your beer types, showing the lowest and highest rating for each.
 - New map has been added, it displays the countries you had beer from. This is still work in progress and country names from Untappd don't always match with MapBox, so please let me know if you're missing countries on your map.
 - Leafjet js is replaced with MapBox, because I'm working on a map that highlights the brewery countries. Make sure to add your key to the .env file.
 
