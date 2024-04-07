@@ -63,7 +63,7 @@ const Uploader = () => {
       'application/json': ['.json'],
     },
     maxFiles: 1,
-    maxSize: 15 * 1024 * 1024,
+    maxSize: 15 * 1024 * 1024, // 15 mb max.
   });
 
   const fileRejectionItems = fileRejections.map(({ file, errors }) => (
@@ -90,7 +90,7 @@ const Uploader = () => {
           <div>
             <p className="text-gray-400 mb-4">Drag 'n' drop some JSON files here or</p>
             <button className="bg-yellow-500 hover:bg-yellow-400 text-black py-2 px-4 rounded">
-              Select file
+              Select JSON file
             </button>
             {fileRejectionItems.length > 0 && (
               <p className="mt-4">

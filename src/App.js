@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { DataContext } from './DataContext';
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
-import Dashboard from './components/Dashboard.jsx';
+import Dashboard from './components/Dashboard/Dashboard.jsx';
 import Uploader from './components/Uploader/Uploader.jsx';
 
 const App = () => {

@@ -1,5 +1,5 @@
 import ResetFilters from './ResetFilters.jsx';
-import { filterDuplicateBeers, isFilterOverviewSet } from '../utils/';
+import { filterDuplicateBeers, isFilterOverviewSet } from '../../utils';
 
 const DashboardHeader = ({
   beerData,
