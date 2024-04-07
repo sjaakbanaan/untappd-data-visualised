@@ -1,17 +1,26 @@
+import { useState, useEffect } from 'react';
 import Navigation from './Navigation.jsx';
 
-// get username for .env file
-const user = process.env.REACT_APP_USER;
-
 const Header = () => {
+  const [storedUserName, setStoredUserName] = useState(null);
+
+  useEffect(() => {
+    // Check for userDetails in local storage
+    const storedUserDetails = localStorage.getItem('userDetails');
+    if (storedUserDetails) {
+      const storedUserDetailsJson = JSON.parse(storedUserDetails);
+      setStoredUserName(storedUserDetailsJson.untappd_username);
+    }
+  }, []); // Run only on component mount
+
   return (
     <>
       <div className="flex items-center justify-end mb-6 md:mb-0">
         <Navigation />
         <a
           className="mr-3"
-          title={`Untappd profile of ${user}`}
-          href={`https://untappd.com/user/${user}`}
+          title={`Untappd profile of ${storedUserName}`}
+          href={`https://untappd.com/user/${storedUserName}`}
           target="_blank"
         >
           <svg
@@ -40,8 +49,10 @@ const Header = () => {
       <h1 className="text-center mb-2 text-4xl text-yellow-500 font-bold">
         Untappd Data Visualised
       </h1>
-      {user && (
-        <h2 className="text-center mb-5 text-2xl text-gray-400 font-bold">{user}</h2>
+      {storedUserName && (
+        <h2 className="text-center mb-5 text-2xl text-gray-400 font-bold">
+          {storedUserName}
+        </h2>
       )}
     </>
   );
