@@ -24,12 +24,7 @@ const VenuePopUp = ({ popupInfo, setPopupInfo }) => {
         </h4>
       </div>
       <div className="flex mt-2 items-center mb-1">
-        <Icon
-          icon="CALENDAR"
-          size="16"
-          viewBox="0 0 488 512"
-          className="mr-3 fill-yellow-600"
-        />
+        <Icon icon="CALENDAR" viewBox="0 0 488 512" className="mr-3 fill-yellow-600" />
         <div className="flex-1">
           <strong>most recent check-in:</strong>
           <br />
@@ -42,7 +37,6 @@ const VenuePopUp = ({ popupInfo, setPopupInfo }) => {
         <div className="flex mt-2 items-center mb-1">
           <Icon
             icon="FRIENDS"
-            size="16"
             viewBox="0 0 512 398.108"
             className="mr-3 fill-yellow-600"
           />
