@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import VenueMap from './Maps/VenueMap.jsx';
 import BreweryMap from './Maps/BreweryMap.jsx';
 import TopTableList from './TopTableList/TopTableList.jsx';
@@ -12,15 +12,12 @@ import YearFilterButtons from './YearFilterButtons.jsx';
 import DashboardHeader from './DashboardHeader.jsx';
 import BeerTypeChart from './Charts/BeerTypeChart/BeerTypeChart.jsx';
 
-import {
-  filterBeerData,
-  getDefaultStartDate,
-  getDefaultEndDate,
-  fetchData,
-} from '../utils/';
+import { filterBeerData, getDefaultStartDate, getDefaultEndDate } from '../utils/';
+
+// Import the context where jsonData is stored
+import { DataContext } from '../DataContext';
 
 const useDashboardData = () => {
-  const [beerData, setBeerData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [filterOverview, setFilterOverview] = useState({
     brewery_name: '',
@@ -34,25 +31,19 @@ const useDashboardData = () => {
     end: getDefaultEndDate(),
   });
 
-  useEffect(() => {
-    const fetchDataAndSetState = async () => {
-      const data = await fetchData('/beers-processed.json');
-      if (data) {
-        setBeerData(data);
-        setFilteredData(); // Initial load without filters
-      }
-    };
-
-    fetchDataAndSetState();
-  }, []);
+  // Access jsonData from context
+  const { jsonData } = useContext(DataContext);
+  // console.log('data', jsonData);
 
   useEffect(() => {
-    const filteredResults = filterBeerData(beerData, filterOverview, filterDateRange);
-    setFilteredData(filteredResults);
-  }, [beerData, filterOverview, filterDateRange]);
+    if (jsonData) {
+      const filteredResults = filterBeerData(jsonData, filterOverview, filterDateRange);
+      setFilteredData(filteredResults);
+    }
+  }, [jsonData, filterOverview, filterDateRange]);
 
   return {
-    beerData,
+    jsonData,
     filteredData,
     filterOverview,
     setFilterOverview,
@@ -63,7 +54,7 @@ const useDashboardData = () => {
 
 const Dashboard = () => {
   const {
-    beerData,
+    jsonData,
     filteredData,
     filterOverview,
     setFilterOverview,
@@ -74,15 +65,15 @@ const Dashboard = () => {
   return (
     <>
       <DateSelector
-        beerData={beerData}
+        beerData={jsonData}
         filterDateRange={filterDateRange}
         setFilterDateRange={setFilterDateRange}
       />
-      {filteredData && filteredData?.length > 0 ? (
+      {filteredData && filteredData.length > 0 ? (
         <>
           <div className="rounded shadow-md">
             <YearFilterButtons
-              beerData={beerData}
+              beerData={jsonData}
               filterDateRange={filterDateRange}
               setFilterDateRange={setFilterDateRange}
             />
@@ -92,10 +83,10 @@ const Dashboard = () => {
               setFilterOverview={setFilterOverview}
             />
             <DashboardHeader
-              totalBeerCount={filteredData && filteredData?.length}
+              totalBeerCount={filteredData.length}
               filterDateRange={filterDateRange}
-              beerData={filteredData}
               filterOverview={filterOverview}
+              beerData={filteredData}
               setFilterOverview={setFilterOverview}
             />
             <div className="container mx-auto mt-4 p-2 md:p-8 bg-gray-800 rounded shadow-md">
