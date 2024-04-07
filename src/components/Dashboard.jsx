@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import VenueMap from './Maps/VenueMap.jsx';
 import BreweryMap from './Maps/BreweryMap.jsx';
 import TopTableList from './TopTableList/TopTableList.jsx';
@@ -105,7 +106,11 @@ const Dashboard = () => {
         </>
       ) : (
         <div className="mt-4">
-          Loading results or your filters didn't return a result.
+          Loading results or your filters didn't return a result. Did you already{' '}
+          <Link className="text-yellow-500 underline" to="/import">
+            import your Untappd JSON export
+          </Link>
+          ?
         </div>
       )}
     </>
