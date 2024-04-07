@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useUploadedJsonUpdater } from '../utils/';
 import VenueForm from './VenueForm.jsx';
+import { DataContext } from '../DataContext';
 
 const Uploader = () => {
-  const [jsonData, setJsonData] = useState(null);
+  const { jsonData, setJsonData } = useContext(DataContext);
   const { manipulateData } = useUploadedJsonUpdater(); // Import and use the hook
   const [venueDetails, setVenueDetails] = useState({
     venue_lat: '',
@@ -37,7 +38,7 @@ const Uploader = () => {
       // Do something with the JSON data
       const data = reader.result;
       const updatedData = manipulateData(JSON.parse(data), venueDetails);
-      setJsonData(JSON.stringify(updatedData, null, 2)); // Convert back to string if needed
+      setJsonData(updatedData); // Convert back to string if needed
     };
 
     reader.readAsText(acceptedFiles[0]);
@@ -94,7 +95,10 @@ const Uploader = () => {
       </div>
       {jsonData && (
         <div className="mt-4 text-gray-400">
-          <pre className="text-gray-700 whitespace-pre-wrap">{jsonData}</pre>
+          <div className="text-gray-700 bg-green-300 p-4 rounded-lg">
+            {/* {JSON.stringify(jsonData, null, 2)} */}
+            Upload succesful!
+          </div>
         </div>
       )}
     </div>

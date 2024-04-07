@@ -15,11 +15,6 @@
 .DS_Store
 .env
 
-# untappd data
-/public/beers.json
-/public/beers-processed.json
-/public/home-config.json
-
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
