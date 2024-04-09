@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import Map, { NavigationControl, FullscreenControl, Source, Layer } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { getLocalStorageData } from '../../utils/';
 
 // For more information on data-driven styles, see https://www.mapbox.com/help/gl-dds-ref/
 const dataLayer = {
@@ -14,6 +15,14 @@ const dataLayer = {
 
 const VenueMap = ({ beerData }) => {
   const [allData, setAllData] = useState(null);
+  const [storedMapBoxKey, setStoredMapBoxKey] = useState(
+    getLocalStorageData('mapbox_key')
+  );
+
+  useEffect(() => {
+    // Check for Mapbox key in local storage
+    setStoredMapBoxKey(getLocalStorageData('mapbox_key'));
+  }, []); // Run only on component mount
 
   useEffect(() => {
     /* data fetch */
@@ -67,6 +76,7 @@ const VenueMap = ({ beerData }) => {
           mapStyle="mapbox://styles/mapbox/dark-v10"
           interactiveLayerIds={['data']}
           scrollZoom={false}
+          mapboxAccessToken={storedMapBoxKey}
         >
           <FullscreenControl position="top-left" />
           <NavigationControl position="top-left" />

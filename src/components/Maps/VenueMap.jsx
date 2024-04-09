@@ -3,11 +3,20 @@ import Map, { NavigationControl, FullscreenControl } from 'react-map-gl';
 import Pins from './Pins.jsx';
 import VenuePopUp from './VenuePopUp.jsx';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { getLocalStorageData } from '../../utils/';
 
 const VenueMap = ({ beerData }) => {
   const [popupInfo, setPopupInfo] = useState(null);
   const [boundingBox, setBoundingBox] = useState(null);
-  const [mapKey, setMapKey] = useState(0); // Add state for the map key
+  const [mapKey, setMapKey] = useState(null); // Add state for the map 'key'
+  const [storedMapboxKey, setStoredMapboxKey] = useState(
+    getLocalStorageData('mapbox_key')
+  );
+
+  useEffect(() => {
+    // Check for userDetails in local storage
+    setStoredMapboxKey(getLocalStorageData('mapbox_key'));
+  }, []); // Run only on component mount
 
   useEffect(() => {
     const getBoundingBox = (beerData) => {
@@ -19,7 +28,6 @@ const VenueMap = ({ beerData }) => {
         uniqueCombinations.add(key); // Add combination to the set
         return true; // Include if it's a new combination
       });
-      // console.log(filteredData);
 
       if (filteredData.length === 0) {
         return [
@@ -58,6 +66,7 @@ const VenueMap = ({ beerData }) => {
           style={{ width: '100%', height: 500 }}
           mapStyle="mapbox://styles/mapbox/dark-v10"
           scrollZoom={false}
+          mapboxAccessToken={storedMapboxKey}
         >
           <FullscreenControl position="top-left" />
           <NavigationControl position="top-left" />
