@@ -13,6 +13,7 @@ import { normalizeString } from './normalizeString';
 import { isFilterOverviewSet } from './isFilterOverviewSet';
 import { useCounter } from './useCounter';
 import { useUploadedJsonUpdater } from './useUploadedJsonUpdater';
+import { getLocalStorageData } from './getLocalStorageData';
 
 export {
   formatDate,
@@ -30,4 +31,5 @@ export {
   isFilterOverviewSet,
   useCounter,
   useUploadedJsonUpdater,
+  getLocalStorageData,
 };

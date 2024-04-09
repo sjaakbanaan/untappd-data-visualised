@@ -16,7 +16,7 @@ const VenuePopUp = ({ popupInfo, setPopupInfo }) => {
           icon="LOCATION"
           size="18"
           viewBox="0 0 70.749 90"
-          className="mr-3 fill-yellow-600"
+          className="mr-3 fill-yellow-700"
         />
         <h4 className="text-base leading-tight font-bold flex-1">
           {popupInfo.venue_name}
@@ -24,7 +24,7 @@ const VenuePopUp = ({ popupInfo, setPopupInfo }) => {
         </h4>
       </div>
       <div className="flex mt-2 items-center mb-1">
-        <Icon icon="CALENDAR" viewBox="0 0 488 512" className="mr-3 fill-yellow-600" />
+        <Icon icon="CALENDAR" viewBox="0 0 488 512" className="mr-3 fill-yellow-700" />
         <div className="flex-1">
           <strong>most recent check-in:</strong>
           <br />
@@ -38,7 +38,7 @@ const VenuePopUp = ({ popupInfo, setPopupInfo }) => {
           <Icon
             icon="FRIENDS"
             viewBox="0 0 512 398.108"
-            className="mr-3 fill-yellow-600"
+            className="mr-3 fill-yellow-700"
           />
           <div className="flex-1">{popupInfo.tagged_friends.split(',').join(', ')}</div>
         </div>

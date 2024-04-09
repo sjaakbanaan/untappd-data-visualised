@@ -19,13 +19,17 @@ const BeerTypeChart = ({ beerData }) => {
                     gridColumnStart: item.min + 1,
                     gridColumnEnd: item.max + 1,
                   }}
-                  className="bg-yellow-700 whitespace-nowrap h-6 text-center text-xs leading-6"
+                  className="bg-yellow-500 rounded-lg whitespace-nowrap h-8 text-center flex items-center text-xs leading-6"
                 >
-                  <BeerTypeMinMax spanClass="mx-2" item={item} showRating />
-                  <div className="text-sm absolute left-0 top-0 leading-6">
+                  <BeerTypeMinMax
+                    spanClass="mx-1 bg-gray-800 px-3 rounded-lg"
+                    item={item}
+                    showRating
+                  />
+                  <div className="text-sm absolute left-0 top-1 leading-6 bg-gray-800">
                     {item.beer_type}{' '}
                     <span className="text-gray-400">({item.total_results})</span>{' '}
-                    <BeerTypeMinMax spanClass="text-yellow-500" item={item} />
+                    <BeerTypeMinMax hasBg spanClass="text-yellow-500" item={item} />
                   </div>
                 </div>
               </div>

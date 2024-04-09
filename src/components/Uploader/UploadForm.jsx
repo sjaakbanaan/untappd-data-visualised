@@ -2,6 +2,7 @@ const UploadForm = ({ userDetails, handleInputChange }) => {
   // Define an array of fields with their corresponding labels
   const fields = [
     { name: 'untappd_username', label: 'Untappd username' },
+    { name: 'mapbox_key', label: 'Mapbox API key' },
     { name: 'venue_city', label: 'Home city' },
     { name: 'venue_state', label: 'Home state' },
     { name: 'venue_country', label: 'Home country' },
