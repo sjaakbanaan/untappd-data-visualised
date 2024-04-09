@@ -1,35 +1,37 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import OverviewCard from './OverviewCard.jsx';
+import Pagination from './Pagination.jsx';
 
 const Overview = ({ beerData }) => {
-  const [showOverview, setShowOverview] = useState(false);
-
-  const handleToggleOverview = () => {
-    setShowOverview(!showOverview);
-  };
-
-  // at how many results should the overview be hidden behind a button?
-  const buttonNumber = 200;
+  const [currentPage, setCurrentPage] = useState(1);
+  const ItemsPerPage = 100;
+  const overviewRef = useRef(null);
+  const startIndex = (currentPage - 1) * ItemsPerPage;
+  const endIndex = currentPage * ItemsPerPage;
 
   return (
-    <>
-      {beerData?.length > buttonNumber && (
-        <div className="mt-6 mb-2 flex justify-center">
-          <button
-            className="bg-yellow-600 hover:bg-yellow-700 transition-colors duration-300 text-white font-bold py-3 px-5 rounded mr-2"
-            onClick={handleToggleOverview}
-          >
-            {showOverview ? 'Hide Overview' : 'Show Overview'}
-          </button>
-        </div>
-      )}
-      {(showOverview || beerData?.length <= buttonNumber) && (
-        <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-8">
-          {beerData?.length > 0 &&
-            beerData.map((item, i) => <OverviewCard key={i} item={item} />)}
-        </div>
-      )}
-    </>
+    <div className="pt-10 mb-6" ref={overviewRef}>
+      <h2 className="text-2xl text-center font-bold">Beers overview</h2>
+      <Pagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        beerData={beerData}
+        ItemsPerPage={ItemsPerPage}
+        overviewRef={overviewRef}
+      />
+      <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 pt-8">
+        {beerData.slice(startIndex, endIndex).map((item, i) => (
+          <OverviewCard key={i} item={item} />
+        ))}
+      </div>
+      <Pagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        beerData={beerData}
+        ItemsPerPage={ItemsPerPage}
+        overviewRef={overviewRef}
+      />
+    </div>
   );
 };
 
