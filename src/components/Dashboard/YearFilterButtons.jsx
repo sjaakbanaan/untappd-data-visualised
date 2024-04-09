@@ -35,7 +35,9 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
           <button
             key={`set-year-${year}`}
             className={`shadow w-full border rounded py-2 px-3 mb-4 transition-colors duration-300 ${
-              filterDateRange?.start.startsWith(`${year}-01-01`)
+              filterDateRange?.start.substring(0, 4) ===
+                filterDateRange?.end.substring(0, 4) &&
+              filterDateRange?.start.startsWith(`${year}`)
                 ? 'bg-yellow-500 text-gray-900 border-yellow-500'
                 : 'text-white bg-gray-900 hover:bg-gray-700 '
             }`}
