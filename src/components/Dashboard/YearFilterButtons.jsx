@@ -16,7 +16,8 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
         <button
           key="set-all-time"
           className={`shadow w-full border rounded py-2 px-3 mb-4 ${
-            filterDateRange?.start === `${uniqueDates[0]}`
+            filterDateRange?.start === `${uniqueDates[0]}` &&
+            filterDateRange?.end == currDate
               ? 'bg-yellow-500 text-gray-900 border-yellow-500'
               : 'text-white bg-gray-900 hover:bg-gray-700'
           }`}
@@ -30,15 +31,18 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
           all time
         </button>
       </div>
+
       {uniqueYears.map((year, i) => (
         <div className="block" key={i}>
           <button
-            key={`set-year-${year}`}
             className={`shadow w-full border rounded py-2 px-3 mb-4 transition-colors duration-300 ${
-              filterDateRange?.start == `${year}-01-01` &&
-              filterDateRange?.end == `${year}-12-31`
+              // set active state, with an exception for the current year, because then the end value fot filterDateRange is not `${year}-12-31` but currDate:
+              (filterDateRange?.start === `${year}-01-01` &&
+                filterDateRange?.end === `${year}-12-31`) ||
+              (filterDateRange?.start === `${year}-01-01` &&
+                filterDateRange?.end === currDate)
                 ? 'bg-yellow-500 text-gray-900 border-yellow-500'
-                : 'text-white bg-gray-900 hover:bg-gray-700 '
+                : 'text-white bg-gray-900 hover:bg-gray-700'
             }`}
             onClick={() =>
               setFilterDateRange({
