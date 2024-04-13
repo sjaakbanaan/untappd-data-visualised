@@ -36,6 +36,7 @@ const DateSelector = ({ beerData, filterDateRange, setFilterDateRange }) => {
             setFilterDateRange({ ...filterDateRange, start: e.target.value })
           }
           min={formattedEarliestDate}
+          required
         />
         <input
           type="date"
@@ -45,6 +46,7 @@ const DateSelector = ({ beerData, filterDateRange, setFilterDateRange }) => {
             setFilterDateRange({ ...filterDateRange, end: e.target.value })
           }
           max={formattedLatestDate}
+          required
         />
       </div>
     </div>
