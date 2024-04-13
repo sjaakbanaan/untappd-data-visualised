@@ -41,7 +41,7 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
                 filterDateRange?.end === `${year}-12-31`) ||
               (filterDateRange?.start === `${year}-01-01` &&
                 filterDateRange?.end === currDate)
-                ? 'bg-yellow-500 text-gray-900 border-yellow-500'
+                ? 'bg-yellow-500 hover:bg-yellow-400 text-gray-900 border-yellow-500'
                 : 'text-white bg-gray-900 hover:bg-gray-700'
             }`}
             onClick={() =>

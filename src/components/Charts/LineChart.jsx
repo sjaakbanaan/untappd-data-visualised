@@ -77,14 +77,13 @@ const LineChart = ({ beerData }) => {
     ],
   };
 
+  // return false if there are not enough years in the filter range:
+  if (labels && labels.length < 3) return false;
+
   return (
     <div className="p-4">
       <h2 className="text-lg font-semibold mb-6">Cumulative beer count (year)</h2>
-      {labels && labels.length > 2 ? (
-        <Line options={options} data={data} />
-      ) : (
-        <p>At least 3 years should be in your date range.</p>
-      )}
+      <Line options={options} data={data} />
     </div>
   );
 };

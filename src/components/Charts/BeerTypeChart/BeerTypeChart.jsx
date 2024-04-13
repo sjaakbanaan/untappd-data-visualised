@@ -16,8 +16,8 @@ const BeerTypeChart = ({ beerData }) => {
               <div className="grid w-full grid-cols-500 relative">
                 <div
                   style={{
-                    gridColumnStart: item.min + 1,
-                    gridColumnEnd: item.max + 1,
+                    gridColumnStart: item && item.min + 1,
+                    gridColumnEnd: item && item.max + 1,
                   }}
                   className="bg-yellow-500 rounded-lg whitespace-nowrap h-8 text-center flex items-center text-xs leading-6"
                 >
