@@ -98,6 +98,10 @@ This will open the app on localhost:3000 in your default web browser. Fill in th
 
 - Make this into an actual web app so you don't have to run it yourself.
 
+## Known bugs
+
+- Resetting filters doesn't reset the select box values in UI
+
 ## Contributing
 
 Contributions are welcome via pull requests! Please make sure to adhere to the project's coding standards.
