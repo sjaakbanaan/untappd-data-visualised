@@ -28,36 +28,67 @@ const Pagination = ({
     }
   };
 
+  // Determine the start and end index for the number buttons
+  let startPage = Math.max(currentPage - 2, 1);
+  const endPage = Math.min(startPage + 4, totalPages);
+
+  // If there are not enough numbers after the current page, adjust the start index
+  if (endPage - startPage < 4) {
+    startPage = Math.max(endPage - 4, 1);
+  }
+
   return (
     <div className="flex justify-center flex-wrap mt-10">
       <button
         className={`${
           currentPage === 1 ? 'cursor-not-allowed' : 'hover:bg-gray-700'
-        }  transition-colors duration-300 bg-gray-900 shadow border rounded my-2 py-2 px-3 text-white mr-2`}
+        } transition-colors duration-300 bg-gray-900 shadow border rounded my-2 py-2 px-3 text-white mr-2`}
         onClick={handlePrevPage}
         disabled={currentPage === 1}
       >
         Prev
       </button>
-      {Array.from({ length: totalPages }).map((_, index) => (
+      {startPage > 1 && (
         <button
-          key={index}
-          disabled={currentPage === index + 1}
+          key={1}
+          className="bg-gray-800 text-white hover:bg-gray-700 transition-colors duration-300 my-2 py-2 px-3 mx-2 rounded"
+          onClick={() => handlePageNumbers(1)}
+          title="go to 1"
+        >
+          1
+        </button>
+      )}
+      {startPage > 2 && <span className="mx-2 py-3">...</span>}
+      {Array.from({ length: endPage - startPage + 1 }).map((_, index) => (
+        <button
+          key={startPage + index}
+          disabled={currentPage === startPage + index}
           className={`${
-            currentPage === index + 1
+            currentPage === startPage + index
               ? 'bg-yellow-500 text-gray-900'
               : 'bg-gray-800 text-white hover:bg-gray-700'
           } transition-colors duration-300 my-2 py-2 px-3 mx-2 rounded`}
-          onClick={() => handlePageNumbers(index + 1)}
-          title={`go to ${index + 1}`}
+          onClick={() => handlePageNumbers(startPage + index)}
+          title={`go to ${startPage + index}`}
         >
-          {index + 1}
+          {startPage + index}
         </button>
       ))}
+      {endPage < totalPages - 1 && <span className="mx-2 py-3">...</span>}
+      {endPage < totalPages && (
+        <button
+          key={totalPages}
+          className="bg-gray-800 text-white hover:bg-gray-700 transition-colors duration-300 my-2 py-2 px-3 mx-2 rounded"
+          onClick={() => handlePageNumbers(totalPages)}
+          title={`go to ${totalPages}`}
+        >
+          {totalPages}
+        </button>
+      )}
       <button
         className={`${
           currentPage === totalPages ? 'cursor-not-allowed' : 'hover:bg-gray-700'
-        }  transition-colors duration-300 bg-gray-900 shadow border rounded my-2 py-2 px-3 text-white ml-2`}
+        } transition-colors duration-300 bg-gray-900 shadow border rounded my-2 py-2 px-3 text-white ml-2`}
         onClick={handleNextPage}
         disabled={currentPage === totalPages}
       >

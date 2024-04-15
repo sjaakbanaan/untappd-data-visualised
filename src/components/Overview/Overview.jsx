@@ -4,7 +4,7 @@ import Pagination from './Pagination.jsx';
 
 const Overview = ({ beerData }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const ItemsPerPage = 100;
+  const ItemsPerPage = 50;
   const overviewRef = useRef(null);
   const startIndex = (currentPage - 1) * ItemsPerPage;
   const endIndex = currentPage * ItemsPerPage;
