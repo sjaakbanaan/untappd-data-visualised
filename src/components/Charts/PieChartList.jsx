@@ -14,7 +14,7 @@ const PieChartList = ({ beerData }) => {
       url_type: 'brewery_url',
     },
     {
-      title: 'Top 10 brewery country',
+      title: 'Top 10 brewery countries',
       name: 'brewery_country',
     },
     {
