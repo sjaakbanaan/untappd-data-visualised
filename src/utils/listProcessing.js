@@ -5,20 +5,28 @@ export const processTopBeers = (beerData, scoreType) => {
   const formattedData = transformRatingData(beerData, scoreType);
   const suffix = scoreType === 'beer_abv' ? '%' : '';
 
-  // Use a Set to keep track of unique beer names
-  const uniqueBeerNames = new Set();
+  // Create a map to store the highest value for each beer ID
+  const highestValuesMap = new Map();
 
-  // Filter out duplicates based on beer name
-  const uniqueFormattedData = formattedData.filter((item) => {
-    if (uniqueBeerNames.has(item.name)) {
-      return false; // Skip duplicate
+  // Iterate over the formatted data to update the highest value for each beer ID
+  formattedData.forEach((item) => {
+    const { bid, value } = item;
+    if (!highestValuesMap.has(bid) || value > highestValuesMap.get(bid)) {
+      highestValuesMap.set(bid, value);
     }
-    uniqueBeerNames.add(item.name);
-    return true;
   });
 
-  const sortedData = [...uniqueFormattedData].sort((a, b) => b.value - a.value);
+  // Filter the formatted data to keep only items with the highest value for each beer ID
+  const uniqueFormattedData = formattedData.filter((item) => {
+    return item.value === highestValuesMap.get(item.bid);
+  });
+
+  // Sort the unique formatted data by value in descending order
+  const sortedData = uniqueFormattedData.sort((a, b) => b.value - a.value);
+
+  // Get the top 10 items
   const processedList = sortedData.slice(0, 10);
+
   return { processedList, onEmpty, suffix };
 };
 
