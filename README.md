@@ -20,7 +20,7 @@ After setting filters, the following lists are presented in either a chart or li
 ```
 - Top 10 beer styles
 - Top 10 breweries
-- Top 10 brewery country
+- Top 10 brewery countries
 - Top 10 brewery cities
 - Top 10 flavor combinations
 - Top 10 most drank beers
