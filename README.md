@@ -1,13 +1,22 @@
 # Untappd Data Visualised v2.0
 
-![image (12)](https://github.com/sjaakbanaan/untappd-data-visualised/assets/2773301/15cb9e08-a187-458a-83b4-bf0355f600b6)
+### Good news! Soon you'll able to run this from a web app instead of running it locally! More on this ASAP.
+
+## What's new in v2?
+- There's no longer a need to run a import script before using the app! Uploading and processing now happens in the app itself!;
+- Added a nice overview of all your beer types (beer type apprecation list), showing the lowest and highest rating for each;
+- Pagination added on the overview part, the 'show overview' button has been removed;
+- UI improvements, mostly consistency. And some small bug fixes.
+
+![image](https://github.com/sjaakbanaan/untappd-data-visualised/assets/2773301/adff1ca7-4638-4de3-a585-c2fb8852e4b9)
 
 ## Overview
 #### You need to be an _Untappd Insider_ to use this dashboard!
 
-This little side project, "untappd-data-visualised," is designed to visualize Untappd data in various formats, such as charts, lists, and maps. It leverages React, Chart.js, MapBox, and some others to provide an interactive and insightful representation of your Untappd check-in history (screenshots soon).
+This little side project, "untappd-data-visualised," is designed to visualize Untappd data in various formats, such as charts, lists, and maps. It leverages React, Chart.js, MapBox, and some others to provide an interactive and insightful representation of your Untappd check-in history. Chat-GPT helped me a lot with creating this.
 
-You start by setting a date range, and from there you can start filtering. After setting filters, the following lists are presented in either a chart or list:
+You start by setting a date range, and from there you can start filtering. For example filter by brewery name/city/country or venue name/city/country.
+After setting filters, the following lists are presented in either a chart or list:
 ```
 - Top 10 beer styles
 - Top 10 breweries
@@ -41,12 +50,12 @@ You start by setting a date range, and from there you can start filtering. After
 - Map displaying venues checked-in
 - NEW: Map displaying brewery countries
 - NEW: Cumulative beer count (year)
+- NEW: beer type apprecation list
 and more!
 
 ```
 
 <img width="1362" alt="screen3" src="https://github.com/sjaakbanaan/untappd-data-visualised/assets/2773301/1b342d5d-cb33-4512-a69e-08bb0575bd6a">
-
 
 ## Getting Started
 
@@ -54,6 +63,7 @@ and more!
 
 - **Node.js**: and preferably **Yarn**.
 - An export of your data from Untappd (https://untappd.com/user/xxxx/beers) as JSON.
+- A [MapBox API key](https://account.mapbox.com/). It's free, you should be able to skip the setting up your payment card somehow.
 
 ### Installation:
 
@@ -68,8 +78,6 @@ cd untappd-data-visualised
 yarn install # npm install
 ```
 
-1. Copy `.env-example` from root to `.env` and set your [MapBox API key](https://account.mapbox.com/). It's free, you should be able to skip the setting up your payment card somehow.
-
 ### Usage
 
 To start the server:
@@ -80,17 +88,15 @@ yarn start # npm run start
 
 This will open the app on localhost:3000 in your default web browser. Fill in the form and upload your JSON export and set your home data (you can get these values via Google Maps for example).
 
+![image](https://github.com/sjaakbanaan/untappd-data-visualised/assets/2773301/33e336c0-8539-4988-9388-1699bf1d3aea)
+
 ## Recent changes
 
-- There's no longer a need to run a import script before using the app! Uploading and processing now happens in the app itself.
-- Added a nice overview of all your beer types, showing the lowest and highest rating for each.
-- New map has been added, it displays the countries you had beer from. This is still work in progress and country names from Untappd don't always match with MapBox, so please let me know if you're missing countries on your map.
-- Leafjet js is replaced with MapBox, because I'm working on a map that highlights the brewery countries. Make sure to add your key to the .env file.
+- See above, this list will appear again in the future
 
 ## Future wishes
 
 - Make this into an actual web app so you don't have to run it yourself.
-- A sortable dashboard where you can toggle certain data.
 
 ## Contributing
 
@@ -99,3 +105,6 @@ Contributions are welcome via pull requests! Please make sure to adhere to the p
 ## License
 
 This project is licensed under the MIT License.
+
+![image](https://github.com/sjaakbanaan/untappd-data-visualised/assets/2773301/389514dd-710d-4671-9195-cbb62189c191)
+
