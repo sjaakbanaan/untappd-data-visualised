@@ -12,6 +12,8 @@ import DateSelector from './DateSelector.jsx';
 import YearFilterButtons from './YearFilterButtons.jsx';
 import DashboardHeader from './DashboardHeader.jsx';
 import BeerTypeChart from '../Charts/BeerTypeChart/BeerTypeChart.jsx';
+import Nouislider from 'nouislider-react';
+import 'nouislider/distribute/nouislider.css';
 
 import { filterBeerData, getDefaultStartDate, getDefaultEndDate } from '../../utils/';
 
@@ -65,6 +67,16 @@ const Dashboard = () => {
 
   return (
     <>
+      <Nouislider
+        accessibility
+        range={{ min: 2014, max: 2024 }}
+        start={[2023, 2024]}
+        step={1}
+        pips={{ mode: 'count', values: 5 }}
+        clickablePips
+        tooltips
+        connect
+      />
       <DateSelector
         beerData={beerData}
         filterDateRange={filterDateRange}
