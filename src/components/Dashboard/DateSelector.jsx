@@ -1,8 +1,5 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable jsx-a11y/label-has-for */
 import { useEffect, useState } from 'react';
 const DateSelector = ({ beerData, filterDateRange, setFilterDateRange }) => {
-  // console.log(beerData);
   const [formattedEarliestDate, setFormattedEarliestDate] = useState('');
   const [formattedLatestDate, setFormattedLatestDate] = useState('');
 
@@ -26,7 +23,6 @@ const DateSelector = ({ beerData, filterDateRange, setFilterDateRange }) => {
 
   return (
     <div>
-      <label className="block text-white text-sm font-bold mb-2">Drank between</label>
       <div className="grid md:grid-cols-2 gap-4">
         <input
           type="date"
