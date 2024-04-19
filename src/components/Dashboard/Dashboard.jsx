@@ -65,15 +65,15 @@ const Dashboard = () => {
 
   return (
     <>
-      <DateSelector
-        beerData={beerData}
-        filterDateRange={filterDateRange}
-        setFilterDateRange={setFilterDateRange}
-      />
       {filteredData && filteredData.length > 0 ? (
         <>
           <div className="rounded shadow-md">
             <YearFilterButtons
+              beerData={beerData}
+              filterDateRange={filterDateRange}
+              setFilterDateRange={setFilterDateRange}
+            />
+            <DateSelector
               beerData={beerData}
               filterDateRange={filterDateRange}
               setFilterDateRange={setFilterDateRange}
