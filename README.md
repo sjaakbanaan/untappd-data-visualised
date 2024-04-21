@@ -1,12 +1,6 @@
 # Untappd Data Visualised v2.0
 
-### Good news! Soon you'll be able to run this from a web app instead of running it locally! More on this ASAP.
-
-## What's new in v2?
-- There's no longer a need to run a import script before using the app! Uploading and processing now happens in the app itself!;
-- Added a nice overview of all your beer types (beer type apprecation list), showing the lowest and highest rating for each;
-- Pagination added on the overview part, the 'show overview' button has been removed;
-- UI improvements, mostly consistency. And some small bug fixes.
+### Checkout the releases page for update notes
 
 ![image](https://github.com/sjaakbanaan/untappd-data-visualised/assets/2773301/adff1ca7-4638-4de3-a585-c2fb8852e4b9)
 
