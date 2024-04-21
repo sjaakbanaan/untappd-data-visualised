@@ -1,6 +1,6 @@
 # Untappd Data Visualised v2.0
 
-### Good news! Soon you'll able to run this from a web app instead of running it locally! More on this ASAP.
+### Good news! Soon you'll be able to run this from a web app instead of running it locally! More on this ASAP.
 
 ## What's new in v2?
 - There's no longer a need to run a import script before using the app! Uploading and processing now happens in the app itself!;
