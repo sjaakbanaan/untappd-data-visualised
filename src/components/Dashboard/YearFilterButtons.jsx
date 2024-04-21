@@ -18,7 +18,7 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
         <div className="block">
           <button
             key="set-all-time"
-            className={`shadow w-full border rounded py-2 px-3 mb-4 ${
+            className={`transition-colors duration-300 shadow w-full border rounded py-2 px-3 mb-4 ${
               filterDateRange?.start === getDefaultStartDate() &&
               filterDateRange?.end == getDefaultEndDate()
                 ? 'bg-yellow-500 text-gray-900 border-yellow-500'
@@ -37,7 +37,7 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
         <div className="block">
           <button
             key="set-all-time"
-            className={`shadow w-full border rounded py-2 px-3 mb-4 ${
+            className={`transition-colors duration-300 shadow w-full border rounded py-2 px-3 mb-4 ${
               filterDateRange?.start === `${uniqueDates[0]}` &&
               filterDateRange?.end == getDefaultEndDate()
                 ? 'bg-yellow-500 text-gray-900 border-yellow-500'
@@ -57,7 +57,7 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
         {uniqueYears.map((year, i) => (
           <div className="block" key={i}>
             <button
-              className={`shadow w-full border rounded py-2 px-3 mb-4 transition-colors duration-300 ${
+              className={`transition-colors duration-300 shadow w-full border rounded py-2 px-3 mb-4 ${
                 // set active state, with an exception for the current year, because then the end value fot filterDateRange is not `${year}-12-31` but getDefaultEndDate():
                 (filterDateRange?.start === `${year}-01-01` &&
                   filterDateRange?.end === `${year}-12-31`) ||
