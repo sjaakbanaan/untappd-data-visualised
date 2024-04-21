@@ -51,7 +51,7 @@ const Pagination = ({
       {startPage > 1 && (
         <button
           key={1}
-          className="bg-gray-800 text-white hover:bg-gray-700 transition-colors duration-300 my-2 py-2 px-3 mx-2 rounded"
+          className="transition-colors duration-300 bg-gray-800 text-white hover:bg-gray-700 my-2 py-2 px-3 mx-2 rounded"
           onClick={() => handlePageNumbers(1)}
           title="go to 1"
         >
@@ -78,7 +78,7 @@ const Pagination = ({
       {endPage < totalPages && (
         <button
           key={totalPages}
-          className="bg-gray-800 text-white hover:bg-gray-700 transition-colors duration-300 my-2 py-2 px-3 mx-2 rounded"
+          className="transition-colors duration-300 bg-gray-800 text-white hover:bg-gray-700 my-2 py-2 px-3 mx-2 rounded"
           onClick={() => handlePageNumbers(totalPages)}
           title={`go to ${totalPages}`}
         >
