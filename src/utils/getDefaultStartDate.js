@@ -1,4 +1,6 @@
-// Function to get the default end date
+// Function to get the default end date, which is 6 months back
 export const getDefaultStartDate = () => {
-  return new Date(new Date().getFullYear(), 0, 1).toLocaleDateString();
+  const currentDate = new Date();
+  currentDate.setMonth(currentDate.getMonth() - 6);
+  return currentDate.toISOString().split('T')[0];
 };

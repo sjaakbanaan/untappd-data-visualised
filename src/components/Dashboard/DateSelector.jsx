@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 const DateSelector = ({ beerData, filterDateRange, setFilterDateRange }) => {
   const [formattedEarliestDate, setFormattedEarliestDate] = useState('');
   const [formattedLatestDate, setFormattedLatestDate] = useState('');
+  const [startButtonFlicker, setStartButtonFlicker] = useState('');
 
   // Calculate the minimum start date
   useEffect(() => {
@@ -21,26 +22,34 @@ const DateSelector = ({ beerData, filterDateRange, setFilterDateRange }) => {
     }
   }, [beerData]);
 
+  const handleInputChange = (field, value) => {
+    setFilterDateRange({ ...filterDateRange, [field]: value });
+  };
+
+  useEffect(() => {
+    setStartButtonFlicker('');
+    // Adding a small delay before re-adding the class to trigger the animation
+    setTimeout(() => {
+      setStartButtonFlicker('animate-lightup');
+    }, 100);
+  }, [filterDateRange.start, filterDateRange.end]);
+
   return (
     <div>
-      <div className="grid md:grid-cols-2 gap-4">
+      <div className="grid md:grid-cols-2 mb-8 gap-4">
         <input
           type="date"
-          className="shadow appearance-none bg-gray-900 border rounded py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+          className={`shadow appearance-none bg-gray-900 border rounded py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline ${startButtonFlicker}`}
           value={filterDateRange.start}
-          onChange={(e) =>
-            setFilterDateRange({ ...filterDateRange, start: e.target.value })
-          }
+          onChange={(e) => handleInputChange('start', e.target.value)}
           min={formattedEarliestDate}
           required
         />
         <input
           type="date"
-          className="shadow before:text-white appearance-none border rounded py-2 px-3 bg-gray-900 text-white leading-tight focus:outline-none focus:shadow-outline"
+          className={`shadow before:text-white appearance-none border rounded py-2 px-3 bg-gray-900 text-white leading-tight focus:outline-none focus:shadow-outline ${startButtonFlicker}`}
           value={filterDateRange.end}
-          onChange={(e) =>
-            setFilterDateRange({ ...filterDateRange, end: e.target.value })
-          }
+          onChange={(e) => handleInputChange('end', e.target.value)}
           max={formattedLatestDate}
           required
         />
