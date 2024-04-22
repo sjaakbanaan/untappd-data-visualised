@@ -2,6 +2,7 @@
   "name": "untappd-data-visualised",
   "version": "2.0.0",
   "private": false,
+  "type": "module",
   "dependencies": {
     "autoprefixer": "^10.4.17",
     "chart.js": "^4.4.1",
