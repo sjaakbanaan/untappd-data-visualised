@@ -3,7 +3,7 @@ import { getBarChartTopBottomData } from '../../../utils';
 import BeerTypeMinMax from './BeerTypeMinMax.jsx';
 
 const BeerTypeChart = ({ beerData }) => {
-  const [listToggle, setListToggle] = useState(false);
+  const [listToggle, setListToggle] = useState(true);
   const dataList = getBarChartTopBottomData(beerData);
 
   return (

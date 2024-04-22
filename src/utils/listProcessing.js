@@ -17,13 +17,16 @@ export const processTopBeers = (beerData, scoreType) => {
   });
 
   // Filter the formatted data to keep only items with the highest value for each beer ID
-  const uniqueFormattedData = formattedData.filter((item) => {
-    return item.value === highestValuesMap.get(item.bid);
-  });
-
-  // Sort the unique formatted data by value in descending order
-  const sortedData = uniqueFormattedData.sort((a, b) => b.value - a.value);
-
+  const sortedData = formattedData
+    .reduce((acc, current) => {
+      const existingItem = acc.find((item) => item.bid === current.bid);
+      if (!existingItem || current.value > existingItem.value) {
+        acc = acc.filter((item) => item.bid !== current.bid);
+        acc.push(current);
+      }
+      return acc;
+    }, [])
+    .sort((a, b) => b.value - a.value);
   // Get the top 10 items
   const processedList = sortedData.slice(0, 10);
 

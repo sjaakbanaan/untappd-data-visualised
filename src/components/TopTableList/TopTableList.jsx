@@ -57,7 +57,7 @@ const TopTableList = ({ beerData }) => {
       dataType: 'topByRating',
       scoreType: 'brewery_name',
       key: 'breweryRatingGlobal',
-      title: 'Top 10 nreweries by rating (global)',
+      title: 'Top 10 breweries by rating (global)',
       ratingType: 'global_rating_score',
     },
     {
