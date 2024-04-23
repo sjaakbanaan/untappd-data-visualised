@@ -16,7 +16,7 @@ const DashboardHeader = ({
     (new Date(filterDateRange.end) - new Date(filterDateRange.start)) /
       (1000 * 60 * 60 * 24);
   return (
-    <div className="md:flex md:items-center mt-10 mb-6">
+    <div className="md:flex md:items-center mt-10 md:mb-6">
       <h2 className="text-2xl font-bold">
         {totalBeerCount} beers <span className="text-gray-400">/</span>{' '}
         {totalUniqueBeerCount} uniques{' '}
