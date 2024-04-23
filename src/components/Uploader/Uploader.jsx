@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 import { useNavigate } from 'react-router-dom';
 
 import { useDropzone } from 'react-dropzone';
@@ -10,7 +10,7 @@ import { DataContext } from '../../DataContext';
 const Uploader = () => {
   ReactGA.send({
     hitType: 'pageview',
-    page: '/',
+    page: '/uploader',
     title: 'Uploader',
   });
   const { setBeerData } = useContext(DataContext);
