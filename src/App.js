@@ -1,4 +1,6 @@
 import { useContext } from 'react';
+import ReactGA from 'react-ga';
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { DataContext } from './DataContext';
 import Header from './components/Header.jsx';
@@ -7,6 +9,8 @@ import Dashboard from './components/Dashboard/Dashboard.jsx';
 import Uploader from './components/Uploader/Uploader.jsx';
 
 const App = () => {
+  // Initialize React Ga with your tracking ID
+  ReactGA.initialize('G-SFBLBDE0LG');
   const { beerData } = useContext(DataContext);
   return (
     <Router>

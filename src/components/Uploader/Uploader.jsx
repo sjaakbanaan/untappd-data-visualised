@@ -1,11 +1,18 @@
 import { useState, useEffect, useContext } from 'react';
+import ReactGA from 'react-ga';
 import { useNavigate } from 'react-router-dom';
+
 import { useDropzone } from 'react-dropzone';
 import { useUploadedJsonUpdater } from '../../utils/';
 import UploadForm from './UploadForm.jsx';
 import { DataContext } from '../../DataContext';
 
 const Uploader = () => {
+  ReactGA.send({
+    hitType: 'pageview',
+    page: '/',
+    title: 'Uploader',
+  });
   const { setBeerData } = useContext(DataContext);
   const { manipulateData } = useUploadedJsonUpdater(); // Import and use the hook
   const [userDetails, setUserDetails] = useState({

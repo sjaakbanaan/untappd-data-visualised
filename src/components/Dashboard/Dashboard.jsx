@@ -1,4 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
+import ReactGA from 'react-ga';
+
 import { Link } from 'react-router-dom';
 import VenueMap from '../Maps/VenueMap.jsx';
 import BreweryMap from '../Maps/BreweryMap.jsx';
@@ -54,6 +56,12 @@ const useDashboardData = () => {
 };
 
 const Dashboard = () => {
+  ReactGA.send({
+    hitType: 'pageview',
+    page: '/',
+    title: 'Dashboard',
+  });
+
   const {
     beerData,
     filteredData,
