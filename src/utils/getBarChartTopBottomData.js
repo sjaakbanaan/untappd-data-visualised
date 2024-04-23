@@ -78,7 +78,7 @@ export const getBarChartTopBottomData = (beerData) => {
     });
 
     const sortedTopBeerTypes = removeNullItemsFromArray(topBeerTypeStatistics).sort(
-      (a, b) => a.min + a.max - (b.min + b.max)
+      (a, b) => b.min + b.max - (a.min + a.max)
     );
 
     return sortedTopBeerTypes;

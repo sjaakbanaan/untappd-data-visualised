@@ -1,10 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getBarChartTopBottomData } from '../../../utils';
 import BeerTypeMinMax from './BeerTypeMinMax.jsx';
 
 const BeerTypeChart = ({ beerData }) => {
-  const [listToggle, setListToggle] = useState(true);
   const dataList = getBarChartTopBottomData(beerData);
+  const [listToggle, setListToggle] = useState(true);
+  const [toggledDataList, setToggledDataList] = useState({});
+
+  useEffect(() => {
+    if (listToggle) {
+      setToggledDataList(dataList.slice(0, 10));
+    } else {
+      setToggledDataList(dataList);
+    }
+  }, [listToggle]);
 
   return (
     <div className="p-4">
@@ -12,19 +21,19 @@ const BeerTypeChart = ({ beerData }) => {
         Beer type appreciation <span className="text-gray-400">({dataList.length})</span>
       </h2>
 
-      <button
-        className="transition-colors duration-300 shadow border rounded py-2 px-3 mb-4 text-white bg-gray-900 hover:bg-gray-700"
-        type="button"
-        onClick={() => setListToggle(listToggle ? false : true)}
-      >
-        {listToggle ? 'show all' : 'show less'}
-      </button>
-
-      {dataList.length > 1 && (
-        <ul
-          className={`m-0 p-0 list-none flex flex-col text-white divide-y divide-gray-700 transition-all duration-300 overflow-hidden ${listToggle ? 'max-h-[330px]' : 'max-h-[10000px]'}`}
+      {dataList.length > 10 && (
+        <button
+          className="transition-colors duration-300 shadow border rounded py-2 px-3 mb-4 text-white bg-gray-900 hover:bg-gray-700"
+          type="button"
+          onClick={() => setListToggle(listToggle ? false : true)}
         >
-          {dataList.map((item) => (
+          {listToggle ? 'show all' : 'show less'}
+        </button>
+      )}
+
+      {toggledDataList.length > 1 && (
+        <ul className="m-0 p-0 list-none flex flex-col text-white divide-y divide-gray-700 transition-all duration-300">
+          {toggledDataList.map((item) => (
             <li className="flex items-center" key={item.key}>
               <div className="grid w-full grid-cols-500 relative">
                 <div
