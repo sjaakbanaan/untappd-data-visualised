@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <div className="p-3 text-center text-yellow-500 mt-10">
+    <div className="p-3 text-center text-yellow-500 my-5 md:my-10">
       Created by{' '}
       <a href="https://github.com/sjaakbanaan/" target="_blank">
         sjaakbanaan

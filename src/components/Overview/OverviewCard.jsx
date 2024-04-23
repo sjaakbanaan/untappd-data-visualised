@@ -7,13 +7,13 @@ const OverviewCard = ({ item }) => {
       style={{
         backgroundImage: `url(${item.photo_url})`,
       }}
-      className="block shadow-md bg-center bg-cover transition-transform duration-500 transform hover:scale-110 rounded-lg overflow-hidden hover:z-1"
+      className="block shadow-md bg-center bg-cover transition-transform duration-500 transform hover:scale-110 md:rounded-lg overflow-hidden hover:z-1"
     >
       <a
         href={item.checkin_url}
         target="_blank"
         rel="noopener noreferrer"
-        className="p-4 pb-8 block bg-gray-800 min-h-96 h-full rounded-lg bg-opacity-50"
+        className="p-4 pb-8 block bg-gray-800 min-h-96 h-full md:rounded-lg bg-opacity-50"
       >
         <h2 className="text-xl text-white font-semibold mb-2">{item.beer_name}</h2>
         <p className="mb-4">{item.brewery_name}</p>

@@ -68,29 +68,31 @@ const Dashboard = () => {
       {filteredData && filteredData.length > 0 ? (
         <>
           <div className="rounded shadow-md">
-            <YearFilterButtons
-              beerData={beerData}
-              filterDateRange={filterDateRange}
-              setFilterDateRange={setFilterDateRange}
-            />
-            <DateSelector
-              beerData={beerData}
-              filterDateRange={filterDateRange}
-              setFilterDateRange={setFilterDateRange}
-            />
-            <OverviewFilters
-              beerData={filteredData}
-              filterOverview={filterOverview}
-              setFilterOverview={setFilterOverview}
-            />
-            <DashboardHeader
-              totalBeerCount={filteredData.length}
-              filterDateRange={filterDateRange}
-              filterOverview={filterOverview}
-              beerData={filteredData}
-              setFilterOverview={setFilterOverview}
-            />
-            <div className="container mx-auto mt-4 p-2 md:p-8 bg-gray-800 rounded shadow-md">
+            <div class="container mx-auto p-4 md:p-0">
+              <YearFilterButtons
+                beerData={beerData}
+                filterDateRange={filterDateRange}
+                setFilterDateRange={setFilterDateRange}
+              />
+              <DateSelector
+                beerData={beerData}
+                filterDateRange={filterDateRange}
+                setFilterDateRange={setFilterDateRange}
+              />
+              <OverviewFilters
+                beerData={filteredData}
+                filterOverview={filterOverview}
+                setFilterOverview={setFilterOverview}
+              />
+              <DashboardHeader
+                totalBeerCount={filteredData.length}
+                filterDateRange={filterDateRange}
+                filterOverview={filterOverview}
+                beerData={filteredData}
+                setFilterOverview={setFilterOverview}
+              />
+            </div>
+            <div className="container mx-auto mt-4 p-2 md:p-8 bg-gray-800 md:rounded shadow-md">
               <div className="grid lg:grid-cols-2 gap-8 text-white">
                 <PieChartList beerData={filteredData} />
                 <BarChartList beerData={filteredData} />

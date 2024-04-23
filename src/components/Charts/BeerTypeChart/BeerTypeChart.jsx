@@ -32,7 +32,7 @@ const BeerTypeChart = ({ beerData }) => {
       )}
 
       {toggledDataList.length > 1 && (
-        <ul className="m-0 p-0 list-none flex flex-col text-white divide-y divide-gray-700 transition-all duration-300">
+        <ul className="m-0 p-0 list-none flex flex-col text-white divide-y divide-gray-700 transition-all duration-300 overflow-hidden">
           {toggledDataList.map((item) => (
             <li className="flex items-center" key={item.key}>
               <div className="grid w-full grid-cols-500 relative">
@@ -41,10 +41,10 @@ const BeerTypeChart = ({ beerData }) => {
                     gridColumnStart: item && item.min + 1,
                     gridColumnEnd: item && item.max + 1,
                   }}
-                  className="bg-yellow-500 rounded-lg whitespace-nowrap h-8 text-center flex items-center text-xs leading-6"
+                  className="md:bg-yellow-500 rounded-lg whitespace-nowrap h-8 text-center flex items-center text-xs leading-6"
                 >
                   <BeerTypeMinMax
-                    spanClass="mx-1 bg-gray-800 px-3 rounded-lg"
+                    spanClass="mx-1 bg-gray-800 px-3 rounded-lg hidden md:block"
                     item={item}
                     showRating
                   />

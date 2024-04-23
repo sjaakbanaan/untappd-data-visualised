@@ -78,7 +78,7 @@ const Uploader = () => {
   ));
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-gray-800 text-white shadow-md rounded-lg">
+    <div className="max-w-3xl mx-auto p-6 bg-gray-800 text-white shadow-md md:rounded-lg">
       <UploadForm userDetails={userDetails} handleInputChange={handleInputChange} />
       <div
         {...getRootProps()}
