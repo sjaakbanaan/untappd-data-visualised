@@ -14,6 +14,9 @@ import { isFilterOverviewSet } from './isFilterOverviewSet';
 import { useCounter } from './useCounter';
 import { useUploadedJsonUpdater } from './useUploadedJsonUpdater';
 import { getLocalStorageData } from './getLocalStorageData';
+import { statsCountTotal } from './statsCountTotal';
+import { statsCountUnique } from './statsCountUnique';
+import { statsCountUniqueFriends } from './statsCountUniqueFriends';
 
 export {
   formatDate,
@@ -32,4 +35,7 @@ export {
   useCounter,
   useUploadedJsonUpdater,
   getLocalStorageData,
+  statsCountTotal,
+  statsCountUnique,
+  statsCountUniqueFriends,
 };

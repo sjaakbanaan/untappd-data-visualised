@@ -10,6 +10,7 @@ import OverviewFilters from '../Overview/OverviewFilters.jsx';
 import PieChartList from '../Charts/PieChartList.jsx';
 import BarChartList from '../Charts/BarChartList.jsx';
 import LineChart from '../Charts/LineChart.jsx';
+import BasicStats from '../BasicStats/BasicStats.jsx';
 import DateSelector from './DateSelector.jsx';
 import YearFilterButtons from './YearFilterButtons.jsx';
 import DashboardHeader from './DashboardHeader.jsx';
@@ -102,6 +103,7 @@ const Dashboard = () => {
             </div>
             <div className="container mx-auto mt-4 p-2 md:p-8 bg-gray-800 md:rounded shadow-md">
               <div className="grid lg:grid-cols-2 gap-8 text-white">
+                <BasicStats beerData={filteredData} filterDateRange={filterDateRange} />
                 <PieChartList beerData={filteredData} />
                 <BarChartList beerData={filteredData} />
                 <TopTableList beerData={filteredData} />
