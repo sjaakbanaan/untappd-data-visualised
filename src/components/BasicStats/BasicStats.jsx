@@ -9,7 +9,7 @@ import {
   getDefaultEndDate,
 } from '../../utils';
 
-const BasicStats = ({ beerData, filterDateRange }) => {
+const BasicStats = ({ beerData, fullBeerData, filterDateRange }) => {
   const totalUniqueBeerCount = beerData && filterDuplicateBeers(beerData)?.length;
 
   const totalDays =
@@ -28,9 +28,13 @@ const BasicStats = ({ beerData, filterDateRange }) => {
   const beerTypes = getBarChartTopBottomData(beerData);
   const fullDateRange = checkFullDateRange(
     getDefaultEndDate(),
-    beerData,
+    fullBeerData,
     filterDateRange
   );
+
+  const totalAndAvg = (totalVal) => {
+    return `${totalVal} (${(totalVal / beerData.length).toFixed(2)} per checkin)`;
+  };
 
   const stats = [
     {
@@ -57,19 +61,19 @@ const BasicStats = ({ beerData, filterDateRange }) => {
     },
     {
       key: 'Total photos',
-      value: `${totalPhotos} (${(totalPhotos / beerData.length).toFixed(2)} per checkin)`,
+      value: totalAndAvg(totalPhotos),
     },
     {
       key: 'Total toasts',
-      value: `${totalToasts} (${(totalToasts / beerData.length).toFixed(2)} per checkin)`,
+      value: totalAndAvg(totalToasts),
     },
     {
       key: 'Total comments',
-      value: `${totalComments} (${(totalComments / beerData.length).toFixed(2)} per checkin)`,
+      value: totalAndAvg(totalComments),
     },
     {
       key: 'Total locations',
-      value: `${totalLocations} (${(totalLocations / beerData.length).toFixed(2)} per checkin)`,
+      value: totalAndAvg(totalLocations),
     },
     {
       key: 'Total cities drank in',
@@ -91,7 +95,7 @@ const BasicStats = ({ beerData, filterDateRange }) => {
 
   return (
     <div className="p-4">
-      <h2 className="text-lg font-semibold mb-6">Basic Statistics</h2>
+      <h2 className="text-lg font-semibold mb-6">Basic statistics</h2>
       <ul className="divide-y divide-gray-700">
         {stats.length > 0 &&
           stats.map(
@@ -112,6 +116,7 @@ const BasicStats = ({ beerData, filterDateRange }) => {
 
 BasicStats.propTypes = {
   beerData: PropTypes.array.isRequired,
+  fullBeerData: PropTypes.array.isRequired,
 };
 
 export default BasicStats;

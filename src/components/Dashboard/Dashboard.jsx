@@ -103,7 +103,11 @@ const Dashboard = () => {
             </div>
             <div className="container mx-auto mt-4 p-2 md:p-8 bg-gray-800 md:rounded shadow-md">
               <div className="grid lg:grid-cols-2 gap-8 text-white">
-                <BasicStats beerData={filteredData} filterDateRange={filterDateRange} />
+                <BasicStats
+                  beerData={filteredData}
+                  fullBeerData={beerData}
+                  filterDateRange={filterDateRange}
+                />
                 <PieChartList beerData={filteredData} />
                 <BarChartList beerData={filteredData} />
                 <TopTableList beerData={filteredData} />
