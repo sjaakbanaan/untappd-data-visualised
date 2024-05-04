@@ -1,4 +1,4 @@
-# Untappd Data Visualised v2.0
+# Untappd Data Visualised v2.1.0
 
 ### Checkout the releases page for update notes
 
@@ -41,10 +41,11 @@ After setting filters, the following lists are presented in either a chart or li
 - Frequency: Beers per day
 - Frequency: Rating scores
 - Frequency: Serving type
-- Map displaying venues checked-in
-- NEW: Map displaying brewery countries
+- displaying venues checked-in
+- Map displaying brewery countries
 - NEW: Cumulative beer count (year)
 - NEW: beer type apprecation list
+- NEW: basic statistics
 and more!
 
 ```
@@ -84,7 +85,7 @@ This will open the app on localhost:3000 in your default web browser. Fill in th
 
 ## Recent changes
 
-- See above, this list will appear again in the future
+- 04-05-2024: Added a basic statistics block as first tile on the dashboard
 
 ## Future wishes
 

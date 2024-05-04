@@ -17,6 +17,7 @@ import { getLocalStorageData } from './getLocalStorageData';
 import { statsCountTotal } from './statsCountTotal';
 import { statsCountUnique } from './statsCountUnique';
 import { statsCountUniqueFriends } from './statsCountUniqueFriends';
+import { checkFullDateRange } from './checkFullDateRange';
 
 export {
   formatDate,
@@ -38,4 +39,5 @@ export {
   statsCountTotal,
   statsCountUnique,
   statsCountUniqueFriends,
+  checkFullDateRange,
 };

@@ -1,15 +1,16 @@
-import { getDefaultStartDate, getDefaultEndDate } from '../../utils/';
+import { getDefaultStartDate, getDefaultEndDate, checkFullDateRange } from '../../utils/';
 
 const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) => {
   // Extract unique years from beerData
   const uniqueYears = [
     ...new Set(beerData.map((item) => new Date(item.created_at).getFullYear())),
   ];
-  const uniqueDates = [
-    ...new Set(
-      beerData.map((item) => new Date(item.created_at).toISOString().slice(0, 10))
-    ),
-  ];
+
+  const fullDateRange = checkFullDateRange(
+    getDefaultEndDate(),
+    beerData,
+    filterDateRange
+  );
 
   return (
     <div className="mb-8 md:mb-0">
@@ -38,14 +39,13 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
           <button
             key="set-all-time"
             className={`transition-colors duration-300 shadow w-full border rounded py-2 px-3 mb-0 md:mb-4 ${
-              filterDateRange?.start === `${uniqueDates[0]}` &&
-              filterDateRange?.end == getDefaultEndDate()
+              fullDateRange[0]
                 ? 'bg-yellow-500 text-gray-900 border-yellow-500'
                 : 'text-white bg-gray-900 hover:bg-gray-700'
             }`}
             onClick={() =>
               setFilterDateRange({
-                start: `${uniqueDates[0]}`,
+                start: `${fullDateRange[1]}`,
                 end: getDefaultEndDate(),
               })
             }

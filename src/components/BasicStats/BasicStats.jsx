@@ -5,6 +5,8 @@ import {
   statsCountTotal,
   statsCountUnique,
   statsCountUniqueFriends,
+  checkFullDateRange,
+  getDefaultEndDate,
 } from '../../utils';
 
 const BasicStats = ({ beerData, filterDateRange }) => {
@@ -24,8 +26,23 @@ const BasicStats = ({ beerData, filterDateRange }) => {
   const totalComments = statsCountTotal(beerData, 'total_comments', (item) => item !== 0);
   const totalUniqueFriends = statsCountUniqueFriends(beerData, 'tagged_friends');
   const beerTypes = getBarChartTopBottomData(beerData);
+  const fullDateRange = checkFullDateRange(
+    getDefaultEndDate(),
+    beerData,
+    filterDateRange
+  );
 
   const stats = [
+    {
+      key: 'Years active',
+      value: (totalDays / 365).toFixed(1),
+      hide: !fullDateRange[0],
+    },
+    {
+      key: 'Days active',
+      value: totalDays,
+      hide: !fullDateRange[0],
+    },
     {
       key: 'Total beers',
       value: `${beerData.length} (${(beerData.length / totalDays).toFixed(2)} per day)`,
@@ -33,14 +50,6 @@ const BasicStats = ({ beerData, filterDateRange }) => {
     {
       key: 'Total unique beers',
       value: `${totalUniqueBeerCount} (${((totalUniqueBeerCount / beerData.length) * 100).toFixed(1)}%)`,
-    },
-    {
-      key: 'Years active',
-      value: (totalDays / 365).toFixed(1),
-    },
-    {
-      key: 'Days active',
-      value: totalDays,
     },
     {
       key: 'Different beer styles',
@@ -85,14 +94,17 @@ const BasicStats = ({ beerData, filterDateRange }) => {
       <h2 className="text-lg font-semibold mb-6">Basic Statistics</h2>
       <ul className="divide-y divide-gray-700">
         {stats.length > 0 &&
-          stats.map((item, i) => (
-            <li key={i} className="py-2">
-              <div className="flex items-center justify-between">
-                {item.key}
-                <span className="text-gray-400 whitespace-nowrap">{item.value}</span>
-              </div>
-            </li>
-          ))}
+          stats.map(
+            (item, i) =>
+              !item.hide && (
+                <li key={i} className="py-2">
+                  <div className="flex items-center justify-between">
+                    {item.key}
+                    <span className="text-gray-400 whitespace-nowrap">{item.value}</span>
+                  </div>
+                </li>
+              )
+          )}
       </ul>
     </div>
   );
