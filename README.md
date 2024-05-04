@@ -1,4 +1,4 @@
-# Untappd Data Visualised v2.1.0
+# Untappd Data Visualised v2.2.0
 
 ### Checkout the releases page for update notes
 
@@ -85,6 +85,7 @@ This will open the app on localhost:3000 in your default web browser. Fill in th
 
 ## Recent changes
 
+- 04-05-2024: Added sorting filters to the beer overview
 - 04-05-2024: Added a basic statistics block as first tile on the dashboard
 
 ## Future wishes

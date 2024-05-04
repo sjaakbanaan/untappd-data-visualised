@@ -1,6 +1,6 @@
 {
   "name": "untappd-data-visualised",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "private": false,
   "dependencies": {
     "autoprefixer": "^10.4.17",

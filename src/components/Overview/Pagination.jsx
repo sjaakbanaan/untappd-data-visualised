@@ -38,7 +38,7 @@ const Pagination = ({
   }
 
   return (
-    <div className="flex justify-center flex-wrap mt-10">
+    <div className="flex justify-center flex-wrap mt-4">
       <button
         className={`${
           currentPage === 1 ? 'cursor-not-allowed' : 'hover:bg-gray-700'
