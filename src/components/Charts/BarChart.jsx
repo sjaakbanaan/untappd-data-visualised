@@ -6,6 +6,7 @@ import {
   getBarChartYearData,
   getBarChartMonthData,
   getBarChartDayData,
+  getBarChartHourData,
 } from '../../utils/';
 
 const BarChart = ({ beerData, dataType, trailingChar }) => {
@@ -16,11 +17,14 @@ const BarChart = ({ beerData, dataType, trailingChar }) => {
         dataList = getBarChartYearData(beerData);
         sortByName = true;
         break;
+      case 'beers_per_month':
+        dataList = getBarChartMonthData(beerData);
+        break;
       case 'beers_per_day':
         dataList = getBarChartDayData(beerData);
         break;
-      case 'beers_per_month':
-        dataList = getBarChartMonthData(beerData);
+      case 'beers_per_hour':
+        dataList = getBarChartHourData(beerData);
         break;
       default:
         dataList = getBarChartData(beerData, dataType);

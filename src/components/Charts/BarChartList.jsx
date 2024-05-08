@@ -10,6 +10,10 @@ const BarChartList = ({ beerData }) => {
       trailing_char: '%',
     },
     {
+      title: 'Beers per hour',
+      name: 'beers_per_hour',
+    },
+    {
       title: 'Beers per day',
       name: 'beers_per_day',
     },

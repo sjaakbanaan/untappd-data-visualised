@@ -18,6 +18,7 @@ import { statsCountTotal } from './statsCountTotal';
 import { statsCountUnique } from './statsCountUnique';
 import { statsCountUniqueFriends } from './statsCountUniqueFriends';
 import { checkFullDateRange } from './checkFullDateRange';
+import { getBarChartHourData } from './getBarChartHourData';
 
 export {
   formatDate,
@@ -30,6 +31,7 @@ export {
   getBarChartYearData,
   getBarChartMonthData,
   getBarChartDayData,
+  getBarChartHourData,
   getBarChartTopBottomData,
   normalizeString,
   isFilterOverviewSet,
