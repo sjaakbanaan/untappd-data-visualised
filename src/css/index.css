@@ -6,6 +6,12 @@
   html {
     @apply bg-gray-900;
   }
+  .customModal {
+    @apply bg-gray-800 text-white py-10 max-w-[90vw] px-8 !important;
+    .react-responsive-modal-closeButton svg path {
+      @apply fill-white;
+    }
+  }
 }
 
 body {

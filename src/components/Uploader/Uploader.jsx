@@ -8,11 +8,14 @@ import UploadForm from './UploadForm.jsx';
 import { DataContext } from '../../DataContext';
 
 const Uploader = () => {
-  ReactGA.send({
-    hitType: 'pageview',
-    page: '/uploader',
-    title: 'Uploader',
+  useEffect(() => {
+    ReactGA.send({
+      hitType: 'pageview',
+      page: '/uploader',
+      title: 'Uploader',
+    });
   });
+
   const { setBeerData } = useContext(DataContext);
   const { manipulateData } = useUploadedJsonUpdater(); // Import and use the hook
   const [userDetails, setUserDetails] = useState({

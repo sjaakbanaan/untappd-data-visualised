@@ -17,9 +17,13 @@ export const getBarChartDayData = (beerData) => {
     const dayName = daysOfWeek[dayIndex];
 
     if (!checkInsPerDay[dayName]) {
-      checkInsPerDay[dayName] = 1;
+      checkInsPerDay[dayName] = {
+        value: 1,
+        items: [beer], // Initialize items array with the beer name
+      };
     } else {
-      checkInsPerDay[dayName]++;
+      checkInsPerDay[dayName].value++;
+      checkInsPerDay[dayName].items.push(beer); // Add beer name to items array
     }
   });
 
@@ -34,6 +38,6 @@ export const getBarChartDayData = (beerData) => {
   // Map the ordered days to an array of objects
   return orderedDays.map((dayName) => ({
     name: dayName,
-    value: checkInsPerDay[dayName] || 0, // Handle cases where there are no check-ins for a day
+    ...checkInsPerDay[dayName], // Spread the count and items from checkInsPerDay
   }));
 };

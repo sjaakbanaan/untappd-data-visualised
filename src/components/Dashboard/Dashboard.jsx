@@ -57,10 +57,12 @@ const useDashboardData = () => {
 };
 
 const Dashboard = () => {
-  ReactGA.send({
-    hitType: 'pageview',
-    page: '/',
-    title: 'Dashboard',
+  useEffect(() => {
+    ReactGA.send({
+      hitType: 'pageview',
+      page: '/uploader',
+      title: 'Uploader',
+    });
   });
 
   const {
@@ -77,7 +79,7 @@ const Dashboard = () => {
       {filteredData && filteredData.length > 0 ? (
         <>
           <div className="rounded shadow-md">
-            <div class="container mx-auto p-4 md:p-0">
+            <div className="container mx-auto p-4 md:p-0">
               <YearFilterButtons
                 beerData={beerData}
                 filterDateRange={filterDateRange}

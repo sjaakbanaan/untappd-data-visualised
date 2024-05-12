@@ -3,7 +3,7 @@ import OverviewCard from './OverviewCard.jsx';
 import Pagination from './Pagination.jsx';
 import Icon from '../Maps/Icon/Icon.jsx';
 
-const Overview = ({ beerData }) => {
+const Overview = ({ beerData, title = 'Beers overview' }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortCriteria, setSortCriteria] = useState('created_at');
   const [sortOrder, setSortOrder] = useState('asc');
@@ -48,11 +48,12 @@ const Overview = ({ beerData }) => {
   return (
     <div className="container relative mx-auto">
       <div className="pt-10 mb-6" ref={overviewRef}>
-        <h2 className="text-2xl text-center font-bold">Beers overview</h2>
-        <div className="flex justify-center mt-10">
+        {title && <h2 className="text-2xl text-center font-bold mb-10">{title}</h2>}
+        <div className="flex justify-center">
           {buttons.length > 1 &&
-            buttons.map((item) => (
+            buttons.map((item, i) => (
               <button
+                key={i}
                 className={`mx-2 transition-colors duration-300 shadow border rounded py-2 px-3 mb-4 flex items-center
                 ${
                   sortCriteria === item.type
