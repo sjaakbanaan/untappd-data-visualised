@@ -1,6 +1,6 @@
 # Untappd Data Visualised v2.2.0
 
-## This is the repo for the web app that can be found here: https:///tappd.online, no need to install anymore!
+## This is the repo for [tappd.online](https:///tappd.online), no need to install anymore!
 
 
 ### Checkout the releases page for update notes
