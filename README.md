@@ -1,5 +1,8 @@
 # Untappd Data Visualised v2.2.0
 
+## This is the repo for the web app that can be found here: https:///tappd.online, no need to install anymore!
+
+
 ### Checkout the releases page for update notes
 
 ![image](https://github.com/sjaakbanaan/untappd-data-visualised/assets/2773301/adff1ca7-4638-4de3-a585-c2fb8852e4b9)
@@ -43,14 +46,14 @@ After setting filters, the following lists are presented in either a chart or li
 - Frequency: Serving type
 - displaying venues checked-in
 - Map displaying brewery countries
-- NEW: Cumulative beer count (year)
+- Cumulative beer count (year)
 - NEW: beer type apprecation list
 - NEW: basic statistics
 and more!
 
 ```
 
-## Getting Started
+## Want to contribute? 
 
 ### Prerequisites
 
@@ -85,6 +88,7 @@ This will open the app on localhost:3000 in your default web browser. Fill in th
 
 ## Recent changes
 
+- 12-05-2024: And we're live! https:///tappd.online
 - 04-05-2024: Added sorting filters to the beer overview
 - 04-05-2024: Added a basic statistics block as first tile on the dashboard
 
