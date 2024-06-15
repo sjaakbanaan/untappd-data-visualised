@@ -34,9 +34,13 @@ After setting filters, the following lists are presented in either a chart or li
 - Tagged friends
 - Breweries by rating
 - Beer types by rating
-- Filter by country drank at
-- Filter by city drank at
-- Filter by brewery
+- Filter by breweries
+- Filter by brewery cities
+- Filter by brewery countries
+- Filter by venues drank at
+- Filter by countries drank at
+- Filter by cities drank at
+- Filter by tagged friends
 - Show checkins on a map
 - Frequency: Beer ABV
 - Frequency: Beers per year
@@ -47,8 +51,8 @@ After setting filters, the following lists are presented in either a chart or li
 - displaying venues checked-in
 - Map displaying brewery countries
 - Cumulative beer count (year)
-- NEW: beer type apprecation list
-- NEW: basic statistics
+- Beer type apprecation list
+- Basic statistics
 and more!
 
 ```
@@ -91,6 +95,7 @@ This will open the app on localhost:3000 in your default web browser. Fill in th
 - 12-05-2024: And we're live! https:///tappd.online
 - 04-05-2024: Added sorting filters to the beer overview
 - 04-05-2024: Added a basic statistics block as first tile on the dashboard
+- 15-06-2024: Added the 'tagged_friends' filter to the overview + bug fixes
 
 ## Future wishes
 
@@ -98,7 +103,7 @@ This will open the app on localhost:3000 in your default web browser. Fill in th
 
 ## Known bugs
 
-- you tell me :)
+- Resetting filters doesn't reset the select box values in UI
 
 ## Contributing
 

@@ -11,17 +11,27 @@ const OverviewFilter = ({
   translate,
 }) => {
   // Function to translate country names
-  console.log('data', splitValues);
-
   const translateToEnglish = (originalName) => {
     const country = countriesData.countries.find((c) => c.original === originalName);
     return country ? country.english : originalName;
   };
+
+  // In case the the returned option is an array, split up the values
+  let formattedOptions = options;
+  if (splitValues) {
+    formattedOptions = [
+      ...new Set(
+        options.flatMap((item) => item.split(',')).filter(Boolean) // This removes any empty strings that may occur from leading commas
+      ),
+    ].sort(); // Sorts the array alphabetically
+  }
+
   // Format options for react-select
-  const selectOptions = options.map((option) => ({
+  const selectOptions = formattedOptions.map((option) => ({
     label: translate ? translateToEnglish(option) : option,
     value: option,
   }));
+
   return (
     <div>
       <label htmlFor={labelPlural} className="block text-white text-sm font-bold mb-2">

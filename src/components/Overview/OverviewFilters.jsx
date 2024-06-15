@@ -43,11 +43,11 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-4">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 my-4">
       {Object.entries(filterOptions).map(([key, options]) => (
         <OverviewFilter
           key={key}
-          translate={key == 'venue_country'}
+          translate={key == 'venue_country' || key == 'brewery_country'}
           splitValues={key == 'tagged_friends'}
           label={`${key.replace('_', ' ')} (${options.length})`}
           labelPlural={`${key.replace('_', ' ')}s`}
