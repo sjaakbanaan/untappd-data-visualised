@@ -18,6 +18,18 @@ const UploadForm = ({ userDetails, handleInputChange }) => {
         Untappd uses their HQ for your home location. Don't worry, this data is only on
         your computer so not saved or shared in anyway.
       </p>
+      <p className="mb-5">
+        More info and instructions can be found on{' '}
+        <a
+          className="underline hover:no-underline"
+          href="https://github.com/sjaakbanaan/untappd-data-visualised/"
+          title="Github repository"
+          target="_blank"
+        >
+          Github
+        </a>
+        .
+      </p>
       <form>
         {/* Map over the fields array to generate input fields */}
         {fields.map((field) => (

@@ -98,7 +98,7 @@ This will open the app on localhost:3000 in your default web browser. Fill in th
 
 ## Known bugs
 
-- Resetting filters doesn't reset the select box values in UI
+- you tell me :)
 
 ## Contributing
 

@@ -9,6 +9,7 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
     venue_name: [],
     venue_city: [],
     venue_country: [],
+    tagged_friends: [],
   });
 
   useEffect(() => {
@@ -20,6 +21,7 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
       'venue_name',
       'venue_city',
       'venue_country',
+      'tagged_friends',
     ];
     const uniqueOptions = {};
 
@@ -46,6 +48,7 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
         <OverviewFilter
           key={key}
           translate={key == 'venue_country'}
+          splitValues={key == 'tagged_friends'}
           label={`${key.replace('_', ' ')} (${options.length})`}
           labelPlural={`${key.replace('_', ' ')}s`}
           options={options}

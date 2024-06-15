@@ -25,10 +25,12 @@ const useDashboardData = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [filterOverview, setFilterOverview] = useState({
     brewery_name: '',
-    venue_country: '',
-    venue_city: '',
-    venue_name: '',
+    brewery_city: '',
     brewery_country: '',
+    venue_name: '',
+    venue_city: '',
+    venue_country: '',
+    tagged_friends: '',
   });
   const [filterDateRange, setFilterDateRange] = useState({
     start: getDefaultStartDate(),

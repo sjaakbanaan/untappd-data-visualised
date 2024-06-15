@@ -9,7 +9,7 @@ const Navigation = () => {
       <ul className="text-xs">
         {pathname == '/upload' ? (
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/">Dashboard</Link>
           </li>
         ) : (
           <li>

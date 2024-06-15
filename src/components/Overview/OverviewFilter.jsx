@@ -2,8 +2,17 @@ import classNames from 'classnames';
 import Select from 'react-select';
 import countriesData from '../../countries.json';
 
-const OverviewFilter = ({ label, labelPlural, options, onChange, translate }) => {
+const OverviewFilter = ({
+  label,
+  labelPlural,
+  options,
+  onChange,
+  splitValues,
+  translate,
+}) => {
   // Function to translate country names
+  console.log('data', splitValues);
+
   const translateToEnglish = (originalName) => {
     const country = countriesData.countries.find((c) => c.original === originalName);
     return country ? country.english : originalName;
