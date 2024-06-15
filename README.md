@@ -65,6 +65,28 @@ and more!
 - An export of your data from Untappd (https://untappd.com/user/xxxx/beers) as JSON.
 - A [MapBox API key](https://account.mapbox.com/). It's free, you should be able to skip the setting up your payment card somehow.
 
+
+![image](https://github.com/sjaakbanaan/untappd-data-visualised/assets/2773301/33e336c0-8539-4988-9388-1699bf1d3aea)
+
+## Recent changes
+
+- 12-05-2024: And we're live! https:///tappd.online
+- 04-05-2024: Added sorting filters to the beer overview
+- 04-05-2024: Added a basic statistics block as first tile on the dashboard
+- 15-06-2024: Added the 'tagged_friends' filter to the overview + bug fixes
+
+## Future wishes
+
+- Make this into an actual web app so you don't have to run it yourself.
+
+## Known bugs
+
+- Resetting filters doesn't reset the select box values in UI
+
+## Contributing
+
+Contributions are welcome via pull requests! Please make sure to adhere to the project's coding standards.
+
 ### Installation:
 
 ```bash
@@ -87,27 +109,6 @@ yarn start # npm run start
 ```
 
 This will open the app on localhost:3000 in your default web browser. Fill in the form and upload your JSON export and set your home data (you can get these values via Google Maps for example).
-
-![image](https://github.com/sjaakbanaan/untappd-data-visualised/assets/2773301/33e336c0-8539-4988-9388-1699bf1d3aea)
-
-## Recent changes
-
-- 12-05-2024: And we're live! https:///tappd.online
-- 04-05-2024: Added sorting filters to the beer overview
-- 04-05-2024: Added a basic statistics block as first tile on the dashboard
-- 15-06-2024: Added the 'tagged_friends' filter to the overview + bug fixes
-
-## Future wishes
-
-- Make this into an actual web app so you don't have to run it yourself.
-
-## Known bugs
-
-- Resetting filters doesn't reset the select box values in UI
-
-## Contributing
-
-Contributions are welcome via pull requests! Please make sure to adhere to the project's coding standards.
 
 ## License
 

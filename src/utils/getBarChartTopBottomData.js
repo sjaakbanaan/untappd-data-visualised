@@ -53,7 +53,6 @@ export const getBarChartTopBottomData = (beerData) => {
       const filteredRatingScores = beerTypeData.map((beer) => beer.rating_score);
       // Calculate lowest and highest rating scores for the current beer type
       const filteredScoresAboveZero = filteredRatingScores.filter((score) => score > 0);
-
       const lowestRatingScore = Math.min(...filteredScoresAboveZero);
       const highestRatingScore = Math.max(...filteredScoresAboveZero);
 

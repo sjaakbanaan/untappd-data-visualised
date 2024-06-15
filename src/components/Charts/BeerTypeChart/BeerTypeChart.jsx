@@ -13,7 +13,7 @@ const BeerTypeChart = ({ beerData }) => {
     } else {
       setToggledDataList(dataList);
     }
-  }, [listToggle]);
+  }, [beerData, listToggle]);
 
   return (
     <div className="p-4">
