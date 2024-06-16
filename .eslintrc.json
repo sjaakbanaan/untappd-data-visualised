@@ -5,7 +5,7 @@
     "node": true,
     "jest": true
   },
-  "extends": ["eslint:recommended", "prettier"],
+  "extends": ["eslint:recommended", "prettier", "plugin:tailwindcss/recommended"],
   "root": true,
   "parserOptions": {
     "ecmaFeatures": {

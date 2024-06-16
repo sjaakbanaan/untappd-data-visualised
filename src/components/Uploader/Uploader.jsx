@@ -88,19 +88,19 @@ const Uploader = () => {
   ));
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-gray-800 text-white shadow-md md:rounded-lg">
+    <div className="mx-auto max-w-3xl bg-gray-800 p-6 text-white shadow-md md:rounded-lg">
       <UploadForm userDetails={userDetails} handleInputChange={handleInputChange} />
       <div
         {...getRootProps()}
-        className="dropzone border-dashed border-2 text-md border-gray-400 leading-5 rounded-md p-8 text-center"
+        className="rounded-md border-2 border-dashed border-gray-400 p-8 text-center leading-5"
       >
         <input {...getInputProps()} />
         {isDragActive ? (
           <p className="text-gray-400">Yes, drop it here!</p>
         ) : (
           <div>
-            <p className="text-gray-400 mb-4">Drag 'n' drop your JSON file here or</p>
-            <button className="transition-colors duration-300 bg-yellow-500 hover:bg-yellow-400 text-black py-2 px-4 rounded">
+            <p className="mb-4 text-gray-400">Drag 'n' drop your JSON file here or</p>
+            <button className="rounded bg-yellow-500 px-4 py-2 text-black transition-colors duration-300 hover:bg-yellow-400">
               Select JSON file
             </button>
             {fileRejectionItems.length > 0 && (

@@ -105,8 +105,8 @@ const Dashboard = () => {
                 setFilterOverview={setFilterOverview}
               />
             </div>
-            <div className="container mx-auto mt-4 p-2 md:p-8 bg-gray-800 md:rounded shadow-md">
-              <div className="grid lg:grid-cols-2 gap-8 text-white">
+            <div className="container mx-auto mt-4 bg-gray-800 p-2 shadow-md md:rounded md:p-8">
+              <div className="grid gap-8 text-white lg:grid-cols-2">
                 <BasicStats
                   beerData={filteredData}
                   fullBeerData={beerData}

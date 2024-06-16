@@ -14,7 +14,7 @@ const Header = () => {
     <div className="bg-gray-900 p-4 md:p-8">
       <div className="container relative mx-auto">
         <div className="mb-6">
-          <div className="flex items-center justify-end mb-6 md:mb-0">
+          <div className="mb-6 flex items-center justify-end md:mb-0">
             <Navigation />
             <a
               className="mr-3"
@@ -45,11 +45,11 @@ const Header = () => {
               </svg>
             </a>
           </div>
-          <h1 className="text-center mb-2 text-4xl text-yellow-500 font-bold">
+          <h1 className="mb-2 text-center text-4xl font-bold text-yellow-500">
             Untappd Data Visualised
           </h1>
           {storedUserName && (
-            <h2 className="text-center text-2xl text-gray-400 font-bold">
+            <h2 className="text-center text-2xl font-bold text-gray-400">
               {storedUserName}
             </h2>
           )}

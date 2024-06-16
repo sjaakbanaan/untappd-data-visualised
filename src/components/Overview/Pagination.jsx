@@ -38,11 +38,11 @@ const Pagination = ({
   }
 
   return (
-    <div className="flex justify-center flex-wrap mt-4">
+    <div className="mt-4 flex flex-wrap justify-center">
       <button
         className={`${
           currentPage === 1 ? 'cursor-not-allowed' : 'hover:bg-gray-700'
-        } transition-colors duration-300 bg-gray-900 shadow border rounded my-2 py-2 px-3 text-white mr-2`}
+        } my-2 mr-2 rounded border bg-gray-900 px-3 py-2 text-white shadow transition-colors duration-300`}
         onClick={handlePrevPage}
         disabled={currentPage === 1}
       >
@@ -51,7 +51,7 @@ const Pagination = ({
       {startPage > 1 && (
         <button
           key={1}
-          className="transition-colors duration-300 bg-gray-800 text-white hover:bg-gray-700 my-2 py-2 px-3 mx-2 rounded"
+          className="m-2 rounded bg-gray-800 px-3 py-2 text-white transition-colors duration-300 hover:bg-gray-700"
           onClick={() => handlePageNumbers(1)}
           title="go to 1"
         >
@@ -67,7 +67,7 @@ const Pagination = ({
             currentPage === startPage + index
               ? 'bg-yellow-500 text-gray-900'
               : 'bg-gray-800 text-white hover:bg-gray-700'
-          } transition-colors duration-300 my-2 py-2 px-3 mx-2 rounded`}
+          } m-2 rounded px-3 py-2 transition-colors duration-300`}
           onClick={() => handlePageNumbers(startPage + index)}
           title={`go to ${startPage + index}`}
         >
@@ -78,7 +78,7 @@ const Pagination = ({
       {endPage < totalPages && (
         <button
           key={totalPages}
-          className="transition-colors duration-300 bg-gray-800 text-white hover:bg-gray-700 my-2 py-2 px-3 mx-2 rounded"
+          className="m-2 rounded bg-gray-800 px-3 py-2 text-white transition-colors duration-300 hover:bg-gray-700"
           onClick={() => handlePageNumbers(totalPages)}
           title={`go to ${totalPages}`}
         >
@@ -88,7 +88,7 @@ const Pagination = ({
       <button
         className={`${
           currentPage === totalPages ? 'cursor-not-allowed' : 'hover:bg-gray-700'
-        } transition-colors duration-300 bg-gray-900 shadow border rounded my-2 py-2 px-3 text-white ml-2`}
+        } my-2 ml-2 rounded border bg-gray-900 px-3 py-2 text-white shadow transition-colors duration-300`}
         onClick={handleNextPage}
         disabled={currentPage === totalPages}
       >

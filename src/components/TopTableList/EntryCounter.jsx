@@ -1,16 +1,16 @@
 const EntryCounter = ({ minimumEntries, increment, decrement }) => {
   return (
-    <div className="flex text-lf font-semibold text-gray-400 mb-3">
+    <div className="mb-3 flex text-lg font-semibold text-gray-400">
       <div className="w-20">at least {minimumEntries}</div>
       <button
-        className="transition-colors duration-300 px-2 border-2 border-gray-600 ml-2 mr-2 font-bold"
+        className="mx-2 border-2 border-gray-600 px-2 font-bold transition-colors duration-300"
         disabled={minimumEntries <= 1}
         onClick={decrement}
       >
         -
       </button>
       <button
-        className="transition-colors duration-300 px-2 border-2 border-gray-600 font-bold"
+        className="border-2 border-gray-600 px-2 font-bold transition-colors duration-300"
         onClick={increment}
       >
         +

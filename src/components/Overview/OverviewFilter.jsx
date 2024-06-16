@@ -34,7 +34,7 @@ const OverviewFilter = ({
 
   return (
     <div>
-      <label htmlFor={labelPlural} className="block text-white text-sm font-bold mb-2">
+      <label htmlFor={labelPlural} className="mb-2 block text-sm font-bold text-white">
         Filter by {label}
       </label>
       <Select

@@ -36,10 +36,10 @@ const DateSelector = ({ beerData, filterDateRange, setFilterDateRange }) => {
 
   return (
     <div>
-      <div className="grid md:grid-cols-2 mb-8 gap-4">
+      <div className="mb-8 grid gap-4 md:grid-cols-2">
         <input
           type="date"
-          className={`shadow appearance-none bg-gray-900 w-full md:w-auto border rounded py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline ${startButtonFlicker}`}
+          className={`w-full appearance-none rounded border bg-gray-900 px-3 py-2 leading-tight text-white shadow focus:outline-none md:w-auto ${startButtonFlicker}`}
           value={filterDateRange.start}
           onChange={(e) => handleInputChange('start', e.target.value)}
           min={formattedEarliestDate}
@@ -47,7 +47,7 @@ const DateSelector = ({ beerData, filterDateRange, setFilterDateRange }) => {
         />
         <input
           type="date"
-          className={`shadow appearance-none bg-gray-900 w-full md:w-auto border rounded py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline ${startButtonFlicker}`}
+          className={`w-full appearance-none rounded border bg-gray-900 px-3 py-2 leading-tight text-white shadow focus:outline-none md:w-auto ${startButtonFlicker}`}
           value={filterDateRange.end}
           onChange={(e) => handleInputChange('end', e.target.value)}
           max={formattedLatestDate}

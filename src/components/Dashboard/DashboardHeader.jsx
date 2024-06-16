@@ -4,7 +4,7 @@ import { isFilterOverviewSet } from '../../utils';
 const DashboardHeader = ({ filterOverview, setFilterOverview, totalBeerCount }) => {
   return (
     <div className="md:flex md:items-center mt-10 md:mb-6">
-      <h2 className="text-2xl font-bold">
+      <h2 className="text-2xl my-3 font-bold">
         {totalBeerCount} checkins{' '}
         <span className="text-gray-400">in current selection</span>
       </h2>

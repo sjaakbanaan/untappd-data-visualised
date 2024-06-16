@@ -6,6 +6,8 @@
     "autoprefixer": "^10.4.17",
     "chart.js": "^4.4.1",
     "classnames": "^2.5.1",
+    "dotenv": "^16.4.5",
+    "eslint-plugin-tailwindcss": "^3.17.3",
     "mapbox-gl": "^3.2.0",
     "postcss": "^8.4.33",
     "prop-types": "^15.8.1",
@@ -51,7 +53,7 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-private-property-in-object": "^7.23.4",
-    "eslint": "^8.56.0",
+    "eslint": "8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "prettier": "^3.2.4"
   }

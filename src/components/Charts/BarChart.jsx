@@ -12,6 +12,7 @@ import {
 
 // components
 import ChartModal from '../ChartModal.jsx';
+import NotificationBar from '../NotificationBar.jsx';
 
 const BarChart = ({ beerData, dataType, trailingChar }) => {
   const openModal = () => setOpen(true);
@@ -89,6 +90,9 @@ const BarChart = ({ beerData, dataType, trailingChar }) => {
 
   return (
     <>
+      {enableClick && (
+        <NotificationBar text="Click on a bar to see the checkins for that selection." />
+      )}
       <Bar
         ref={chartRef}
         options={{
@@ -109,6 +113,16 @@ const BarChart = ({ beerData, dataType, trailingChar }) => {
                 color: 'rgb(255, 255, 255)',
               },
             },
+          },
+          onHover: function (e) {
+            const points = this.getElementsAtEventForMode(
+              e,
+              'index',
+              { axis: 'x', intersect: true },
+              false
+            );
+            if (enableClick && points.length) e.native.target.style.cursor = 'pointer';
+            else e.native.target.style.cursor = 'default';
           },
           plugins: {
             legend: {

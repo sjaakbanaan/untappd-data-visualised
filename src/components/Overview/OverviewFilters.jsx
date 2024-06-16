@@ -43,7 +43,7 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 my-4">
+    <div className="my-4 grid grid-cols-1 gap-4 md:grid-cols-4">
       {Object.entries(filterOptions).map(([key, options]) => (
         <OverviewFilter
           key={key}

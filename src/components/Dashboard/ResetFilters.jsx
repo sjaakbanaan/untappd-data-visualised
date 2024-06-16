@@ -15,7 +15,7 @@ const ResetFilters = ({ setFilterOverview }) => {
   return (
     <div className="ml-4">
       <button
-        className="transition-colors duration-300 bg-yellow-500 hover:bg-yellow-400 text-gray-900 shadow border-yellow-500 rounded py-2 px-3"
+        className="rounded border-yellow-500 bg-yellow-500 px-3 py-2 text-gray-900 shadow transition-colors duration-300 hover:bg-yellow-400"
         onClick={handleResetFilters}
       >
         Reset filters

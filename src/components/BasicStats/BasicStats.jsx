@@ -95,7 +95,7 @@ const BasicStats = ({ beerData, fullBeerData, filterDateRange }) => {
 
   return (
     <div className="p-4">
-      <h2 className="text-lg font-semibold mb-6">Basic statistics</h2>
+      <h2 className="mb-6 text-lg font-semibold">Basic statistics</h2>
       <ul className="divide-y divide-gray-700">
         {stats.length > 0 &&
           stats.map(
@@ -104,7 +104,7 @@ const BasicStats = ({ beerData, fullBeerData, filterDateRange }) => {
                 <li key={i} className="py-2">
                   <div className="flex items-center justify-between">
                     {item.key}
-                    <span className="text-gray-400 whitespace-nowrap">{item.value}</span>
+                    <span className="whitespace-nowrap text-gray-400">{item.value}</span>
                   </div>
                 </li>
               )

@@ -110,7 +110,7 @@ const PieChart = ({ beerData, dataType, urlType }) => {
             borderColor: 'rgb(31 41 55)',
           },
         },
-        onClick: (event, elements) => {
+        onClick: (elements) => {
           if (elements.length > 0) {
             const index = elements[0].index;
             // URL mapping based on index

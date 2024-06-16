@@ -82,7 +82,7 @@ const LineChart = ({ beerData }) => {
 
   return (
     <div className="p-4">
-      <h2 className="text-lg font-semibold mb-6">Cumulative beer count (year)</h2>
+      <h2 className="mb-6 text-lg font-semibold">Cumulative beer count (year)</h2>
       <Line options={options} data={data} />
     </div>
   );

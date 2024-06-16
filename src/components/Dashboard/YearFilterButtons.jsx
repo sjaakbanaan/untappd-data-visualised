@@ -14,16 +14,16 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
 
   return (
     <div className="mb-8 md:mb-0">
-      <div className="block text-white text-sm font-bold mb-2">Drank between</div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-none lg:grid-flow-col gap-4">
+      <div className="mb-2 block text-sm font-bold text-white">Drank between</div>
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-flow-col lg:grid-cols-none">
         <div className="block">
           <button
             key="set-all-time"
-            className={`transition-colors duration-300 shadow w-full border rounded py-2 px-3 mb-0 md:mb-4 ${
+            className={`mb-0 w-full rounded border px-3 py-2 shadow transition-colors duration-300 md:mb-4 ${
               filterDateRange?.start === getDefaultStartDate() &&
               filterDateRange?.end == getDefaultEndDate()
-                ? 'bg-yellow-500 text-gray-900 border-yellow-500'
-                : 'text-white bg-gray-900 hover:bg-gray-700'
+                ? 'border-yellow-500 bg-yellow-500 text-gray-900'
+                : 'bg-gray-900 text-white hover:bg-gray-700'
             }`}
             onClick={() =>
               setFilterDateRange({
@@ -38,10 +38,10 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
         <div className="block">
           <button
             key="set-all-time"
-            className={`transition-colors duration-300 shadow w-full border rounded py-2 px-3 mb-0 md:mb-4 ${
+            className={`mb-0 w-full rounded border px-3 py-2 shadow transition-colors duration-300 md:mb-4 ${
               fullDateRange[0]
-                ? 'bg-yellow-500 text-gray-900 border-yellow-500'
-                : 'text-white bg-gray-900 hover:bg-gray-700'
+                ? 'border-yellow-500 bg-yellow-500 text-gray-900'
+                : 'bg-gray-900 text-white hover:bg-gray-700'
             }`}
             onClick={() =>
               setFilterDateRange({
@@ -57,14 +57,14 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
         {uniqueYears.map((year, i) => (
           <div className="block" key={i}>
             <button
-              className={`transition-colors duration-300 shadow w-full border rounded py-2 px-3 mb-0 md:mb-4 ${
+              className={`mb-0 w-full rounded border px-3 py-2 shadow transition-colors duration-300 md:mb-4 ${
                 // set active state, with an exception for the current year, because then the end value fot filterDateRange is not `${year}-12-31` but getDefaultEndDate():
                 (filterDateRange?.start === `${year}-01-01` &&
                   filterDateRange?.end === `${year}-12-31`) ||
                 (filterDateRange?.start === `${year}-01-01` &&
                   filterDateRange?.end === getDefaultEndDate())
-                  ? 'bg-yellow-500 hover:bg-yellow-400 text-gray-900 border-yellow-500'
-                  : 'text-white bg-gray-900 hover:bg-gray-700'
+                  ? 'border-yellow-500 bg-yellow-500 text-gray-900 hover:bg-yellow-400'
+                  : 'bg-gray-900 text-white hover:bg-gray-700'
               }`}
               onClick={() =>
                 setFilterDateRange({

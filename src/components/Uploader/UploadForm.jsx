@@ -12,7 +12,7 @@ const UploadForm = ({ userDetails, handleInputChange }) => {
 
   return (
     <div className="mb-10">
-      <h2 className="text-xl text-white mb-3">Enter details</h2>
+      <h2 className="mb-3 text-xl text-white">Enter details</h2>
       <p className="mb-5">
         Your home details are needed to overwrite the 'Untappd at Home' values because
         Untappd uses their HQ for your home location. Don't worry, this data is only on
@@ -34,11 +34,11 @@ const UploadForm = ({ userDetails, handleInputChange }) => {
         {/* Map over the fields array to generate input fields */}
         {fields.map((field) => (
           <div className="mb-4" key={field.name}>
-            <label className="block text-gray-400 text-sm mb-2" htmlFor={field.name}>
+            <label className="mb-2 block text-sm text-gray-400" htmlFor={field.name}>
               {field.label}
             </label>
             <input
-              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
               id={field.name}
               type="text"
               placeholder={`Enter ${field.label.toLowerCase()}`}

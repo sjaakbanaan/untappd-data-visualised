@@ -7,7 +7,7 @@
     @apply bg-gray-900;
   }
   .customModal {
-    @apply bg-gray-800 text-white py-10 max-w-[90vw] px-8 !important;
+    @apply bg-gray-900 text-white py-10 max-w-[80vw] px-12 !important;
     .react-responsive-modal-closeButton svg path {
       @apply fill-white;
     }

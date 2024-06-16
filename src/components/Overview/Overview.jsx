@@ -3,7 +3,7 @@ import OverviewCard from './OverviewCard.jsx';
 import Pagination from './Pagination.jsx';
 import Icon from '../Maps/Icon/Icon.jsx';
 
-const Overview = ({ beerData, title = 'Beers overview' }) => {
+const Overview = ({ beerData, title = 'Beers overview', lessCols }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortCriteria, setSortCriteria] = useState('created_at');
   const [sortOrder, setSortOrder] = useState('asc');
@@ -47,18 +47,18 @@ const Overview = ({ beerData, title = 'Beers overview' }) => {
 
   return (
     <div className="container relative mx-auto">
-      <div className="pt-10 mb-6" ref={overviewRef}>
-        {title && <h2 className="text-2xl text-center font-bold mb-10">{title}</h2>}
+      <div className="mb-6 pt-10" ref={overviewRef}>
+        {title && <h2 className="mb-10 text-center text-2xl font-bold">{title}</h2>}
         <div className="flex justify-center">
           {buttons.length > 1 &&
             buttons.map((item, i) => (
               <button
                 key={i}
-                className={`mx-2 transition-colors duration-300 shadow border rounded py-2 px-3 mb-4 flex items-center
+                className={`mx-2 mb-4 flex items-center rounded border px-3 py-2 shadow transition-colors duration-300
                 ${
                   sortCriteria === item.type
-                    ? 'bg-yellow-500 hover:bg-yellow-400 text-gray-900 border-yellow-500'
-                    : 'text-white bg-gray-900 hover:bg-gray-700'
+                    ? 'border-yellow-500 bg-yellow-500 text-gray-900 hover:bg-yellow-400'
+                    : 'bg-gray-900 text-white hover:bg-gray-700'
                 }`}
                 type="button"
                 onClick={() => toggleSortCriteria(item.type)}
@@ -81,7 +81,12 @@ const Overview = ({ beerData, title = 'Beers overview' }) => {
           ItemsPerPage={ItemsPerPage}
           overviewRef={overviewRef}
         />
-        <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 pt-8">
+        <div
+          className={`
+            grid grid-cols-1 gap-4 pt-8 md:grid-cols-2
+            ${lessCols ? 'lg:grid-cols-3' : 'lg:grid-cols-4'}
+          `}
+        >
           {sortedBeerData.slice(startIndex, endIndex).map((item, i) => (
             <OverviewCard key={i} item={item} />
           ))}

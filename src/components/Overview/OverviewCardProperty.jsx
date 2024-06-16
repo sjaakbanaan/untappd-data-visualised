@@ -10,9 +10,9 @@ const OverviewCardProperty = ({
   suffix,
 }) => {
   return (
-    <div className={`flex items-top mb-2 ${color}`}>
+    <div className={`mb-2 flex ${color}`}>
       <Icon icon={icon} viewBox={viewBox} className="mr-2 mt-1 fill-yellow-500" />
-      <div className="flex-1 flex items-center">
+      <div className="flex flex-1 items-center">
         {formatOutput ? formatDate(value) : value}
         {suffix && <div className="ml-2 text-xs">{suffix}</div>}
       </div>

@@ -10,7 +10,7 @@ import Uploader from './components/Uploader/Uploader.jsx';
 
 const App = () => {
   // Initialize React Ga with your tracking ID
-  ReactGA.initialize('G-SFBLBDE0LG');
+  ReactGA.initialize(process.env.REACT_APP_GTM_CODE);
   const { beerData } = useContext(DataContext);
   return (
     <Router>

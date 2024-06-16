@@ -7,6 +7,7 @@ import {
 } from '../../utils/listProcessing';
 import { useCounter } from '../../utils/';
 import EntryCounter from './EntryCounter.jsx';
+import NotificationBar from '../NotificationBar.jsx';
 
 const processingFunctions = {
   friends: processTaggedFriends,
@@ -33,15 +34,18 @@ const TopTable = ({
 
   return (
     <>
-      <div className="flex items-center justify-between">
-        {dataType == 'topByRating' && (
-          <EntryCounter
-            minimumEntries={minimumEntries}
-            increment={increment}
-            decrement={decrement}
-          />
-        )}
-      </div>
+      {dataType == 'topByRating' && (
+        <>
+          <NotificationBar text="You can adjust the amount of checkins for this list." />
+          <div className="flex items-center justify-between">
+            <EntryCounter
+              minimumEntries={minimumEntries}
+              increment={increment}
+              decrement={decrement}
+            />
+          </div>
+        </>
+      )}
       <ul className="divide-y divide-gray-700">
         {processedList.length > 0 ? (
           processedList.map((item, i) => (
@@ -52,7 +56,7 @@ const TopTable = ({
                 <a href={item.url} target="_blank" rel="noopener">
                   {item.name}
                 </a>
-                <span className="text-gray-400 whitespace-nowrap">
+                <span className="whitespace-nowrap text-gray-400">
                   {item.value}
                   {suffix}
                   {selfCompare && (

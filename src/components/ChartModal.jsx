@@ -15,7 +15,7 @@ const ChartModal = ({ beerList, open, setOpen }) => {
         modal: 'customModal',
       }}
     >
-      <Overview title="" beerData={beerList} />
+      <Overview title="Filtered Beers overview" lessCols beerData={beerList} />
     </Modal>
   );
 };
