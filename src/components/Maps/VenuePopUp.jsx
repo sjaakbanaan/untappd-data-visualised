@@ -11,19 +11,19 @@ const VenuePopUp = ({ popupInfo, setPopupInfo }) => {
       onClose={() => setPopupInfo(null)}
       className="text-black"
     >
-      <div className="flex mt-2 items-center mb-1">
+      <div className="mb-1 mt-2 flex items-center">
         <Icon
           icon="LOCATION"
           size="18"
           viewBox="0 0 70.749 90"
           className="mr-3 fill-yellow-700"
         />
-        <h4 className="text-base leading-tight font-bold flex-1">
+        <h4 className="flex-1 text-base font-bold leading-tight">
           {popupInfo.venue_name}
           {popupInfo.venue_city && `, ${popupInfo.venue_city}`}
         </h4>
       </div>
-      <div className="flex mt-2 items-center mb-1">
+      <div className="mb-1 mt-2 flex items-center">
         <Icon icon="CALENDAR" viewBox="0 0 488 512" className="mr-3 fill-yellow-700" />
         <div className="flex-1">
           <strong>most recent check-in:</strong>
@@ -34,7 +34,7 @@ const VenuePopUp = ({ popupInfo, setPopupInfo }) => {
         </div>
       </div>
       {popupInfo.tagged_friends && (
-        <div className="flex mt-2 items-center mb-1">
+        <div className="mb-1 mt-2 flex items-center">
           <Icon
             icon="FRIENDS"
             viewBox="0 0 512 398.108"

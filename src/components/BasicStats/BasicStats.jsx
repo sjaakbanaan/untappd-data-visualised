@@ -18,9 +18,10 @@ const BasicStats = ({ beerData, fullBeerData, filterDateRange }) => {
       (1000 * 60 * 60 * 24);
 
   const totalPhotos = statsCountTotal(beerData, 'photo_url');
-  const totalLocations = statsCountTotal(beerData, 'venue_name');
+  const totalVenues = statsCountTotal(beerData, 'venue_name');
   const totalCities = statsCountUnique(beerData, 'venue_city');
   const totalCountries = statsCountUnique(beerData, 'venue_country');
+  const totalVenuesPurchased = statsCountUnique(beerData, 'purchase_venue');
   const totalBreweryCountries = statsCountUnique(beerData, 'brewery_country');
   const totalToasts = statsCountTotal(beerData, 'total_toasts', (item) => item !== 0);
   const totalComments = statsCountTotal(beerData, 'total_comments', (item) => item !== 0);
@@ -72,8 +73,12 @@ const BasicStats = ({ beerData, fullBeerData, filterDateRange }) => {
       value: totalAndAvg(totalComments),
     },
     {
-      key: 'Total locations',
-      value: totalAndAvg(totalLocations),
+      key: 'Total venues drank at',
+      value: totalAndAvg(totalVenues),
+    },
+    {
+      key: 'Total venues purchased from',
+      value: totalAndAvg(totalVenuesPurchased),
     },
     {
       key: 'Total cities drank in',

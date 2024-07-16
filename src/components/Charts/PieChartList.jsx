@@ -43,7 +43,7 @@ const PieChartList = ({ beerData }) => {
       name: 'venue_country',
     },
     {
-      title: 'Top 10 venues purchased (untappd removed this data)',
+      title: 'Top 10 venues purchased',
       name: 'purchase_venue',
     },
   ];
