@@ -16,6 +16,7 @@
     "sourceType": "module"
   },
   "plugins": ["react", "jsx-a11y", "import"],
+  "ignorePatterns": ["node_modules/"],
   "rules": {
     "camelcase": [
       "off",
