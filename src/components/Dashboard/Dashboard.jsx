@@ -80,47 +80,45 @@ const Dashboard = () => {
     <>
       {filteredData && filteredData.length > 0 ? (
         <>
-          <div className="rounded shadow-md">
-            <div className="container mx-auto p-4 md:p-0">
-              <YearFilterButtons
-                beerData={beerData}
-                filterDateRange={filterDateRange}
-                setFilterDateRange={setFilterDateRange}
-              />
-              <DateSelector
-                beerData={beerData}
-                filterDateRange={filterDateRange}
-                setFilterDateRange={setFilterDateRange}
-              />
-              <OverviewFilters
+          <div className="container mx-auto p-4 md:p-0">
+            <YearFilterButtons
+              beerData={beerData}
+              filterDateRange={filterDateRange}
+              setFilterDateRange={setFilterDateRange}
+            />
+            <DateSelector
+              beerData={beerData}
+              filterDateRange={filterDateRange}
+              setFilterDateRange={setFilterDateRange}
+            />
+            <OverviewFilters
+              beerData={filteredData}
+              filterOverview={filterOverview}
+              setFilterOverview={setFilterOverview}
+            />
+            <DashboardHeader
+              totalBeerCount={filteredData.length}
+              filterDateRange={filterDateRange}
+              filterOverview={filterOverview}
+              beerData={filteredData}
+              setFilterOverview={setFilterOverview}
+            />
+          </div>
+          <div className="container mx-auto mt-4 rounded bg-gray-800 p-2 shadow-md md:p-8">
+            <div className="grid gap-8 text-white lg:grid-cols-2">
+              <BasicStats
                 beerData={filteredData}
-                filterOverview={filterOverview}
-                setFilterOverview={setFilterOverview}
-              />
-              <DashboardHeader
-                totalBeerCount={filteredData.length}
+                fullBeerData={beerData}
                 filterDateRange={filterDateRange}
-                filterOverview={filterOverview}
-                beerData={filteredData}
-                setFilterOverview={setFilterOverview}
               />
+              <PieChartList beerData={filteredData} />
+              <BarChartList beerData={filteredData} />
+              <TopTableList beerData={filteredData} />
+              <LineChart beerData={filteredData} />
+              <VenueMap beerData={filteredData} />
+              <BreweryMap beerData={filteredData} />
             </div>
-            <div className="container mx-auto mt-4 bg-gray-800 p-2 shadow-md md:rounded md:p-8">
-              <div className="grid gap-8 text-white lg:grid-cols-2">
-                <BasicStats
-                  beerData={filteredData}
-                  fullBeerData={beerData}
-                  filterDateRange={filterDateRange}
-                />
-                <PieChartList beerData={filteredData} />
-                <BarChartList beerData={filteredData} />
-                <TopTableList beerData={filteredData} />
-                <LineChart beerData={filteredData} />
-                <VenueMap beerData={filteredData} />
-                <BreweryMap beerData={filteredData} />
-              </div>
-              <BeerTypeChart beerData={filteredData} />
-            </div>
+            <BeerTypeChart beerData={filteredData} />
           </div>
           <Overview beerData={filteredData} />
         </>
