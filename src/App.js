@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { useContext } from 'react';
 import ReactGA from 'react-ga4';
 
@@ -10,7 +11,14 @@ import Uploader from './components/Uploader/Uploader.jsx';
 
 const App = () => {
   // Initialize React Ga with your tracking ID
-  ReactGA.initialize(process.env.REACT_APP_GTM_CODE);
+  const gtmCode = process.env.REACT_APP_GTM_CODE || 'G-SFBLBDE0LG';
+
+  try {
+    ReactGA.initialize(gtmCode);
+    console.log(`Google Analytics initialized with tracking ID: ${gtmCode}`);
+  } catch (error) {
+    console.error('Error initializing Google Analytics:', error);
+  }
   const { beerData } = useContext(DataContext);
   return (
     <Router>
