@@ -77,34 +77,32 @@ const Dashboard = () => {
   } = useDashboardData();
 
   return (
-    <>
+    <div className="container mx-auto p-4 md:p-0">
       {filteredData && filteredData.length > 0 ? (
-        <>
-          <div className="container mx-auto p-4 md:p-0">
-            <YearFilterButtons
-              beerData={beerData}
-              filterDateRange={filterDateRange}
-              setFilterDateRange={setFilterDateRange}
-            />
-            <DateSelector
-              beerData={beerData}
-              filterDateRange={filterDateRange}
-              setFilterDateRange={setFilterDateRange}
-            />
-            <OverviewFilters
-              beerData={filteredData}
-              filterOverview={filterOverview}
-              setFilterOverview={setFilterOverview}
-            />
-            <DashboardHeader
-              totalBeerCount={filteredData.length}
-              filterDateRange={filterDateRange}
-              filterOverview={filterOverview}
-              beerData={filteredData}
-              setFilterOverview={setFilterOverview}
-            />
-          </div>
-          <div className="container mx-auto mt-4 rounded bg-gray-800 p-2 shadow-md md:p-8">
+        <div>
+          <YearFilterButtons
+            beerData={beerData}
+            filterDateRange={filterDateRange}
+            setFilterDateRange={setFilterDateRange}
+          />
+          <DateSelector
+            beerData={beerData}
+            filterDateRange={filterDateRange}
+            setFilterDateRange={setFilterDateRange}
+          />
+          <OverviewFilters
+            beerData={filteredData}
+            filterOverview={filterOverview}
+            setFilterOverview={setFilterOverview}
+          />
+          <DashboardHeader
+            totalBeerCount={filteredData.length}
+            filterDateRange={filterDateRange}
+            filterOverview={filterOverview}
+            beerData={filteredData}
+            setFilterOverview={setFilterOverview}
+          />
+          <div className="rounded bg-gray-800 p-2 shadow-md md:p-8">
             <div className="grid gap-8 text-white lg:grid-cols-2">
               <BasicStats
                 beerData={filteredData}
@@ -121,17 +119,17 @@ const Dashboard = () => {
             <BeerTypeChart beerData={filteredData} />
           </div>
           <Overview beerData={filteredData} />
-        </>
+        </div>
       ) : (
         <div className="mt-4">
           Loading results or your filters didn't return a result. Did you already{' '}
           <Link className="text-yellow-500 underline" to="/upload">
-            upload your Untappd JSON export
+            upload your Untappd JSON export?
           </Link>
           ?
         </div>
       )}
-    </>
+    </div>
   );
 };
 

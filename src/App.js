@@ -15,7 +15,6 @@ const App = () => {
 
   try {
     ReactGA.initialize(gtmCode);
-    console.log(`Google Analytics initialized with tracking ID: ${gtmCode}`);
   } catch (error) {
     console.error('Error initializing Google Analytics:', error);
   }
@@ -23,14 +22,16 @@ const App = () => {
   return (
     <Router>
       <Header />
-      <Routes>
-        <Route
-          path="/"
-          element={beerData && beerData.length > 0 ? <Dashboard /> : <Uploader />}
-        />
-        <Route path="/upload" element={<Uploader />} />
-      </Routes>
-      <Footer />
+      <div className="mx-6">
+        <Routes>
+          <Route
+            path="/"
+            element={beerData && beerData.length > 0 ? <Dashboard /> : <Uploader />}
+          />
+          <Route path="/upload" element={<Uploader />} />
+        </Routes>
+        <Footer />
+      </div>
     </Router>
   );
 };
