@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import OverviewCard from './OverviewCard.jsx';
 import Pagination from './Pagination.jsx';
-import Icon from '../Maps/Icon/Icon.jsx';
+import Icon from '../Icon/Icon.jsx';
 
 const Overview = ({ beerData, title = 'Beers overview', lessCols }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -67,7 +67,7 @@ const Overview = ({ beerData, title = 'Beers overview', lessCols }) => {
                 {sortCriteria === item.type && (
                   <Icon
                     icon="ARROW"
-                    viewBox="0 0 24 24"
+                    style={{ width: '16px', height: '16px' }}
                     className={`ml-2 fill-black ${sortOrder === 'asc' && 'rotate-180'}`}
                   />
                 )}

@@ -1,4 +1,4 @@
-import Icon from './Icon/Icon.jsx';
+import Icon from '../Icon/Icon.jsx';
 import { formatDate } from '../../utils';
 import { Popup } from 'react-map-gl';
 
@@ -14,8 +14,7 @@ const VenuePopUp = ({ popupInfo, setPopupInfo }) => {
       <div className="mb-1 mt-2 flex items-center">
         <Icon
           icon="LOCATION"
-          size="18"
-          viewBox="0 0 70.749 90"
+          style={{ width: '18px', height: '18px' }}
           className="mr-3 fill-yellow-700"
         />
         <h4 className="flex-1 text-base font-bold leading-tight">
@@ -24,7 +23,11 @@ const VenuePopUp = ({ popupInfo, setPopupInfo }) => {
         </h4>
       </div>
       <div className="mb-1 mt-2 flex items-center">
-        <Icon icon="CALENDAR" viewBox="0 0 488 512" className="mr-3 fill-yellow-700" />
+        <Icon
+          icon="CALENDAR"
+          style={{ width: '16px', height: '16px' }}
+          className="mr-3 fill-yellow-700"
+        />
         <div className="flex-1">
           <strong>most recent check-in:</strong>
           <br />
@@ -37,7 +40,7 @@ const VenuePopUp = ({ popupInfo, setPopupInfo }) => {
         <div className="mb-1 mt-2 flex items-center">
           <Icon
             icon="FRIENDS"
-            viewBox="0 0 512 398.108"
+            style={{ width: '16px', height: '16px' }}
             className="mr-3 fill-yellow-700"
           />
           <div className="flex-1">{popupInfo.tagged_friends.split(',').join(', ')}</div>

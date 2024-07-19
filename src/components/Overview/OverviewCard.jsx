@@ -17,35 +17,22 @@ const OverviewCard = ({ item }) => {
       >
         <h2 className="mb-2 text-xl font-semibold text-white">{item.beer_name}</h2>
         <p className="mb-4">{item.brewery_name}</p>
-        <OverviewCardProperty
-          icon="BEER"
-          viewBox="0 0 473.639 512"
-          value={item.beer_type}
-        />
-        <OverviewCardProperty
-          icon="CALENDAR"
-          viewBox="0 0 488 512"
-          value={item.created_at}
-          formatOutput
-        />
+        {item.beer_type && <OverviewCardProperty icon="BEER" value={item.beer_type} />}
+        {item.created_at && (
+          <OverviewCardProperty icon="CALENDAR" value={item.created_at} formatOutput />
+        )}
         {item.venue_name && (
-          <OverviewCardProperty
-            icon="LOCATION"
-            viewBox="0 0 70.749 90"
-            value={item.venue_name}
-          />
+          <OverviewCardProperty icon="LOCATION" value={item.venue_name} />
         )}
         {item.rating_score && (
           <OverviewCardProperty
             icon="STAR"
-            viewBox="0 0 512 512"
             value={`${item.rating_score} / ${item.global_rating_score}`}
           />
         )}
         {item.tagged_friends && (
           <OverviewCardProperty
             icon="FRIENDS"
-            viewBox="0 0 512 398.108"
             value={item.tagged_friends.split(',').join(', ')}
           />
         )}
