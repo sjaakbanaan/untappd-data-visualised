@@ -70,7 +70,7 @@ and more!
 
 ## Recent changes
 
-- 12-05-2024: And [we're live!] (https://tappd.online)
+- 12-05-2024: And [we're live!](https://tappd.online)
 - 04-05-2024: Added sorting filters to the beer overview
 - 04-05-2024: Added a basic statistics block as first tile on the dashboard
 - 15-06-2024: Added the 'tagged_friends' filter to the overview + bug fixes
