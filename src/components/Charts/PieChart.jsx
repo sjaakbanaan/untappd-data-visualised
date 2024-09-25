@@ -48,17 +48,17 @@ const PieChart = ({ beerData, dataType, urlType }) => {
       });
 
     // Sort by count in descending order and take the top 10
-    const topItems = dataList.sort((a, b) => b.count - a.count).slice(0, 10);
-    const labels = topItems.map((item) => {
+    const top10Items = dataList.sort((a, b) => b.count - a.count).slice(0, 10);
+    const labels = top10Items.map((item) => {
       const countLabel = `(${item.count}×)`;
       return `${item.name} ${countLabel}`;
     });
-    const data = topItems.map((item) => item.count);
+    const data = top10Items.map((item) => item.count);
 
-    return { labels, data, topItems };
+    return { labels, data, top10Items };
   };
 
-  const { labels, data, topItems } = processData();
+  const { labels, data, top10Items } = processData();
 
   const chartData = {
     labels: labels,
@@ -83,7 +83,8 @@ const PieChart = ({ beerData, dataType, urlType }) => {
   };
 
   // skip pie chart when there's only 1 result:
-  if (topItems.length <= 1) return 'A minimum of two results is needed for a pie chart.';
+  if (top10Items.length <= 1)
+    return 'A minimum of two results is needed for a pie chart.';
 
   // hack to create padding between pie and legend
   const plugin = {
@@ -99,7 +100,7 @@ const PieChart = ({ beerData, dataType, urlType }) => {
     },
   };
 
-  const url_array = topItems.map((item) => item.url);
+  const url_array = top10Items.map((item) => item.url);
   return (
     <Pie
       plugins={[plugin]}
@@ -132,6 +133,9 @@ const PieChart = ({ beerData, dataType, urlType }) => {
             align: 'start',
             labels: {
               color: 'rgb(255, 255, 255)',
+              font: {
+                size: 16,
+              },
             },
           },
         },
