@@ -76,6 +76,8 @@ const Dashboard = () => {
     setFilterDateRange,
   } = useDashboardData();
 
+  console.log('data', filteredData);
+
   return (
     <div className="container mx-auto p-4 md:p-0">
       {filteredData && filteredData.length > 0 ? (

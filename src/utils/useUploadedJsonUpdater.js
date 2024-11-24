@@ -1,7 +1,14 @@
 import { useState } from 'react';
+import countriesData from '../countries.json';
 
 export const useUploadedJsonUpdater = () => {
   const [beerData, setBeerData] = useState(null);
+
+  // Function to translate country names
+  const translateToEnglish = (originalName) => {
+    const country = countriesData.countries.find((c) => c.nativeName === originalName);
+    return country ? country.name : originalName;
+  };
 
   const manipulateData = (data, userDetails) => {
     const uniqueCheckinIds = new Set();
@@ -35,6 +42,11 @@ export const useUploadedJsonUpdater = () => {
           ...updatedItem,
           ...userDetails,
         };
+      }
+
+      if (updatedItem.venue_country !== null) {
+        // Wrap the venue_country value with the translateToEnglish() function
+        updatedItem.venue_country = translateToEnglish(updatedItem.venue_country);
       }
 
       return updatedItem;

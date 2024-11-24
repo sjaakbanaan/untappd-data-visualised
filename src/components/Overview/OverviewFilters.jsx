@@ -47,7 +47,6 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
       {Object.entries(filterOptions).map(([key, options]) => (
         <OverviewFilter
           key={key}
-          translate={key == 'venue_country' || key == 'brewery_country'}
           splitValues={key == 'tagged_friends'}
           label={`${key.replace('_', ' ')} (${options.length})`}
           labelPlural={`${key.replace('_', ' ')}s`}

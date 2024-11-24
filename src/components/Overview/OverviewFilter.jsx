@@ -1,21 +1,7 @@
 import classNames from 'classnames';
 import Select from 'react-select';
-import countriesData from '../../countries.json';
 
-const OverviewFilter = ({
-  label,
-  labelPlural,
-  options,
-  onChange,
-  splitValues,
-  translate,
-}) => {
-  // Function to translate country names
-  const translateToEnglish = (originalName) => {
-    const country = countriesData.countries.find((c) => c.original === originalName);
-    return country ? country.english : originalName;
-  };
-
+const OverviewFilter = ({ label, labelPlural, options, onChange, splitValues }) => {
   // In case the the returned option is an array, split up the values
   let formattedOptions = options;
   if (splitValues) {
@@ -28,7 +14,7 @@ const OverviewFilter = ({
 
   // Format options for react-select
   const selectOptions = formattedOptions.map((option) => ({
-    label: translate ? translateToEnglish(option) : option,
+    label: option,
     value: option,
   }));
 
