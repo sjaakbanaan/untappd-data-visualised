@@ -53,7 +53,7 @@ After setting filters, the following lists are presented in either a chart or li
 - Cumulative beer count (year)
 - Beer type apprecation list
 - Basic statistics
-and more!
+- NEW: Filter by beer type
 
 ```
 
@@ -74,6 +74,7 @@ and more!
 - 04-05-2024: Added sorting filters to the beer overview
 - 04-05-2024: Added a basic statistics block as first tile on the dashboard
 - 15-06-2024: Added the 'tagged_friends' filter to the overview + bug fixes
+- 25-11-2024: Add the option to filter by beer type, improved country overlay on MapBox maps + bug fixes
 
 ## Future wishes
 

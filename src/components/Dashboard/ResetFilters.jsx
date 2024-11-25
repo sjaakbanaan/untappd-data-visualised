@@ -8,6 +8,7 @@ const ResetFilters = ({ setFilterOverview }) => {
       venue_city: '',
       venue_country: '',
       tagged_friends: '',
+      beer_type: '',
     });
     // clear filter input
   };

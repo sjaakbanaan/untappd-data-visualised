@@ -10,6 +10,7 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
     venue_city: [],
     venue_country: [],
     tagged_friends: [],
+    beer_type: [],
   });
 
   useEffect(() => {
@@ -22,6 +23,7 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
       'venue_city',
       'venue_country',
       'tagged_friends',
+      'beer_type',
     ];
     const uniqueOptions = {};
 

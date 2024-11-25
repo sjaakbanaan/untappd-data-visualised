@@ -13,6 +13,7 @@ export const filterBeerData = (beerData, filterOverview, filterDateRange) => {
     venue_city: generateFilterFunction('venue_city'),
     venue_country: generateFilterFunction('venue_country'),
     tagged_friends: generateFilterFunction('tagged_friends'),
+    beer_type: generateFilterFunction('beer_type'),
 
     // Date range filter
     date: (item) =>
