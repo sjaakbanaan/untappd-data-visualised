@@ -1,4 +1,4 @@
-const BeerTypeMinMax = ({ spanClass, item, showRating }) => {
+const BeerTypeRating = ({ spanClass, item, showRating }) => {
   return (
     <span className={spanClass}>
       {item.min != item.max && (
@@ -16,4 +16,4 @@ const BeerTypeMinMax = ({ spanClass, item, showRating }) => {
     </span>
   );
 };
-export default BeerTypeMinMax;
+export default BeerTypeRating;

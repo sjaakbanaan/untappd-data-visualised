@@ -1,19 +1,40 @@
 import { useState, useEffect } from 'react';
 import { getBarChartTopBottomData } from '../../../utils';
-import BeerTypeMinMax from './BeerTypeMinMax.jsx';
+import BeerTypeRating from './BeerTypeRating.jsx';
 
 const BeerTypeChart = ({ beerData }) => {
   const dataList = getBarChartTopBottomData(beerData);
   const [listToggle, setListToggle] = useState(true);
-  const [toggledDataList, setToggledDataList] = useState({});
+  const [toggledDataList, setToggledDataList] = useState([]);
+  const [sortColumn, setSortColumn] = useState('beer_type'); // 'beer_type' or 'rating'
+  const [sortOrder, setSortOrder] = useState('asc'); // 'asc' or 'desc'
 
+  // Sort and toggle the data list
   useEffect(() => {
-    if (listToggle) {
-      setToggledDataList(dataList.slice(0, 10));
+    const sortedData = [...dataList].sort((a, b) => {
+      if (sortColumn === 'beer_type') {
+        return sortOrder === 'asc'
+          ? a.beer_type.localeCompare(b.beer_type)
+          : b.beer_type.localeCompare(a.beer_type);
+      } else if (sortColumn === 'rating') {
+        const aRating = a.min + a.max;
+        const bRating = b.min + b.max;
+        return sortOrder === 'asc' ? aRating - bRating : bRating - aRating;
+      }
+      return 0;
+    });
+
+    setToggledDataList(listToggle ? sortedData.slice(0, 10) : sortedData);
+  }, [dataList, listToggle, sortColumn, sortOrder]);
+
+  const toggleSort = (column) => {
+    if (sortColumn === column) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
     } else {
-      setToggledDataList(dataList);
+      setSortColumn(column);
+      setSortOrder('asc');
     }
-  }, [beerData, listToggle]);
+  };
 
   return (
     <div className="p-4">
@@ -25,14 +46,22 @@ const BeerTypeChart = ({ beerData }) => {
         <button
           className="mb-4 rounded border bg-gray-900 px-3 py-2 text-white shadow transition-colors duration-300 hover:bg-gray-700"
           type="button"
-          onClick={() => setListToggle(listToggle ? false : true)}
+          onClick={() => setListToggle(!listToggle)}
         >
-          {listToggle ? 'show all' : 'show less'}
+          {listToggle ? 'Show all' : 'Show less'}
         </button>
       )}
 
-      {toggledDataList.length > 1 && (
+      {toggledDataList.length > 0 && (
         <ul className="m-0 flex list-none flex-col divide-y divide-gray-700 overflow-hidden p-0 text-white transition-all duration-300">
+          <li className="my-2 flex w-full items-center justify-between text-sm font-bold">
+            <button className="text-left" onClick={() => toggleSort('beer_type')}>
+              Beer type {sortColumn === 'beer_type' && (sortOrder === 'asc' ? '↑' : '↓')}
+            </button>
+            <button className="text-right" onClick={() => toggleSort('rating')}>
+              Rating {sortColumn === 'rating' && (sortOrder === 'asc' ? '↑' : '↓')}
+            </button>
+          </li>
           {toggledDataList.map((item) => (
             <li className="flex items-center" key={item.key}>
               <div className="relative grid w-full grid-cols-500">
@@ -43,7 +72,7 @@ const BeerTypeChart = ({ beerData }) => {
                   }}
                   className="flex h-8 items-center whitespace-nowrap rounded-lg text-center text-xs leading-6 md:bg-yellow-500"
                 >
-                  <BeerTypeMinMax
+                  <BeerTypeRating
                     spanClass="mx-1 bg-gray-800 px-3 rounded-lg hidden md:block"
                     item={item}
                     showRating
@@ -51,7 +80,7 @@ const BeerTypeChart = ({ beerData }) => {
                   <div className="absolute left-0 top-1 bg-gray-800 text-sm leading-6">
                     {item.beer_type}{' '}
                     <span className="text-gray-400">({item.total_results})</span>{' '}
-                    <BeerTypeMinMax hasBg spanClass="text-yellow-500" item={item} />
+                    <BeerTypeRating hasBg spanClass="text-yellow-500" item={item} />
                   </div>
                 </div>
               </div>
