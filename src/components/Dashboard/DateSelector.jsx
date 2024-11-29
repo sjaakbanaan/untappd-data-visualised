@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
+import NotificationBar from '../NotificationBar.jsx';
+
 const DateSelector = ({ beerData, filterDateRange, setFilterDateRange }) => {
   const [formattedEarliestDate, setFormattedEarliestDate] = useState('');
   const [formattedLatestDate, setFormattedLatestDate] = useState('');
   const [startButtonFlicker, setStartButtonFlicker] = useState('');
+  const [isInvalidRange, setIsInvalidRange] = useState(false); // Track invalid range state
 
   // Calculate the minimum start date
   useEffect(() => {
@@ -22,8 +25,17 @@ const DateSelector = ({ beerData, filterDateRange, setFilterDateRange }) => {
     }
   }, [beerData]);
 
-  const handleInputChange = (field, value) => {
+  const handleInputChange = (field, value, filterDateRange) => {
+    if (field === 'start' && value.length > 0 && value > filterDateRange.end) {
+      setIsInvalidRange(true);
+      return false;
+    }
+    if (field === 'end' && value.length > 0 && value < filterDateRange.start) {
+      setIsInvalidRange(true);
+      return false;
+    }
     setFilterDateRange({ ...filterDateRange, [field]: value });
+    setIsInvalidRange(false); // Reset invalid range state when the range is valid
   };
 
   useEffect(() => {
@@ -41,7 +53,7 @@ const DateSelector = ({ beerData, filterDateRange, setFilterDateRange }) => {
           type="date"
           className={`w-full appearance-none rounded border bg-gray-900 px-3 py-2 leading-tight text-white shadow focus:outline-none md:w-auto ${startButtonFlicker}`}
           value={filterDateRange.start}
-          onChange={(e) => handleInputChange('start', e.target.value)}
+          onChange={(e) => handleInputChange('start', e.target.value, filterDateRange)}
           min={formattedEarliestDate}
           required
         />
@@ -49,11 +61,16 @@ const DateSelector = ({ beerData, filterDateRange, setFilterDateRange }) => {
           type="date"
           className={`w-full appearance-none rounded border bg-gray-900 px-3 py-2 leading-tight text-white shadow focus:outline-none md:w-auto ${startButtonFlicker}`}
           value={filterDateRange.end}
-          onChange={(e) => handleInputChange('end', e.target.value)}
+          onChange={(e) => handleInputChange('end', e.target.value, filterDateRange)}
           max={formattedLatestDate}
           required
         />
       </div>
+      {/* Show or hide the invalid range message based on isInvalidRange */}
+      <NotificationBar
+        text="Invalid date range, please adjust it."
+        show={!!isInvalidRange}
+      />
     </div>
   );
 };
