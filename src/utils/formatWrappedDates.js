@@ -1,4 +1,4 @@
-export const formatPngDates = (start, end) => {
+export const formatWrappedDates = (start, end) => {
   const startDate = new Date(start);
   const endDate = new Date(end);
 

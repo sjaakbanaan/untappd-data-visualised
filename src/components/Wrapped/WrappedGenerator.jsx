@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import html2canvas from 'html2canvas';
 import { getOverviewStats } from '../../utils';
 import { processTopBeers } from '../../utils/listProcessing';
-import PngOverview from './PngOverview.jsx';
+import Wrapped from './Wrapped.jsx';
 
 /*
 - top 5 beers (highest rating)
@@ -11,7 +11,7 @@ import PngOverview from './PngOverview.jsx';
 - top 5 venues (exl. home)
 */
 
-const PngOverviewGenerator = ({ userName, beerData, fullBeerData, filterDateRange }) => {
+const WrappedGenerator = ({ userName, beerData, fullBeerData, filterDateRange }) => {
   const elementRef = useRef();
 
   const captureScreenshot = async () => {
@@ -56,7 +56,7 @@ const PngOverviewGenerator = ({ userName, beerData, fullBeerData, filterDateRang
   const low5Beers = processTopBeers(beerData, 'rating_score', 5, 'desc');
 
   return (
-    <PngOverview
+    <Wrapped
       userName={userName}
       captureScreenshot={captureScreenshot}
       stats={stats}
@@ -68,4 +68,4 @@ const PngOverviewGenerator = ({ userName, beerData, fullBeerData, filterDateRang
   );
 };
 
-export default PngOverviewGenerator;
+export default WrappedGenerator;

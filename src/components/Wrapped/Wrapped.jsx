@@ -1,4 +1,4 @@
-import { formatPngDates } from '../../utils';
+import { formatWrappedDates } from '../../utils';
 
 /*
 - top 5 beers (highest rating)
@@ -7,7 +7,7 @@ import { formatPngDates } from '../../utils';
 - top 5 venues (exl. home)
 */
 
-const PngOverview = ({
+const Wrapped = ({
   userName,
   captureScreenshot,
   stats,
@@ -32,7 +32,7 @@ const PngOverview = ({
         <img src="/logo512.png" style={{ width: '64px' }} alt="" />
         <h2 className="mt-6 text-2xl font-bold">Untappd stats for {userName}</h2>
         <div className="mb-4 mt-2">
-          {formatPngDates(filterDateRange.start, filterDateRange.end)}
+          {formatWrappedDates(filterDateRange.start, filterDateRange.end)}
         </div>
         <div className="w-full">
           <h2 className="mb-2 font-bold">Top 5 beers (by rating)</h2>
@@ -94,4 +94,4 @@ const PngOverview = ({
   );
 };
 
-export default PngOverview;
+export default Wrapped;
