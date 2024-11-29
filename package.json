@@ -7,6 +7,7 @@
     "autoprefixer": "^10.4.17",
     "chart.js": "^4.4.1",
     "classnames": "^2.5.1",
+    "html2canvas": "^1.4.1",
     "mapbox-gl": "^3.2.0",
     "postcss": "^8.4.33",
     "prop-types": "^15.8.1",
@@ -54,10 +55,10 @@
     "@babel/plugin-transform-private-property-in-object": "^7.23.4",
     "eslint": "8.57.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-react": "^7.34.4",
-    "eslint-plugin-tailwindcss": "3.16.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsx-a11y": "^6.9.0",
+    "eslint-plugin-react": "^7.34.4",
+    "eslint-plugin-tailwindcss": "3.16.0",
     "prettier": "^3.2.4"
   }
 }

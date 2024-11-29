@@ -1,6 +1,6 @@
 import { transformRatingData } from '.';
 
-export const processTopBeers = (beerData, scoreType) => {
+export const processTopBeers = (beerData, scoreType, count = 10, order = 'asc') => {
   const onEmpty = 'No beers to display, please change your search range.';
   const formattedData = transformRatingData(beerData, scoreType);
   const suffix = scoreType === 'beer_abv' ? '%' : '';
@@ -17,18 +17,23 @@ export const processTopBeers = (beerData, scoreType) => {
   });
 
   // Filter the formatted data to keep only items with the highest value for each beer ID
-  const sortedData = formattedData
-    .reduce((acc, current) => {
-      const existingItem = acc.find((item) => item.bid === current.bid);
-      if (!existingItem || current.value > existingItem.value) {
-        acc = acc.filter((item) => item.bid !== current.bid);
-        acc.push(current);
-      }
-      return acc;
-    }, [])
-    .sort((a, b) => b.value - a.value);
-  // Get the top 10 items
-  const processedList = sortedData.slice(0, 10);
+  const deduplicatedData = formattedData.reduce((acc, current) => {
+    const existingItem = acc.find((item) => item.bid === current.bid);
+    if (!existingItem || current.value > existingItem.value) {
+      acc = acc.filter((item) => item.bid !== current.bid);
+      acc.push(current);
+    }
+    return acc;
+  }, []);
+
+  // Sort the data based on value (descending for top, ascending for lowest)
+  const sortedData =
+    order === 'desc'
+      ? deduplicatedData.sort((a, b) => a.value - b.value)
+      : deduplicatedData.sort((a, b) => b.value - a.value);
+
+  // Get the top or lowest `count` items
+  const processedList = sortedData.slice(0, count);
 
   return { processedList, onEmpty, suffix };
 };
