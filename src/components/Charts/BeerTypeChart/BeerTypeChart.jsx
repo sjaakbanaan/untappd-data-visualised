@@ -20,6 +20,10 @@ const BeerTypeChart = ({ beerData }) => {
         const aRating = a.min + a.max;
         const bRating = b.min + b.max;
         return sortOrder === 'asc' ? aRating - bRating : bRating - aRating;
+      } else if (sortColumn === 'total_results') {
+        return sortOrder === 'asc'
+          ? a.total_results - b.total_results
+          : b.total_results - a.total_results;
       }
       return 0;
     });
@@ -55,10 +59,17 @@ const BeerTypeChart = ({ beerData }) => {
       {toggledDataList.length > 0 && (
         <ul className="m-0 flex list-none flex-col divide-y divide-gray-700 overflow-hidden p-0 text-white transition-all duration-300">
           <li className="my-2 flex w-full items-center justify-between text-sm font-bold">
-            <button className="text-left" onClick={() => toggleSort('beer_type')}>
-              Beer type {sortColumn === 'beer_type' && (sortOrder === 'asc' ? '↑' : '↓')}
-            </button>
-            <button className="text-right" onClick={() => toggleSort('rating')}>
+            <div>
+              <button onClick={() => toggleSort('beer_type')}>
+                Beer type{' '}
+                {sortColumn === 'beer_type' && (sortOrder === 'asc' ? '↑' : '↓')}
+              </button>
+              <button className="ml-6" onClick={() => toggleSort('total_results')}>
+                Total results
+                {sortColumn === 'total_results' && (sortOrder === 'asc' ? '↑' : '↓')}
+              </button>
+            </div>
+            <button onClick={() => toggleSort('rating')}>
               Rating {sortColumn === 'rating' && (sortOrder === 'asc' ? '↑' : '↓')}
             </button>
           </li>
