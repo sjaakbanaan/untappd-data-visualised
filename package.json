@@ -4,28 +4,25 @@
   "private": false,
   "dependencies": {
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
-    "autoprefixer": "^10.4.17",
-    "chart.js": "^4.4.1",
+    "autoprefixer": "^10.4.20",
+    "chart.js": "^4.4.6",
     "classnames": "^2.5.1",
     "html2canvas": "^1.4.1",
-    "mapbox-gl": "^3.2.0",
-    "postcss": "^8.4.33",
+    "mapbox-gl": "^3.8.0",
+    "postcss": "^8.4.49",
     "prop-types": "^15.8.1",
-    "react": "^18.2.0",
+    "react": "^18.3.1",
     "react-chartjs-2": "^5.2.0",
-    "react-dom": "^18.2.0",
-    "react-dropzone": "^14.2.3",
+    "react-dom": "^18.3.1",
+    "react-dropzone": "^14.2.5",
     "react-ga4": "^2.1.0",
     "react-map-gl": "^7.1.7",
     "react-responsive-modal": "^6.4.2",
-    "react-router-dom": "^6.22.3",
+    "react-router-dom": "^7.0.1",
     "react-scripts": "5.0.1",
-    "react-select": "^5.8.0",
-    "react-simple-maps": "^3.0.0",
-    "react-svg-worldmap": "^2.0.0-alpha.16",
-    "serve": "^14.2.2",
-    "tailwindcss": "^3.4.1",
-    "viewport-mercator-project": "^7.0.4"
+    "react-select": "^5.8.3",
+    "serve": "^14.2.4",
+    "tailwindcss": "^3.4.15"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -52,13 +49,13 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-transform-private-property-in-object": "^7.23.4",
-    "eslint": "8.57.0",
+    "@babel/plugin-transform-private-property-in-object": "^7.25.9",
+    "eslint": "9.16.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-jsx-a11y": "^6.9.0",
-    "eslint-plugin-react": "^7.34.4",
-    "eslint-plugin-tailwindcss": "3.16.0",
-    "prettier": "^3.2.4"
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-tailwindcss": "3.17.5",
+    "prettier": "^3.4.1"
   }
 }

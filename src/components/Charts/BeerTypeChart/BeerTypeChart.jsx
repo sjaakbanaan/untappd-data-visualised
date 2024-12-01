@@ -6,8 +6,8 @@ const BeerTypeChart = ({ beerData }) => {
   const dataList = getBarChartTopBottomData(beerData);
   const [listToggle, setListToggle] = useState(true);
   const [toggledDataList, setToggledDataList] = useState([]);
-  const [sortColumn, setSortColumn] = useState('beer_type'); // 'beer_type' or 'rating'
-  const [sortOrder, setSortOrder] = useState('asc'); // 'asc' or 'desc'
+  const [sortColumn, setSortColumn] = useState('rating'); // 'beer_type' or 'rating'
+  const [sortOrder, setSortOrder] = useState('desc'); // 'asc' or 'desc'
 
   // Sort and toggle the data list
   useEffect(() => {
