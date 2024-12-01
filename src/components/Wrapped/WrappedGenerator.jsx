@@ -1,14 +1,14 @@
 import { useRef } from 'react';
 import html2canvas from 'html2canvas';
-import { getOverviewStats } from '../../utils';
+import { getOverviewStats, processTopData } from '../../utils';
 import { processTopBeers } from '../../utils/listProcessing';
 import Wrapped from './Wrapped.jsx';
 
 /*
-- top 5 beers (highest rating)
-- top 5 worst beers (lowest rating)
-- top 5 brewers (most)
-- top 5 venues (exl. home)
+x top 5 beers (highest rating)
+x top 5 worst beers (lowest rating)
+x top 5 brewers (most)
+x top 5 venues (exl. home)
 */
 
 const WrappedGenerator = ({ userName, beerData, fullBeerData, filterDateRange }) => {
@@ -39,21 +39,22 @@ const WrappedGenerator = ({ userName, beerData, fullBeerData, filterDateRange })
     'Total beers',
     'Total unique beers',
     'Different beer styles',
-    'Total photos added',
-    'Total toasts received',
-    'Total comments received',
     'Total venues drank at',
-    'Total venues purchased from',
-    'Total cities drank in',
-    'Total countries drank in',
-    'Total brewery countries',
-    'Total unique friends',
   ];
-  const stats = getOverviewStats(beerData, filterDateRange, fullBeerData, infoToShow);
+  const stats = getOverviewStats(
+    beerData,
+    filterDateRange,
+    fullBeerData,
+    infoToShow,
+    true
+  );
 
   // top lists
   const high5Beers = processTopBeers(beerData, 'rating_score', 5, 'asc');
   const low5Beers = processTopBeers(beerData, 'rating_score', 5, 'desc');
+
+  const { topItems: high5Breweries } = processTopData(beerData, 'brewery_name', '', 5);
+  const { topItems: high5Venues } = processTopData(beerData, 'venue_name', '', 5, true);
 
   return (
     <Wrapped
@@ -62,6 +63,8 @@ const WrappedGenerator = ({ userName, beerData, fullBeerData, filterDateRange })
       stats={stats}
       high5Beers={high5Beers}
       low5Beers={low5Beers}
+      high5Breweries={high5Breweries}
+      high5Venues={high5Venues}
       elementRef={elementRef}
       filterDateRange={filterDateRange}
     />

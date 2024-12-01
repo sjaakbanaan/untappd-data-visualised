@@ -21,6 +21,7 @@ import { checkFullDateRange } from './checkFullDateRange';
 import { getBarChartHourData } from './getBarChartHourData';
 import { formatWrappedDates } from './formatWrappedDates';
 import { getOverviewStats } from './getOverviewStats';
+import { processTopData } from './processTopData';
 
 export {
   formatDate,
@@ -46,4 +47,5 @@ export {
   checkFullDateRange,
   formatWrappedDates,
   getOverviewStats,
+  processTopData,
 };

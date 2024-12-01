@@ -12,7 +12,8 @@ export const getOverviewStats = (
   beerData,
   filterDateRange,
   fullBeerData,
-  requestedKeys
+  infoToShow,
+  hideAvg = false
 ) => {
   const totalUniqueBeerCount = beerData && filterDuplicateBeers(beerData)?.length;
   const totalDays =
@@ -37,6 +38,7 @@ export const getOverviewStats = (
   );
 
   const totalAndAvg = (totalVal) => {
+    if (hideAvg) return totalVal;
     return `${totalVal} (${(totalVal / beerData.length).toFixed(2)} per checkin)`;
   };
 
@@ -102,6 +104,6 @@ export const getOverviewStats = (
   ];
 
   return stats
-    .filter((stat) => !stat.hide && requestedKeys.includes(stat.key))
+    .filter((stat) => !stat.hide && infoToShow.includes(stat.key))
     .map(({ key, value }) => ({ key, value }));
 };

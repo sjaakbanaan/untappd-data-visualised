@@ -1,4 +1,4 @@
-# Untappd Data Visualised v2.3.0
+# Untappd Data Visualised v2.3.1
 
 ## This is the repo for [tappd.online](https:///tappd.online), no need to install anymore!
 
@@ -75,8 +75,9 @@ After setting filters, the following lists are presented in either a chart or li
 - 04-05-2024: v2.0.2 Added sorting filters to the beer overview
 - 04-05-2024: v2.1.0 Added a basic statistics block as first tile on the dashboard
 - 15-06-2024: v2.2.0 Added the 'tagged_friends' filter to the overview + bug fixes
-- 25-11-2024: v2.3.0 Add the option to filter by beer type, improved country overlay on MapBox maps + bug fixes
-- 25-11-2024: v2.1.0 Fixed a date range bug + added sort option to Beer type chart, sortable by 'total results' and 'beer type'
+- 25-11-2024: v2.2.1 Add the option to filter by beer type, improved country overlay on MapBox maps + bug fixes
+- 25-11-2024: v2.3.0 Fixed a date range bug + added sort option to Beer type chart, sortable by 'total results' and 'beer type'
+- 25-11-2024: v2.3.1 Fixed the issue with only 3 items in the top 10 list and prep for the 'Wrapped' option that's coming soon +  cleanup
 
 ## Future wishes
 

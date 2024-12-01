@@ -1,18 +1,13 @@
 import { formatWrappedDates } from '../../utils';
 
-/*
-- top 5 beers (highest rating)
-- top 5 worst beers (lowest rating)
-- top 5 brewers (most)
-- top 5 venues (exl. home)
-*/
-
 const Wrapped = ({
   userName,
   captureScreenshot,
   stats,
   high5Beers,
   low5Beers,
+  high5Breweries,
+  high5Venues,
   filterDateRange,
   elementRef,
 }) => {
@@ -35,8 +30,27 @@ const Wrapped = ({
           {formatWrappedDates(filterDateRange.start, filterDateRange.end)}
         </div>
         <div className="w-full">
+          <ul className="mb-10">
+            {stats.length > 0 &&
+              stats.map(
+                (item, i) =>
+                  !item.hide &&
+                  !item.topList && (
+                    <li key={i} className="my-2">
+                      <div className="flex items-center justify-between">
+                        {item.key}
+                        <span className="ml-10 whitespace-nowrap text-gray-400">
+                          {item.value}
+                        </span>
+                      </div>
+                    </li>
+                  )
+              )}
+          </ul>
+        </div>
+        <div className="w-full">
           <h2 className="mb-2 font-bold">Top 5 beers (by rating)</h2>
-          <ul className="mb-10 w-full">
+          <ul className="mb-10">
             {high5Beers.processedList.length > 0 &&
               high5Beers.processedList.map((item, i) => (
                 <li key={i} className="my-2">
@@ -50,9 +64,9 @@ const Wrapped = ({
               ))}
           </ul>
         </div>
-        <div>
+        <div className="w-full">
           <h2 className="mb-2 font-bold">Worst 5 beers (by rating)</h2>
-          <ul className="mb-10 w-full">
+          <ul className="mb-10">
             {low5Beers.processedList.length > 0 &&
               low5Beers.processedList.map((item, i) => (
                 <li key={i} className="my-2">
@@ -66,23 +80,38 @@ const Wrapped = ({
               ))}
           </ul>
         </div>
-        <ul className="w-full">
-          {stats.length > 0 &&
-            stats.map(
-              (item, i) =>
-                !item.hide &&
-                !item.topList && (
-                  <li key={i} className="my-2">
-                    <div className="flex items-center justify-between">
-                      {item.key}
-                      <span className="ml-10 whitespace-nowrap text-gray-400">
-                        {item.value}
-                      </span>
-                    </div>
-                  </li>
-                )
-            )}
-        </ul>
+        <div className="w-full">
+          <h2 className="mb-2 font-bold">Top 5 breweries (by total)</h2>
+          <ul className="mb-10">
+            {high5Breweries.length > 0 &&
+              high5Breweries.map((item, i) => (
+                <li key={i} className="my-2">
+                  <div className="flex items-center justify-between">
+                    {item.name}
+                    <span className="ml-10 whitespace-nowrap text-gray-400">
+                      {item.count}x
+                    </span>
+                  </div>
+                </li>
+              ))}
+          </ul>
+        </div>
+        <div className="w-full">
+          <h2 className="mb-2 font-bold">Top 5 vebues (home excl.)</h2>
+          <ul className="mb-10">
+            {high5Venues.length > 0 &&
+              high5Venues.map((item, i) => (
+                <li key={i} className="my-2">
+                  <div className="flex items-center justify-between">
+                    {item.name}
+                    <span className="ml-10 whitespace-nowrap text-gray-400">
+                      {item.count}x
+                    </span>
+                  </div>
+                </li>
+              ))}
+          </ul>
+        </div>
         <div className="mt-10 w-full text-right text-sm">
           create your own on{' '}
           <a target="_blank" className="font-bold" href="https://tapped.online">
