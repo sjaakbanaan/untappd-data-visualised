@@ -1,10 +1,10 @@
-const EntryCounter = ({ minimumEntries, increment, decrement }) => {
+const EntryCounter = ({ minimumCheckins, increment, decrement }) => {
   return (
     <div className="mb-3 flex text-lg font-semibold text-gray-400">
-      <div className="w-20">at least {minimumEntries}</div>
+      <div className="mr-2 w-[84px] whitespace-nowrap">at least {minimumCheckins}</div>
       <button
         className="mx-2 border-2 border-gray-600 px-2 font-bold transition-colors duration-300"
-        disabled={minimumEntries <= 1}
+        disabled={minimumCheckins <= 1}
         onClick={decrement}
       >
         -

@@ -11,9 +11,9 @@ import NotificationBar from '../NotificationBar.jsx';
 
 const processingFunctions = {
   friends: processTaggedFriends,
-  topBeers: processTopBeers,
   flavorProfiles: processFlavorProfiles,
   topByRating: processTopbyRating,
+  // if not on this list, default is: processTopBeers
 };
 
 const TopTable = ({
@@ -24,12 +24,23 @@ const TopTable = ({
   lowerCase = false,
   ratingType,
 }) => {
-  const initialMinimum = 3;
-  const { count: minimumEntries, increment, decrement } = useCounter(initialMinimum);
+  const initMinimumCheckins = 3;
+  const itemsToShow = 10;
+
+  const {
+    count: minimumCheckins,
+    increment,
+    decrement,
+  } = useCounter(initMinimumCheckins);
 
   const processingFunction = processingFunctions[dataType] || processTopBeers;
   const scoreTypeVal = scoreType ?? '';
-  const getList = processingFunction(beerData, scoreTypeVal, minimumEntries, ratingType);
+  const getList = processingFunction(
+    beerData,
+    scoreTypeVal,
+    dataType == 'topByRating' ? minimumCheckins : itemsToShow,
+    ratingType
+  );
   const { processedList, suffix, onEmpty } = getList;
 
   return (
@@ -39,7 +50,7 @@ const TopTable = ({
           <NotificationBar text="You can adjust the amount of checkins for this list." />
           <div className="flex items-center justify-between">
             <EntryCounter
-              minimumEntries={minimumEntries}
+              minimumCheckins={minimumCheckins}
               increment={increment}
               decrement={decrement}
             />

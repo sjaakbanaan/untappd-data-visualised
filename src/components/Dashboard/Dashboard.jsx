@@ -110,7 +110,7 @@ const Dashboard = () => {
             beerData={filteredData}
             setFilterOverview={setFilterOverview}
           />
-          <div className="rounded bg-gray-800 p-2 shadow-md md:p-8">
+          <div className="rounded bg-gray-800 p-2 shadow-md md:p-4 xl:p-6">
             <div className="grid gap-8 text-white lg:grid-cols-2">
               <BasicStats
                 beerData={filteredData}

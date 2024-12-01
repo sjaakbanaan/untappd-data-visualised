@@ -12,7 +12,7 @@ const Header = () => {
   }, []); // Run only on component mount
 
   return (
-    <div className="bg-gray-900 p-4 md:p-8">
+    <div className="bg-gray-900 p-4 md:p-4 xl:p-6">
       <div className="container relative mx-auto">
         <div className="mb-6">
           <div className="mb-6 flex items-center justify-end md:mb-0">

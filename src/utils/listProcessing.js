@@ -91,16 +91,16 @@ export const processFlavorProfiles = (beerData) => {
   return { processedList, suffix, onEmpty };
 };
 
-export const processTopbyRating = (beerData, scoreType, minimumEntries, ratingType) => {
+export const processTopbyRating = (beerData, scoreType, minimumCheckins, ratingType) => {
   const suffix = '';
   const onEmpty = 'Not enough results to display.';
-  // Filter entry value (i.e. brewery_name or beer_type) with at least {minimumEntries} beers
+  // Filter entry value (i.e. brewery_name or beer_type) with at least {minimumCheckins} beers
   const reoccuringEntries = beerData.reduce((acc, beer) => {
     acc[beer[scoreType]] = (acc[beer[scoreType]] || 0) + 1;
     return acc;
   }, {});
   const eligibleEntries = Object.keys(reoccuringEntries).filter(
-    (entryName) => reoccuringEntries[entryName] >= minimumEntries
+    (entryName) => reoccuringEntries[entryName] >= minimumCheckins
   );
 
   // Calculate average rating score for each eligible enty
