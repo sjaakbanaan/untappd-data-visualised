@@ -22,6 +22,7 @@ import { getBarChartHourData } from './getBarChartHourData';
 import { formatWrappedDates } from './formatWrappedDates';
 import { getOverviewStats } from './getOverviewStats';
 import { processTopData } from './processTopData';
+import { useWrappedData } from './useWrappedData';
 
 export {
   formatDate,
@@ -48,4 +49,5 @@ export {
   formatWrappedDates,
   getOverviewStats,
   processTopData,
+  useWrappedData,
 };
