@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { getBarChartTopBottomData } from '../../../utils';
 import BeerTypeRating from './BeerTypeRating.jsx';
 
 const BeerTypeChart = ({ beerData }) => {
-  const dataList = getBarChartTopBottomData(beerData);
+  const dataList = useMemo(() => getBarChartTopBottomData(beerData), [beerData]);
+
   const [listToggle, setListToggle] = useState(true);
   const [toggledDataList, setToggledDataList] = useState([]);
   const [sortColumn, setSortColumn] = useState('rating'); // 'beer_type' or 'rating'
