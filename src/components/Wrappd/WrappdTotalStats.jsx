@@ -1,4 +1,4 @@
-const WrappedTotalStats = ({ stats }) => {
+const WrappdTotalStats = ({ stats }) => {
   if (stats.length === 0) return null;
 
   return (
@@ -24,4 +24,4 @@ const WrappedTotalStats = ({ stats }) => {
   );
 };
 
-export default WrappedTotalStats;
+export default WrappdTotalStats;

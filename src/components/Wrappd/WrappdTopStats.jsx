@@ -1,4 +1,4 @@
-const WrappedTopStats = ({ title, items, valueKey = 'value', suffix = '' }) => {
+const WrappdTopStats = ({ title, items, valueKey = 'value', suffix = '' }) => {
   if (items.length === 0) return null;
 
   return (
@@ -21,4 +21,4 @@ const WrappedTopStats = ({ title, items, valueKey = 'value', suffix = '' }) => {
   );
 };
 
-export default WrappedTopStats;
+export default WrappdTopStats;

@@ -1,6 +1,6 @@
 import html2canvas from 'html2canvas';
 
-const WrappedInput = ({ userName, elementRef, handleChange }) => {
+const WrappdInput = ({ userName, elementRef, handleChange }) => {
   const captureScreenshot = async () => {
     if (!elementRef.current) return;
     try {
@@ -53,7 +53,7 @@ const WrappedInput = ({ userName, elementRef, handleChange }) => {
     <div className="w-full">
       <input
         type="text"
-        className="w-[400px] appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
+        className="w-[400px] appearance-none rounded border py-2 leading-tight text-gray-700 focus:outline-none"
         onChange={handleChange}
         placeholder="Give a custom title instead of a date range.."
       />
@@ -73,4 +73,4 @@ const WrappedInput = ({ userName, elementRef, handleChange }) => {
   );
 };
 
-export default WrappedInput;
+export default WrappdInput;

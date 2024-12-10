@@ -19,10 +19,10 @@ import { statsCountUnique } from './statsCountUnique';
 import { statsCountUniqueFriends } from './statsCountUniqueFriends';
 import { checkFullDateRange } from './checkFullDateRange';
 import { getBarChartHourData } from './getBarChartHourData';
-import { formatWrappedDates } from './formatWrappedDates';
+import { formatWrappdDates } from './formatWrappdDates';
 import { getOverviewStats } from './getOverviewStats';
 import { processTopData } from './processTopData';
-import { useWrappedData } from './useWrappedData';
+import { useWrappdData } from './useWrappdData';
 
 export {
   formatDate,
@@ -46,8 +46,8 @@ export {
   statsCountUnique,
   statsCountUniqueFriends,
   checkFullDateRange,
-  formatWrappedDates,
+  formatWrappdDates,
   getOverviewStats,
   processTopData,
-  useWrappedData,
+  useWrappdData,
 };

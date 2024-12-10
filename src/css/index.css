@@ -14,10 +14,23 @@
   }
 }
 
+@font-face {
+  /* font-display: swap;  */
+  font-family: 'Sofia Pro';
+  src: url('/public/fonts/sofia-pro.woff2') format('woff2');
+  font-weight: normal; /* Adjust as needed */
+  font-style: normal; /* Adjust as needed */
+}
+@font-face {
+  /* font-display: swap;  */
+  font-family: 'Sofia Pro';
+  src: url('/public/fonts/sofia-pro-bold.woff2') format('woff2');
+  font-weight: 700; /* Adjust as needed */
+  font-style: normal; /* Adjust as needed */
+}
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Sofia Pro', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

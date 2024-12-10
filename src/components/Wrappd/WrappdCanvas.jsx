@@ -1,8 +1,8 @@
-import { formatWrappedDates, useWrappedData } from '../../utils';
-import WrappedTopStats from './WrappedTopStats.jsx';
-import WrappedTotalStats from './WrappedTotalStats.jsx';
+import { formatWrappdDates, useWrappdData } from '../../utils';
+import WrappdTopStats from './WrappdTopStats.jsx';
+import WrappdTotalStats from './WrappdTotalStats.jsx';
 
-const WrappedCanvas = ({
+const WrappdCanvas = ({
   beerData,
   fullBeerData,
   userName,
@@ -10,7 +10,7 @@ const WrappedCanvas = ({
   elementRef,
   customTitle,
 }) => {
-  const { stats, topLists } = useWrappedData(beerData, fullBeerData, filterDateRange);
+  const { stats, topLists } = useWrappdData(beerData, fullBeerData, filterDateRange);
 
   return (
     <div
@@ -25,11 +25,11 @@ const WrappedCanvas = ({
       <div className="mb-4 mt-2">
         {customTitle
           ? customTitle
-          : formatWrappedDates(filterDateRange.start, filterDateRange.end)}
+          : formatWrappdDates(filterDateRange.start, filterDateRange.end)}
       </div>
-      <WrappedTotalStats stats={stats} />
+      <WrappdTotalStats stats={stats} />
       {topLists.map((topList, index) => (
-        <WrappedTopStats
+        <WrappdTopStats
           key={index}
           title={topList.title}
           items={topList.items}
@@ -47,4 +47,4 @@ const WrappedCanvas = ({
   );
 };
 
-export default WrappedCanvas;
+export default WrappdCanvas;
