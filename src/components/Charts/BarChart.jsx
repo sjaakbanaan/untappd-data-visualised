@@ -103,6 +103,9 @@ const BarChart = ({ beerData, dataType, trailingChar }) => {
               },
               ticks: {
                 color: 'rgb(255, 255, 255)',
+                font: {
+                  family: 'Sofia Pro',
+                },
               },
             },
             y: {
@@ -111,6 +114,9 @@ const BarChart = ({ beerData, dataType, trailingChar }) => {
               },
               ticks: {
                 color: 'rgb(255, 255, 255)',
+                font: {
+                  family: 'Sofia Pro',
+                },
               },
             },
           },

@@ -82,6 +82,7 @@ const PieChart = ({ beerData, dataType, urlType }) => {
             labels: {
               color: 'rgb(255, 255, 255)',
               font: {
+                family: 'Sofia Pro',
                 size: 16,
               },
             },
