@@ -56,13 +56,17 @@ export const getOverviewStats = (
     {
       key: 'Total beers',
       value: `${beerData.length} (${(beerData.length / totalDays).toFixed(2)} per day)`,
+      short_value: beerData.length,
     },
     {
       key: 'Total unique beers',
+      short_key: 'Unique beers',
       value: `${totalUniqueBeerCount} (${((totalUniqueBeerCount / beerData.length) * 100).toFixed(1)}%)`,
+      short_value: totalUniqueBeerCount,
     },
     {
       key: 'Different beer styles',
+      short_key: 'Beer styles',
       value: beerTypes.length,
     },
     {
@@ -79,6 +83,7 @@ export const getOverviewStats = (
     },
     {
       key: 'Total venues drank at',
+      short_key: 'Venues',
       value: totalAndAvg(totalVenues),
     },
     {
@@ -105,5 +110,10 @@ export const getOverviewStats = (
 
   return stats
     .filter((stat) => !stat.hide && infoToShow.includes(stat.key))
-    .map(({ key, value }) => ({ key, value }));
+    .map(({ key, value, short_value, short_key }) => ({
+      key,
+      short_key,
+      value,
+      short_value,
+    }));
 };

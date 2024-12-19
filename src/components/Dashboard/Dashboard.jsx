@@ -15,7 +15,7 @@ import DateSelector from './DateSelector.jsx';
 import YearFilterButtons from './YearFilterButtons.jsx';
 import DashboardHeader from './DashboardHeader.jsx';
 import BeerTypeChart from '../Charts/BeerTypeChart/BeerTypeChart.jsx';
-// import Wrappd from '../Wrappd/Wrappd.jsx';
+import Wrappd from '../Wrappd/Wrappd.jsx';
 
 import { filterBeerData, getDefaultStartDate, getDefaultEndDate } from '../../utils/';
 
@@ -80,12 +80,12 @@ const Dashboard = () => {
 
   return (
     <div className="container mx-auto p-4 md:p-0">
-      {/* <Wrappd
+      <Wrappd
         filterDateRange={filterDateRange}
         beerData={filteredData}
         fullBeerData={beerData}
         userName="sjaakbanaan"
-      /> */}
+      />
       {filteredData && filteredData.length > 0 ? (
         <div>
           <YearFilterButtons

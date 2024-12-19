@@ -24,24 +24,24 @@ export const useWrappdData = (beerData, fullBeerData, filterDateRange) => {
   const topLists = useMemo(
     () => [
       {
-        title: 'Top 5 beers (by rating)',
+        title: 'Top 5 beers',
         items: processTopBeers(beerData, 'rating_score', 5, 'asc').processedList,
         valueKey: 'value',
       },
       {
-        title: 'Top 5 breweries (by total)',
+        title: 'Top 5 breweries',
         items: processTopData(beerData, 'brewery_name', '', 5).topItems,
         valueKey: 'count',
         suffix: 'x',
       },
       {
-        title: 'Top 5 venues (home excl.)',
+        title: 'Top 5 venues',
         items: processTopData(beerData, 'venue_name', '', 5, true).topItems,
         valueKey: 'count',
         suffix: 'x',
       },
       {
-        title: 'Worst 5 beers (by rating)',
+        title: 'Worst 5 beers',
         items: processTopBeers(beerData, 'rating_score', 5, 'desc').processedList,
         valueKey: 'value',
       },

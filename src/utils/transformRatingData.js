@@ -5,6 +5,7 @@ export const transformRatingData = (beerData, scoreType) => {
     bid: +item.bid,
     value: +item[scoreType],
     url: item.checkin_url,
+    photo_url: item.photo_url,
     your_score: item.rating_score,
   }));
 };
