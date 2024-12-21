@@ -1,4 +1,4 @@
-# Untappd Data Visualised v2.3.2
+# Untappd Data Visualised v2.4
 
 ## This is the repo for [tappd.online](https:///tappd.online), no need to install anymore!
 
