@@ -27,8 +27,7 @@ const Wrappd = ({ beerData, fullBeerData, filterDateRange }) => {
               <span className="text-gray-300">Optional:</span> copy the link to your
               Untappd avatar from your{' '}
               <a
-                href={`https://untappd.com/user/
-              ${userName}`}
+                href={`https://untappd.com/user/${userName}`}
                 target="_blank"
                 className="underline"
               >
