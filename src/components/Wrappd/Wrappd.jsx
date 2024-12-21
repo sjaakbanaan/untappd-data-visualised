@@ -2,9 +2,11 @@ import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import WrappdCanvas from './WrappdCanvas.jsx';
 import WrappdInput from './WrappdInput.jsx';
+import { getUserName } from '../../utils';
 
-const Wrappd = ({ userName, beerData, fullBeerData, filterDateRange }) => {
+const Wrappd = ({ beerData, fullBeerData, filterDateRange }) => {
   const elementRef = useRef();
+  const userName = getUserName();
   const [customTitle, setCustomTitle] = useState('');
 
   const handleCustomTitle = (event) => {

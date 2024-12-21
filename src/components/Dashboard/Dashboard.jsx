@@ -84,7 +84,6 @@ const Dashboard = () => {
         filterDateRange={filterDateRange}
         beerData={filteredData}
         fullBeerData={beerData}
-        userName="sjaakbanaan"
       />
       {filteredData && filteredData.length > 0 ? (
         <div>

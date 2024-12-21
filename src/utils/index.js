@@ -23,6 +23,7 @@ import { formatWrappdDates } from './formatWrappdDates';
 import { getOverviewStats } from './getOverviewStats';
 import { processTopData } from './processTopData';
 import { useWrappdData } from './useWrappdData';
+import { getUserName } from './getUserName';
 
 export {
   formatDate,
@@ -50,4 +51,5 @@ export {
   getOverviewStats,
   processTopData,
   useWrappdData,
+  getUserName,
 };
