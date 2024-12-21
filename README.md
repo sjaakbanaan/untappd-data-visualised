@@ -54,13 +54,10 @@ After setting filters, the following lists are presented in either a chart or li
 - Cumulative beer count (year)
 - Beer type apprecation list
 - Basic statistics
-- COMING SOON: 'wrapped' png export
 
 ```
 
-## Want to contribute? 
-
-### Prerequisites
+## Prerequisites
 
 - **Node.js**: and preferably **Yarn**.
 - An export of your data from Untappd (https://untappd.com/user/xxxx/beers) as JSON.
@@ -79,6 +76,7 @@ After setting filters, the following lists are presented in either a chart or li
 - 25-11-2024: v2.3.0 Fixed a date range bug + added sort option to Beer type chart, sortable by 'total results' and 'beer type'
 - 25-11-2024: v2.3.1 Fixed the issue with only 3 items in the top 10 list and prep for the 'Wrappd' option that's coming soon +  cleanup
 - 10-12-2024: v2.3.1 New default font + more prep for Wrappd
+- 10-12-2024: v2.4.0 v1 of Tappd Wrappd is done!
 
 ## Future wishes
 
@@ -120,4 +118,3 @@ This will open the app on localhost:3000 in your default web browser. Fill in th
 This project is licensed under the MIT License.
 
 ![image](https://github.com/sjaakbanaan/untappd-data-visualised/assets/2773301/389514dd-710d-4671-9195-cbb62189c191)
-
