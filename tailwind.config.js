@@ -2,6 +2,11 @@
 
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  safelist: [
+    // needed because of dynamic value in WrappdPhotos.jsx
+    'col-span-6',
+    'col-span-4',
+  ],
   theme: {
     extend: {
       keyframes: {
