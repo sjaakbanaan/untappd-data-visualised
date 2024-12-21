@@ -20,6 +20,7 @@ const Uploader = () => {
   const { manipulateData } = useUploadedJsonUpdater(); // Import and use the hook
   const [userDetails, setUserDetails] = useState({
     untappd_username: '',
+    untappd_avatar: '',
     mapbox_key: '',
     venue_lat: '',
     venue_lng: '',
@@ -38,6 +39,12 @@ const Uploader = () => {
 
   const saveToLocalStorage = (key, value) => {
     localStorage.setItem(key, JSON.stringify(value));
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserDetails({ ...userDetails, [name]: value });
+    saveToLocalStorage('userDetails', { ...userDetails, [name]: value });
   };
 
   const navigate = useNavigate(); // Get the navigate object
@@ -60,12 +67,6 @@ const Uploader = () => {
       reader.readAsText(acceptedFiles[0]);
       navigate('/');
     }
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUserDetails({ ...userDetails, [name]: value });
-    saveToLocalStorage('userDetails', { ...userDetails, [name]: value });
   };
 
   const { getRootProps, getInputProps, isDragActive, fileRejections } = useDropzone({
