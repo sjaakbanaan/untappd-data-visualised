@@ -22,7 +22,7 @@ const App = () => {
   return (
     <Router>
       <Header />
-      <div className="mx-6">
+      <div className="mx-1 md:mx-6">
         <Routes>
           <Route
             path="/"
