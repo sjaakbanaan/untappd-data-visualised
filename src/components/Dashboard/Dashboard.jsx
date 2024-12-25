@@ -80,11 +80,6 @@ const Dashboard = () => {
 
   return (
     <div className="container mx-auto p-4 md:p-0">
-      <Wrappd
-        filterDateRange={filterDateRange}
-        beerData={filteredData}
-        fullBeerData={beerData}
-      />
       {filteredData && filteredData.length > 0 ? (
         <div>
           <YearFilterButtons
@@ -108,6 +103,12 @@ const Dashboard = () => {
             filterOverview={filterOverview}
             beerData={filteredData}
             setFilterOverview={setFilterOverview}
+          />
+
+          <Wrappd
+            filterDateRange={filterDateRange}
+            beerData={filteredData}
+            fullBeerData={beerData}
           />
           <div className="rounded bg-gray-800 p-2 shadow-md md:p-4 xl:p-6">
             <div className="grid gap-8 text-white lg:grid-cols-2">
