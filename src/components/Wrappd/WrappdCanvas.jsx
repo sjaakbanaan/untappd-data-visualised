@@ -23,7 +23,7 @@ const WrappdCanvas = ({
   }, []); // Run only on component mount
 
   return (
-    <div>
+    <div className="h-0 overflow-hidden">
       <div className="w-[720px] bg-wrappd-gradient p-10" ref={elementRef}>
         <div className="rounded-2xl bg-wrappdBlack p-10 text-white">
           <WrappdHeader
