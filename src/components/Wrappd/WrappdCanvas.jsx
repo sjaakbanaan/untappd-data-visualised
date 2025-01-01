@@ -1,8 +1,10 @@
-import { formatWrappdDates, useWrappdData, getLocalStorageData } from '../../utils';
+import { useWrappdData, getLocalStorageData } from '../../utils';
 import { useEffect, useState } from 'react';
 import WrappdPhotos from './WrappdPhotos.jsx';
 import WrappdTopStats from './WrappdTopStats.jsx';
 import WrappdTotalStats from './WrappdTotalStats.jsx';
+import WrappdHeader from './WrappdHeader.jsx';
+import WrappdFooter from './WrappdFooter.jsx';
 
 const WrappdCanvas = ({
   beerData,
@@ -12,9 +14,8 @@ const WrappdCanvas = ({
   elementRef,
   customTitle,
 }) => {
-  const { stats, topLists } = useWrappdData(beerData, fullBeerData, filterDateRange);
-
   const [storedAvatar, setStoredAvatar] = useState(null);
+  const { stats, topLists } = useWrappdData(beerData, fullBeerData, filterDateRange);
 
   useEffect(() => {
     // Check for userDetails in local storage
@@ -22,22 +23,15 @@ const WrappdCanvas = ({
   }, []); // Run only on component mount
 
   return (
-    <div className="h-0 overflow-hidden">
+    <div>
       <div className="w-[720px] bg-wrappd-gradient p-10" ref={elementRef}>
         <div className="rounded-2xl bg-wrappdBlack p-10 text-white">
-          <div className="mb-10 flex items-center">
-            {storedAvatar && (
-              <img className="mr-6 w-32 rounded-full" src={storedAvatar} alt="" />
-            )}
-            <div>
-              <div className="-mt-8 mb-2 text-3xl">{userName}</div>
-              <div className="text-wrappdYellow">
-                {customTitle
-                  ? customTitle
-                  : formatWrappdDates(filterDateRange.start, filterDateRange.end)}
-              </div>
-            </div>
-          </div>
+          <WrappdHeader
+            userName={userName}
+            storedAvatar={storedAvatar}
+            customTitle={customTitle}
+            filterDateRange={filterDateRange}
+          />
           <WrappdTotalStats stats={stats} />
           <WrappdPhotos topList={topLists.find((item) => item.title === 'Top 5 beers')} />
           {topLists.map((topList, index) => (
@@ -49,15 +43,7 @@ const WrappdCanvas = ({
               suffix={topList.suffix}
             />
           ))}
-          <div className="mt-12 flex flex-row items-center text-2xl">
-            <img src="/logo-wrappd.png" className="-mb-2 mr-6 w-[78px]" alt="" />
-            <div>
-              <div className="-mt-2 font-bold">Tappd Wrappd</div>
-              <div className="-mt-2 text-wrappdYellow">
-                Create your own at tappd.online
-              </div>
-            </div>
-          </div>
+          <WrappdFooter />
         </div>
       </div>
     </div>

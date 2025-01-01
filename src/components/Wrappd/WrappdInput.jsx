@@ -6,6 +6,7 @@ const WrappdInput = ({ userName, elementRef, handleCustomTitle }) => {
     try {
       const canvas = await html2canvas(elementRef.current, {
         useCORS: true, // Enables cross-origin handling
+        allowTaint: false,
         // scale: 2, // Improves image resolution
       });
       const dataURL = canvas.toDataURL('image/png');

@@ -2,7 +2,7 @@ const WrappdPhotos = ({ topList }) => {
   return (
     <div className="mb-10 mt-14 grid grid-flow-row grid-cols-12 grid-rows-2 gap-4">
       {topList?.items.map((item, index) => {
-        // Dynamically set colSpan based on index
+        // Dynamically set col-span based on index
         const colSpan = index >= 2 ? 4 : 6;
 
         return (

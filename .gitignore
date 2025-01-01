@@ -14,6 +14,7 @@
 # misc
 .DS_Store
 .env
+get_export.sh
 
 npm-debug.log*
 yarn-debug.log*
