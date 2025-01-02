@@ -68,6 +68,7 @@ const DateSelector = ({ beerData, filterDateRange, setFilterDateRange }) => {
       </div>
       {/* Show or hide the invalid range message based on isInvalidRange */}
       <NotificationBar
+        type="error"
         text="Invalid date range, please adjust it."
         show={!!isInvalidRange}
       />
