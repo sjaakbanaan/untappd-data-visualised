@@ -1,6 +1,6 @@
 import { useWrappdData, getLocalStorageData } from '../../utils';
 import { useEffect, useState } from 'react';
-import WrappdPhotos from './WrappdPhotos.jsx';
+// import WrappdPhotos from './WrappdPhotos.jsx';
 import WrappdTopStats from './WrappdTopStats.jsx';
 import WrappdTotalStats from './WrappdTotalStats.jsx';
 import WrappdHeader from './WrappdHeader.jsx';
@@ -33,7 +33,7 @@ const WrappdCanvas = ({
             filterDateRange={filterDateRange}
           />
           <WrappdTotalStats stats={stats} />
-          <WrappdPhotos topList={topLists.find((item) => item.title === 'Top 5 beers')} />
+          {/* <WrappdPhotos topList={topLists.find((item) => item.title === 'Top 5 beers')} /> */}
           {topLists.map((topList, index) => (
             <WrappdTopStats
               key={index}

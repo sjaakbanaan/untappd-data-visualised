@@ -1,13 +1,25 @@
-import { formatWrappdDates } from '../../utils';
+import { useEffect, useState } from 'react';
+import { formatWrappdDates, toDataURL } from '../../utils';
 
 const WrappdHeader = ({ storedAvatar, userName, customTitle, filterDateRange }) => {
+  const [avatarDataUrl, setAvatarDataUrl] = useState(null);
+
+  useEffect(() => {
+    if (storedAvatar) {
+      (async () => {
+        const dataUrl = await toDataURL(storedAvatar);
+        setAvatarDataUrl(dataUrl);
+      })();
+    }
+  }, [storedAvatar]);
+
   return (
     <header className="mb-10 flex items-center">
       {storedAvatar && (
         <img
           crossOrigin="anonymous"
           className="mr-6 w-32 rounded-full"
-          src={storedAvatar}
+          src={avatarDataUrl || storedAvatar} // Use the data URL if available, fallback to the original src
           alt=""
         />
       )}

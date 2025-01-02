@@ -24,6 +24,7 @@ import { getOverviewStats } from './getOverviewStats';
 import { processTopData } from './processTopData';
 import { useWrappdData } from './useWrappdData';
 import { getUserName } from './getUserName';
+import { toDataURL } from './toDataURL';
 
 export {
   formatDate,
@@ -52,4 +53,5 @@ export {
   processTopData,
   useWrappdData,
   getUserName,
+  toDataURL,
 };

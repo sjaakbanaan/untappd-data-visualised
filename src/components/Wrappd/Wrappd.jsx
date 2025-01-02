@@ -48,7 +48,7 @@ const Wrappd = ({ beerData, fullBeerData, filterDateRange }) => {
                 >
                   Untappd profile
                 </a>{' '}
-                (right click on the rounded photo and choose 'Copy image address), and
+                (right click on the rounded photo and choose 'Copy image address'), and
                 paste it{' '}
                 <Link to="/upload" className="underline">
                   here
