@@ -6,6 +6,9 @@
   html {
     @apply bg-gray-900 text-white;
   }
+  img {
+    @apply inline-block; /* needed for html2canvas */
+  }
   .customModal {
     @apply bg-gray-900 text-white py-10 max-w-[80vw] px-12 !important;
     .react-responsive-modal-closeButton svg path {
