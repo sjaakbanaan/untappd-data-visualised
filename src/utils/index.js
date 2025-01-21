@@ -25,6 +25,7 @@ import { processTopData } from './processTopData';
 import { useWrappdData } from './useWrappdData';
 import { getUserName } from './getUserName';
 import { toDataURL } from './toDataURL';
+import { getBarChartRatingData } from './getBarChartRatingData';
 
 export {
   formatDate,
@@ -54,4 +55,5 @@ export {
   useWrappdData,
   getUserName,
   toDataURL,
+  getBarChartRatingData,
 };

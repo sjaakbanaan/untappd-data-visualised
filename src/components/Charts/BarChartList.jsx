@@ -33,6 +33,14 @@ const BarChartList = ({ beerData }) => {
       title: 'Serving type',
       name: 'serving_type',
     },
+    {
+      title: 'Your average rating',
+      name: 'avg_rating',
+    },
+    {
+      title: 'Global average rating',
+      name: 'avg_global_rating',
+    },
   ];
   const [selectedBarChartData, setSelectedBarChartData] = useState(barChartList[0].name);
 

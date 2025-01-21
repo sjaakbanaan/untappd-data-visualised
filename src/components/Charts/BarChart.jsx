@@ -8,6 +8,7 @@ import {
   getBarChartMonthData,
   getBarChartDayData,
   getBarChartHourData,
+  getBarChartRatingData,
 } from '../../utils/';
 
 // components
@@ -36,6 +37,12 @@ const BarChart = ({ beerData, dataType, trailingChar }) => {
       case 'beers_per_hour':
         dataList = getBarChartHourData(beerData);
         enableClick = true;
+        break;
+      case 'avg_rating':
+        dataList = getBarChartRatingData(beerData);
+        break;
+      case 'avg_global_rating':
+        dataList = getBarChartRatingData(beerData, true);
         break;
       default:
         dataList = getBarChartData(beerData, dataType);

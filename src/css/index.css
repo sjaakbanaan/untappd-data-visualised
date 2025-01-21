@@ -6,54 +6,60 @@
   html {
     @apply bg-gray-900 text-white;
   }
+
+  @font-face {
+    /* font-display: swap;  */
+    font-family: 'Sofia Pro';
+    src: url('/public/fonts/sofia-pro.woff2') format('woff2');
+    font-weight: normal; /* Adjust as needed */
+    font-style: normal; /* Adjust as needed */
+  }
+  @font-face {
+    /* font-display: swap;  */
+    font-family: 'Sofia Pro';
+    src: url('/public/fonts/sofia-pro-bold.woff2') format('woff2');
+    font-weight: 700; /* Adjust as needed */
+    font-style: normal; /* Adjust as needed */
+  }
+  body {
+    margin: 0;
+    font-family: 'Sofia Pro', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   img {
     @apply inline-block; /* needed for html2canvas */
   }
+
+  .wrappd-text-reset * {
+    line-height: 1 !important;
+  }
+
   .customModal {
     @apply bg-gray-900 text-white py-10 max-w-[80vw] px-12 !important;
     .react-responsive-modal-closeButton svg path {
       @apply fill-white;
     }
   }
-}
 
-@font-face {
-  /* font-display: swap;  */
-  font-family: 'Sofia Pro';
-  src: url('/public/fonts/sofia-pro.woff2') format('woff2');
-  font-weight: normal; /* Adjust as needed */
-  font-style: normal; /* Adjust as needed */
-}
-@font-face {
-  /* font-display: swap;  */
-  font-family: 'Sofia Pro';
-  src: url('/public/fonts/sofia-pro-bold.woff2') format('woff2');
-  font-weight: 700; /* Adjust as needed */
-  font-style: normal; /* Adjust as needed */
-}
-body {
-  margin: 0;
-  font-family: 'Sofia Pro', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  /* some dirty css overwriting over here */
 
-/* some dirty css overwriting over here */
-
-input[type='date']::-webkit-calendar-picker-indicator {
-  cursor: pointer;
-  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcKICAgdmlld0JveD0iMCAwIDQ4OCA1MTIiCiAgIHZlcnNpb249IjEuMSIKICAgaWQ9InN2ZzEzNiIKICAgc29kaXBvZGk6ZG9jbmFtZT0ibW9udGhseS1jYWxlbmRhci5zdmciCiAgIGlua3NjYXBlOnZlcnNpb249IjEuMi4xICg5YzZkNDFlLCAyMDIyLTA3LTE0KSIKICAgeG1sbnM6aW5rc2NhcGU9Imh0dHA6Ly93d3cuaW5rc2NhcGUub3JnL25hbWVzcGFjZXMvaW5rc2NhcGUiCiAgIHhtbG5zOnNvZGlwb2RpPSJodHRwOi8vc29kaXBvZGkuc291cmNlZm9yZ2UubmV0L0RURC9zb2RpcG9kaS0wLmR0ZCIKICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcwogICAgIGlkPSJkZWZzMTQwIiAvPgogIDxzb2RpcG9kaTpuYW1lZHZpZXcKICAgICBpZD0ibmFtZWR2aWV3MTM4IgogICAgIHBhZ2Vjb2xvcj0iI2ZmZmZmZiIKICAgICBib3JkZXJjb2xvcj0iIzAwMDAwMCIKICAgICBib3JkZXJvcGFjaXR5PSIwLjI1IgogICAgIGlua3NjYXBlOnNob3dwYWdlc2hhZG93PSIyIgogICAgIGlua3NjYXBlOnBhZ2VvcGFjaXR5PSIwLjAiCiAgICAgaW5rc2NhcGU6cGFnZWNoZWNrZXJib2FyZD0iMCIKICAgICBpbmtzY2FwZTpkZXNrY29sb3I9IiNkMWQxZDEiCiAgICAgc2hvd2dyaWQ9ImZhbHNlIgogICAgIGlua3NjYXBlOnpvb209IjAuNDYwOTM3NSIKICAgICBpbmtzY2FwZTpjeD0iMjQyLjk4MzA1IgogICAgIGlua3NjYXBlOmN5PSIyNTYiCiAgICAgaW5rc2NhcGU6d2luZG93LXdpZHRoPSIxMzA5IgogICAgIGlua3NjYXBlOndpbmRvdy1oZWlnaHQ9IjQ1NiIKICAgICBpbmtzY2FwZTp3aW5kb3cteD0iMCIKICAgICBpbmtzY2FwZTp3aW5kb3cteT0iNDQiCiAgICAgaW5rc2NhcGU6d2luZG93LW1heGltaXplZD0iMCIKICAgICBpbmtzY2FwZTpjdXJyZW50LWxheWVyPSJzdmcxMzYiIC8+CiAgPHBhdGgKICAgICBzdHlsZT0ib3BhY2l0eTowLjk4NTtmaWxsOiNmZmZmZmYiCiAgICAgZD0iTTYxIDBoMzd2NjBoNzJWMGgzOHY2MGg3MlYwaDM4djYwaDcyVjBoMzd2NjBoNjF2OTlIMFY2MGg2MXoiCiAgICAgaWQ9InBhdGgxMzIiIC8+CiAgPHBhdGgKICAgICBzdHlsZT0ib3BhY2l0eTowLjk5OTtmaWxsOiNmZmZmZmYiCiAgICAgZD0iTTQ4OCA1MTJIMFYxOTVoNDg4eiIKICAgICBpZD0icGF0aDEzNCIgLz4KPC9zdmc+Cg==');
-}
-input[type='date']::-webkit-calendar-picker-indicator:before {
-  display: none;
-}
-select {
-  background-repeat: no-repeat;
-  background-position-x: calc(100% - 12px);
-  background-position-y: 10px;
-  background-size: 14px 14px;
-  background-image: url("data:image/svg+xml,<svg width='24' fill='white' height='24' xmlns='http://www.w3.org/2000/svg'><path d='m0,6l12,12l12,-12l-24,0z'/><path fill='none' d='m0,0l24,0l0,24l-24,0l0,-24z'/></svg>");
-}
-.mapboxgl-popup-close-button {
-  margin-right: 8px;
+  input[type='date']::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcKICAgdmlld0JveD0iMCAwIDQ4OCA1MTIiCiAgIHZlcnNpb249IjEuMSIKICAgaWQ9InN2ZzEzNiIKICAgc29kaXBvZGk6ZG9jbmFtZT0ibW9udGhseS1jYWxlbmRhci5zdmciCiAgIGlua3NjYXBlOnZlcnNpb249IjEuMi4xICg5YzZkNDFlLCAyMDIyLTA3LTE0KSIKICAgeG1sbnM6aW5rc2NhcGU9Imh0dHA6Ly93d3cuaW5rc2NhcGUub3JnL25hbWVzcGFjZXMvaW5rc2NhcGUiCiAgIHhtbG5zOnNvZGlwb2RpPSJodHRwOi8vc29kaXBvZGkuc291cmNlZm9yZ2UubmV0L0RURC9zb2RpcG9kaS0wLmR0ZCIKICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcwogICAgIGlkPSJkZWZzMTQwIiAvPgogIDxzb2RpcG9kaTpuYW1lZHZpZXcKICAgICBpZD0ibmFtZWR2aWV3MTM4IgogICAgIHBhZ2Vjb2xvcj0iI2ZmZmZmZiIKICAgICBib3JkZXJjb2xvcj0iIzAwMDAwMCIKICAgICBib3JkZXJvcGFjaXR5PSIwLjI1IgogICAgIGlua3NjYXBlOnNob3dwYWdlc2hhZG93PSIyIgogICAgIGlua3NjYXBlOnBhZ2VvcGFjaXR5PSIwLjAiCiAgICAgaW5rc2NhcGU6cGFnZWNoZWNrZXJib2FyZD0iMCIKICAgICBpbmtzY2FwZTpkZXNrY29sb3I9IiNkMWQxZDEiCiAgICAgc2hvd2dyaWQ9ImZhbHNlIgogICAgIGlua3NjYXBlOnpvb209IjAuNDYwOTM3NSIKICAgICBpbmtzY2FwZTpjeD0iMjQyLjk4MzA1IgogICAgIGlua3NjYXBlOmN5PSIyNTYiCiAgICAgaW5rc2NhcGU6d2luZG93LXdpZHRoPSIxMzA5IgogICAgIGlua3NjYXBlOndpbmRvdy1oZWlnaHQ9IjQ1NiIKICAgICBpbmtzY2FwZTp3aW5kb3cteD0iMCIKICAgICBpbmtzY2FwZTp3aW5kb3cteT0iNDQiCiAgICAgaW5rc2NhcGU6d2luZG93LW1heGltaXplZD0iMCIKICAgICBpbmtzY2FwZTpjdXJyZW50LWxheWVyPSJzdmcxMzYiIC8+CiAgPHBhdGgKICAgICBzdHlsZT0ib3BhY2l0eTowLjk4NTtmaWxsOiNmZmZmZmYiCiAgICAgZD0iTTYxIDBoMzd2NjBoNzJWMGgzOHY2MGg3MlYwaDM4djYwaDcyVjBoMzd2NjBoNjF2OTlIMFY2MGg2MXoiCiAgICAgaWQ9InBhdGgxMzIiIC8+CiAgPHBhdGgKICAgICBzdHlsZT0ib3BhY2l0eTowLjk5OTtmaWxsOiNmZmZmZmYiCiAgICAgZD0iTTQ4OCA1MTJIMFYxOTVoNDg4eiIKICAgICBpZD0icGF0aDEzNCIgLz4KPC9zdmc+Cg==');
+  }
+  input[type='date']::-webkit-calendar-picker-indicator:before {
+    display: none;
+  }
+  select {
+    background-repeat: no-repeat;
+    background-position-x: calc(100% - 12px);
+    background-position-y: 10px;
+    background-size: 14px 14px;
+    background-image: url("data:image/svg+xml,<svg width='24' fill='white' height='24' xmlns='http://www.w3.org/2000/svg'><path d='m0,6l12,12l12,-12l-24,0z'/><path fill='none' d='m0,0l24,0l0,24l-24,0l0,-24z'/></svg>");
+  }
+  .mapboxgl-popup-close-button {
+    margin-right: 8px;
+  }
 }
