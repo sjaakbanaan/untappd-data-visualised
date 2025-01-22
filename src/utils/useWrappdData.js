@@ -5,12 +5,7 @@ import { processTopBeers } from './listProcessing';
 
 export const useWrappdData = (beerData, fullBeerData, filterDateRange) => {
   const infoToShow = useMemo(
-    () => [
-      'Total beers',
-      'Total unique beers',
-      'Different beer styles',
-      'Total venues drank at',
-    ],
+    () => ['Total Beers', 'Unique beers', 'Beer styles', 'Venues drank at'],
     []
   );
 

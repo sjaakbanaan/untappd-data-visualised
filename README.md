@@ -77,7 +77,8 @@ After setting filters, the following lists are presented in either a chart or li
 - 25-11-2024: v2.3.1 Fixed the issue with only 3 items in the top 10 list and prep for the 'Wrappd' option that's coming soon +  cleanup
 - 10-12-2024: v2.3.1 New default font + more prep for Wrappd
 - 10-12-2024: v2.4.0 v1 of Tappd Wrappd is done!
-- 21-01-2025: v2.4.1 Added a yearly avg. (global) rating to the frequency bar chart.
+- 21-01-2025: v2.4.1 Added a yearly avg. (global) rating to the frequency bar chart
+- 22-01-2025: v2.4.2 New UI for the basic statistics
 
 ## Future wishes
 

@@ -8,13 +8,7 @@ import {
   getDefaultEndDate,
 } from '../utils';
 
-export const getOverviewStats = (
-  beerData,
-  filterDateRange,
-  fullBeerData,
-  infoToShow,
-  hideAvg = false
-) => {
+export const getOverviewStats = (beerData, filterDateRange, fullBeerData, infoToShow) => {
   const totalUniqueBeerCount = beerData && filterDuplicateBeers(beerData)?.length;
   const totalDays =
     filterDateRange &&
@@ -37,12 +31,65 @@ export const getOverviewStats = (
     filterDateRange
   );
 
-  const totalAndAvg = (totalVal) => {
-    if (hideAvg) return totalVal;
-    return `${totalVal} (${(totalVal / beerData.length).toFixed(2)} per checkin)`;
-  };
-
   const stats = [
+    {
+      key: 'Total Beers',
+      value: beerData.length,
+      suffix: `${(beerData.length / totalDays).toFixed(2)} per day`,
+    },
+    {
+      key: 'Unique beers',
+      short_key: 'Unique beers',
+      value: totalUniqueBeerCount,
+      suffix: `${((totalUniqueBeerCount / beerData.length) * 100).toFixed(1)}%`,
+    },
+    {
+      key: 'Beer styles',
+      short_key: 'Beer styles',
+      value: beerTypes.length,
+    },
+    {
+      key: 'Venues drank at',
+      short_key: 'Venues',
+      value: totalVenues,
+      suffix: `${(totalVenues / beerData.length).toFixed(2)} per checkin`,
+    },
+    {
+      key: 'Venues purchased',
+      value: totalVenuesPurchased,
+      suffix: `${(totalVenues / beerData.length).toFixed(2)} per checkin`,
+    },
+    {
+      key: 'Cities drank in',
+      value: totalCities,
+    },
+    {
+      key: 'Countries drank in',
+      value: totalCountries,
+    },
+    {
+      key: 'Brewery countries',
+      value: totalBreweryCountries,
+    },
+    {
+      key: 'Photos added',
+      value: totalPhotos,
+      suffix: `${(totalPhotos / beerData.length).toFixed(2)} per checkin`,
+    },
+    {
+      key: 'Toasts received',
+      value: totalToasts,
+      suffix: `${(totalToasts / beerData.length).toFixed(2)} per checkin`,
+    },
+    {
+      key: 'Comments received',
+      value: totalComments,
+      suffix: `${(totalComments / beerData.length).toFixed(2)} per checkin`,
+    },
+    {
+      key: 'Total unique friends',
+      value: totalUniqueFriends,
+    },
     {
       key: 'Years active',
       value: (totalDays / 365).toFixed(1),
@@ -53,67 +100,14 @@ export const getOverviewStats = (
       value: totalDays,
       hide: !fullDateRange[0],
     },
-    {
-      key: 'Total beers',
-      value: `${beerData.length} (${(beerData.length / totalDays).toFixed(2)} per day)`,
-      short_value: beerData.length,
-    },
-    {
-      key: 'Total unique beers',
-      short_key: 'Unique beers',
-      value: `${totalUniqueBeerCount} (${((totalUniqueBeerCount / beerData.length) * 100).toFixed(1)}%)`,
-      short_value: totalUniqueBeerCount,
-    },
-    {
-      key: 'Different beer styles',
-      short_key: 'Beer styles',
-      value: beerTypes.length,
-    },
-    {
-      key: 'Total photos added',
-      value: totalAndAvg(totalPhotos),
-    },
-    {
-      key: 'Total toasts received',
-      value: totalAndAvg(totalToasts),
-    },
-    {
-      key: 'Total comments received',
-      value: totalAndAvg(totalComments),
-    },
-    {
-      key: 'Total venues drank at',
-      short_key: 'Venues',
-      value: totalAndAvg(totalVenues),
-    },
-    {
-      key: 'Total venues purchased from',
-      value: totalAndAvg(totalVenuesPurchased),
-    },
-    {
-      key: 'Total cities drank in',
-      value: `${totalCities}`,
-    },
-    {
-      key: 'Total countries drank in',
-      value: `${totalCountries}`,
-    },
-    {
-      key: 'Total brewery countries',
-      value: `${totalBreweryCountries}`,
-    },
-    {
-      key: 'Total unique friends',
-      value: totalUniqueFriends,
-    },
   ];
 
   return stats
     .filter((stat) => !stat.hide && infoToShow.includes(stat.key))
-    .map(({ key, value, short_value, short_key }) => ({
+    .map(({ key, value, short_key, suffix }) => ({
       key,
       short_key,
       value,
-      short_value,
+      suffix,
     }));
 };

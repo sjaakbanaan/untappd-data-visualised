@@ -13,9 +13,7 @@ const WrappdTotalStats = ({ stats }) => {
                 className="flex flex-col justify-between rounded-md border border-wrappdYellow p-3"
               >
                 <div className="-mt-4">{item.short_key || item.key}</div>
-                <div className="text-3xl font-bold text-wrappdYellow">
-                  {item.short_value || item.value}
-                </div>
+                <div className="text-3xl font-bold text-wrappdYellow">{item.value}</div>
               </div>
             )
         )}
