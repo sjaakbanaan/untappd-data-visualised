@@ -29,7 +29,7 @@ const BasicStats = ({ beerData, fullBeerData, filterDateRange }) => {
           stats.map(
             (item, i) =>
               !item.hide && (
-                <li key={i} className="rounded-lg bg-gray-700 p-4">
+                <li key={i} className="rounded-lg bg-gray-900 p-4">
                   <div className="grid h-full grid-rows-auto-1fr text-center text-xl">
                     <div>{item.key}</div>
                     <div className="my-4 flex items-center justify-center whitespace-nowrap">
