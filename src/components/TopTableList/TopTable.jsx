@@ -23,6 +23,7 @@ const TopTable = ({
   selfCompare,
   lowerCase = false,
   ratingType,
+  showPhotos,
 }) => {
   const initMinimumCheckins = 3;
   const itemsToShow = 10;
@@ -57,33 +58,56 @@ const TopTable = ({
           </div>
         </>
       )}
-      <ul className="divide-y divide-gray-700">
+      <ul
+        className={`${showPhotos ? 'grid grid-cols-2 gap-6' : 'divide-y divide-gray-700'}`}
+      >
         {processedList.length > 0 ? (
           processedList.map((item, i) => (
-            <li key={i} className="py-2">
+            <li
+              key={i}
+              className={`${showPhotos ? 'min-h-64 overflow-hidden bg-gray-800 bg-cover bg-center shadow-lg transition-transform duration-300 hover:scale-110 md:rounded-lg ' : 'py-2'}`}
+              style={
+                item.photo_url ? { backgroundImage: `url(${item.photo_url})` } : null
+              }
+            >
               <div
-                className={`flex items-center justify-between  ${lowerCase && 'lowercase'}`}
+                className={`flex h-full items-center justify-between ${lowerCase && 'lowercase'}`}
               >
-                <a href={item.url} target="_blank" rel="noopener">
-                  {item.name}
-                </a>
-                <span className="whitespace-nowrap text-gray-400">
-                  {item.value}
-                  {suffix}
-                  {selfCompare && (
-                    <>
-                      <strong> / {item.your_score}</strong>{' '}
-                      <span
-                        className={
-                          item.your_score > item.value ? 'text-green-700' : 'text-red-700'
-                        }
-                      >
-                        ({item.your_score > item.value ? '+' : '-'}
-                        {Math.abs(item.your_score - item.value).toFixed(2)})
-                      </span>
-                    </>
+                <a
+                  href={item.url}
+                  className={`${showPhotos && 'flex size-full flex-col items-center justify-center overflow-hidden bg-gray-800/50 p-4'}`}
+                  target="_blank"
+                  rel="noopener"
+                >
+                  {showPhotos && <span>#{i + 1}</span>}
+                  <span className="my-3 text-center text-lg">{item.name}</span>
+                  {showPhotos && (
+                    <span className="text-center text-3xl font-extrabold text-yellow-400">
+                      {item.value}
+                      {selfCompare && (
+                        <>
+                          <strong> / {item.your_score}</strong>
+                          <div
+                            className={
+                              item.your_score > item.value
+                                ? 'text-lg text-green-700'
+                                : 'text-lg text-red-700'
+                            }
+                          >
+                            ({item.your_score > item.value ? '+' : '-'}
+                            {Math.abs(item.your_score - item.value).toFixed(2)})
+                          </div>
+                        </>
+                      )}
+                    </span>
                   )}
-                </span>
+                </a>
+                {!showPhotos && (
+                  <span className="whitespace-nowrap text-gray-400">
+                    {item.value}
+                    {suffix}
+                  </span>
+                )}
               </div>
             </li>
           ))

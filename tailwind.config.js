@@ -28,6 +28,7 @@ module.exports = {
       },
       gridTemplateColumns: {
         500: 'repeat(500, minmax(0, 1fr))',
+        min1Max2: 'repeat(auto-fit, minmax(0, 1fr))',
       },
       gridTemplateRows: {
         'auto-1fr': 'auto 1fr 28px',

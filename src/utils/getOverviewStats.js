@@ -18,6 +18,7 @@ export const getOverviewStats = (beerData, filterDateRange, fullBeerData, infoTo
   const totalPhotos = statsCountTotal(beerData, 'photo_url');
   const totalVenues = statsCountTotal(beerData, 'venue_name');
   const totalCities = statsCountUnique(beerData, 'venue_city');
+  const totalBreweries = statsCountUnique(beerData, 'brewery_name');
   const totalCountries = statsCountUnique(beerData, 'venue_country');
   const totalVenuesPurchased = statsCountUnique(beerData, 'purchase_venue');
   const totalBreweryCountries = statsCountUnique(beerData, 'brewery_country');
@@ -33,7 +34,7 @@ export const getOverviewStats = (beerData, filterDateRange, fullBeerData, infoTo
 
   const stats = [
     {
-      key: 'Total Beers',
+      key: 'Total beers',
       value: beerData.length,
       suffix: `${(beerData.length / totalDays).toFixed(2)} per day`,
     },
@@ -42,6 +43,10 @@ export const getOverviewStats = (beerData, filterDateRange, fullBeerData, infoTo
       short_key: 'Unique beers',
       value: totalUniqueBeerCount,
       suffix: `${((totalUniqueBeerCount / beerData.length) * 100).toFixed(1)}%`,
+    },
+    {
+      key: 'Total breweries',
+      value: totalBreweries,
     },
     {
       key: 'Beer styles',
@@ -57,7 +62,7 @@ export const getOverviewStats = (beerData, filterDateRange, fullBeerData, infoTo
     {
       key: 'Venues purchased',
       value: totalVenuesPurchased,
-      suffix: `${(totalVenues / beerData.length).toFixed(2)} per checkin`,
+      suffix: `${(totalVenuesPurchased / beerData.length).toFixed(2)} per checkin`,
     },
     {
       key: 'Cities drank in',

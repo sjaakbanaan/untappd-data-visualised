@@ -42,8 +42,8 @@ const BeerTypeChart = ({ beerData }) => {
   };
 
   return (
-    <div className="p-4">
-      <h2 className="mb-6 text-lg font-semibold">
+    <div className="lg:col-span-2">
+      <h2 className="mb-6 text-xl font-semibold">
         Beer type appreciation <span className="text-gray-400">({dataList.length})</span>
       </h2>
 

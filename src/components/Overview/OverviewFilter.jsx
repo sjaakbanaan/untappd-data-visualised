@@ -39,7 +39,6 @@ const OverviewFilter = ({ label, labelPlural, options, onChange, splitValues }) 
             classNames(
               'bg-gray-900',
               'rounded',
-              'border-solid',
               'border',
               'hover:cursor-pointer',
               isFocused && 'shadow-[0_0_0_1px] shadow-black'
@@ -48,26 +47,15 @@ const OverviewFilter = ({ label, labelPlural, options, onChange, splitValues }) 
           indicatorSeparator: () => classNames('bg-white', 'my-2'),
           input: () => classNames('m-0.5', 'py-0.5', 'text-white'),
           noOptionsMessage: () =>
-            classNames(
-              'bg-gray-900',
-              'border-white',
-              'py-2',
-              'px-3',
-              'border-solid',
-              'border'
-            ),
+            classNames('bg-gray-900', 'border-white', 'py-2', 'px-3'),
           option: () =>
             classNames(
-              'bg-gray-900',
-              'border-white',
-              'hover:text-white',
-              'hover:bg-yellow-600',
+              'bg-gray-800',
+              'hover:text-gray-900',
+              'hover:bg-yellow-500',
+              'hover:border-yellow-500',
               'py-2',
               'px-3',
-              'border-solid',
-              'border',
-              'border-t-0',
-              'mt--10',
               'hover:cursor-pointer'
             ),
           placeholder: () => classNames('text-white', 'mx-0.5'),

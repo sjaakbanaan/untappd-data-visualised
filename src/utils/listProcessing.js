@@ -58,10 +58,11 @@ export const processTaggedFriends = (beerData) => {
     name: item,
     value: itemCount[item],
   }));
-
   processedList.sort((a, b) => b.value - a.value);
+  // Get only the top 10 results
+  const top10List = processedList.slice(0, 10);
 
-  return { processedList, suffix, onEmpty };
+  return { processedList: top10List, suffix, onEmpty };
 };
 
 export const processFlavorProfiles = (beerData) => {
@@ -92,7 +93,6 @@ export const processFlavorProfiles = (beerData) => {
 };
 
 export const processTopbyRating = (beerData, scoreType, minimumCheckins, ratingType) => {
-  const suffix = '';
   const onEmpty = 'Not enough results to display.';
   // Filter entry value (i.e. brewery_name or beer_type) with at least {minimumCheckins} beers
   const reoccuringEntries = beerData.reduce((acc, beer) => {
@@ -120,5 +120,5 @@ export const processTopbyRating = (beerData, scoreType, minimumCheckins, ratingT
   // Select top 10 breweries
   const processedList = topRatingMap.slice(0, 10);
 
-  return { processedList, suffix, onEmpty };
+  return { processedList, onEmpty };
 };

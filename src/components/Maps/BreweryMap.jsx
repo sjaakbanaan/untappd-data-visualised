@@ -63,8 +63,8 @@ const VenueMap = ({ beerData }) => {
   }, [allData]);
 
   return (
-    <div className="p-4">
-      <h2 className="mb-6 text-lg font-semibold">Brewery countries</h2>
+    <div>
+      <h2 className="mb-6 text-xl font-semibold">Brewery countries</h2>
       <div className="my-4 overflow-hidden rounded border border-gray-900 shadow-md">
         <Map
           initialViewState={{

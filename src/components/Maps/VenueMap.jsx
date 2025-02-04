@@ -54,8 +54,8 @@ const VenueMap = ({ beerData }) => {
   }, [boundingBox]);
 
   return (
-    <div className="p-4">
-      <h2 className="mb-6 text-lg font-semibold">Venues checked-in</h2>
+    <div>
+      <h2 className="mb-6 text-xl font-semibold">Venues checked-in</h2>
       <div className="my-4 overflow-hidden rounded border border-gray-900 shadow-md">
         <Map
           key={mapKey} // Use mapKey as the key prop

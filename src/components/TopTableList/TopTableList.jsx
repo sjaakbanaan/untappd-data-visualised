@@ -9,6 +9,7 @@ const TopTableList = ({ beerData }) => {
       scoreType: 'rating_score',
       key: 'topBeersRatingScore',
       title: 'Top 10 rated beers (by you)',
+      showPhotos: true,
     },
     {
       dataType: 'topBeers',
@@ -16,24 +17,28 @@ const TopTableList = ({ beerData }) => {
       key: 'topBeersGloalRatingScore',
       title: 'Top 10 rated beers (global / you (diff))',
       selfCompare: true,
+      showPhotos: true,
     },
     {
       dataType: 'topBeers',
       scoreType: 'beer_abv',
       key: 'topBeersAbv',
       title: 'Top 10 strongest beers',
+      showPhotos: true,
     },
     {
       dataType: 'topBeers',
       scoreType: 'total_toasts',
       key: 'topBeersTotalToasts',
       title: 'Top 10 toasts',
+      showPhotos: true,
     },
     {
       dataType: 'topBeers',
       scoreType: 'total_comments',
       key: 'TopBeersTotalComments',
       title: 'Top 10 comments',
+      showPhotos: true,
     },
     {
       dataType: 'flavorProfiles',
@@ -74,8 +79,8 @@ const TopTableList = ({ beerData }) => {
   const selectedChartData = tableList.find((chart) => chart.key === selectedTopList);
 
   return (
-    <div className="p-4">
-      <h2 className="mb-6 text-lg font-semibold">Other Top 10 lists</h2>
+    <div>
+      <h2 className="mb-6 text-xl font-semibold">Top 10 lists</h2>
       <select
         className="mb-8 w-full appearance-none rounded border border-white bg-gray-900 px-3 py-2 leading-tight text-white shadow focus:outline-none"
         value={selectedTopList}
@@ -96,6 +101,7 @@ const TopTableList = ({ beerData }) => {
         selfCompare={selectedChartData.selfCompare}
         lowerCase={selectedChartData.lowerCase}
         ratingType={selectedChartData.ratingType}
+        showPhotos={selectedChartData.showPhotos}
       />
     </div>
   );
