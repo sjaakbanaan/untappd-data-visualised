@@ -1,11 +1,11 @@
-# Untappd Data Visualised v2.4
+# Untappd Data Visualised v2.4.3
 
 ## This is the repo for [tappd.online](https:///tappd.online), no need to install anymore!
 
 
 ### Checkout the releases page for update notes
 
-![image](https://github.com/sjaakbanaan/untappd-data-visualised/assets/2773301/adff1ca7-4638-4de3-a585-c2fb8852e4b9)
+![tappd-screen1](https://github.com/user-attachments/assets/953f9cee-e01f-4e5d-a980-437dfd976562)
 
 ## Overview
 #### You need to be an _Untappd Insider_ to use this dashboard!
@@ -57,6 +57,8 @@ After setting filters, the following lists are presented in either a chart or li
 
 ```
 
+![tappd-screen2](https://github.com/user-attachments/assets/872afc24-c338-4451-b7c1-6cd486167b44)
+
 ## Prerequisites
 
 - **Node.js**: and preferably **Yarn**.
@@ -93,6 +95,8 @@ After setting filters, the following lists are presented in either a chart or li
 
 Contributions are welcome via pull requests! Please make sure to adhere to the project's coding standards.
 
+![tappd-screen3](https://github.com/user-attachments/assets/fc77d54a-751a-4e8d-82ed-b746b8938c25)
+
 ### Installation:
 
 ```bash
@@ -120,4 +124,5 @@ This will open the app on localhost:3000 in your default web browser. Fill in th
 
 This project is licensed under the MIT License.
 
-![image](https://github.com/sjaakbanaan/untappd-data-visualised/assets/2773301/389514dd-710d-4671-9195-cbb62189c191)
+![tappd-screen4](https://github.com/user-attachments/assets/eeff54d0-c849-4916-9fe7-60bc3ad2b103)
+
