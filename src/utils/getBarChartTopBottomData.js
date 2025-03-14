@@ -1,11 +1,11 @@
 // Function to calculate average rating score for a beer type
-export const calculateAverageRatingScore = (beerTypeData) => {
+export const calculateAverageRatingScore = (beerTypeData, scoreType = 'rating_score') => {
   // function to round, because it sometimes had a lot of decimals behind the comma
   const roundedValue = (value) => Number((value * 100).toFixed(2));
 
   // Filter out rating scores that are 0
   const filteredScoresAboveZero = beerTypeData
-    .map((beer) => beer.rating_score)
+    .map((beer) => beer[scoreType]) // Use scoreType dynamically
     .filter((score) => score > 0);
 
   // Calculate the sum of all rating scores
@@ -17,7 +17,7 @@ export const calculateAverageRatingScore = (beerTypeData) => {
   return roundedValue(averageRatingScore);
 };
 
-export const getBarChartTopBottomData = (beerData) => {
+export const getBarChartTopBottomData = (beerData, scoreType = 'rating_score') => {
   // utils
   const removeNullItemsFromArray = (arr) => {
     // Filter out null items
@@ -51,10 +51,10 @@ export const getBarChartTopBottomData = (beerData) => {
     const topBeerTypeStatistics = filteredBeerTypes.map(([beerType], i) => {
       const beerTypeData = beerData.filter((beer) => beer.beer_type === beerType);
       // Calculate average rating score for the current beer type
-      const averageRating = calculateAverageRatingScore(beerTypeData);
+      const averageRating = calculateAverageRatingScore(beerTypeData, scoreType);
 
       // Filter out rating scores that are 0
-      const filteredRatingScores = beerTypeData.map((beer) => beer.rating_score);
+      const filteredRatingScores = beerTypeData.map((beer) => beer[scoreType]); // Use scoreType dynamically
       // Calculate lowest and highest rating scores for the current beer type
       const filteredScoresAboveZero = filteredRatingScores.filter((score) => score > 0);
       const lowestRatingScore = Math.min(...filteredScoresAboveZero);
@@ -62,10 +62,10 @@ export const getBarChartTopBottomData = (beerData) => {
 
       // Find the corresponding bid for the lowest and highest rating scores
       const min_bid = beerTypeData.find(
-        (beer) => beer.rating_score === lowestRatingScore
+        (beer) => beer[scoreType] === lowestRatingScore // Use scoreType dynamically
       )?.bid;
       const max_bid = beerTypeData.find(
-        (beer) => beer.rating_score === highestRatingScore
+        (beer) => beer[scoreType] === highestRatingScore // Use scoreType dynamically
       )?.bid;
 
       return {

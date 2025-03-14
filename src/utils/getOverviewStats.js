@@ -33,6 +33,7 @@ export const getOverviewStats = (beerData, filterDateRange, fullBeerData, infoTo
     filterDateRange
   );
   const avgRating = calculateAverageRatingScore(beerData);
+  const globalAvgRating = calculateAverageRatingScore(beerData, 'global_rating_score');
 
   const stats = [
     {
@@ -57,6 +58,7 @@ export const getOverviewStats = (beerData, filterDateRange, fullBeerData, infoTo
     {
       key: 'Average rating',
       value: (avgRating / 100).toFixed(2),
+      suffix: `global rating: ${(globalAvgRating / 100).toFixed(2)}`,
     },
     {
       key: 'Venues drank at',
