@@ -17,7 +17,7 @@ export const getOverviewStats = (beerData, filterDateRange, fullBeerData, infoTo
       (1000 * 60 * 60 * 24);
 
   const totalPhotos = statsCountTotal(beerData, 'photo_url');
-  const totalVenues = statsCountTotal(beerData, 'venue_name');
+  const totalVenues = statsCountUnique(beerData, 'venue_name');
   const totalCities = statsCountUnique(beerData, 'venue_city');
   const totalBreweries = statsCountUnique(beerData, 'brewery_name');
   const totalCountries = statsCountUnique(beerData, 'venue_country');
