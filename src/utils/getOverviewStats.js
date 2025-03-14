@@ -7,6 +7,7 @@ import {
   checkFullDateRange,
   getDefaultEndDate,
 } from '../utils';
+import { calculateAverageRatingScore } from './getBarChartTopBottomData';
 
 export const getOverviewStats = (beerData, filterDateRange, fullBeerData, infoToShow) => {
   const totalUniqueBeerCount = beerData && filterDuplicateBeers(beerData)?.length;
@@ -31,6 +32,7 @@ export const getOverviewStats = (beerData, filterDateRange, fullBeerData, infoTo
     fullBeerData,
     filterDateRange
   );
+  const avgRating = calculateAverageRatingScore(beerData);
 
   const stats = [
     {
@@ -50,8 +52,11 @@ export const getOverviewStats = (beerData, filterDateRange, fullBeerData, infoTo
     },
     {
       key: 'Beer styles',
-      short_key: 'Beer styles',
       value: beerTypes.length,
+    },
+    {
+      key: 'Average rating',
+      value: (avgRating / 100).toFixed(2),
     },
     {
       key: 'Venues drank at',

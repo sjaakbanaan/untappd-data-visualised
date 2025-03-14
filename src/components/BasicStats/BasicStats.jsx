@@ -18,6 +18,7 @@ const BasicStats = ({ beerData, fullBeerData, filterDateRange }) => {
     'Unique friends',
     'Years active',
     'Days active',
+    'Average rating',
   ];
 
   const stats = getOverviewStats(beerData, filterDateRange, fullBeerData, infoToShow);

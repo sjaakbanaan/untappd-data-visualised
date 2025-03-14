@@ -1,3 +1,22 @@
+// Function to calculate average rating score for a beer type
+export const calculateAverageRatingScore = (beerTypeData) => {
+  // function to round, because it sometimes had a lot of decimals behind the comma
+  const roundedValue = (value) => Number((value * 100).toFixed(2));
+
+  // Filter out rating scores that are 0
+  const filteredScoresAboveZero = beerTypeData
+    .map((beer) => beer.rating_score)
+    .filter((score) => score > 0);
+
+  // Calculate the sum of all rating scores
+  const totalScoreSum = filteredScoresAboveZero.reduce((sum, score) => sum + score, 0);
+
+  // Calculate the average rating score
+  const averageRatingScore = totalScoreSum / filteredScoresAboveZero.length;
+
+  return roundedValue(averageRatingScore);
+};
+
 export const getBarChartTopBottomData = (beerData) => {
   // utils
   const removeNullItemsFromArray = (arr) => {
@@ -5,24 +24,9 @@ export const getBarChartTopBottomData = (beerData) => {
     const filteredArray = arr.filter((item) => item !== null);
     return filteredArray;
   };
+
   // function to round, because it sometimes had a lot of decimals behind the comma
   const roundedValue = (value) => Number((value * 100).toFixed(2));
-
-  // Function to calculate average rating score for a beer type
-  const calculateAverageRatingScore = (beerTypeData) => {
-    // Filter out rating scores that are 0
-    const filteredScoresAboveZero = beerTypeData
-      .map((beer) => beer.rating_score)
-      .filter((score) => score > 0);
-
-    // Calculate the sum of all rating scores
-    const totalScoreSum = filteredScoresAboveZero.reduce((sum, score) => sum + score, 0);
-
-    // Calculate the average rating score
-    const averageRatingScore = totalScoreSum / filteredScoresAboveZero.length;
-
-    return roundedValue(averageRatingScore);
-  };
 
   // Function to calculate top beer types by occurrence and their statistics
   const calculateBeerTypeStatistics = () => {
