@@ -95,11 +95,10 @@ const Dashboard = () => {
           setFilterOverview={setFilterOverview}
         />
         <DashboardHeader
-          totalBeerCount={filteredData.length}
           filterDateRange={filterDateRange}
           filterOverview={filterOverview}
-          beerData={filteredData}
           setFilterOverview={setFilterOverview}
+          totalBeerCount={filteredData.length}
           setFilterDateRange={setFilterDateRange}
         />
       </div>

@@ -25,7 +25,7 @@ const ResetFilters = ({ setFilterOverview, setFilterDateRange }) => {
         className="rounded border-yellow-500 bg-yellow-500 px-3 py-2 text-black shadow transition-colors duration-300 hover:bg-yellow-400"
         onClick={handleResetFilters}
       >
-        Reset filters
+        Reset to last 6 months
       </button>
     </div>
   );

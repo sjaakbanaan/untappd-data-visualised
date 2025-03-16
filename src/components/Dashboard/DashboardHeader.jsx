@@ -2,6 +2,7 @@ import ResetFilters from './ResetFilters.jsx';
 import { isFilterOverviewSet } from '../../utils';
 
 const DashboardHeader = ({
+  filterDateRange,
   filterOverview,
   setFilterOverview,
   totalBeerCount,
@@ -13,7 +14,7 @@ const DashboardHeader = ({
         {totalBeerCount} checkins{' '}
         <span className="text-gray-400">in current selection</span>
       </h2>
-      {isFilterOverviewSet(filterOverview) && (
+      {isFilterOverviewSet(filterOverview, filterDateRange) && (
         <ResetFilters
           setFilterOverview={setFilterOverview}
           setFilterDateRange={setFilterDateRange}

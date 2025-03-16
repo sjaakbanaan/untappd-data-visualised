@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import NotificationBar from '../NotificationBar.jsx';
+// import NotificationBar from '../NotificationBar.jsx';
 
 const DateSelector = ({ beerData, filterDateRange, setFilterDateRange }) => {
   const [formattedEarliestDate, setFormattedEarliestDate] = useState('');
   const [formattedLatestDate, setFormattedLatestDate] = useState('');
   const [startButtonFlicker, setStartButtonFlicker] = useState('');
-  const [isInvalidRange, setIsInvalidRange] = useState(false); // Track invalid range state
+  // const [isInvalidRange, setIsInvalidRange] = useState(false); // Track invalid range state
 
   // Calculate the minimum start date
   useEffect(() => {
@@ -26,16 +26,16 @@ const DateSelector = ({ beerData, filterDateRange, setFilterDateRange }) => {
   }, [beerData]);
 
   const handleInputChange = (field, value, filterDateRange) => {
-    if (field === 'start' && value.length > 0 && value > filterDateRange.end) {
-      setIsInvalidRange(true);
-      return false;
-    }
-    if (field === 'end' && value.length > 0 && value < filterDateRange.start) {
-      setIsInvalidRange(true);
-      return false;
-    }
+    // if (field === 'start' && value.length > 0 && value > filterDateRange.end) {
+    //   setIsInvalidRange(true);
+    //   return false;
+    // }
+    // if (field === 'end' && value.length > 0 && value < filterDateRange.start) {
+    //   setIsInvalidRange(true);
+    //   return false;
+    // }
     setFilterDateRange({ ...filterDateRange, [field]: value });
-    setIsInvalidRange(false); // Reset invalid range state when the range is valid
+    // setIsInvalidRange(false); // Reset invalid range state when the range is valid
   };
 
   useEffect(() => {
@@ -68,10 +68,10 @@ const DateSelector = ({ beerData, filterDateRange, setFilterDateRange }) => {
         />
       </div>
       {/* Show or hide the invalid range message based on isInvalidRange */}
-      <NotificationBar
+      {/* <NotificationBar
         text="Invalid date range, please adjust it."
         show={!!isInvalidRange}
-      />
+      /> */}
     </div>
   );
 };
