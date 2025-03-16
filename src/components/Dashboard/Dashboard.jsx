@@ -186,7 +186,7 @@ const Dashboard = () => {
         </div>
       ) : (
         <NotificationBar
-          text="Loading results or your filters didn't return a result. Use the 'Reset filters'
+          text="Your filters didn't return a result. Adjust your filters or sse the 'Reset filters'
           button above."
         />
       )}
