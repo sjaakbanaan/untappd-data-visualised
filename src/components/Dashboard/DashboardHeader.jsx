@@ -1,7 +1,12 @@
 import ResetFilters from './ResetFilters.jsx';
 import { isFilterOverviewSet } from '../../utils';
 
-const DashboardHeader = ({ filterOverview, setFilterOverview, totalBeerCount }) => {
+const DashboardHeader = ({
+  filterOverview,
+  setFilterOverview,
+  totalBeerCount,
+  setFilterDateRange,
+}) => {
   return (
     <div className="mt-10 md:mb-6 md:flex md:items-center">
       <h2 className="my-3 text-2xl font-bold">
@@ -9,7 +14,10 @@ const DashboardHeader = ({ filterOverview, setFilterOverview, totalBeerCount }) 
         <span className="text-gray-400">in current selection</span>
       </h2>
       {isFilterOverviewSet(filterOverview) && (
-        <ResetFilters setFilterOverview={setFilterOverview} />
+        <ResetFilters
+          setFilterOverview={setFilterOverview}
+          setFilterDateRange={setFilterDateRange}
+        />
       )}
     </div>
   );

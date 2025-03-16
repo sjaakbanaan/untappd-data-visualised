@@ -55,6 +55,7 @@ const DateSelector = ({ beerData, filterDateRange, setFilterDateRange }) => {
           value={filterDateRange.start}
           onChange={(e) => handleInputChange('start', e.target.value, filterDateRange)}
           min={formattedEarliestDate}
+          max={formattedLatestDate}
           required
         />
         <input
@@ -68,7 +69,6 @@ const DateSelector = ({ beerData, filterDateRange, setFilterDateRange }) => {
       </div>
       {/* Show or hide the invalid range message based on isInvalidRange */}
       <NotificationBar
-        type="error"
         text="Invalid date range, please adjust it."
         show={!!isInvalidRange}
       />

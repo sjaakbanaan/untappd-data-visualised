@@ -83,6 +83,7 @@ After setting filters, the following lists are presented in either a chart or li
 - 22-01-2025: v2.4.2 New UI for the basic statistics
 - 04-02-2025: v2.4.3 Performance improvement by grouping elements in tabbed content
 - 14-03-2025: v2.4.4 Add an average rating to the basic stats overview
+- 16-03-2025: v2.4.5 Better error handling with invalid filter options applied
 
 ## Future wishes
 

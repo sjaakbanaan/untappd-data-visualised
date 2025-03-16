@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext, lazy, Suspense } from 'react';
 import ReactGA from 'react-ga4';
-import { Link } from 'react-router-dom';
 
 import DashboardHeader from './DashboardHeader.jsx';
 import YearFilterButtons from './YearFilterButtons.jsx';
@@ -8,6 +7,7 @@ import DateSelector from './DateSelector.jsx';
 import OverviewFilters from '../Overview/OverviewFilters.jsx';
 import { DataContext } from '../../DataContext';
 import { filterBeerData, getDefaultStartDate, getDefaultEndDate } from '../../utils/';
+import NotificationBar from '../NotificationBar.jsx';
 
 // Lazy-load heavy components
 const BasicStats = lazy(() => import('../BasicStats/BasicStats.jsx'));
@@ -78,31 +78,33 @@ const Dashboard = () => {
 
   return (
     <div className="container mx-auto p-4 md:p-0">
+      <div>
+        <YearFilterButtons
+          beerData={beerData}
+          filterDateRange={filterDateRange}
+          setFilterDateRange={setFilterDateRange}
+        />
+        <DateSelector
+          beerData={beerData}
+          filterDateRange={filterDateRange}
+          setFilterDateRange={setFilterDateRange}
+        />
+        <OverviewFilters
+          beerData={filteredData}
+          filterOverview={filterOverview}
+          setFilterOverview={setFilterOverview}
+        />
+        <DashboardHeader
+          totalBeerCount={filteredData.length}
+          filterDateRange={filterDateRange}
+          filterOverview={filterOverview}
+          beerData={filteredData}
+          setFilterOverview={setFilterOverview}
+          setFilterDateRange={setFilterDateRange}
+        />
+      </div>
       {filteredData && filteredData.length > 0 ? (
         <div>
-          <YearFilterButtons
-            beerData={beerData}
-            filterDateRange={filterDateRange}
-            setFilterDateRange={setFilterDateRange}
-          />
-          <DateSelector
-            beerData={beerData}
-            filterDateRange={filterDateRange}
-            setFilterDateRange={setFilterDateRange}
-          />
-          <OverviewFilters
-            beerData={filteredData}
-            filterOverview={filterOverview}
-            setFilterOverview={setFilterOverview}
-          />
-          <DashboardHeader
-            totalBeerCount={filteredData.length}
-            filterDateRange={filterDateRange}
-            filterOverview={filterOverview}
-            beerData={filteredData}
-            setFilterOverview={setFilterOverview}
-          />
-
           {/* Section Buttons */}
           <div className="my-4 flex flex-wrap gap-4">
             <button
@@ -113,7 +115,7 @@ const Dashboard = () => {
                   : 'bg-gray-900 text-white hover:bg-gray-700'
               }`}
             >
-              Show Stats
+              Stats
             </button>
             <button
               onClick={() => setActiveSection('charts')}
@@ -123,7 +125,7 @@ const Dashboard = () => {
                   : 'bg-gray-900 text-white hover:bg-gray-700'
               }`}
             >
-              Show Charts
+              Charts
             </button>
             <button
               onClick={() => setActiveSection('maps')}
@@ -133,7 +135,7 @@ const Dashboard = () => {
                   : 'bg-gray-900 text-white hover:bg-gray-700'
               }`}
             >
-              Show Maps
+              Maps
             </button>
             <button
               onClick={() => setActiveSection('checkins')}
@@ -143,7 +145,7 @@ const Dashboard = () => {
                   : 'bg-gray-900 text-white hover:bg-gray-700'
               }`}
             >
-              Show Checkins
+              Checkins
             </button>
           </div>
 
@@ -183,13 +185,10 @@ const Dashboard = () => {
           </div>
         </div>
       ) : (
-        <div className="mt-4 text-center text-xl">
-          Loading results or your filters didn't return a result. Did you already{' '}
-          <Link className="text-yellow-500 underline" to="/upload">
-            upload your Untappd JSON export
-          </Link>
-          ?
-        </div>
+        <NotificationBar
+          text="Loading results or your filters didn't return a result. Use the 'Reset filters'
+          button above."
+        />
       )}
     </div>
   );
