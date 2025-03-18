@@ -1,9 +1,9 @@
 import Navigation from './Navigation.jsx';
 import Icon from './Icon/Icon.jsx';
-import { getUserName } from '../utils';
+import { useLocalStorageData } from '../utils';
 
 const Header = () => {
-  const userName = getUserName();
+  const userName = useLocalStorageData('untappd_username');
 
   return (
     <div className="bg-gray-900 p-4 md:p-4 xl:p-6">

@@ -14,7 +14,7 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
 
   return (
     <div className="mb-8 md:mb-8">
-      <div className="mb-2 block text-sm font-bold text-white">Drank between</div>
+      <div className="mb-2 block text-sm font-bold text-white">Set a date range</div>
       <div className="grid grid-cols-2 gap-4 md:grid-cols-3  lg:grid-cols-4 xl:grid-flow-col xl:grid-cols-none">
         <div className="block">
           <button

@@ -2,11 +2,11 @@ import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import WrappdCanvas from './WrappdCanvas.jsx';
 import WrappdInput from './WrappdInput.jsx';
-import { getUserName } from '../../utils';
+import { useLocalStorageData } from '../../utils';
 
 const Wrappd = ({ beerData, fullBeerData, filterDateRange }) => {
   const elementRef = useRef();
-  const userName = getUserName();
+  const userName = useLocalStorageData('untappd_username');
   const [customTitle, setCustomTitle] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 

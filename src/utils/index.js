@@ -23,7 +23,7 @@ import { formatWrappdDates } from './formatWrappdDates';
 import { getOverviewStats } from './getOverviewStats';
 import { processTopData } from './processTopData';
 import { useWrappdData } from './useWrappdData';
-import { getUserName } from './getUserName';
+import { useLocalStorageData } from './useLocalStorageData';
 import { toDataURL } from './toDataURL';
 import { getBarChartRatingData } from './getBarChartRatingData';
 
@@ -53,7 +53,7 @@ export {
   getOverviewStats,
   processTopData,
   useWrappdData,
-  getUserName,
+  useLocalStorageData,
   toDataURL,
   getBarChartRatingData,
 };

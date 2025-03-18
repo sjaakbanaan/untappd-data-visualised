@@ -6,7 +6,12 @@ import YearFilterButtons from './YearFilterButtons.jsx';
 import DateSelector from './DateSelector.jsx';
 import OverviewFilters from '../Overview/OverviewFilters.jsx';
 import { DataContext } from '../../DataContext';
-import { filterBeerData, getDefaultStartDate, getDefaultEndDate } from '../../utils/';
+import {
+  filterBeerData,
+  getDefaultStartDate,
+  getDefaultEndDate,
+  useLocalStorageData,
+} from '../../utils/';
 import NotificationBar from '../NotificationBar.jsx';
 
 // Lazy-load heavy components
@@ -57,6 +62,8 @@ const useDashboardData = () => {
 };
 
 const Dashboard = () => {
+  const mapboxKey = useLocalStorageData('mapbox_key');
+
   useEffect(() => {
     ReactGA.send({
       hitType: 'pageview',
@@ -126,16 +133,20 @@ const Dashboard = () => {
             >
               Charts
             </button>
-            <button
-              onClick={() => setActiveSection('maps')}
-              className={`mb-0 rounded border px-3 py-2 text-lg shadow transition-colors duration-300 ${
-                activeSection === 'maps'
-                  ? 'border-yellow-500 bg-yellow-500 text-gray-900'
-                  : 'bg-gray-900 text-white hover:bg-gray-700'
-              }`}
-            >
-              Maps
-            </button>
+
+            {mapboxKey && (
+              <button
+                onClick={() => setActiveSection('maps')}
+                className={`mb-0 rounded border px-3 py-2 text-lg shadow transition-colors duration-300 ${
+                  activeSection === 'maps'
+                    ? 'border-yellow-500 bg-yellow-500 text-gray-900'
+                    : 'bg-gray-900 text-white hover:bg-gray-700'
+                }`}
+              >
+                Maps
+              </button>
+            )}
+
             <button
               onClick={() => setActiveSection('checkins')}
               className={`mb-0 rounded border px-3 py-2 text-lg shadow transition-colors duration-300 ${

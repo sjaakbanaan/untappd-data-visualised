@@ -20,7 +20,7 @@ const Uploader = () => {
   const { manipulateData } = useUploadedJsonUpdater(); // Import and use the hook
   const [userDetails, setUserDetails] = useState({
     untappd_username: '',
-    untappd_avatar: '',
+    // untappd_avatar: '',
     mapbox_key: '',
     venue_lat: '',
     venue_lng: '',
