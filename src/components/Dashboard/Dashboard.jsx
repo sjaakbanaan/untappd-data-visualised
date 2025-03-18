@@ -6,13 +6,9 @@ import YearFilterButtons from './YearFilterButtons.jsx';
 import DateSelector from './DateSelector.jsx';
 import OverviewFilters from '../Overview/OverviewFilters.jsx';
 import { DataContext } from '../../DataContext';
-import {
-  filterBeerData,
-  getDefaultStartDate,
-  getDefaultEndDate,
-  useLocalStorageData,
-} from '../../utils/';
+import { filterBeerData, getDefaultStartDate, getDefaultEndDate } from '../../utils/';
 import NotificationBar from '../NotificationBar.jsx';
+import DashboardNav from './DashboardNav.jsx';
 
 // Lazy-load heavy components
 const BasicStats = lazy(() => import('../BasicStats/BasicStats.jsx'));
@@ -26,6 +22,7 @@ const BeerTypeChart = lazy(() => import('../Charts/BeerTypeChart/BeerTypeChart.j
 const Overview = lazy(() => import('../Overview/Overview.jsx'));
 
 const useDashboardData = () => {
+  // prepare the useStates for the incoming data:
   const [filteredData, setFilteredData] = useState([]);
   const [filterOverview, setFilterOverview] = useState({
     brewery_name: '',
@@ -42,8 +39,11 @@ const useDashboardData = () => {
     end: getDefaultEndDate(),
   });
 
+  // BEHOLD! THE ALMIGHTHY BEER DATA!
   const { beerData } = useContext(DataContext);
 
+  /* The filtering starts here whenever you change a filter. It returns pretty much all
+  the date needed for components: */
   useEffect(() => {
     if (beerData) {
       const filteredResults = filterBeerData(beerData, filterOverview, filterDateRange);
@@ -62,8 +62,7 @@ const useDashboardData = () => {
 };
 
 const Dashboard = () => {
-  const mapboxKey = useLocalStorageData('mapbox_key');
-
+  // analytics
   useEffect(() => {
     ReactGA.send({
       hitType: 'pageview',
@@ -72,6 +71,7 @@ const Dashboard = () => {
     });
   });
 
+  // let's fetch all that nice data via the useDashboardData() hook:
   const {
     beerData,
     filteredData,
@@ -81,9 +81,11 @@ const Dashboard = () => {
     setFilterDateRange,
   } = useDashboardData();
 
+  // set a default active dashboard menu item:
   const [activeSection, setActiveSection] = useState('stats');
 
   return (
+    // All filtering instruments and total result display are up next:
     <div className="container mx-auto p-4 md:p-0">
       <div>
         <YearFilterButtons
@@ -111,54 +113,11 @@ const Dashboard = () => {
       </div>
       {filteredData && filteredData.length > 0 ? (
         <div>
-          {/* Section Buttons */}
-          <div className="my-4 flex flex-wrap gap-4">
-            <button
-              onClick={() => setActiveSection('stats')}
-              className={`mb-0 rounded border px-3 py-2 text-lg shadow transition-colors duration-300 ${
-                activeSection === 'stats'
-                  ? 'border-yellow-500 bg-yellow-500 text-gray-900'
-                  : 'bg-gray-900 text-white hover:bg-gray-700'
-              }`}
-            >
-              Stats
-            </button>
-            <button
-              onClick={() => setActiveSection('charts')}
-              className={`mb-0 rounded border px-3 py-2 text-lg shadow transition-colors duration-300 ${
-                activeSection === 'charts'
-                  ? 'border-yellow-500 bg-yellow-500 text-gray-900'
-                  : 'bg-gray-900 text-white hover:bg-gray-700'
-              }`}
-            >
-              Charts
-            </button>
-
-            {mapboxKey && (
-              <button
-                onClick={() => setActiveSection('maps')}
-                className={`mb-0 rounded border px-3 py-2 text-lg shadow transition-colors duration-300 ${
-                  activeSection === 'maps'
-                    ? 'border-yellow-500 bg-yellow-500 text-gray-900'
-                    : 'bg-gray-900 text-white hover:bg-gray-700'
-                }`}
-              >
-                Maps
-              </button>
-            )}
-
-            <button
-              onClick={() => setActiveSection('checkins')}
-              className={`mb-0 rounded border px-3 py-2 text-lg shadow transition-colors duration-300 ${
-                activeSection === 'checkins'
-                  ? 'border-yellow-500 bg-yellow-500 text-gray-900'
-                  : 'bg-gray-900 text-white hover:bg-gray-700'
-              }`}
-            >
-              Checkins
-            </button>
-          </div>
-
+          {/* section Buttons */}
+          <DashboardNav
+            activeSection={activeSection}
+            setActiveSection={setActiveSection}
+          />
           {/* Conditional Loading */}
           <div className="grid gap-6 rounded md:py-4 lg:grid-cols-2 lg:gap-10 lg:gap-y-24 xl:py-6">
             <Suspense fallback={<div>Loading...</div>}>
@@ -195,6 +154,7 @@ const Dashboard = () => {
           </div>
         </div>
       ) : (
+        // in case of no results:
         <NotificationBar
           text="Your filters didn't return a result. Adjust your filters or sse the 'Reset filters'
           button above."

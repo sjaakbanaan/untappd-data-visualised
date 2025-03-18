@@ -47,7 +47,7 @@ const Overview = ({ beerData, lessCols }) => {
 
   return (
     <div className="container relative mx-auto">
-      <div className="mt-6" ref={overviewRef}>
+      <div ref={overviewRef}>
         <div className="flex justify-center">
           {buttons.length > 1 &&
             buttons.map((item, i) => (

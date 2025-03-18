@@ -1,6 +1,6 @@
 {
   "name": "untappd-data-visualised",
-  "version": "2.4.6",
+  "version": "2.4.7",
   "private": false,
   "dependencies": {
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",

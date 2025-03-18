@@ -85,6 +85,7 @@ After setting filters, the following lists are presented in either a chart or li
 - 14-03-2025: v2.4.4 Add an average rating to the basic stats overview
 - 16-03-2025: v2.4.5 Better error handling with invalid filter options applied
 - 18-03-2025: v2.4.6 Map Box key is now optional, the Map nav element will be hidden + some Wrappd leftovers cleanup.
+- 18-03-2025: v2.4.7 Improved dashboard navigation
 
 ## Future wishes
 
