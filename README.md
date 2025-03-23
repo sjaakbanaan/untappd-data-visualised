@@ -5,7 +5,7 @@
 
 ### Checkout the releases page for update notes
 
-![tappd-screen1](https://github.com/user-attachments/assets/953f9cee-e01f-4e5d-a980-437dfd976562)
+![screencapture-tappd-online-2025-03-23-21_36_48](https://github.com/user-attachments/assets/ee37fbb2-2c91-42b4-bb38-a20bf78621f1)
 
 ## Overview
 #### You need to be an _Untappd Insider_ to use this dashboard!
