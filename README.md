@@ -57,7 +57,7 @@ After setting filters, the following lists are presented in either a chart or li
 
 ```
 
-![tappd-screen2](https://github.com/user-attachments/assets/872afc24-c338-4451-b7c1-6cd486167b44)
+![screencapture-tappd-online-2025-03-23-21_38_30](https://github.com/user-attachments/assets/db0cc620-4d8a-4b78-8671-561360ff22d2)
 
 ## Prerequisites
 
@@ -65,8 +65,7 @@ After setting filters, the following lists are presented in either a chart or li
 - An export of your data from Untappd (https://untappd.com/user/xxxx/beers) as JSON.
 - A [MapBox API key](https://account.mapbox.com/). It's free, you should be able to skip the setting up your payment card somehow.
 
-
-![image](https://github.com/sjaakbanaan/untappd-data-visualised/assets/2773301/33e336c0-8539-4988-9388-1699bf1d3aea)
+![screencapture-tappd-online-2025-03-23-21_39_39](https://github.com/user-attachments/assets/f9494f2a-163b-41c6-95da-98f0f31d8a96)
 
 ## Change log
 
