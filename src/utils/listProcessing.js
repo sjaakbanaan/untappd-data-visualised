@@ -68,7 +68,7 @@ export const processTaggedFriends = (beerData) => {
 export const processFlavorProfiles = (beerData) => {
   const suffix = ' times';
   const onEmpty =
-    'No flavor profiles to display, are these checkins from before the launch of the "Tagged Friends"?';
+    'No flavor profiles to display, make sure your current selection is correct.';
 
   const allItemsArr = beerData.flatMap((item) =>
     item.flavor_profiles

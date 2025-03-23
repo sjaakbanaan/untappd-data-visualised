@@ -18,7 +18,7 @@ const processingFunctions = {
 
 const TopTable = ({
   beerData,
-  dataType,
+  dataType = 'friends',
   scoreType,
   selfCompare,
   lowerCase = false,
@@ -122,12 +122,6 @@ const TopTable = ({
 TopTable.propTypes = {
   beerData: PropTypes.array.isRequired,
   dataType: PropTypes.string,
-  title: PropTypes.string,
-};
-
-TopTable.defaultProps = {
-  dataType: 'friends',
-  title: 'No title',
 };
 
 export default TopTable;

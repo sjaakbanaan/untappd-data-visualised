@@ -86,6 +86,7 @@ After setting filters, the following lists are presented in either a chart or li
 - 16-03-2025: v2.4.5 Better error handling with invalid filter options applied
 - 18-03-2025: v2.4.6 Map Box key is now optional, the Map nav element will be hidden + some Wrappd leftovers cleanup.
 - 18-03-2025: v2.4.7 Improved dashboard navigation
+- 23-03-2025: v2.5 Cleanup of Dashboard.jsx + solved warnings + fixed issue where select box value didn't reset after filter reset + better ui for year buttons for long-time users + filters only defined in DataContext, no longer on 4 different places
 
 ## Future wishes
 

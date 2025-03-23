@@ -1,30 +1,19 @@
 import { useState, useEffect } from 'react';
 import OverviewFilter from './OverviewFilter.jsx';
+import { useContext } from 'react';
+import { DataContext } from '../../DataContext';
+import { transformResetList } from '../../utils/';
 
 const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
-  const [filterOptions, setFilterOptions] = useState({
-    brewery_name: [],
-    brewery_city: [],
-    brewery_country: [],
-    venue_name: [],
-    venue_city: [],
-    venue_country: [],
-    tagged_friends: [],
-    beer_type: [],
-  });
+  const { resetList } = useContext(DataContext);
+  // set empty filter options state
+  const [filterOptions, setFilterOptions] = useState(
+    transformResetList(resetList, 'arrays')
+  );
 
   useEffect(() => {
     // Extract unique filter options from beerData
-    const filterKeys = [
-      'brewery_name',
-      'brewery_city',
-      'brewery_country',
-      'venue_name',
-      'venue_city',
-      'venue_country',
-      'tagged_friends',
-      'beer_type',
-    ];
+    const filterKeys = transformResetList(resetList, 'keyArrays');
     const uniqueOptions = {};
 
     filterKeys.forEach((key) => {

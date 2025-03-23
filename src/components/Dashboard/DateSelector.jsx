@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
-// import NotificationBar from '../NotificationBar.jsx';
 
 const DateSelector = ({ beerData, filterDateRange, setFilterDateRange }) => {
   const [formattedEarliestDate, setFormattedEarliestDate] = useState('');
   const [formattedLatestDate, setFormattedLatestDate] = useState('');
   const [startButtonFlicker, setStartButtonFlicker] = useState('');
-  // const [isInvalidRange, setIsInvalidRange] = useState(false); // Track invalid range state
 
   // Calculate the minimum start date
   useEffect(() => {
@@ -67,11 +65,6 @@ const DateSelector = ({ beerData, filterDateRange, setFilterDateRange }) => {
           required
         />
       </div>
-      {/* Show or hide the invalid range message based on isInvalidRange */}
-      {/* <NotificationBar
-        text="Invalid date range, please adjust it."
-        show={!!isInvalidRange}
-      /> */}
     </div>
   );
 };

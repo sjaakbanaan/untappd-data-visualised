@@ -15,7 +15,7 @@ import {
 import ChartModal from '../ChartModal.jsx';
 import NotificationBar from '../NotificationBar.jsx';
 
-const BarChart = ({ beerData, dataType, trailingChar }) => {
+const BarChart = ({ beerData, dataType = '', trailingChar = '' }) => {
   const openModal = () => setOpen(true);
   const [open, setOpen] = useState(false);
   const [filterBeerList, setFilterBeerList] = useState([]);
@@ -155,13 +155,6 @@ BarChart.propTypes = {
   beerData: PropTypes.array.isRequired,
   dataType: PropTypes.string,
   trailingChar: PropTypes.string,
-  hideCount: PropTypes.bool,
-};
-
-BarChart.defaultProps = {
-  dataType: '',
-  trailingChar: '',
-  hideCount: false,
 };
 
 export default BarChart;

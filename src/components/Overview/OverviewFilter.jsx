@@ -1,7 +1,14 @@
 import classNames from 'classnames';
 import Select from 'react-select';
 
-const OverviewFilter = ({ label, labelPlural, options, onChange, splitValues }) => {
+const OverviewFilter = ({
+  label,
+  labelPlural,
+  options,
+  onChange,
+  value,
+  splitValues,
+}) => {
   // In case the the returned option is an array, split up the values
   let formattedOptions = options;
   if (splitValues) {
@@ -25,13 +32,14 @@ const OverviewFilter = ({ label, labelPlural, options, onChange, splitValues }) 
       </label>
       <Select
         id={labelPlural}
-        placeholder="Select an option..."
+        placeholder="Choose.."
         options={selectOptions}
         onChange={(selectedOption) =>
           onChange(selectedOption ? selectedOption.value : null)
         } // Handle null value
         isClearable
         isSearchable
+        value={value ? { label: value, value } : null} // handle null value
         unstyled
         classNames={{
           clearIndicator: () => classNames('p-2'),

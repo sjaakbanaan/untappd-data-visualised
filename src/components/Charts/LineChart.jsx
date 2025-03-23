@@ -92,8 +92,4 @@ LineChart.propTypes = {
   beerData: PropTypes.array.isRequired,
 };
 
-LineChart.defaultProps = {
-  dataType: '',
-};
-
 export default LineChart;

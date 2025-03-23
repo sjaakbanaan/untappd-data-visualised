@@ -1,12 +1,11 @@
-import { useState, useEffect, useContext, lazy, Suspense } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import ReactGA from 'react-ga4';
 
+import { useDashboardData } from '../../utils/';
 import DashboardHeader from './DashboardHeader.jsx';
 import YearFilterButtons from './YearFilterButtons.jsx';
 import DateSelector from './DateSelector.jsx';
 import OverviewFilters from '../Overview/OverviewFilters.jsx';
-import { DataContext } from '../../DataContext';
-import { filterBeerData, getDefaultStartDate, getDefaultEndDate } from '../../utils/';
 import NotificationBar from '../NotificationBar.jsx';
 import DashboardNav from './DashboardNav.jsx';
 
@@ -20,46 +19,6 @@ const VenueMap = lazy(() => import('../Maps/VenueMap.jsx'));
 const BreweryMap = lazy(() => import('../Maps/BreweryMap.jsx'));
 const BeerTypeChart = lazy(() => import('../Charts/BeerTypeChart/BeerTypeChart.jsx'));
 const Overview = lazy(() => import('../Overview/Overview.jsx'));
-
-const useDashboardData = () => {
-  // prepare the useStates for the incoming data:
-  const [filteredData, setFilteredData] = useState([]);
-  const [filterOverview, setFilterOverview] = useState({
-    brewery_name: '',
-    brewery_city: '',
-    brewery_country: '',
-    venue_name: '',
-    venue_city: '',
-    venue_country: '',
-    tagged_friends: '',
-    beer_type: '',
-  });
-  const [filterDateRange, setFilterDateRange] = useState({
-    start: getDefaultStartDate(),
-    end: getDefaultEndDate(),
-  });
-
-  // BEHOLD! THE ALMIGHTHY BEER DATA!
-  const { beerData } = useContext(DataContext);
-
-  /* The filtering starts here whenever you change a filter. It returns pretty much all
-  the date needed for components: */
-  useEffect(() => {
-    if (beerData) {
-      const filteredResults = filterBeerData(beerData, filterOverview, filterDateRange);
-      setFilteredData(filteredResults);
-    }
-  }, [beerData, filterOverview, filterDateRange]);
-
-  return {
-    beerData,
-    filteredData,
-    filterOverview,
-    setFilterOverview,
-    filterDateRange,
-    setFilterDateRange,
-  };
-};
 
 const Dashboard = () => {
   // analytics

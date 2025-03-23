@@ -6,7 +6,7 @@ import { processTopData } from '../../utils';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const PieChart = ({ beerData, dataType, urlType }) => {
+const PieChart = ({ beerData, dataType, urlType = '' }) => {
   const { labels, topChartData, topItems } = processTopData(beerData, dataType, urlType);
 
   const chartData = {
@@ -97,14 +97,7 @@ const PieChart = ({ beerData, dataType, urlType }) => {
 PieChart.propTypes = {
   beerData: PropTypes.array.isRequired,
   dataType: PropTypes.string,
-  trailingChar: PropTypes.string,
-  hideCount: PropTypes.bool,
-};
-
-PieChart.defaultProps = {
-  dataType: '',
-  trailingChar: '',
-  hideCount: false,
+  urlType: PropTypes.string,
 };
 
 export default PieChart;

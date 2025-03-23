@@ -26,6 +26,8 @@ import { useWrappdData } from './useWrappdData';
 import { useLocalStorageData } from './useLocalStorageData';
 import { toDataURL } from './toDataURL';
 import { getBarChartRatingData } from './getBarChartRatingData';
+import { transformResetList } from './transformResetList';
+import { useDashboardData } from './useDashboardData';
 
 export {
   formatDate,
@@ -56,4 +58,6 @@ export {
   useLocalStorageData,
   toDataURL,
   getBarChartRatingData,
+  transformResetList,
+  useDashboardData,
 };

@@ -1,17 +1,12 @@
 import { getDefaultStartDate, getDefaultEndDate } from '../../utils/';
+import { useContext } from 'react';
+import { DataContext } from '../../DataContext';
 
 const ResetFilters = ({ setFilterOverview, setFilterDateRange }) => {
+  const { resetList } = useContext(DataContext);
+
   const handleResetFilters = () => {
-    setFilterOverview({
-      brewery_name: '',
-      brewery_city: '',
-      brewery_country: '',
-      venue_name: '',
-      venue_city: '',
-      venue_country: '',
-      tagged_friends: '',
-      beer_type: '',
-    });
+    setFilterOverview(resetList);
     // clear filter input
     setFilterDateRange({
       start: getDefaultStartDate(),
