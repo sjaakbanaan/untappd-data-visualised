@@ -1,9 +1,6 @@
 # Untappd Data Visualised v2.5.1
 
-## This is the repo for [tappd.online](https:///tappd.online), no need to install anymore!
-
-
-### Checkout the releases page for update notes
+## This is the repository for [tappd.online](https:///tappd.online), no need to install anymore!
 
 ![screencapture-tappd-online-2025-03-23-21_36_48](https://github.com/user-attachments/assets/ee37fbb2-2c91-42b4-bb38-a20bf78621f1)
 
@@ -54,16 +51,15 @@ After setting filters, the following lists are presented in either a chart or li
 - Cumulative beer count (year)
 - Beer type apprecation list
 - Basic statistics
-
 ```
 
 ![screencapture-tappd-online-2025-03-23-21_38_30](https://github.com/user-attachments/assets/db0cc620-4d8a-4b78-8671-561360ff22d2)
 
 ## Prerequisites
 
-- **Node.js**: and preferably **Yarn**.
 - An export of your data from Untappd (https://untappd.com/user/xxxx/beers) as JSON.
 - A [MapBox API key](https://account.mapbox.com/). It's free, you should be able to skip the setting up your payment card somehow.
+- for local development: **Node.js**: and preferably **Yarn**.
 
 ![screencapture-tappd-online-2025-03-23-21_39_39](https://github.com/user-attachments/assets/f9494f2a-163b-41c6-95da-98f0f31d8a96)
 
@@ -90,11 +86,12 @@ After setting filters, the following lists are presented in either a chart or li
 
 ## Future wishes
 
-- Make this into an actual web app so you don't have to run it yourself.
+- Being able to run it without the need of Untappd Insider
+- Being able to share your stats
 
 ## Known bugs
 
-- Resetting filters doesn't reset the select box values in UI
+- tell me
 
 ## Contributing
 
