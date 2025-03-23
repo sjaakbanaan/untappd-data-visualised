@@ -100,7 +100,7 @@ After setting filters, the following lists are presented in either a chart or li
 
 Contributions are welcome via pull requests! Please make sure to adhere to the project's coding standards.
 
-![tappd-screen3](https://github.com/user-attachments/assets/fc77d54a-751a-4e8d-82ed-b746b8938c25)
+![screencapture-tappd-online-2025-03-23-21_41_36 (1)](https://github.com/user-attachments/assets/f1d59e2b-28b9-45cf-9e75-3f1f51755b9f)
 
 ### Installation:
 
@@ -128,6 +128,4 @@ This will open the app on localhost:3000 in your default web browser. Fill in th
 ## License
 
 This project is licensed under the MIT License.
-
-![tappd-screen4](https://github.com/user-attachments/assets/eeff54d0-c849-4916-9fe7-60bc3ad2b103)
 
