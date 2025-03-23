@@ -1,7 +1,15 @@
 import classNames from 'classnames';
 import Select from 'react-select';
+import statesData from '../../states.json';
+
+// Function to translate state codes to names
+const translateStates = (stateCode, statesData) => {
+  const state = statesData.find((c) => c.code === stateCode);
+  return state ? state.name : stateCode;
+};
 
 const OverviewFilter = ({
+  filterKey,
   label,
   labelPlural,
   options,
@@ -21,7 +29,7 @@ const OverviewFilter = ({
 
   // Format options for react-select
   const selectOptions = formattedOptions.map((option) => ({
-    label: option,
+    label: filterKey == 'brewery_state' ? translateStates(option, statesData) : option,
     value: option,
   }));
 

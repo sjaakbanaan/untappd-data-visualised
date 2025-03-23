@@ -5,8 +5,8 @@ export const useUploadedJsonUpdater = () => {
   const [beerData, setBeerData] = useState(null);
 
   // Function to translate country names
-  const translateToEnglish = (originalName) => {
-    const country = countriesData.countries.find((c) => c.nativeName === originalName);
+  const translateCountries = (originalName, countriesData) => {
+    const country = countriesData.find((c) => c.nativeName === originalName);
     return country ? country.name : originalName;
   };
 
@@ -17,9 +17,9 @@ export const useUploadedJsonUpdater = () => {
       // Create a copy of the original item
       let updatedItem = { ...item };
 
+      // STEP 1: Update the URL's:
       // Define the properties to check and update
       const propertiesToCheck = ['checkin_url', 'beer_url', 'brewery_url'];
-
       // Iterate over the properties
       propertiesToCheck.forEach((property) => {
         // Check if the property exists and contains "api.untappd", then replace it
@@ -31,7 +31,8 @@ export const useUploadedJsonUpdater = () => {
         }
       });
 
-      // Optionally, add additional conditions to update the item based on other criteria
+      // STEP 2: Update the venue_name name to user home location:
+      // Check if venue_name equals one of the following values, and replace it with user home location
       if (
         updatedItem.venue_name === 'Untappd at Home' ||
         updatedItem.venue_name === 'Untappd Virtual Festival' ||
@@ -44,15 +45,19 @@ export const useUploadedJsonUpdater = () => {
         };
       }
 
+      // STEP 3: Translate the venue_country to proper English:
       if (updatedItem.venue_country !== null) {
-        // Wrap the venue_country value with the translateToEnglish() function
-        updatedItem.venue_country = translateToEnglish(updatedItem.venue_country);
+        // Wrap the venue_country value with the translateCountries() function
+        updatedItem.venue_country = translateCountries(
+          updatedItem.venue_country,
+          countriesData
+        );
       }
 
       return updatedItem;
     });
 
-    // Filter out duplicates based on the 'checkin_id'
+    // STEP 4: filter out duplicates based on the 'checkin_id':
     const filteredData = updatedData.filter((item) => {
       if (!uniqueCheckinIds.has(item.checkin_id)) {
         uniqueCheckinIds.add(item.checkin_id);

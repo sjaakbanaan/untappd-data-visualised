@@ -68,7 +68,7 @@ After setting filters, the following lists are presented in either a chart or li
 
 ![image](https://github.com/sjaakbanaan/untappd-data-visualised/assets/2773301/33e336c0-8539-4988-9388-1699bf1d3aea)
 
-## Recent changes
+## Change log
 
 - 12-05-2024: v2.0.1 And [we're live!](https://tappd.online)
 - 04-05-2024: v2.0.2 Added sorting filters to the beer overview
@@ -87,6 +87,7 @@ After setting filters, the following lists are presented in either a chart or li
 - 18-03-2025: v2.4.6 Map Box key is now optional, the Map nav element will be hidden + some Wrappd leftovers cleanup.
 - 18-03-2025: v2.4.7 Improved dashboard navigation
 - 23-03-2025: v2.5 Cleanup of Dashboard.jsx + solved warnings + fixed issue where select box value didn't reset after filter reset + better ui for year buttons for long-time users + filters only defined in DataContext, no longer on 4 different places
+- 23-03-2025: v2.5.1 Added brewery state and rating as a filter option
 
 ## Future wishes
 

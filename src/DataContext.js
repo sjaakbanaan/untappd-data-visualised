@@ -9,12 +9,14 @@ const DataProvider = ({ children }) => {
   const resetList = {
     brewery_name: '',
     brewery_city: '',
+    brewery_state: '',
     brewery_country: '',
     venue_name: '',
     venue_city: '',
     venue_country: '',
     tagged_friends: '',
     beer_type: '',
+    rating_score: '',
   };
 
   return (

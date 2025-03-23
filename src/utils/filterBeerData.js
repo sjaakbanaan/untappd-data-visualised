@@ -2,7 +2,8 @@ export const filterBeerData = (beerData, filterOverview, filterDateRange, resetL
   // Helper function to generate filter functions dynamically
   const generateFilterFunction = (filterKey) => (item) =>
     !filterOverview[filterKey] ||
-    item[filterKey]?.toLowerCase().includes(filterOverview[filterKey].toLowerCase());
+    item[filterKey]?.toString().toLowerCase() ===
+      filterOverview[filterKey].toString().toLowerCase();
 
   // Dynamically create filter functions based on resetList keys
   const filterFunctions = Object.keys(resetList).reduce((acc, key) => {

@@ -1,6 +1,6 @@
+import { useContext } from 'react';
 import { useState, useEffect } from 'react';
 import OverviewFilter from './OverviewFilter.jsx';
-import { useContext } from 'react';
 import { DataContext } from '../../DataContext';
 import { transformResetList } from '../../utils/';
 
@@ -19,6 +19,10 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
     filterKeys.forEach((key) => {
       uniqueOptions[key] = [...new Set(beerData.map((item) => item[key]))]
         .filter(Boolean)
+        .filter(
+          (option) =>
+            key !== 'brewery_state' || (typeof option === 'string' && option.length === 2)
+        ) // two-letter state codes
         .sort();
     });
 
@@ -34,10 +38,11 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
   };
 
   return (
-    <div className="my-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+    <div className="my-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
       {Object.entries(filterOptions).map(([key, options]) => (
         <OverviewFilter
           key={key}
+          filterKey={key}
           splitValues={key == 'tagged_friends'}
           label={`${key.replace('_', ' ')} (${options.length})`}
           labelPlural={`${key.replace('_', ' ')}s`}

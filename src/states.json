@@ -1,0 +1,166 @@
+[
+  {
+    "code": "AB",
+    "name": "Alberta, Canada"
+  },
+  {
+    "code": "AL",
+    "name": "Alabama, USA"
+  },
+  {
+    "code": "BC",
+    "name": "British Columbia, Canada"
+  },
+  {
+    "code": "CA",
+    "name": "California, USA"
+  },
+  {
+    "code": "CO",
+    "name": "Colorado, USA"
+  },
+  {
+    "code": "DE",
+    "name": "Delaware, USA"
+  },
+  {
+    "code": "FL",
+    "name": "Florida, USA"
+  },
+  {
+    "code": "GA",
+    "name": "Georgia, USA"
+  },
+  {
+    "code": "HI",
+    "name": "Hawaii, USA"
+  },
+  {
+    "code": "IA",
+    "name": "Iowa, USA"
+  },
+  {
+    "code": "ID",
+    "name": "Idaho, USA"
+  },
+  {
+    "code": "IL",
+    "name": "Illinois, USA"
+  },
+  {
+    "code": "IN",
+    "name": "Indiana, USA"
+  },
+  {
+    "code": "KY",
+    "name": "Kentucky, USA"
+  },
+  {
+    "code": "LA",
+    "name": "Louisiana, USA"
+  },
+  {
+    "code": "MA",
+    "name": "Massachusetts, USA"
+  },
+  {
+    "code": "MD",
+    "name": "Maryland, USA"
+  },
+  {
+    "code": "ME",
+    "name": "Maine, USA"
+  },
+  {
+    "code": "MI",
+    "name": "Michigan, USA"
+  },
+  {
+    "code": "MN",
+    "name": "Minnesota, USA"
+  },
+  {
+    "code": "MO",
+    "name": "Missouri, USA"
+  },
+  {
+    "code": "MS",
+    "name": "Mississippi, USA"
+  },
+  {
+    "code": "MT",
+    "name": "Montana, USA"
+  },
+  {
+    "code": "NC",
+    "name": "North Carolina, USA"
+  },
+  {
+    "code": "ND",
+    "name": "North Dakota, USA"
+  },
+  {
+    "code": "NH",
+    "name": "New Hampshire, USA"
+  },
+  {
+    "code": "NV",
+    "name": "Nevada, USA"
+  },
+  {
+    "code": "NY",
+    "name": "New York, USA"
+  },
+  {
+    "code": "OH",
+    "name": "Ohio, USA"
+  },
+  {
+    "code": "ON",
+    "name": "Ontario, Canada"
+  },
+  {
+    "code": "OR",
+    "name": "Oregon, USA"
+  },
+  {
+    "code": "PA",
+    "name": "Pennsylvania, USA"
+  },
+  {
+    "code": "QC",
+    "name": "Quebec, Canada"
+  },
+  {
+    "code": "RI",
+    "name": "Rhode Island, USA"
+  },
+  {
+    "code": "TN",
+    "name": "Tennessee, USA"
+  },
+  {
+    "code": "TX",
+    "name": "Texas, USA"
+  },
+  {
+    "code": "UT",
+    "name": "Utah, USA"
+  },
+  {
+    "code": "VA",
+    "name": "Virginia, USA"
+  },
+  {
+    "code": "VT",
+    "name": "Vermont, USA"
+  },
+  {
+    "code": "WA",
+    "name": "Washington, USA"
+  },
+  {
+    "code": "WI",
+    "name": "Wisconsin, USA"
+  }
+]
