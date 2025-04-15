@@ -16,7 +16,7 @@
     "sourceType": "module"
   },
   "plugins": ["react", "jsx-a11y", "import"],
-  "ignorePatterns": ["node_modules/"],
+  "ignorePatterns": ["node_modules/", "*.html", "*.css"],
   "rules": {
     "camelcase": [
       "off",
@@ -108,8 +108,7 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx", ".json"],
-        "moduleDirectory": ["node_modules", "src/"]
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     }
   }

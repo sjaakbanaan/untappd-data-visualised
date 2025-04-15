@@ -10,14 +10,14 @@
   @font-face {
     /* font-display: swap;  */
     font-family: 'Sofia Pro';
-    src: url('/public/fonts/sofia-pro.woff2') format('woff2');
+    src: url('/fonts/sofia-pro.woff2') format('woff2');
     font-weight: normal; /* Adjust as needed */
     font-style: normal; /* Adjust as needed */
   }
   @font-face {
     /* font-display: swap;  */
     font-family: 'Sofia Pro';
-    src: url('/public/fonts/sofia-pro-bold.woff2') format('woff2');
+    src: url('/fonts/sofia-pro-bold.woff2') format('woff2');
     font-weight: 700; /* Adjust as needed */
     font-style: normal; /* Adjust as needed */
   }

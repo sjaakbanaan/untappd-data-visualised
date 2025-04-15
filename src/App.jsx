@@ -11,7 +11,7 @@ import Uploader from './components/Uploader/Uploader';
 
 const App = () => {
   // Initialize React Ga with your tracking ID
-  const gtmCode = process.env.REACT_APP_GTM_CODE || 'G-SFBLBDE0LG';
+  const gtmCode = import.meta.env.VITE_GTM_CODE || 'G-SFBLBDE0LG';
 
   try {
     ReactGA.initialize(gtmCode);

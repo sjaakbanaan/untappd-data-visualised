@@ -10,6 +10,7 @@
 
 # production
 /build
+/dist
 
 # misc
 .DS_Store
@@ -19,3 +20,6 @@ get_export.sh
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Vite
+*.local
