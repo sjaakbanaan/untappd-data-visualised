@@ -115,7 +115,7 @@ const Dashboard = () => {
       ) : (
         // in case of no results:
         <NotificationBar
-          text="Your filters didn't return a result. Adjust your filters or sse the 'Reset filters'
+          text="Your filters didn't return a result. Adjust your filters or use the 'Reset filters'
           button above."
         />
       )}

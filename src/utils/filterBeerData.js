@@ -1,9 +1,20 @@
 export const filterBeerData = (beerData, filterOverview, filterDateRange, resetList) => {
   // Helper function to generate filter functions dynamically
-  const generateFilterFunction = (filterKey) => (item) =>
-    !filterOverview[filterKey] ||
-    item[filterKey]?.toString().toLowerCase() ===
-      filterOverview[filterKey].toString().toLowerCase();
+  const generateFilterFunction = (filterKey) => (item) => {
+    if (!filterOverview[filterKey]) return true;
+
+    const itemValue = item[filterKey]?.toString().toLowerCase();
+    const filterValue = filterOverview[filterKey].toString().toLowerCase();
+
+    if (filterKey === 'tagged_friends') {
+      // For tagged_friends, check if the selected friend is in the comma-separated list
+      return (
+        itemValue?.split(',').some((friend) => friend.trim() === filterValue) || false
+      );
+    }
+
+    return itemValue === filterValue;
+  };
 
   // Dynamically create filter functions based on resetList keys
   const filterFunctions = Object.keys(resetList).reduce((acc, key) => {

@@ -1,4 +1,4 @@
-# Untappd Data Visualised v2.5.1
+# Untappd Data Visualised v2.5.2
 
 ## This is the repository for [tappd.online](https:///tappd.online), no need to install anymore!
 
@@ -83,6 +83,7 @@ After setting filters, the following lists are presented in either a chart or li
 - 18-03-2025: v2.4.7 Improved dashboard navigation
 - 23-03-2025: v2.5 Cleanup of Dashboard.jsx + solved warnings + fixed issue where select box value didn't reset after filter reset + better ui for year buttons for long-time users + filters only defined in DataContext, no longer on 4 different places
 - 23-03-2025: v2.5.1 Added brewery state and rating as a filter option
+- 15-04-2025: v2.5.2 Fixed a bug where filtering on 'tagged friends' wouldn't return a complete list
 
 ## Future wishes
 

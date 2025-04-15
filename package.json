@@ -1,6 +1,6 @@
 {
   "name": "untappd-data-visualised",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "private": false,
   "dependencies": {
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
@@ -29,7 +29,8 @@
     "build": "react-scripts build",
     "production": "serve -s build -l 80 -L",
     "eject": "react-scripts eject",
-    "build:css": "tailwindcss build src/index.css -o src/tailwind.css"
+    "build:css": "tailwindcss build src/index.css -o src/tailwind.css",
+    "export": "./get_export.sh"
   },
   "eslintConfig": {
     "extends": [
