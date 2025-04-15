@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { Marker } from 'react-map-gl';
-import Icon from '../Icon/Icon.jsx';
+import Icon from '../Icon/Icon';
 
 const Pins = ({ beerData, setPopupInfo }) => {
   const pins = useMemo(() => {

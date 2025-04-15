@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { getBarChartTopBottomData } from '../../../utils';
-import BeerTypeRating from './BeerTypeRating.jsx';
+import BeerTypeRating from './BeerTypeRating';
 
 const BeerTypeChart = ({ beerData }) => {
   const dataList = useMemo(() => getBarChartTopBottomData(beerData), [beerData]);

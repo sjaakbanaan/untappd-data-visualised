@@ -1,4 +1,4 @@
-import Icon from '../Icon/Icon.jsx';
+import Icon from '../Icon/Icon';
 import { useLocalStorageData } from '../../utils/';
 
 const DashboardNav = ({ activeSection, setActiveSection }) => {

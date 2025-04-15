@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useDropzone } from 'react-dropzone';
 import { useUploadedJsonUpdater } from '../../utils/';
-import UploadForm from './UploadForm.jsx';
+import UploadForm from './UploadForm';
 import { DataContext } from '../../DataContext';
 
 const Uploader = () => {

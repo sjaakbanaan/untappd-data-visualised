@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import TopTable from './TopTable.jsx';
+import TopTable from './TopTable';
 
 const TopTableList = ({ beerData }) => {
   const tableList = [

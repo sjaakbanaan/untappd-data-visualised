@@ -1,4 +1,4 @@
-import Icon from './Icon/Icon.jsx';
+import Icon from './Icon/Icon';
 
 const NotificationBar = ({ text, show = true, type = 'alert' }) => {
   if (!show) return null; // Return null for no rendering

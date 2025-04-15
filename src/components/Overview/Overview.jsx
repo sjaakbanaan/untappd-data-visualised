@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
-import OverviewCard from './OverviewCard.jsx';
-import Pagination from './Pagination.jsx';
-import Icon from '../Icon/Icon.jsx';
+import OverviewCard from './OverviewCard';
+import Pagination from './Pagination';
+import Icon from '../Icon/Icon';
 
 const Overview = ({ beerData, lessCols }) => {
   const [currentPage, setCurrentPage] = useState(1);

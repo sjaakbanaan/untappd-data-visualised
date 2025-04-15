@@ -1,4 +1,4 @@
-import OverviewCardProperty from './OverviewCardProperty.jsx';
+import OverviewCardProperty from './OverviewCardProperty';
 
 const OverviewCard = ({ item }) => {
   return (

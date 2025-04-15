@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import WrappdCanvas from './WrappdCanvas.jsx';
-import WrappdInput from './WrappdInput.jsx';
+import WrappdCanvas from './WrappdCanvas';
+import WrappdInput from './WrappdInput';
 import { useLocalStorageData } from '../../utils';
 
 const Wrappd = ({ beerData, fullBeerData, filterDateRange }) => {

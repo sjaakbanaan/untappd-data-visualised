@@ -1,4 +1,4 @@
-import ResetFilters from './ResetFilters.jsx';
+import ResetFilters from './ResetFilters';
 import { isFilterOverviewSet } from '../../utils';
 
 const DashboardHeader = ({

@@ -4,10 +4,10 @@ import ReactGA from 'react-ga4';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { DataContext } from './DataContext';
-import Header from './components/Header.jsx';
-import Footer from './components/Footer.jsx';
-import Dashboard from './components/Dashboard/Dashboard.jsx';
-import Uploader from './components/Uploader/Uploader.jsx';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Dashboard from './components/Dashboard/Dashboard';
+import Uploader from './components/Uploader/Uploader';
 
 const App = () => {
   // Initialize React Ga with your tracking ID

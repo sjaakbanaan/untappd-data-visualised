@@ -1,10 +1,10 @@
 import { useWrappdData, getLocalStorageData } from '../../utils';
 import { useEffect, useState } from 'react';
-// import WrappdPhotos from './WrappdPhotos.jsx';
-import WrappdTopStats from './WrappdTopStats.jsx';
-import WrappdTotalStats from './WrappdTotalStats.jsx';
-import WrappdHeader from './WrappdHeader.jsx';
-import WrappdFooter from './WrappdFooter.jsx';
+// import WrappdPhotos from './WrappdPhotos';
+import WrappdTopStats from './WrappdTopStats';
+import WrappdTotalStats from './WrappdTotalStats';
+import WrappdHeader from './WrappdHeader';
+import WrappdFooter from './WrappdFooter';
 
 const WrappdCanvas = ({
   beerData,

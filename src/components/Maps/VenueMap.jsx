@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Map, { NavigationControl, FullscreenControl } from 'react-map-gl';
-import Pins from './Pins.jsx';
-import VenuePopUp from './VenuePopUp.jsx';
+import Pins from './Pins';
+import VenuePopUp from './VenuePopUp';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { getLocalStorageData } from '../../utils/';
 

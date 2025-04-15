@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { useState, useEffect } from 'react';
-import OverviewFilter from './OverviewFilter.jsx';
+import OverviewFilter from './OverviewFilter';
 import { DataContext } from '../../DataContext';
 import { transformResetList } from '../../utils/';
 

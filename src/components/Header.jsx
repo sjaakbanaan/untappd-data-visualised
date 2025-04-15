@@ -1,5 +1,5 @@
-import Navigation from './Navigation.jsx';
-import Icon from './Icon/Icon.jsx';
+import Navigation from './Navigation';
+import Icon from './Icon/Icon';
 import { useLocalStorageData } from '../utils';
 
 const Header = () => {

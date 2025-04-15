@@ -6,8 +6,8 @@ import {
   processTopbyRating,
 } from '../../utils/listProcessing';
 import { useCounter } from '../../utils/';
-import EntryCounter from './EntryCounter.jsx';
-import NotificationBar from '../NotificationBar.jsx';
+import EntryCounter from './EntryCounter';
+import NotificationBar from '../NotificationBar';
 
 const processingFunctions = {
   friends: processTaggedFriends,

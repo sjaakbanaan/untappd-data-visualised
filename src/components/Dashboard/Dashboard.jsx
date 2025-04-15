@@ -2,23 +2,23 @@ import { useState, useEffect, lazy, Suspense } from 'react';
 import ReactGA from 'react-ga4';
 
 import { useDashboardData } from '../../utils/';
-import DashboardHeader from './DashboardHeader.jsx';
-import YearFilterButtons from './YearFilterButtons.jsx';
-import DateSelector from './DateSelector.jsx';
-import OverviewFilters from '../Overview/OverviewFilters.jsx';
-import NotificationBar from '../NotificationBar.jsx';
-import DashboardNav from './DashboardNav.jsx';
+import DashboardHeader from './DashboardHeader';
+import YearFilterButtons from './YearFilterButtons';
+import DateSelector from './DateSelector';
+import OverviewFilters from '../Overview/OverviewFilters';
+import NotificationBar from '../NotificationBar';
+import DashboardNav from './DashboardNav';
 
 // Lazy-load heavy components
-const BasicStats = lazy(() => import('../BasicStats/BasicStats.jsx'));
-const PieChartList = lazy(() => import('../Charts/PieChartList.jsx'));
-const BarChartList = lazy(() => import('../Charts/BarChartList.jsx'));
-const TopTableList = lazy(() => import('../TopTableList/TopTableList.jsx'));
-const LineChart = lazy(() => import('../Charts/LineChart.jsx'));
-const VenueMap = lazy(() => import('../Maps/VenueMap.jsx'));
-const BreweryMap = lazy(() => import('../Maps/BreweryMap.jsx'));
-const BeerTypeChart = lazy(() => import('../Charts/BeerTypeChart/BeerTypeChart.jsx'));
-const Overview = lazy(() => import('../Overview/Overview.jsx'));
+const BasicStats = lazy(() => import('../BasicStats/BasicStats'));
+const PieChartList = lazy(() => import('../Charts/PieChartList'));
+const BarChartList = lazy(() => import('../Charts/BarChartList'));
+const TopTableList = lazy(() => import('../TopTableList/TopTableList'));
+const LineChart = lazy(() => import('../Charts/LineChart'));
+const VenueMap = lazy(() => import('../Maps/VenueMap'));
+const BreweryMap = lazy(() => import('../Maps/BreweryMap'));
+const BeerTypeChart = lazy(() => import('../Charts/BeerTypeChart/BeerTypeChart'));
+const Overview = lazy(() => import('../Overview/Overview'));
 
 const Dashboard = () => {
   // analytics

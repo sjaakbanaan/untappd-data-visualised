@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import PieChart from './PieChart.jsx';
+import PieChart from './PieChart';
 
 const PieChartList = ({ beerData }) => {
   const pieChartList = [

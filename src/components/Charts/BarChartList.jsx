@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import BarChart from './BarChart.jsx';
+import BarChart from './BarChart';
 
 const BarChartList = ({ beerData }) => {
   const barChartList = [
