@@ -81,10 +81,14 @@ const BasicStats = ({ beerData, fullBeerData, filterDateRange }) => {
       {shareLink && (
         <div className="mb-4 rounded bg-gray-800 p-4">
           <p className="text-sm text-gray-400">Share this link:</p>
-          <p className="break-all text-yellow-500">{shareLink}</p>
+          <p className="break-all text-yellow-500">
+            <a href={shareLink} target="_blank" rel="noopener noreferrer">
+              {shareLink}
+            </a>
+          </p>
         </div>
       )}
-      <ul className="grid grid-cols-1 gap-6 md:grid-cols-3">
+      <ul className="grid grid-cols-2 gap-6 md:grid-cols-3">
         {stats.length > 0 &&
           stats.map(
             (item, i) =>
