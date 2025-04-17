@@ -29,6 +29,7 @@ const UploadForm = ({ userDetails, handleInputChange }) => {
           href="https://github.com/sjaakbanaan/untappd-data-visualised/"
           title="Github repository"
           target="_blank"
+          rel="noreferrer"
         >
           Github
         </a>

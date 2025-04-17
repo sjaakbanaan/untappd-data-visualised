@@ -77,7 +77,7 @@ const TopTable = ({
                   href={item.url}
                   className={`${showPhotos && 'flex size-full flex-col items-center justify-center overflow-hidden bg-gray-800/50 p-4'}`}
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                 >
                   {showPhotos && <span>#{i + 1}</span>}
                   <span className="my-3 text-center text-lg">{item.name}</span>

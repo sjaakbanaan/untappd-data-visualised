@@ -31,7 +31,12 @@ const VenuePopUp = ({ popupInfo, setPopupInfo }) => {
         <div className="flex-1">
           <strong>most recent check-in:</strong>
           <br />
-          <a className="underline" href={popupInfo.checkin_url} target="_blank">
+          <a
+            className="underline"
+            href={popupInfo.checkin_url}
+            target="_blank"
+            rel="noreferrer"
+          >
             {formatDate(popupInfo.created_at)}
           </a>
         </div>

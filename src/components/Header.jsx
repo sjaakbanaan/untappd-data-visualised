@@ -17,6 +17,7 @@ const Header = () => {
                 title={`Untappd profile of ${userName}`}
                 href={`https://untappd.com/user/${userName}`}
                 target="_blank"
+                rel="noreferrer"
               >
                 <Icon icon="UNTAPPD" className="w-5 fill-yellow-500" />
               </a>
@@ -25,6 +26,7 @@ const Header = () => {
               href="https://github.com/sjaakbanaan/untappd-data-visualised/"
               title="Github repository"
               target="_blank"
+              rel="noreferrer"
             >
               <Icon icon="GITHUB" className="w-5 fill-white" />
             </a>

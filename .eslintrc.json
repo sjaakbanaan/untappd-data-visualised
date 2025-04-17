@@ -7,20 +7,30 @@
   },
   "extends": [
     "eslint:recommended",
-    "prettier",
-    "plugin:tailwindcss/recommended",
-    "react-app"
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
+    "plugin:react-hooks/recommended",
+    "prettier"
   ],
   "root": true,
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 12,
-    "allowImportExportEverywhere": true,
+    "ecmaVersion": 2021,
     "sourceType": "module"
   },
-  "plugins": ["react", "jsx-a11y", "import"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx"]
+      }
+    }
+  },
+  "plugins": ["react", "react-hooks", "jsx-a11y", "import"],
   "ignorePatterns": ["node_modules/", "*.html", "*.css"],
   "rules": {
     "camelcase": [
@@ -48,18 +58,24 @@
     "no-shadow": "off",
     "object-curly-newline": "off",
     "valid-jsdoc": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
 
     "import/no-unresolved": [
       2,
       {
-        "commonjs": true
+        "commonjs": true,
+        "caseSensitive": true
       }
     ],
     "import/extensions": [
       "error",
-      "never",
+      "ignorePackages",
       {
-        "json": "always"
+        "js": "never",
+        "jsx": "never"
       }
     ],
     "import/no-dynamic-require": "off",
@@ -98,23 +114,6 @@
     "react/jsx-one-expression-per-line": 0,
     "react/no-find-dom-node": 1,
     "react/jsx-uses-react": "off",
-    "react/no-string-refs": 1,
-    "react/no-danger": "off",
-    "react/react-in-jsx-scope": "off",
-    "react/jsx-filename-extension": [
-      2,
-      {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
-      }
-    ],
-    "react/jsx-props-no-spreading": "off",
-    "semi": ["error", "always"]
-  },
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
-      }
-    }
+    "react/no-unescaped-entities": "off"
   }
 }

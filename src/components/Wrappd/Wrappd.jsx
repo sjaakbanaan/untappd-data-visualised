@@ -45,6 +45,7 @@ const Wrappd = ({ beerData, fullBeerData, filterDateRange }) => {
                   href={`https://untappd.com/user/${userName}`}
                   target="_blank"
                   className="underline"
+                  rel="noreferrer"
                 >
                   Untappd profile
                 </a>{' '}

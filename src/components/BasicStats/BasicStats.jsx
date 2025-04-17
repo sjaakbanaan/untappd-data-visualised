@@ -80,7 +80,7 @@ const BasicStats = ({ beerData, fullBeerData, filterDateRange }) => {
       </div>
       {shareLink && (
         <div className="mb-4 rounded bg-gray-800 p-4">
-          <p className="text-sm text-gray-400">Share this link:</p>
+          <p className="text-sm text-gray-400">Your personal link for this range:</p>
           <p className="break-all text-yellow-500">
             <a href={shareLink} target="_blank" rel="noopener noreferrer">
               {shareLink}

@@ -36,11 +36,6 @@
     "build:css": "tailwindcss build src/index.css -o src/tailwind.css",
     "export": "./get_export.sh"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -61,6 +56,7 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsx-a11y": "^6.9.0",
     "eslint-plugin-react": "^7.34.4",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-tailwindcss": "3.16.0",
     "prettier": "^3.4.1",
     "vite": "^6.2.6"
