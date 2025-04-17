@@ -20,14 +20,14 @@ export const formatWrappdDates = (start, end) => {
 
   // If the dates are in the same month and year
   if (startYear === endYear && startMonth === endMonth) {
-    return `${startMonth} ${startDay} & ${endDay} ${startYear}`;
+    return `${startMonth} ${startDay} - ${endDay} ${startYear}`;
   }
 
   // If the dates are in the same year but different months
   if (startYear === endYear) {
-    return `${startMonth} ${startDay} & ${endMonth} ${endDay} ${startYear}`;
+    return `${startMonth} ${startDay} - ${endMonth} ${endDay} ${startYear}`;
   }
 
   // If the dates span different years
-  return `${startMonth} ${startDay} ${startYear} & ${endMonth} ${endDay} ${endYear}`;
+  return `${startMonth} ${startDay} ${startYear} - ${endMonth} ${endDay} ${endYear}`;
 };

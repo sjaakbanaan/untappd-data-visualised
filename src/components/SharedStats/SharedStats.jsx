@@ -1,13 +1,27 @@
 import { useEffect, useState } from 'react';
+import ReactGA from 'react-ga4';
 import { useParams } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
+import StatCard from '../StatCard/StatCard';
+import { formatWrappdDates } from '../../utils';
 
 const SharedStats = () => {
+  // analytics
+  useEffect(() => {
+    ReactGA.send({
+      hitType: 'pageview',
+      page: '/shared-stats',
+      title: 'Shared Stats',
+    });
+  });
+
   const { id } = useParams();
   const [stats, setStats] = useState(null);
+  const [dateRange, setDateRange] = useState({ start: null, end: null });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [userName, setUserName] = useState(null);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -16,7 +30,13 @@ const SharedStats = () => {
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          setStats(docSnap.data().stats);
+          const data = docSnap.data();
+          setStats(data.stats);
+          setUserName(data.userName);
+          setDateRange({
+            start: data.startDate,
+            end: data.endDate,
+          });
         } else {
           setError('Stats not found');
         }
@@ -48,30 +68,25 @@ const SharedStats = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="mb-8 text-center text-3xl font-bold text-yellow-500">
-        Shared Stats
-      </h1>
-      <ul className="grid grid-cols-1 gap-6 md:grid-cols-3">
+    <div className="container max-w-[1024px] mx-auto p-4 md:p-0 my-8">
+      <h1 className="mb-4 text-center text-4xl font-bold text-yellow-500">{userName}</h1>
+      {dateRange.start && dateRange.end && (
+        <h2 className="mb-12 text-center text-2xl font-bold text-white">
+          {formatWrappdDates(dateRange.start, dateRange.end)}
+        </h2>
+      )}
+      <ul className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
         {stats.map((item, i) => (
-          <li
-            key={i}
-            className="block overflow-hidden bg-gray-800 px-4 py-8 shadow-lg transition-transform duration-300 hover:scale-110 md:rounded-lg"
-          >
-            <div className="grid h-full grid-rows-auto-1fr text-center text-xl">
-              <div className="font-bold">{item.key}</div>
-              <div className="mb-4 mt-6 flex items-center justify-center whitespace-nowrap">
-                <div className="min-h-[40px] text-[60px] font-extrabold text-yellow-500">
-                  {item.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
-                </div>
-              </div>
-              <div className="-mt-2 flex justify-center text-sm text-gray-500">
-                <span>{item.suffix}</span>
-              </div>
-            </div>
-          </li>
+          <StatCard key={i} statKey={item.key} value={item.value} suffix={item.suffix} />
         ))}
       </ul>
+      <div className="my-5 p-3 text-center text-yellow-500 md:my-10">
+        Created your own on{' '}
+        <a href="https://tapped.online" target="_blank">
+          tapped.online
+        </a>
+        <div className="pt-1 text-gray-400">powered by Untappd</div>
+      </div>
     </div>
   );
 };

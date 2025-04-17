@@ -15,6 +15,9 @@ const UploadForm = ({ userDetails, handleInputChange }) => {
     <div className="mb-10">
       <h2 className="mb-3 text-xl text-white">Enter details</h2>
       <p className="mb-5">
+        <strong>Untappd Insiders is required to use this tool!</strong>
+        <br />
+        <br />
         Your home details are needed to overwrite the 'Untappd at Home' values because
         Untappd uses their HQ for your home location. Don't worry, this data is only on
         your computer so not saved or shared in anyway.

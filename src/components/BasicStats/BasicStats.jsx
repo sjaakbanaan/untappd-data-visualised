@@ -3,10 +3,14 @@ import PropTypes from 'prop-types';
 import { getOverviewStats } from '../../utils';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../../firebase';
+import StatCard from '../StatCard/StatCard';
+import { useLocalStorageData } from '../../utils';
 
 const BasicStats = ({ beerData, fullBeerData, filterDateRange }) => {
   const [shareLink, setShareLink] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  // get userName from local storage
+  const userName = useLocalStorageData('untappd_username');
 
   const infoToShow = [
     'Total beers',
@@ -41,7 +45,10 @@ const BasicStats = ({ beerData, fullBeerData, filterDateRange }) => {
         }));
 
       const statsData = {
+        userName: userName,
         stats: validStats,
+        startDate: filterDateRange.start,
+        endDate: filterDateRange.end,
         createdAt: new Date().toISOString(),
       };
 
@@ -50,6 +57,7 @@ const BasicStats = ({ beerData, fullBeerData, filterDateRange }) => {
       setShareLink(shareUrl);
 
       await navigator.clipboard.writeText(shareUrl);
+
       console.log('Link copied to clipboard!');
     } catch (error) {
       console.error('Failed to create share link:', error);
@@ -81,22 +89,12 @@ const BasicStats = ({ beerData, fullBeerData, filterDateRange }) => {
           stats.map(
             (item, i) =>
               !item.hide && (
-                <li
+                <StatCard
                   key={i}
-                  className="block overflow-hidden bg-gray-800 px-4 py-8 shadow-lg transition-transform duration-300 hover:scale-110 md:rounded-lg"
-                >
-                  <div className="grid h-full grid-rows-auto-1fr text-center text-xl">
-                    <div className="font-bold">{item.key}</div>
-                    <div className="mb-4 mt-6 flex items-center justify-center whitespace-nowrap">
-                      <div className=" min-h-[40px] text-[60px] font-extrabold text-yellow-500">
-                        {item.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
-                      </div>
-                    </div>
-                    <div className="-mt-2 flex justify-center text-sm text-gray-500">
-                      <span>{item.suffix}</span>
-                    </div>
-                  </div>
-                </li>
+                  statKey={item.key}
+                  value={item.value}
+                  suffix={item.suffix}
+                />
               )
           )}
       </ul>

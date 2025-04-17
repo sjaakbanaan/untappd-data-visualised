@@ -100,7 +100,9 @@ const Uploader = () => {
           <p className="text-gray-400">Yes, drop it here!</p>
         ) : (
           <div>
-            <p className="mb-4 text-gray-400">Drag 'n' drop your JSON file here or</p>
+            <p className="mb-4 text-gray-400">
+              Drag 'n' drop your exported JSON file here or
+            </p>
             <button className="rounded bg-yellow-500 px-4 py-2 text-black transition-colors duration-300 hover:bg-yellow-400">
               Select JSON file
             </button>
