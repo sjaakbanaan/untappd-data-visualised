@@ -8,6 +8,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Dashboard from './components/Dashboard/Dashboard';
 import Uploader from './components/Uploader/Uploader';
+import SharedStats from './components/SharedStats/SharedStats';
 
 const App = () => {
   // Initialize React Ga with your tracking ID
@@ -29,6 +30,7 @@ const App = () => {
             element={beerData && beerData.length > 0 ? <Dashboard /> : <Uploader />}
           />
           <Route path="/upload" element={<Uploader />} />
+          <Route path="/shared/:id" element={<SharedStats />} />
         </Routes>
         <Footer />
       </div>

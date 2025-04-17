@@ -5,7 +5,12 @@
     "node": true,
     "jest": true
   },
-  "extends": ["eslint:recommended", "prettier", "plugin:tailwindcss/recommended"],
+  "extends": [
+    "eslint:recommended",
+    "prettier",
+    "plugin:tailwindcss/recommended",
+    "react-app"
+  ],
   "root": true,
   "parserOptions": {
     "ecmaFeatures": {
@@ -62,10 +67,10 @@
     "import/no-extraneous-dependencies": [
       "error",
       {
+        "packageDir": "./",
         "devDependencies": true,
         "optionalDependencies": false,
-        "peerDependencies": false,
-        "packageDir": "./"
+        "peerDependencies": false
       }
     ],
     "jsx-a11y/anchor-is-valid": "off",
