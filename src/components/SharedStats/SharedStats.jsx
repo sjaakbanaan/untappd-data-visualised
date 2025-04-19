@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { useEffect, useState } from 'react';
 import ReactGA from 'react-ga4';
 import { useParams } from 'react-router-dom';
@@ -19,6 +20,7 @@ const SharedStats = () => {
   const [stats, setStats] = useState(null);
   const [dateRange, setDateRange] = useState({ start: null, end: null });
   const [userName, setUserName] = useState(null);
+  const [userAvatar, setUserAvatar] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -36,6 +38,7 @@ const SharedStats = () => {
             end: data.endDate,
           });
           setUserName(data.userName || 'Untappd Stats');
+          setUserAvatar(data.userAvatar || undefined);
         } else {
           setError('Stats not found');
         }
@@ -66,7 +69,14 @@ const SharedStats = () => {
     );
   }
 
-  return <SharedStatsLayout userName={userName} dateRange={dateRange} stats={stats} />;
+  return (
+    <SharedStatsLayout
+      userName={userName}
+      userAvatar={userAvatar}
+      dateRange={dateRange}
+      stats={stats}
+    />
+  );
 };
 
 export default SharedStats;

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { getOverviewStats } from '../../utils';
@@ -9,8 +10,9 @@ import { useLocalStorageData } from '../../utils';
 const BasicStats = ({ beerData, fullBeerData, filterDateRange }) => {
   const [shareLink, setShareLink] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  // get userName from local storage
+  // get user details from local storage
   const userName = useLocalStorageData('untappd_username');
+  const userAvatar = useLocalStorageData('untappd_avatar');
 
   const infoToShow = [
     'Total beers',
@@ -46,6 +48,7 @@ const BasicStats = ({ beerData, fullBeerData, filterDateRange }) => {
 
       const statsData = {
         userName: userName,
+        userAvatar: userAvatar,
         stats: validStats,
         startDate: filterDateRange.start,
         endDate: filterDateRange.end,

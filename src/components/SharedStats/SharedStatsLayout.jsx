@@ -2,10 +2,21 @@ import PropTypes from 'prop-types';
 import StatCard from '../StatCard/StatCard';
 import { formatWrappdDates } from '../../utils';
 
-const SharedStatsLayout = ({ userName, dateRange, stats }) => {
+const SharedStatsLayout = ({ userName, userAvatar, dateRange, stats }) => {
   return (
     <div className="container max-w-[1024px] mx-auto p-4 md:p-0 my-8">
-      <h1 className="mb-4 text-center text-4xl font-bold text-yellow-500">{userName}</h1>
+      <div className="flex items-center justify-center mb-8">
+        {userAvatar && (
+          <img
+            src={userAvatar}
+            alt="User avatar"
+            className="w-12 h-12 mr-3 rounded-full"
+          />
+        )}
+        <h1 className="text-center text-ellipsis overflow-hidden whitespace-nowrap text-4xl font-bold text-yellow-500">
+          {userName}
+        </h1>
+      </div>
       {dateRange.start && dateRange.end && (
         <h2 className="mb-12 text-center text-2xl font-bold text-white">
           {formatWrappdDates(dateRange.start, dateRange.end)}
