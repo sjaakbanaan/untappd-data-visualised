@@ -10,6 +10,7 @@
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
+    "plugin:tailwindcss/recommended",
     "prettier"
   ],
   "root": true,
@@ -28,9 +29,14 @@
       "node": {
         "extensions": [".js", ".jsx"]
       }
+    },
+    "tailwindcss": {
+      "config": "./tailwind.config.js",
+      "cssFiles": ["./src/css/**/*.css"],
+      "officialSorting": true
     }
   },
-  "plugins": ["react", "react-hooks", "jsx-a11y", "import"],
+  "plugins": ["react", "react-hooks", "jsx-a11y", "import", "tailwindcss"],
   "ignorePatterns": ["node_modules/", "*.html", "*.css"],
   "rules": {
     "camelcase": [

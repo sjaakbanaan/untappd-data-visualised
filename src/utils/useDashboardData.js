@@ -27,7 +27,7 @@ export const useDashboardData = () => {
       );
       setFilteredData(filteredResults);
     }
-  }, [beerData, filterOverview, filterDateRange]);
+  }, [beerData, filterOverview, filterDateRange, resetList]);
 
   return {
     beerData,

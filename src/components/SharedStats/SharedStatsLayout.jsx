@@ -4,16 +4,12 @@ import { formatWrappdDates } from '../../utils';
 
 const SharedStatsLayout = ({ userName, userAvatar, dateRange, stats }) => {
   return (
-    <div className="container max-w-[1024px] mx-auto p-4 md:p-0 my-8">
-      <div className="flex items-center justify-center mb-8">
+    <div className="container mx-auto my-8 max-w-screen-lg p-4 md:p-0">
+      <div className="mb-8 flex items-center justify-center">
         {userAvatar && (
-          <img
-            src={userAvatar}
-            alt="User avatar"
-            className="w-12 h-12 mr-3 rounded-full"
-          />
+          <img src={userAvatar} alt="User avatar" className="mr-3 size-12 rounded-full" />
         )}
-        <h1 className="text-center text-ellipsis overflow-hidden whitespace-nowrap text-4xl font-bold text-yellow-500">
+        <h1 className="truncate text-center text-4xl font-bold text-yellow-500">
           {userName}
         </h1>
       </div>
