@@ -1,6 +1,6 @@
 const WrappdFooter = () => {
   return (
-    <div className="mt-14 flex flex-row items-center text-2xl">
+    <div className="mt-14 flex flex-row items-center">
       <img
         crossOrigin="anonymous"
         src="/logo-wrappd.png"
@@ -8,16 +8,16 @@ const WrappdFooter = () => {
         alt=""
       />
       <footer>
-        <div className="font-bold">Tappd Wrappd</div>
-        <div className="text-wrappdYellow">
+        <div className="text-xl font-bold md:text-2xl">Tappd Wrappd</div>
+        <div className="text-base text-wrappdYellow md:text-2xl">
           Create your own at{' '}
           <a
-            href="https://tapped.online"
+            href="https://tappd.online"
             target="_blank"
             className="hover:underline"
             rel="noreferrer"
           >
-            tapped.online
+            tappd.online
           </a>
         </div>
       </footer>

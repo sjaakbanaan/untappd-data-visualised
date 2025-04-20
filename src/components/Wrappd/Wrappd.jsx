@@ -58,7 +58,7 @@ const Wrappd = () => {
   if (loading) {
     return (
       <div className="flex h-screen items-center justify-center">
-        <div className="text-xl font-bold text-gray-900">Loading...</div>
+        <div className="text-xl font-bold text-white">Loading...</div>
       </div>
     );
   }
