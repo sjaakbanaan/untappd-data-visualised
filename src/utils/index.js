@@ -28,6 +28,7 @@ import { toDataURL } from './toDataURL';
 import { getBarChartRatingData } from './getBarChartRatingData';
 import { transformResetList } from './transformResetList';
 import { useDashboardData } from './useDashboardData';
+import { convertImageToBase64 } from './convertImageToBase64';
 
 export {
   formatDate,
@@ -60,4 +61,5 @@ export {
   getBarChartRatingData,
   transformResetList,
   useDashboardData,
+  convertImageToBase64,
 };

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../../firebase';
-import { useLocalStorageData } from '../../utils';
+import { useLocalStorageData, convertImageToBase64 } from '../../utils';
 
 const WrappdButton = ({ stats, filterDateRange, topLists }) => {
   const [shareLink, setShareLink] = useState('');
@@ -11,7 +11,6 @@ const WrappdButton = ({ stats, filterDateRange, topLists }) => {
   // get user details from local storage
   const userName = useLocalStorageData('untappd_username');
   const userAvatar = useLocalStorageData('untappd_avatar');
-  console.log(stats);
 
   const handleShare = async () => {
     setIsLoading(true);
@@ -45,9 +44,14 @@ const WrappdButton = ({ stats, filterDateRange, topLists }) => {
         }),
       }));
 
+      // Convert avatar to base64 if it exists
+      const processedUserAvatar = userAvatar
+        ? await convertImageToBase64(userAvatar)
+        : null;
+
       const statsData = {
         userName: userName,
-        userAvatar: userAvatar,
+        userAvatar: processedUserAvatar,
         topLists: validTopLists,
         stats: validStats,
         startDate: filterDateRange.start,
