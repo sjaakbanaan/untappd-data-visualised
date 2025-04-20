@@ -1,27 +1,41 @@
-const WrappdPhotos = ({ topList }) => {
-  return (
-    <div className="mb-10 mt-14 grid grid-flow-row grid-cols-12 grid-rows-2 gap-4">
-      {topList?.items.map((item, index) => {
-        // Dynamically set col-span based on index
-        const colSpan = index >= 2 ? 4 : 6;
+import PropTypes from 'prop-types';
 
-        return (
-          <div
-            key={index}
-            style={
-              item.photo_url
-                ? {
-                    backgroundImage: `url(${item.photo_url})`, // Added closing parenthesis
-                  }
-                : undefined
-            }
-            // eslint-disable-next-line tailwindcss/no-custom-classname
-            className={`col-span-${colSpan} flex h-52 justify-center overflow-hidden rounded-lg bg-wrappdYellow bg-cover bg-center`}
-          ></div>
-        );
-      })}
+const WrappdPhotos = ({ photosList }) => {
+  return (
+    <div className="mb-10 grid grid-flow-row grid-cols-2 grid-rows-2 gap-4 md:mt-14 md:grid-cols-12">
+      {photosList?.items
+        .filter((item) => item.photo_url)
+        .slice(0, 5)
+        .map((item, index) => {
+          const originalIndex = photosList.items.findIndex((beer) => beer === item);
+          return (
+            <div
+              key={index}
+              style={{
+                backgroundImage: `url(${item.photo_url})`,
+              }}
+              className={`relative col-span-1 flex justify-center overflow-hidden rounded-lg bg-wrappdYellow bg-cover bg-center lg:rounded-3xl ${
+                index >= 2 ? 'aspect-square md:col-span-4' : 'md:col-span-6'
+              }`}
+            >
+              <div className="absolute right-3 top-3 aspect-square w-8 rounded-full bg-wrappdYellow text-center text-xl font-bold leading-8 text-black">
+                {originalIndex + 1}
+              </div>
+            </div>
+          );
+        })}
     </div>
   );
+};
+
+WrappdPhotos.propTypes = {
+  photosList: PropTypes.shape({
+    items: PropTypes.arrayOf(
+      PropTypes.shape({
+        photo_url: PropTypes.string,
+      })
+    ),
+  }),
 };
 
 export default WrappdPhotos;

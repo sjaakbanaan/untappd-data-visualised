@@ -1,6 +1,6 @@
 import { transformRatingData } from '.';
 
-export const processTopBeers = (beerData, scoreType, count = 10, order = 'asc') => {
+export const processTopBeers = (beerData, scoreType, count = 10, order = 'desc') => {
   const onEmpty = 'No beers to display, please change your search range.';
   const formattedData = transformRatingData(beerData, scoreType);
   const suffix = scoreType === 'beer_abv' ? '%' : '';
@@ -28,7 +28,7 @@ export const processTopBeers = (beerData, scoreType, count = 10, order = 'asc') 
 
   // Sort the data based on value (descending for top, ascending for lowest)
   const sortedData =
-    order === 'desc'
+    order === 'asc'
       ? deduplicatedData.sort((a, b) => a.value - b.value)
       : deduplicatedData.sort((a, b) => b.value - a.value);
 

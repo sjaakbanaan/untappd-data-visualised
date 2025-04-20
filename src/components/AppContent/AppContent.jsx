@@ -5,14 +5,16 @@ import AppRoutes from '../AppRoutes/AppRoutes';
 
 const AppContent = () => {
   const location = useLocation();
-  const isSharedRoute = location.pathname.startsWith('/shared');
+  const isWrappdRoute = location.pathname.startsWith('/wrappd');
 
   return (
     <>
-      {!isSharedRoute && <Header />}
-      <div className="mx-1 md:mx-6">
+      {!isWrappdRoute && <Header />}
+      <div
+        className={`${isWrappdRoute ? 'fixed h-screen w-full overflow-auto bg-wrappd-gradient' : 'px-1 md:px-6'}`}
+      >
         <AppRoutes />
-        {!isSharedRoute && <Footer />}
+        {!isWrappdRoute && <Footer />}
       </div>
     </>
   );

@@ -1,88 +1,84 @@
-import { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-import WrappdCanvas from './WrappdCanvas';
-import WrappdInput from './WrappdInput';
-import { useLocalStorageData } from '../../utils';
+/* eslint-disable no-console */
+import { useEffect, useState } from 'react';
+import ReactGA from 'react-ga4';
+import { useParams } from 'react-router-dom';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../firebase';
+import WrappdLayout from './WrappdLayout';
 
-const Wrappd = ({ beerData, fullBeerData, filterDateRange }) => {
-  const elementRef = useRef();
-  const userName = useLocalStorageData('untappd_username');
-  const [customTitle, setCustomTitle] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
+const Wrappd = () => {
+  // analytics
+  useEffect(() => {
+    ReactGA.send({
+      hitType: 'pageview',
+      page: '/wrappd',
+      title: 'wrappd',
+    });
+  });
 
-  const handleCustomTitle = (event) => {
-    setCustomTitle(event.target.value);
-  };
+  const { id } = useParams();
+  const [stats, setStats] = useState(null);
+  const [dateRange, setDateRange] = useState({ start: null, end: null });
+  const [userName, setUserName] = useState(null);
+  const [userAvatar, setUserAvatar] = useState(null);
+  const [topLists, setTopLists] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const docRef = doc(db, 'wrappdStats', id);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setStats(data.stats);
+          setDateRange({
+            start: data.startDate,
+            end: data.endDate,
+          });
+          setUserName(data.userName || 'Untappd Stats');
+          setUserAvatar(data.userAvatar || undefined);
+          setTopLists(data.topLists || []);
+        } else {
+          setError('Stats not found');
+        }
+      } catch (err) {
+        setError('Failed to load stats');
+        console.error('Error fetching stats:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStats();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <div className="text-xl font-bold text-gray-900">Loading...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <div className="text-xl font-bold text-red-500">{error}</div>
+      </div>
+    );
+  }
 
   return (
-    <>
-      <div
-        className="mb-10 grid w-full grid-flow-row border border-yellow-500 md:w-[768px]
-        "
-      >
-        <button
-          className="bg-yellow-500 p-2 text-gray-700 hover:bg-yellow-200"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          {isOpen ? 'Close Tappd Wrappd' : 'Open Tappd Wrappd'}
-        </button>
-        <div
-          className={`transition-all duration-300 ${
-            isOpen ? 'max-h-screen opacity-100' : 'max-h-0 overflow-hidden opacity-0'
-          }`}
-        >
-          <div className="p-6 text-xl">
-            <h2 className="mb-3 text-2xl font-bold">
-              <span className="text-yellow-500">NEW</span> Your Untappd Wrappd!
-            </h2>
-            <p className="mb-2 font-bold">How does it work?</p>
-            <ul className="list-decimal pl-5">
-              <li>Set a desired data range;</li>
-              <li>
-                <span className="text-gray-300">Optional:</span> copy the link to your
-                Untappd avatar from your{' '}
-                <a
-                  href={`https://untappd.com/user/${userName}`}
-                  target="_blank"
-                  className="underline"
-                  rel="noreferrer"
-                >
-                  Untappd profile
-                </a>{' '}
-                (right click on the rounded photo and choose 'Copy image address'), and
-                paste it{' '}
-                <Link to="/upload" className="underline">
-                  here
-                </Link>
-                ;
-              </li>
-              <li>
-                <span className="text-gray-300">Optional:</span> set a custom title, like
-                'Awesome BeerFest 2024'.
-              </li>
-            </ul>
-          </div>
-          <div className="flex items-center bg-yellow-500 p-6">
-            <WrappdInput
-              elementRef={elementRef}
-              userName={userName}
-              handleCustomTitle={handleCustomTitle}
-            />
-          </div>
-        </div>
-      </div>
-
-      {isOpen && (
-        <WrappdCanvas
-          userName={userName}
-          beerData={beerData}
-          fullBeerData={fullBeerData}
-          customTitle={customTitle}
-          elementRef={elementRef}
-          filterDateRange={filterDateRange}
-        />
-      )}
-    </>
+    <WrappdLayout
+      userName={userName}
+      userAvatar={userAvatar}
+      dateRange={dateRange}
+      stats={stats}
+      topLists={topLists}
+    />
   );
 };
 

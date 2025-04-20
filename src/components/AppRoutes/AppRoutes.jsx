@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { DataContext } from '../../DataContext';
 import Dashboard from '../Dashboard/Dashboard';
 import Uploader from '../Uploader/Uploader';
-import SharedStats from '../SharedStats/SharedStats';
+import Wrappd from '../Wrappd/Wrappd';
 
 const AppRoutes = () => {
   const { beerData } = useContext(DataContext);
@@ -15,7 +15,7 @@ const AppRoutes = () => {
         element={beerData && beerData.length > 0 ? <Dashboard /> : <Uploader />}
       />
       <Route path="/upload" element={<Uploader />} />
-      <Route path="/shared/:id" element={<SharedStats />} />
+      <Route path="/wrappd/:id" element={<Wrappd />} />
     </Routes>
   );
 };

@@ -3,12 +3,7 @@ import { getOverviewStats, processTopData } from '.';
 
 import { processTopBeers } from './listProcessing';
 
-export const useWrappdData = (beerData, fullBeerData, filterDateRange) => {
-  const infoToShow = useMemo(
-    () => ['Total Beers', 'Unique beers', 'Beer styles', 'Venues drank at'],
-    []
-  );
-
+export const useWrappdData = (beerData, fullBeerData, filterDateRange, infoToShow) => {
   // Overview stats
   const stats = useMemo(
     () => getOverviewStats(beerData, filterDateRange, fullBeerData, infoToShow, true),
@@ -20,7 +15,7 @@ export const useWrappdData = (beerData, fullBeerData, filterDateRange) => {
     () => [
       {
         title: 'Top 5 beers',
-        items: processTopBeers(beerData, 'rating_score', 5, 'asc').processedList,
+        items: processTopBeers(beerData, 'rating_score', 25, 'desc').processedList, // fetch a lot to get 5 photos
         valueKey: 'value',
       },
       {
@@ -37,7 +32,7 @@ export const useWrappdData = (beerData, fullBeerData, filterDateRange) => {
       },
       {
         title: 'Worst 5 beers',
-        items: processTopBeers(beerData, 'rating_score', 5, 'desc').processedList,
+        items: processTopBeers(beerData, 'rating_score', 5, 'asc').processedList,
         valueKey: 'value',
       },
     ],
