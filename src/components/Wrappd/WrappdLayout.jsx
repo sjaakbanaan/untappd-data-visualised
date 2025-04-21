@@ -60,7 +60,7 @@ const WrappdLayout = ({ userName, userAvatar, dateRange, stats, topLists }) => {
     <div className="pb-12 pt-4 md:py-20">
       <div
         ref={containerRef}
-        className="container mx-auto max-w-screen-md overflow-hidden bg-gray-900 px-4 py-8 shadow-2xl shadow-gray-950 md:rounded-3xl md:p-10"
+        className="container mx-auto max-w-screen-md overflow-hidden bg-gray-900 px-4 py-8 md:rounded-3xl md:p-10 md:shadow-2xl md:shadow-gray-950"
         style={{ transformStyle: 'preserve-3d' }}
       >
         <ScrollReveal>
