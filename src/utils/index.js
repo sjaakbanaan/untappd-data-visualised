@@ -29,6 +29,7 @@ import { getBarChartRatingData } from './getBarChartRatingData';
 import { transformResetList } from './transformResetList';
 import { useDashboardData } from './useDashboardData';
 import { convertImageToBase64 } from './convertImageToBase64';
+import { setupScrollReveal } from './scrollRevealAnimation';
 
 export {
   formatDate,
@@ -62,4 +63,5 @@ export {
   transformResetList,
   useDashboardData,
   convertImageToBase64,
+  setupScrollReveal,
 };
