@@ -22,6 +22,7 @@ const Wrappd = () => {
   const [userName, setUserName] = useState(null);
   const [userAvatar, setUserAvatar] = useState(null);
   const [topLists, setTopLists] = useState(null);
+  const [filterOverview, setFilterOverview] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -41,6 +42,7 @@ const Wrappd = () => {
           setUserName(data.userName || 'Untappd Stats');
           setUserAvatar(data.userAvatar || undefined);
           setTopLists(data.topLists || []);
+          setFilterOverview(data.filterOverview || {});
         } else {
           setError('Stats not found');
         }
@@ -78,6 +80,7 @@ const Wrappd = () => {
       dateRange={dateRange}
       stats={stats}
       topLists={topLists}
+      filterOverview={filterOverview}
     />
   );
 };

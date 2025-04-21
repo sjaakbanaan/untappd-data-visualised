@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import StatCard from './StatCard';
 import WrappdButton from '../Wrappd/WrappdButton';
-import { useWrappdData } from '../../utils';
+import { useWrappdData } from '../../utils/';
 
-const BasicStats = ({ beerData, fullBeerData, filterDateRange }) => {
+const BasicStats = ({ beerData, fullBeerData, filterDateRange, filterOverview }) => {
   const infoToShow = [
     'Total beers',
     'Unique beers',
@@ -32,7 +32,12 @@ const BasicStats = ({ beerData, fullBeerData, filterDateRange }) => {
 
   return (
     <div>
-      <WrappdButton stats={stats} filterDateRange={filterDateRange} topLists={topLists} />
+      <WrappdButton
+        stats={stats}
+        filterDateRange={filterDateRange}
+        topLists={topLists}
+        filterOverview={filterOverview}
+      />
       <ul className="grid grid-cols-2 gap-6 md:grid-cols-3">
         {stats.length > 0 &&
           stats.map(

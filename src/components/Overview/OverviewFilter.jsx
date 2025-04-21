@@ -75,7 +75,7 @@ const OverviewFilter = ({
               'hover:cursor-pointer'
             ),
           placeholder: () => classNames('text-white', 'mx-0.5'),
-          valueContainer: () => classNames('py-0.5', 'px-2'),
+          valueContainer: () => classNames('py-0.5', 'px-2', 'text-yellow-500'),
         }}
       />
     </div>

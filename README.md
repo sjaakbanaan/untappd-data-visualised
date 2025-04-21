@@ -91,6 +91,7 @@ After setting filters, the following lists are presented in either a chart or li
 - 23-03-2025: v2.5.1 Added brewery state and rating as a filter option
 - 15-04-2025: v2.5.2 Fixed a bug where filtering on 'tagged friends' wouldn't return a complete list
 - 21-04-2025: v2.6.0 Tappd Wrappd is back! Now as a sharable link!
+- 22-04-2025: v2.6.1 Active filter(s) are now also visible on your Tappd Wrappd + cleanup
 
 ## Known bugs
 

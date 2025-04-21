@@ -86,6 +86,7 @@ const Dashboard = () => {
                     beerData={filteredData}
                     fullBeerData={beerData}
                     filterDateRange={filterDateRange}
+                    filterOverview={filterOverview}
                   />
                   <TopTableList beerData={filteredData} />
                 </>

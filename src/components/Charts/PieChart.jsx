@@ -2,7 +2,7 @@ import 'chart.js/auto';
 import PropTypes from 'prop-types';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
-import { processTopData } from '../../utils';
+import { processTopData } from '../../utils/';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 

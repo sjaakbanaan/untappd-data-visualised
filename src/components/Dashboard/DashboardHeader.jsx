@@ -1,5 +1,5 @@
 import ResetFilters from './ResetFilters';
-import { isFilterOverviewSet } from '../../utils';
+import { isFilterOverviewSet } from '../../utils/';
 
 const DashboardHeader = ({
   filterDateRange,

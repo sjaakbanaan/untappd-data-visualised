@@ -3,9 +3,9 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../../firebase';
-import { useLocalStorageData, convertImageToBase64 } from '../../utils';
+import { useLocalStorageData, convertImageToBase64 } from '../../utils/';
 
-const WrappdButton = ({ stats, filterDateRange, topLists }) => {
+const WrappdButton = ({ stats, filterDateRange, topLists, filterOverview }) => {
   const [shareLink, setShareLink] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   // get user details from local storage
@@ -56,6 +56,7 @@ const WrappdButton = ({ stats, filterDateRange, topLists }) => {
         stats: validStats,
         startDate: filterDateRange.start,
         endDate: filterDateRange.end,
+        filterOverview: filterOverview,
         createdAt: new Date().toISOString(),
       };
 

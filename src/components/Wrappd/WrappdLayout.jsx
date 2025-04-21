@@ -8,7 +8,14 @@ import WrappdFooter from './WrappdFooter';
 import ScrollReveal from '../ScrollReveal';
 import gsap from 'gsap';
 
-const WrappdLayout = ({ userName, userAvatar, dateRange, stats, topLists }) => {
+const WrappdLayout = ({
+  userName,
+  userAvatar,
+  dateRange,
+  stats,
+  topLists,
+  filterOverview,
+}) => {
   const containerRef = useRef(null);
   const photosList = topLists.find((item) => item.title === 'Top 5 beers');
 
@@ -67,6 +74,7 @@ const WrappdLayout = ({ userName, userAvatar, dateRange, stats, topLists }) => {
             userName={userName}
             userAvatar={userAvatar}
             dateRange={dateRange}
+            filterOverview={filterOverview}
           />
         </ScrollReveal>
         <ScrollReveal>
@@ -113,6 +121,7 @@ WrappdLayout.propTypes = {
       items: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
     })
   ).isRequired,
+  filterOverview: PropTypes.object.isRequired,
 };
 
 export default WrappdLayout;
