@@ -2,8 +2,6 @@
 
 ## This is the repository for [tappd.online](https:///tappd.online), no need to install anymore!
 
-![screencapture-tappd-online-2025-03-23-21_36_48](https://github.com/user-attachments/assets/ee37fbb2-2c91-42b4-bb38-a20bf78621f1)
-
 ## Overview
 #### You need to be an _Untappd Insider_ to use this dashboard!
 
@@ -53,15 +51,23 @@ After setting filters, the following lists are presented in either a chart or li
 - Basic statistics
 ```
 
+## Screenshots
+
+![screencapture-tappd-online-2025-03-23-21_36_48](https://github.com/user-attachments/assets/ee37fbb2-2c91-42b4-bb38-a20bf78621f1)
+
 ![screencapture-tappd-online-2025-03-23-21_38_30](https://github.com/user-attachments/assets/db0cc620-4d8a-4b78-8671-561360ff22d2)
+
+![screencapture-tappd-online-2025-03-23-21_39_39](https://github.com/user-attachments/assets/f9494f2a-163b-41c6-95da-98f0f31d8a96)
+
+![screencapture-tappd-online-2025-03-23-21_41_36 (1)](https://github.com/user-attachments/assets/f1d59e2b-28b9-45cf-9e75-3f1f51755b9f)
+
+<img width="677" alt="Screenshot 2025-04-21 at 21 47 01" src="https://github.com/user-attachments/assets/ea076421-28ba-472b-91b6-90f0468fc10f" />
 
 ## Prerequisites
 
-- An export of your data from Untappd (https://untappd.com/user/xxxx/beers) as JSON.
+- An export of your data from Untappd (https://untappd.com/user/xxxx/beers) as JSON. You can do so by being an Untappd Insider.
 - A [MapBox API key](https://account.mapbox.com/). It's free, you should be able to skip the setting up your payment card somehow.
 - for local development: **Node.js**: and preferably **Yarn**.
-
-![screencapture-tappd-online-2025-03-23-21_39_39](https://github.com/user-attachments/assets/f9494f2a-163b-41c6-95da-98f0f31d8a96)
 
 ## Change log
 
@@ -85,11 +91,6 @@ After setting filters, the following lists are presented in either a chart or li
 - 23-03-2025: v2.5.1 Added brewery state and rating as a filter option
 - 15-04-2025: v2.5.2 Fixed a bug where filtering on 'tagged friends' wouldn't return a complete list
 
-## Future wishes
-
-- Being able to run it without the need of Untappd Insider
-- Being able to share your stats
-
 ## Known bugs
 
 - tell me
@@ -97,8 +98,6 @@ After setting filters, the following lists are presented in either a chart or li
 ## Contributing
 
 Contributions are welcome via pull requests! Please make sure to adhere to the project's coding standards.
-
-![screencapture-tappd-online-2025-03-23-21_41_36 (1)](https://github.com/user-attachments/assets/f1d59e2b-28b9-45cf-9e75-3f1f51755b9f)
 
 ### Installation:
 
