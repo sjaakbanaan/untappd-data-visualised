@@ -1,12 +1,7 @@
 const WrappdFooter = () => {
   return (
     <div className="mt-14 flex flex-row items-center">
-      <img
-        crossOrigin="anonymous"
-        src="/logo-wrappd.png"
-        className="mr-6 w-[78px]"
-        alt=""
-      />
+      <img src="/logo-wrappd.svg" className="mr-6 w-[78px]" alt="" />
       <footer>
         <div className="text-xl font-bold md:text-2xl">Tappd Wrappd</div>
         <div className="text-base text-wrappdYellow md:text-2xl">
