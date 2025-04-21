@@ -15,9 +15,6 @@ export const formatWrappdDates = (start, end) => {
 
   // Helper function to check if a date range is exactly 6 months
   const isLastSixMonths = (start, end) => {
-    const sixMonthsAgo = new Date(today);
-    sixMonthsAgo.setMonth(today.getMonth() - 6);
-
     // Check if the range is exactly 6 months apart
     const monthDiff =
       (end.getFullYear() - start.getFullYear()) * 12 +
