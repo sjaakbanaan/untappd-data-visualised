@@ -1,7 +1,7 @@
 {
   "name": "untappd-data-visualised",
   "version": "2.5.2",
-  "private": true,
+  "private": false,
   "license": "MIT",
   "engines": {
     "node": ">=20.0.0"
@@ -12,6 +12,7 @@
     "chart.js": "^4.4.1",
     "classnames": "^2.5.1",
     "firebase": "^11.6.0",
+    "gsap": "^3.12.7",
     "html2canvas": "^1.4.1",
     "mapbox-gl": "^3.8.0",
     "postcss": "^8.4.49",

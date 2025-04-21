@@ -10,9 +10,7 @@ const AppContent = () => {
   return (
     <>
       {!isWrappdRoute && <Header />}
-      <div
-        className={`${isWrappdRoute ? 'fixed h-screen w-full overflow-auto bg-wrappd-gradient' : 'px-1 md:px-6'}`}
-      >
+      <div className={`${isWrappdRoute ? 'bg-wrappd-gradient' : 'px-1 md:px-6'}`}>
         <AppRoutes />
         {!isWrappdRoute && <Footer />}
       </div>

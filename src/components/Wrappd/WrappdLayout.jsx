@@ -4,6 +4,7 @@ import WrappdHeader from './WrappdHeader';
 import WrappdStats from './WrappdStats';
 import WrappdPhotos from './WrappdPhotos';
 import WrappdFooter from './WrappdFooter';
+import ScrollReveal from '../ScrollReveal';
 
 const WrappdLayout = ({ userName, userAvatar, dateRange, stats, topLists }) => {
   const photosList = topLists.find((item) => item.title === 'Top 5 beers');
@@ -11,19 +12,32 @@ const WrappdLayout = ({ userName, userAvatar, dateRange, stats, topLists }) => {
   return (
     <div className="py-0 md:py-8">
       <div className="container mx-auto max-w-screen-md overflow-hidden bg-gray-900 px-4 py-8 md:rounded-3xl md:p-10">
-        <WrappdHeader userName={userName} userAvatar={userAvatar} dateRange={dateRange} />
-        <WrappdStats stats={stats} />
-        <WrappdPhotos photosList={photosList} />
-        {topLists.map((topList, index) => (
-          <WrappdTopStats
-            key={index}
-            title={topList.title}
-            items={topList.items.slice(0, 5)}
-            valueKey={topList.valueKey}
-            suffix={topList.suffix}
+        <ScrollReveal>
+          <WrappdHeader
+            userName={userName}
+            userAvatar={userAvatar}
+            dateRange={dateRange}
           />
+        </ScrollReveal>
+        <ScrollReveal>
+          <WrappdStats stats={stats} />
+        </ScrollReveal>
+        <ScrollReveal>
+          <WrappdPhotos photosList={photosList} />
+        </ScrollReveal>
+        {topLists.map((topList, index) => (
+          <ScrollReveal key={index}>
+            <WrappdTopStats
+              title={topList.title}
+              items={topList.items.slice(0, 5)}
+              valueKey={topList.valueKey}
+              suffix={topList.suffix}
+            />
+          </ScrollReveal>
         ))}
-        <WrappdFooter />
+        <ScrollReveal>
+          <WrappdFooter />
+        </ScrollReveal>
       </div>
     </div>
   );
