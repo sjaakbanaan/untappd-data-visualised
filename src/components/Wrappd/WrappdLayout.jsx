@@ -10,7 +10,7 @@ const WrappdLayout = ({ userName, userAvatar, dateRange, stats, topLists }) => {
   const photosList = topLists.find((item) => item.title === 'Top 5 beers');
 
   return (
-    <div className="py-0 md:py-8">
+    <div className="py-0 md:py-8" style={{ marginBottom: '90px' }}>
       <div className="container mx-auto max-w-screen-md overflow-hidden bg-gray-900 px-4 py-8 md:rounded-3xl md:p-10">
         <ScrollReveal>
           <WrappdHeader
