@@ -32,6 +32,10 @@
     @apply inline-block; /* needed for html2canvas */
   }
 
+  .transform-3d {
+    transform-style: preserve-3d;
+  }
+
   .wrappd-text-reset * {
     line-height: 1 !important;
   }
