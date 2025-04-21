@@ -18,7 +18,7 @@ const WrappdPhotos = ({ photosList }) => {
                 index >= 2 ? 'aspect-square md:col-span-4' : 'md:col-span-6'
               }`}
             >
-              <div className="absolute right-3 top-3 aspect-square w-8 rounded-full bg-wrappdYellow text-center text-xl font-bold leading-8 text-black">
+              <div className="absolute right-3 top-3 aspect-square w-8 rounded-full bg-wrappdYellow text-center text-xl font-bold leading-7 text-black">
                 {originalIndex + 1}
               </div>
             </div>
