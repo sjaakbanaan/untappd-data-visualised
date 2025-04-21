@@ -1,12 +1,15 @@
 import PropTypes from 'prop-types';
 
 const WrappdPhotos = ({ photosList }) => {
+  // return null if there are less than 5 photos
+  if (photosList.items.filter((item) => item.photo_url).length < 5) return null;
   return (
     <div className="mb-10 grid grid-flow-row grid-cols-2 grid-rows-2 gap-4 md:mt-14 md:grid-cols-12">
-      {photosList?.items
+      {photosList.items
         .filter((item) => item.photo_url)
         .slice(0, 5)
         .map((item, index) => {
+          // get the original index of the photo to display in the top right corner
           const originalIndex = photosList.items.findIndex((beer) => beer === item);
           return (
             <div
