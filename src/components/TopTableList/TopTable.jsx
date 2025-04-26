@@ -7,7 +7,7 @@ import {
 } from '../../utils/listProcessing';
 import { useCounter } from '../../utils/';
 import EntryCounter from './EntryCounter';
-import NotificationBar from '../NotificationBar';
+import NotificationBar from '../UI/NotificationBar';
 
 const processingFunctions = {
   friends: processTaggedFriends,

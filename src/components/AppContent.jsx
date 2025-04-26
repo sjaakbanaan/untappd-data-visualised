@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom';
-import Header from '../Header';
-import Footer from '../Footer';
-import AppRoutes from '../AppRoutes/AppRoutes';
+import Header from './Header';
+import Footer from './Footer';
+import AppRoutes from './AppRoutes';
 
 const AppContent = () => {
   const location = useLocation();

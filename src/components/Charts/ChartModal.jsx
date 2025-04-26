@@ -1,7 +1,7 @@
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 // components
-import Overview from './Overview/Overview';
+import Overview from '../Overview/Overview';
 
 const ChartModal = ({ beerList, open, setOpen }) => {
   const closeModal = () => setOpen(false);

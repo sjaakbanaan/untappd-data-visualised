@@ -11,6 +11,10 @@ const UploadForm = ({ userDetails, handleInputChange }) => {
     { name: 'venue_lng', label: 'Home longitude' },
   ];
 
+  const validateAvatarUrl = (url) => {
+    return url.endsWith('.jpg');
+  };
+
   return (
     <div className="mb-10">
       <h2 className="mb-3 text-xl text-white">Enter details</h2>
@@ -43,7 +47,13 @@ const UploadForm = ({ userDetails, handleInputChange }) => {
               {field.label}
             </label>
             <input
-              className="w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
+              className={`w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none ${
+                field.name === 'untappd_avatar' &&
+                userDetails[field.name] &&
+                !validateAvatarUrl(userDetails[field.name])
+                  ? 'border-red-500'
+                  : ''
+              }`}
               id={field.name}
               type="text"
               placeholder={`Enter ${field.label.toLowerCase()}`}

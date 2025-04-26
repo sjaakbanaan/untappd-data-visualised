@@ -6,7 +6,7 @@ import DashboardHeader from './DashboardHeader';
 import YearFilterButtons from './YearFilterButtons';
 import DateSelector from './DateSelector';
 import OverviewFilters from '../Overview/OverviewFilters';
-import NotificationBar from '../NotificationBar';
+import NotificationBar from '../UI/NotificationBar';
 import DashboardNav from './DashboardNav';
 
 // Lazy-load heavy components

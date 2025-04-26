@@ -12,8 +12,8 @@ import {
 } from '../../utils/';
 
 // components
-import ChartModal from '../ChartModal';
-import NotificationBar from '../NotificationBar';
+import ChartModal from './ChartModal';
+import NotificationBar from '../UI/NotificationBar';
 
 const BarChart = ({ beerData, dataType = '', trailingChar = '' }) => {
   const openModal = () => setOpen(true);

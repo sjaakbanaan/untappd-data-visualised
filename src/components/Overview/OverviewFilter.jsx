@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import Select from 'react-select';
-import statesData from '../../states.json';
+import statesData from '../../data/states.json';
 
 // Function to translate state codes to names
 const translateStates = (stateCode, statesData) => {

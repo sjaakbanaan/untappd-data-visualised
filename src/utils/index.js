@@ -30,7 +30,7 @@ import { transformResetList } from './transformResetList';
 import { useDashboardData } from './useDashboardData';
 import { convertImageToBase64 } from './convertImageToBase64';
 import { setupScrollReveal } from './scrollRevealAnimation';
-
+import { useShareStats } from './useShareStats';
 export {
   formatDate,
   getDefaultEndDate,
@@ -64,4 +64,5 @@ export {
   useDashboardData,
   convertImageToBase64,
   setupScrollReveal,
+  useShareStats,
 };

@@ -34,6 +34,7 @@ const BasicStats = ({ beerData, fullBeerData, filterDateRange, filterOverview })
     <div>
       <WrappdButton
         stats={stats}
+        beerData={beerData}
         filterDateRange={filterDateRange}
         topLists={topLists}
         filterOverview={filterOverview}

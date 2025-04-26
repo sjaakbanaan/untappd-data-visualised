@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { setupScrollReveal } from '../utils/';
+import { setupScrollReveal } from '../../utils';
 
 let componentIndex = 0;
 
@@ -15,7 +15,7 @@ const ScrollReveal = ({ children }) => {
   }, []);
 
   return (
-    <div ref={elementRef} style={{ visibility: 'hidden' }}>
+    <div ref={elementRef} className="invisible">
       {children}
     </div>
   );

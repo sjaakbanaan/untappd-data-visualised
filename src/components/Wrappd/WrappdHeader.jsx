@@ -5,7 +5,7 @@ import ActiveFiltersDisplay from './ActiveFiltersDisplay';
 const WrappdHeader = ({ userName, userAvatar, dateRange, filterOverview }) => {
   return (
     <header className="mb-10 flex items-center">
-      {userAvatar && (
+      {userAvatar && userAvatar.startsWith('data:image/jpeg;base64') && (
         <img
           crossOrigin="anonymous"
           className="mr-6 w-16 rounded-full md:w-32"

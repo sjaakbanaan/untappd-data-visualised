@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import countriesData from '../countries.json';
+import countriesData from '../data/countries.json';
 
 export const useUploadedJsonUpdater = () => {
   const [beerData, setBeerData] = useState(null);

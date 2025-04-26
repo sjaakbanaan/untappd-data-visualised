@@ -1,4 +1,4 @@
-import Icon from '../Icon/Icon';
+import Icon from '../UI/Icon/Icon';
 import { formatDate } from '../../utils/';
 import { Popup } from 'react-map-gl';
 

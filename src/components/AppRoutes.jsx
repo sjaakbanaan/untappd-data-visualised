@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { DataContext } from '../../DataContext';
-import Dashboard from '../Dashboard/Dashboard';
-import Uploader from '../Uploader/Uploader';
-import Wrappd from '../Wrappd/Wrappd';
+import { DataContext } from '../DataContext';
+import Dashboard from './Dashboard/Dashboard';
+import Uploader from './Uploader/Uploader';
+import Wrappd from './Wrappd/Wrappd';
 
 const AppRoutes = () => {
   const { beerData } = useContext(DataContext);

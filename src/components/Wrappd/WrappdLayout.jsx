@@ -5,7 +5,7 @@ import WrappdHeader from './WrappdHeader';
 import WrappdStats from './WrappdStats';
 import WrappdPhotos from './WrappdPhotos';
 import WrappdFooter from './WrappdFooter';
-import ScrollReveal from '../ScrollReveal';
+import ScrollReveal from './ScrollReveal';
 import gsap from 'gsap';
 
 const WrappdLayout = ({
