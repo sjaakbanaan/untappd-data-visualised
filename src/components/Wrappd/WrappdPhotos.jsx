@@ -12,7 +12,11 @@ const WrappdPhotos = ({ photosList }) => {
           // get the original index of the photo to display in the top right corner
           const originalIndex = photosList.items.findIndex((beer) => beer === item);
           return (
-            <div
+            <a
+              href={item.url}
+              title={item.name}
+              target="_blank"
+              rel="noopener noreferrer"
               key={index}
               style={{
                 backgroundImage: `url(${item.photo_url})`,
@@ -24,7 +28,7 @@ const WrappdPhotos = ({ photosList }) => {
               <div className="absolute right-3 top-3 aspect-square w-8 rounded-full bg-wrappdYellow text-center text-xl font-bold leading-7 text-black">
                 {originalIndex + 1}
               </div>
-            </div>
+            </a>
           );
         })}
     </div>

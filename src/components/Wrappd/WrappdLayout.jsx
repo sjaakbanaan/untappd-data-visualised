@@ -78,7 +78,7 @@ const WrappdLayout = ({
           />
         </ScrollReveal>
         <ScrollReveal>
-          <WrappdStats stats={stats} />
+          <WrappdStats stats={stats} dateRange={dateRange} />
         </ScrollReveal>
         <ScrollReveal>
           <WrappdPhotos photosList={photosList} />

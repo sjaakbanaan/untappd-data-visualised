@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useShareStats } from '../../utils/';
+import { useShareStats, formatWrappdDates } from '../../utils/';
 
 const WrappdButton = ({ stats, filterDateRange, topLists, filterOverview, beerData }) => {
   const { shareLink, setShareLink, isLoading, handleShare } = useShareStats();
@@ -11,19 +11,29 @@ const WrappdButton = ({ stats, filterDateRange, topLists, filterOverview, beerDa
   }, [beerData, setShareLink]);
 
   return (
-    <div>
-      <div className="mb-4 flex justify-end">
+    <div className="mb-8 border-2 border-dashed border-gray-400 p-6 md:p-8">
+      <h2 className="text-2xl font-bold">Share your stats</h2>
+      <p className="mt-2 text-white">
+        Click on the button below to share your beer journey for{' '}
+        <span className="text-yellow-500">
+          {formatWrappdDates(filterDateRange.start, filterDateRange.end)}
+        </span>
+        .
+      </p>
+      <div className="mt-4 flex">
         <button
           onClick={() => handleShare(stats, filterDateRange, topLists, filterOverview)}
           disabled={isLoading}
-          className="rounded bg-yellow-500 px-4 py-2 text-black hover:bg-yellow-600 disabled:opacity-50"
+          className="rounded bg-yellow-500 px-4 py-2 text-black transition-colors duration-300 hover:bg-yellow-400"
         >
-          {isLoading ? 'Creating link...' : 'Tappd Wrappd'}
+          {isLoading ? 'Generating link...' : 'Create Tappd Wrappd'}
         </button>
       </div>
       {shareLink && (
-        <div className="mb-4 rounded bg-gray-800 p-4">
-          <p className="text-sm text-white">Your personal link for this range:</p>
+        <div className="mb-4 mt-8 rounded bg-gray-800 p-4">
+          <p className="text-sm text-white">
+            Here it is, the link has also been copied to your clipboard:
+          </p>
           <p className="break-all text-yellow-500">
             <a href={shareLink} target="_blank" rel="noopener noreferrer">
               {shareLink}

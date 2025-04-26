@@ -8,7 +8,20 @@ const WrappdTopStats = ({ title, items, valueKey = 'value', suffix = '' }) => {
         {items.map((item, i) => (
           <li className="my-2" key={i}>
             <div className="flex flex-row items-center justify-between">
-              <div className="truncate">{item.name || item.key}</div>
+              <div className="truncate">
+                {item.url ? (
+                  <a
+                    href={item.url}
+                    title={`See checkin for ${item.name}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {item.name}
+                  </a>
+                ) : (
+                  item.name
+                )}
+              </div>
               <div className="-mt-1 ml-3 rounded-xl bg-wrappdYellow px-2 py-1 text-center leading-none text-black">
                 <div className="truncate">
                   {item[valueKey]}

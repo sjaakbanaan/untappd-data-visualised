@@ -92,7 +92,7 @@ After setting filters, the following lists are presented in either a chart or li
 - 15-04-2025: v2.5.2 Fixed a bug where filtering on 'tagged friends' wouldn't return a complete list
 - 21-04-2025: v2.6.0 Tappd Wrappd is back! Now as a sharable link!
 - 22-04-2025: v2.6.1 Active filter(s) are now also visible on your Tappd Wrappd + cleanup
-
+- 27-04-2025: v2.6.2 Big cleanup and better UX for Tappd Wrappd
 ## Known bugs
 
 - tell me
