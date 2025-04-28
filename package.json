@@ -59,6 +59,7 @@
     "eslint-plugin-react": "^7.34.4",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-tailwindcss": "3.16.0",
+    "firebase-admin": "^13.3.0",
     "prettier": "^3.4.1",
     "vite": "^6.2.6"
   }

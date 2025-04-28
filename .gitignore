@@ -11,12 +11,11 @@
 # production
 /build
 /dist
+/scripts
 
 # misc
 .DS_Store
 .env
-get_export.sh
-get_free_export.sh
 
 npm-debug.log*
 yarn-debug.log*

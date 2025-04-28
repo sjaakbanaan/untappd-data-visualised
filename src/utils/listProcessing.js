@@ -32,8 +32,11 @@ export const processTopBeers = (beerData, scoreType, count = 10, order = 'desc')
       ? deduplicatedData.sort((a, b) => a.value - b.value)
       : deduplicatedData.sort((a, b) => b.value - a.value);
 
-  // Get the top or lowest `count` items
-  const processedList = sortedData.slice(0, count);
+  // Get the top or lowest `count` items, but in case of 'lowest', make sure the skip the items with a value of 0
+  const processedList =
+    order === 'asc'
+      ? sortedData.filter((item) => item.value > 0).slice(0, count)
+      : sortedData.slice(0, count);
 
   return { processedList, onEmpty, suffix };
 };

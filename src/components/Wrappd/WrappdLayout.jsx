@@ -108,7 +108,7 @@ const WrappdLayout = ({
           <ScrollReveal key={index}>
             <WrappdTopStats
               title={topList.title}
-              items={topList.items.slice(0, 5)}
+              items={topList.items.slice(0, 5)} // needed because i add way more items for the photos
               valueKey={topList.valueKey}
               suffix={topList.suffix}
             />
