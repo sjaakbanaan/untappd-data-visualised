@@ -16,15 +16,21 @@ const WrappdLayout = ({
   topLists,
   filterOverview,
 }) => {
+  // Create a ref for the container to apply 3D effects
   const containerRef = useRef(null);
+  // Find the list of top beers which will be used for photos
   const photosList = topLists.find((item) => item.title === 'Top 5 beers');
 
   useEffect(() => {
     const container = containerRef.current;
 
-    // Only add the effect if screen width is larger than 768px (md breakpoint)
+    // Only apply 3D effect on desktop (screens wider than 768px)
     if (window.innerWidth < 768) return;
 
+    /**
+     * Handles mouse movement to create a 3D tilt effect
+     * Calculates rotation based on mouse position relative to container center
+     */
     const handleMouseMove = (e) => {
       const rect = container.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -33,18 +39,23 @@ const WrappdLayout = ({
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
 
-      const rotateX = (y - centerY) / 200;
-      const rotateY = (centerX - x) / 200;
+      // Calculate rotation angles (divided by 200 to make the effect subtle)
+      const rotateX = (y - centerY) / 100;
+      const rotateY = (centerX - x) / 100;
 
+      // Animate the container rotation using GSAP
       gsap.to(container, {
         rotateX: rotateX,
         rotateY: rotateY,
         duration: 0.5,
         ease: 'power2.out',
-        transformPerspective: 3000,
+        transformPerspective: 2000,
       });
     };
 
+    /**
+     * Resets the container rotation when mouse leaves
+     */
     const handleMouseLeave = () => {
       gsap.to(container, {
         rotateX: 0,
@@ -54,9 +65,11 @@ const WrappdLayout = ({
       });
     };
 
+    // Add event listeners for mouse movement
     container.addEventListener('mousemove', handleMouseMove);
     container.addEventListener('mouseleave', handleMouseLeave);
 
+    // Cleanup: remove event listeners when component unmounts
     return () => {
       container.removeEventListener('mousemove', handleMouseMove);
       container.removeEventListener('mouseleave', handleMouseLeave);
@@ -65,10 +78,12 @@ const WrappdLayout = ({
 
   return (
     <div className="pb-12 pt-4 md:py-20">
+      {/* Main container with 3D transform effect */}
       <div
         ref={containerRef}
         className="transform-3d container mx-auto max-w-screen-md overflow-hidden bg-gray-900 px-4 py-8 shadow-2xl shadow-gray-950 transition-transform duration-1000 ease-out md:rounded-3xl md:p-10"
       >
+        {/* Header section with user info and date range */}
         <ScrollReveal>
           <WrappdHeader
             userName={userName}
@@ -77,12 +92,18 @@ const WrappdLayout = ({
             filterOverview={filterOverview}
           />
         </ScrollReveal>
+
+        {/* Statistics section */}
         <ScrollReveal>
           <WrappdStats stats={stats} dateRange={dateRange} />
         </ScrollReveal>
+
+        {/* Photos section showing top beers */}
         <ScrollReveal>
           <WrappdPhotos photosList={photosList} />
         </ScrollReveal>
+
+        {/* Top lists section (beers, breweries, venues, etc.) */}
         {topLists.map((topList, index) => (
           <ScrollReveal key={index}>
             <WrappdTopStats
@@ -93,6 +114,8 @@ const WrappdLayout = ({
             />
           </ScrollReveal>
         ))}
+
+        {/* Footer section */}
         <ScrollReveal>
           <WrappdFooter />
         </ScrollReveal>

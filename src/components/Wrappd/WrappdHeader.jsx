@@ -8,7 +8,7 @@ const WrappdHeader = ({ userName, userAvatar, dateRange, filterOverview }) => {
       {userAvatar && userAvatar.startsWith('data:image/jpeg;base64') && (
         <img
           crossOrigin="anonymous"
-          className="mr-6 w-16 rounded-full md:w-32"
+          className="mr-6 w-16 rounded-full md:w-24"
           src={userAvatar}
           alt=""
         />
