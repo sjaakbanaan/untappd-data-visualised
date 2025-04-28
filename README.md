@@ -1,4 +1,4 @@
-# Untappd Data Visualised v2.6.0
+# Untappd Data Visualised v2.6.3
 
 ## This is the repository for [tappd.online](https:///tappd.online), no need to install anymore!
 
@@ -93,6 +93,7 @@ After setting filters, the following lists are presented in either a chart or li
 - 21-04-2025: v2.6.0 Tappd Wrappd is back! Now as a sharable link!
 - 22-04-2025: v2.6.1 Active filter(s) are now also visible on your Tappd Wrappd + cleanup
 - 27-04-2025: v2.6.2 Big cleanup and better UX for Tappd Wrappd
+- 28-04-2025: v2.6.3 More of the above
 ## Known bugs
 
 - tell me

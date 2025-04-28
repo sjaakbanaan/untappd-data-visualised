@@ -13,24 +13,15 @@ const WrappdButton = ({ stats, filterDateRange, topLists, filterOverview, beerDa
   return (
     <div className="mb-8 border-2 border-dashed border-gray-400 p-6 md:p-8">
       <h2 className="text-2xl font-bold">Share your stats</h2>
-      <p className="mt-2 text-white">
+      <p className="mt-2 text-gray-400">
         Click on the button below to share your beer journey for{' '}
-        <span className="text-yellow-500">
+        <span className="text-white">
           {formatWrappdDates(filterDateRange.start, filterDateRange.end)}
         </span>
         .
       </p>
-      <div className="mt-4 flex">
-        <button
-          onClick={() => handleShare(stats, filterDateRange, topLists, filterOverview)}
-          disabled={isLoading}
-          className="rounded bg-yellow-500 px-4 py-2 text-black transition-colors duration-300 hover:bg-yellow-400"
-        >
-          {isLoading ? 'Generating link...' : 'Create Tappd Wrappd'}
-        </button>
-      </div>
-      {shareLink && (
-        <div className="mb-4 mt-8 rounded bg-gray-800 p-4">
+      {shareLink ? (
+        <div className="my-4 rounded bg-gray-800 p-4">
           <p className="text-sm text-white">
             Here it is, the link has also been copied to your clipboard:
           </p>
@@ -39,6 +30,16 @@ const WrappdButton = ({ stats, filterDateRange, topLists, filterOverview, beerDa
               {shareLink}
             </a>
           </p>
+        </div>
+      ) : (
+        <div className="mt-4 flex">
+          <button
+            onClick={() => handleShare(stats, filterDateRange, topLists, filterOverview)}
+            disabled={isLoading}
+            className="rounded bg-yellow-500 px-4 py-2 text-black transition-colors duration-300 hover:bg-yellow-400"
+          >
+            {isLoading ? 'Generating link...' : 'Create Tappd Wrappd'}
+          </button>
         </div>
       )}
     </div>

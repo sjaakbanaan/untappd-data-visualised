@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import WrappdLayout from './WrappdLayout';
+import { formatWrappdDates } from '../../utils/';
 
 const Wrappd = () => {
   // analytics
@@ -56,6 +57,13 @@ const Wrappd = () => {
 
     fetchStats();
   }, [id]);
+
+  // Set page title when data is loaded
+  useEffect(() => {
+    if (userName && dateRange.start && dateRange.end) {
+      document.title = `${userName}'s Tappd Wrappd - ${formatWrappdDates(dateRange.start, dateRange.end)}`;
+    }
+  }, [userName, dateRange]);
 
   if (loading) {
     return (
