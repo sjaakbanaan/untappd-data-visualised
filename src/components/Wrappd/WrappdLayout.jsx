@@ -40,8 +40,8 @@ const WrappdLayout = ({
       const centerY = rect.height / 2;
 
       // Calculate rotation angles (divided by 200 to make the effect subtle)
-      const rotateX = (y - centerY) / 100;
-      const rotateY = (centerX - x) / 100;
+      const rotateX = (y - centerY) / 150;
+      const rotateY = (centerX - x) / 150;
 
       // Animate the container rotation using GSAP
       gsap.to(container, {
@@ -49,7 +49,7 @@ const WrappdLayout = ({
         rotateY: rotateY,
         duration: 0.5,
         ease: 'power2.out',
-        transformPerspective: 2000,
+        transformPerspective: 2600,
       });
     };
 
