@@ -9,43 +9,50 @@ import {
 } from '../utils';
 import { calculateAverageRatingScore } from './getBarChartTopBottomData';
 
-export const getOverviewStats = (beerData, filterDateRange, fullBeerData, infoToShow) => {
-  const totalUniqueBeerCount = beerData && filterDuplicateBeers(beerData)?.length;
+export const getOverviewStats = (filteredData, filterDateRange, infoToShow) => {
+  const totalUniqueBeerCount = filteredData && filterDuplicateBeers(filteredData)?.length;
   const totalDays =
     filterDateRange &&
     (new Date(filterDateRange.end) - new Date(filterDateRange.start)) /
       (1000 * 60 * 60 * 24);
 
-  const totalPhotos = statsCountTotal(beerData, 'photo_url');
-  const totalVenues = statsCountUnique(beerData, 'venue_name');
-  const totalCities = statsCountUnique(beerData, 'venue_city');
-  const totalBreweries = statsCountUnique(beerData, 'brewery_name');
-  const totalCountries = statsCountUnique(beerData, 'venue_country');
-  const totalVenuesPurchased = statsCountUnique(beerData, 'purchase_venue');
-  const totalBreweryCountries = statsCountUnique(beerData, 'brewery_country');
-  const totalToasts = statsCountTotal(beerData, 'total_toasts', (item) => item !== 0);
-  const totalComments = statsCountTotal(beerData, 'total_comments', (item) => item !== 0);
-  const totalUniqueFriends = statsCountUniqueFriends(beerData, 'tagged_friends');
-  const beerTypes = getBarChartTopBottomData(beerData);
+  const totalPhotos = statsCountTotal(filteredData, 'photo_url');
+  const totalVenues = statsCountUnique(filteredData, 'venue_name');
+  const totalCities = statsCountUnique(filteredData, 'venue_city');
+  const totalBreweries = statsCountUnique(filteredData, 'brewery_name');
+  const totalCountries = statsCountUnique(filteredData, 'venue_country');
+  const totalVenuesPurchased = statsCountUnique(filteredData, 'purchase_venue');
+  const totalBreweryCountries = statsCountUnique(filteredData, 'brewery_country');
+  const totalToasts = statsCountTotal(filteredData, 'total_toasts', (item) => item !== 0);
+  const totalComments = statsCountTotal(
+    filteredData,
+    'total_comments',
+    (item) => item !== 0
+  );
+  const totalUniqueFriends = statsCountUniqueFriends(filteredData, 'tagged_friends');
+  const beerTypes = getBarChartTopBottomData(filteredData);
   const fullDateRange = checkFullDateRange(
     getDefaultEndDate(),
-    fullBeerData,
+    filteredData,
     filterDateRange
   );
-  const avgRating = calculateAverageRatingScore(beerData);
-  const globalAvgRating = calculateAverageRatingScore(beerData, 'global_rating_score');
+  const avgRating = calculateAverageRatingScore(filteredData);
+  const globalAvgRating = calculateAverageRatingScore(
+    filteredData,
+    'global_rating_score'
+  );
 
   const stats = [
     {
       key: 'Total beers',
-      value: beerData.length,
-      suffix: `${(beerData.length / totalDays).toFixed(2)} per day`,
+      value: filteredData.length,
+      suffix: `${(filteredData.length / totalDays).toFixed(2)} per day`,
     },
     {
       key: 'Unique beers',
       short_key: 'Unique beers',
       value: totalUniqueBeerCount,
-      suffix: `${((totalUniqueBeerCount / beerData.length) * 100).toFixed(1)}%`,
+      suffix: `${((totalUniqueBeerCount / filteredData.length) * 100).toFixed(1)}%`,
     },
     {
       key: 'Total breweries',
@@ -64,12 +71,12 @@ export const getOverviewStats = (beerData, filterDateRange, fullBeerData, infoTo
       key: 'Venues drank at',
       short_key: 'Venues',
       value: totalVenues,
-      suffix: `${(totalVenues / beerData.length).toFixed(2)} per checkin`,
+      suffix: `${(totalVenues / filteredData.length).toFixed(2)} per checkin`,
     },
     {
       key: 'Venues purchased',
       value: totalVenuesPurchased,
-      suffix: `${(totalVenuesPurchased / beerData.length).toFixed(2)} per checkin`,
+      suffix: `${(totalVenuesPurchased / filteredData.length).toFixed(2)} per checkin`,
     },
     {
       key: 'Cities drank in',
@@ -86,17 +93,17 @@ export const getOverviewStats = (beerData, filterDateRange, fullBeerData, infoTo
     {
       key: 'Photos added',
       value: totalPhotos,
-      suffix: `${(totalPhotos / beerData.length).toFixed(2)} per checkin`,
+      suffix: `${(totalPhotos / filteredData.length).toFixed(2)} per checkin`,
     },
     {
       key: 'Toasts received',
       value: totalToasts,
-      suffix: `${(totalToasts / beerData.length).toFixed(2)} per checkin`,
+      suffix: `${(totalToasts / filteredData.length).toFixed(2)} per checkin`,
     },
     {
       key: 'Comments received',
       value: totalComments,
-      suffix: `${(totalComments / beerData.length).toFixed(2)} per checkin`,
+      suffix: `${(totalComments / filteredData.length).toFixed(2)} per checkin`,
     },
     {
       key: 'Total unique friends',

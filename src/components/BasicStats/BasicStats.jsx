@@ -1,44 +1,12 @@
 import PropTypes from 'prop-types';
 import StatCard from './StatCard';
-import WrappdButton from '../Wrappd/WrappdButton';
-import { useWrappdData } from '../../utils/';
+import { useBasicStats } from '../../utils/';
 
-const BasicStats = ({ beerData, fullBeerData, filterDateRange, filterOverview }) => {
-  const infoToShow = [
-    'Total beers',
-    'Unique beers',
-    'Total breweries',
-    'Beer styles',
-    'Photos added',
-    'Toasts received',
-    'Comments received',
-    'Venues drank at',
-    'Venues purchased',
-    'Cities drank in',
-    'Countries drank in',
-    'Brewery countries',
-    'Unique friends',
-    'Years active',
-    'Days active',
-    'Average rating',
-  ];
-
-  const { stats, topLists } = useWrappdData(
-    beerData,
-    fullBeerData,
-    filterDateRange,
-    infoToShow
-  );
+const BasicStats = ({ filteredData, filterDateRange }) => {
+  const { stats } = useBasicStats(filteredData, filterDateRange);
 
   return (
     <div>
-      <WrappdButton
-        stats={stats}
-        beerData={beerData}
-        filterDateRange={filterDateRange}
-        topLists={topLists}
-        filterOverview={filterOverview}
-      />
       <ul className="grid grid-cols-2 gap-6 md:grid-cols-3">
         {stats.length > 0 &&
           stats.map(
@@ -58,8 +26,7 @@ const BasicStats = ({ beerData, fullBeerData, filterDateRange, filterOverview })
 };
 
 BasicStats.propTypes = {
-  beerData: PropTypes.array.isRequired,
-  fullBeerData: PropTypes.array.isRequired,
+  filteredData: PropTypes.array.isRequired,
   filterDateRange: PropTypes.object.isRequired,
 };
 

@@ -22,7 +22,7 @@ import { getBarChartHourData } from './getBarChartHourData';
 import { formatWrappdDates } from './formatWrappdDates';
 import { getOverviewStats } from './getOverviewStats';
 import { processTopData } from './processTopData';
-import { useWrappdData } from './useWrappdData';
+import { useBasicStats } from './useBasicStats';
 import { useLocalStorageData } from './useLocalStorageData';
 import { toDataURL } from './toDataURL';
 import { getBarChartRatingData } from './getBarChartRatingData';
@@ -56,7 +56,7 @@ export {
   formatWrappdDates,
   getOverviewStats,
   processTopData,
-  useWrappdData,
+  useBasicStats,
   useLocalStorageData,
   toDataURL,
   getBarChartRatingData,

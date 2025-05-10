@@ -13,11 +13,15 @@ const dataLayer = {
   },
 };
 
-const VenueMap = ({ beerData }) => {
+const BreweryMap = ({ beerData }) => {
   const [allData, setAllData] = useState(null);
   const [storedMapBoxKey, setStoredMapBoxKey] = useState(
     getLocalStorageData('mapbox_key')
   );
+
+  const uniqueCountries = useMemo(() => {
+    return [...new Set(beerData.map((item) => item.brewery_country))];
+  }, [beerData]);
 
   useEffect(() => {
     // Check for Mapbox key in local storage
@@ -64,7 +68,9 @@ const VenueMap = ({ beerData }) => {
 
   return (
     <div>
-      <h2 className="mb-6 text-xl font-semibold">Brewery countries</h2>
+      <h2 className="mb-6 text-xl font-semibold">
+        Brewery countries ({uniqueCountries.length})
+      </h2>
       <div className="my-4 overflow-hidden rounded border border-gray-900 shadow-md">
         <Map
           initialViewState={{
@@ -89,4 +95,4 @@ const VenueMap = ({ beerData }) => {
   );
 };
 
-export default VenueMap;
+export default BreweryMap;

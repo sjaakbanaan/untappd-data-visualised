@@ -8,6 +8,7 @@ import DateSelector from './DateSelector';
 import OverviewFilters from '../Overview/OverviewFilters';
 import NotificationBar from '../UI/NotificationBar';
 import DashboardNav from './DashboardNav';
+import WrappdShareBox from '../Wrappd/WrappdShareBox';
 
 // Lazy-load heavy components
 const BasicStats = lazy(() => import('../BasicStats/BasicStats'));
@@ -47,12 +48,13 @@ const Dashboard = () => {
     // All filtering instruments and total result display are up next:
     <div className="container mx-auto p-4 md:p-0">
       <div>
-        <YearFilterButtons
+        <div className="mb-2 block text-sm font-bold text-white">Set a date range</div>
+        <DateSelector
           beerData={beerData}
           filterDateRange={filterDateRange}
           setFilterDateRange={setFilterDateRange}
         />
-        <DateSelector
+        <YearFilterButtons
           beerData={beerData}
           filterDateRange={filterDateRange}
           setFilterDateRange={setFilterDateRange}
@@ -83,8 +85,8 @@ const Dashboard = () => {
               {activeSection === 'stats' && (
                 <>
                   <BasicStats
-                    beerData={filteredData}
-                    fullBeerData={beerData}
+                    filteredData={filteredData}
+                    beerData={beerData}
                     filterDateRange={filterDateRange}
                     filterOverview={filterOverview}
                   />
@@ -112,6 +114,11 @@ const Dashboard = () => {
               )}
             </Suspense>
           </div>
+          <WrappdShareBox
+            filteredData={filteredData}
+            filterDateRange={filterDateRange}
+            filterOverview={filterOverview}
+          />
         </div>
       ) : (
         // in case of no results:

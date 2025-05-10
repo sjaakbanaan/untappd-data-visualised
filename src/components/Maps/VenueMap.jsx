@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Map, { NavigationControl, FullscreenControl } from 'react-map-gl';
 import Pins from './Pins';
 import VenuePopUp from './VenuePopUp';
@@ -12,6 +12,10 @@ const VenueMap = ({ beerData }) => {
   const [storedMapboxKey, setStoredMapboxKey] = useState(
     getLocalStorageData('mapbox_key')
   );
+
+  const uniqueVenues = useMemo(() => {
+    return [...new Set(beerData.map((item) => item.venue_name))];
+  }, [beerData]);
 
   useEffect(() => {
     // Check for userDetails in local storage
@@ -55,7 +59,9 @@ const VenueMap = ({ beerData }) => {
 
   return (
     <div>
-      <h2 className="mb-6 text-xl font-semibold">Venues checked-in</h2>
+      <h2 className="mb-6 text-xl font-semibold">
+        Venues checked-in ({uniqueVenues.length})
+      </h2>
       <div className="my-4 overflow-hidden rounded border border-gray-900 shadow-md">
         <Map
           key={mapKey} // Use mapKey as the key prop

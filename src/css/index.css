@@ -28,10 +28,6 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  img {
-    @apply inline-block; /* needed for html2canvas */
-  }
-
   .transform-3d {
     transform-style: preserve-3d;
   }
