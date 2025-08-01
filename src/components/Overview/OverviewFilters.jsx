@@ -28,7 +28,7 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
 
     // Update state with unique filter options
     setFilterOptions(uniqueOptions);
-  }, [beerData]);
+  }, [beerData, resetList]);
 
   // Function to handle filter changes
   const handleFilterChange = (key, value) => {

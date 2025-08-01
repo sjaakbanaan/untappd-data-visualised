@@ -14,9 +14,9 @@ const DataProvider = ({ children }) => {
     venue_name: '',
     venue_city: '',
     venue_country: '',
+    purchase_venue: '',
     tagged_friends: '',
     beer_type: '',
-    rating_score: '',
   };
 
   return (
