@@ -81,7 +81,7 @@ const LineChart = ({ beerData }) => {
   if (labels && labels.length < 3) return false;
 
   return (
-    <div className="col-span-2">
+    <div className="lg:col-span-2">
       <h2 className="mb-6 text-xl font-semibold">Cumulative beer count (year)</h2>
       <Line options={options} data={data} />
     </div>

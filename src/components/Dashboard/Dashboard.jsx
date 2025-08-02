@@ -96,7 +96,10 @@ const Dashboard = () => {
               {activeSection === 'charts' && (
                 <>
                   <PieChartList beerData={filteredData} />
-                  <BarChartList beerData={filteredData} />
+                  <BarChartList
+                    beerData={filteredData}
+                    filterDateRange={filterDateRange}
+                  />
                   <LineChart beerData={filteredData} />
                   <BeerTypeChart beerData={filteredData} />
                 </>

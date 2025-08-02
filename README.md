@@ -97,6 +97,7 @@ After setting filters, the following lists are presented in either a chart or li
 - 11-05-2025: v2.6.4 Moved Tappd Wrappd to the bottom and gave it some more styling and added totals to the maps
 - 16-05-2025: v2.6.5 Added share button for Tappd Wrappd
 - 01-08-2025: v2.6.6 Replaced the rating filter with the purchased venues filter
+- 03-12-2025: v2.6.7 Added the option to see your monthly checkins divided over years to bar charts + mobile UI fix for charts
 ## Known bugs
 
 - tell me

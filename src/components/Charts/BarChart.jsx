@@ -30,6 +30,9 @@ const BarChart = ({ beerData, dataType = '', trailingChar = '' }) => {
       case 'beers_per_month':
         dataList = getBarChartMonthData(beerData);
         break;
+      case 'beers_per_month_year':
+        dataList = getBarChartMonthData(beerData, true);
+        break;
       case 'beers_per_day':
         dataList = getBarChartDayData(beerData);
         enableClick = true;
