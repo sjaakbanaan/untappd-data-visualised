@@ -7,6 +7,7 @@ const DashboardNav = ({ activeSection, setActiveSection }) => {
     { key: 'stats', label: 'Stats', icon: 'STATS' },
     { key: 'charts', label: 'Charts', icon: 'CHART' },
     { key: 'checkins', label: 'Checkins', icon: 'UNTAPPD' },
+    { key: 'ai', label: 'AI', icon: 'STATS' },
   ];
 
   if (mapboxKey) {
