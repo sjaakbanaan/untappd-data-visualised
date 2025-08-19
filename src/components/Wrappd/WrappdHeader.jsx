@@ -3,7 +3,13 @@ import { formatWrappdDates } from '../../utils/';
 import ActiveFiltersDisplay from './ActiveFiltersDisplay';
 import WrappdShareButton from './WrappdShareButton';
 
-const WrappdHeader = ({ userName, userAvatar, dateRange, filterOverview }) => {
+const WrappdHeader = ({
+  userName,
+  userAvatar,
+  dateRange,
+  filterOverview,
+  shareLinkTitle,
+}) => {
   return (
     <header className="mb-10 flex flex-col justify-between md:flex-row md:items-center">
       <div className="flex items-center">
@@ -16,9 +22,12 @@ const WrappdHeader = ({ userName, userAvatar, dateRange, filterOverview }) => {
           />
         )}
         <div className="flex flex-col truncate">
-          <div className="mb-1 truncate text-3xl">{userName}</div>
+          <h1 className="mb-1 truncate text-3xl">{userName}</h1>
           <div className="whitespace-normal text-wrappdYellow">
-            {formatWrappdDates(dateRange.start, dateRange.end)}
+            {shareLinkTitle && <h2 className="text-xl mt-1">{shareLinkTitle}</h2>}
+            <h3 className="text-gray-400">
+              {formatWrappdDates(dateRange.start, dateRange.end)}
+            </h3>
             <ActiveFiltersDisplay filterOverview={filterOverview} />
           </div>
         </div>

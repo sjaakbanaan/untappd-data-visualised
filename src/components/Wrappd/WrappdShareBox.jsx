@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useShareStats, formatWrappdDates, useBasicStats } from '../../utils';
 
 const WrappdShareBox = ({ filterDateRange, filterOverview, filteredData }) => {
   const { shareLink, setShareLink, isLoading, handleShare } = useShareStats();
   const { stats, topLists } = useBasicStats(filteredData, filterDateRange);
+  const [shareLinkTitle, setShareLinkTitle] = useState('');
 
   // reset share link when beerData changes
   useEffect(() => {
@@ -30,17 +31,33 @@ const WrappdShareBox = ({ filterDateRange, filterOverview, filteredData }) => {
         </>
       ) : (
         <>
-          <p>
+          <p className="mb-4">
             Click on the button below to share your beer journey for{' '}
             <span className="text-black">
               {formatWrappdDates(filterDateRange.start, filterDateRange.end)}
             </span>
             .
           </p>
+          <p className="mb-2">
+            Set a custom title for your Wrappd, it replaces the date range{' '}
+            <em>(optional)</em>:
+          </p>
+          <input
+            type="text"
+            value={shareLinkTitle}
+            className="mb-4 appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
+            onChange={(e) => setShareLinkTitle(e.target.value)}
+          />
           <div className="mt-4 flex">
             <button
               onClick={() =>
-                handleShare(stats, filterDateRange, topLists, filterOverview)
+                handleShare(
+                  stats,
+                  filterDateRange,
+                  topLists,
+                  filterOverview,
+                  shareLinkTitle
+                )
               }
               disabled={isLoading}
               className="rounded border border-white bg-gray-800 px-4 py-2 text-white transition-colors duration-300 hover:bg-gray-700"

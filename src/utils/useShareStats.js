@@ -10,7 +10,13 @@ export const useShareStats = () => {
   const userName = useLocalStorageData('untappd_username');
   const userAvatar = useLocalStorageData('untappd_avatar');
 
-  const handleShare = async (stats, filterDateRange, topLists, filterOverview) => {
+  const handleShare = async (
+    stats,
+    filterDateRange,
+    topLists,
+    filterOverview,
+    shareLinkTitle
+  ) => {
     setIsLoading(true);
     try {
       const validStats = stats
@@ -53,6 +59,7 @@ export const useShareStats = () => {
         startDate: filterDateRange.start,
         endDate: filterDateRange.end,
         filterOverview: filterOverview,
+        shareLinkTitle: shareLinkTitle || '',
         createdAt: new Date().toISOString(),
       };
 
