@@ -15,6 +15,7 @@ const WrappdLayout = ({
   stats,
   topLists,
   filterOverview,
+  shareLinkTitle,
 }) => {
   // Create a ref for the container to apply 3D effects
   const containerRef = useRef(null);
@@ -90,6 +91,7 @@ const WrappdLayout = ({
             userAvatar={userAvatar}
             dateRange={dateRange}
             filterOverview={filterOverview}
+            shareLinkTitle={shareLinkTitle}
           />
         </ScrollReveal>
 
@@ -145,6 +147,7 @@ WrappdLayout.propTypes = {
     })
   ).isRequired,
   filterOverview: PropTypes.object.isRequired,
+  shareLinkTitle: PropTypes.string,
 };
 
 export default WrappdLayout;

@@ -26,6 +26,7 @@ const Wrappd = () => {
   const [filterOverview, setFilterOverview] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [shareLinkTitle, setShareLinkTitle] = useState('');
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -44,6 +45,7 @@ const Wrappd = () => {
           setUserAvatar(data.userAvatar || undefined);
           setTopLists(data.topLists || []);
           setFilterOverview(data.filterOverview || {});
+          setShareLinkTitle(data.shareLinkTitle || '');
         } else {
           setError('Stats not found');
         }
@@ -89,6 +91,7 @@ const Wrappd = () => {
       stats={stats}
       topLists={topLists}
       filterOverview={filterOverview}
+      shareLinkTitle={shareLinkTitle}
     />
   );
 };
