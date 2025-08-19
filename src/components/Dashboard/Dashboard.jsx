@@ -9,6 +9,7 @@ import OverviewFilters from '../Overview/OverviewFilters';
 import NotificationBar from '../UI/NotificationBar';
 import DashboardNav from './DashboardNav';
 import WrappdShareBox from '../Wrappd/WrappdShareBox';
+import AIAnalysis from '../AIAnalysis/AIAnalysis';
 
 // Lazy-load heavy components
 const BasicStats = lazy(() => import('../BasicStats/BasicStats'));
@@ -113,6 +114,11 @@ const Dashboard = () => {
               {activeSection === 'checkins' && (
                 <div className="lg:col-span-2">
                   <Overview beerData={filteredData} />
+                </div>
+              )}
+              {activeSection === 'ai' && (
+                <div className="lg:col-span-2">
+                  <AIAnalysis />
                 </div>
               )}
             </Suspense>
