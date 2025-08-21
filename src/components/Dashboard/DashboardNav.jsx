@@ -3,13 +3,16 @@ import { useLocalStorageData } from '../../utils/';
 
 const DashboardNav = ({ activeSection, setActiveSection }) => {
   const mapboxKey = useLocalStorageData('mapbox_key');
+  const geminiApiKey = useLocalStorageData('gemini_api_key');
+
   const sections = [
     { key: 'stats', label: 'Stats', icon: 'STATS' },
     { key: 'charts', label: 'Charts', icon: 'CHART' },
     { key: 'checkins', label: 'Checkins', icon: 'UNTAPPD' },
-    { key: 'ai', label: 'AI', icon: 'STATS' },
   ];
-
+  if (geminiApiKey) {
+    sections.push({ key: 'ai', label: 'AI', icon: 'STATS' });
+  }
   if (mapboxKey) {
     sections.push({ key: 'maps', label: 'Maps', icon: 'MAPS' });
   }

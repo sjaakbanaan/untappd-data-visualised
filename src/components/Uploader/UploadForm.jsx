@@ -4,6 +4,7 @@ const UploadForm = ({ userDetails, handleInputChange }) => {
     { name: 'untappd_username', label: 'Untappd username' },
     { name: 'untappd_avatar', label: 'Untappd avatar URL (needed for Tappd Wrappd)' },
     { name: 'mapbox_key', label: 'Mapbox API key (optional)' },
+    { name: 'gemini_api_key', label: 'Gemini API key (optional)' },
     { name: 'venue_city', label: 'Home city' },
     { name: 'venue_state', label: 'Home state' },
     { name: 'venue_country', label: 'Home country' },

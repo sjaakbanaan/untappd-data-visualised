@@ -38,11 +38,11 @@ export const formatWrappdDates = (start, end) => {
   }
 
   if (isLastSixMonths(startDate, endDate)) {
-    return 'last 6 months';
+    return 'the last 6 months';
   }
 
   if (isLastYear(startDate, endDate)) {
-    return 'last year';
+    return 'the last year';
   }
 
   // If no special cases match, use the original formatting
