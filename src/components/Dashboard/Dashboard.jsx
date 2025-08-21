@@ -1,7 +1,8 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
 import ReactGA from 'react-ga4';
 
-import { useDashboardData } from '../../utils/';
+import { useDashboardData, useLocalStorageData } from '../../utils/';
+
 import DashboardHeader from './DashboardHeader';
 import YearFilterButtons from './YearFilterButtons';
 import DateSelector from './DateSelector';
@@ -32,6 +33,10 @@ const Dashboard = () => {
     });
   });
 
+  const userName = useLocalStorageData('untappd_username');
+  const geminiApiKey = useLocalStorageData('gemini_api_key');
+  const mapboxKey = useLocalStorageData('mapbox_key');
+
   // let's fetch all that nice data via the useDashboardData() hook:
   const {
     beerData,
@@ -44,6 +49,9 @@ const Dashboard = () => {
 
   // set a default active dashboard menu item:
   const [activeSection, setActiveSection] = useState('stats');
+
+  // Add state for AI analysis to persist across tab switches
+  const [aiAnalysis, setAiAnalysis] = useState('');
 
   return (
     // All filtering instruments and total result display are up next:
@@ -105,7 +113,7 @@ const Dashboard = () => {
                   <BeerTypeChart beerData={filteredData} />
                 </>
               )}
-              {activeSection === 'maps' && (
+              {activeSection === 'maps' && mapboxKey && (
                 <>
                   <VenueMap beerData={filteredData} />
                   <BreweryMap beerData={filteredData} />
@@ -116,9 +124,14 @@ const Dashboard = () => {
                   <Overview beerData={filteredData} />
                 </div>
               )}
-              {activeSection === 'ai' && (
+              {activeSection === 'ai' && geminiApiKey && (
                 <div className="lg:col-span-2">
-                  <AIAnalysis />
+                  <AIAnalysis
+                    beerData={filteredData}
+                    analysis={aiAnalysis}
+                    setAnalysis={setAiAnalysis}
+                    filterDateRange={filterDateRange}
+                  />
                 </div>
               )}
             </Suspense>

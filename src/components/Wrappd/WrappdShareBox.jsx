@@ -33,7 +33,7 @@ const WrappdShareBox = ({ filterDateRange, filterOverview, filteredData }) => {
         <>
           <p className="mb-4">
             Click on the button below to share your beer journey for{' '}
-            <span className="text-black">
+            <span className="font-bold">
               {formatWrappdDates(filterDateRange.start, filterDateRange.end)}
             </span>
             .

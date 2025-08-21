@@ -31,6 +31,7 @@ import { useDashboardData } from './useDashboardData';
 import { convertImageToBase64 } from './convertImageToBase64';
 import { setupScrollReveal } from './scrollRevealAnimation';
 import { useShareStats } from './useShareStats';
+import { analyzeBeerDataWithAI } from './aiAnalysis';
 export {
   formatDate,
   getDefaultEndDate,
@@ -65,4 +66,5 @@ export {
   convertImageToBase64,
   setupScrollReveal,
   useShareStats,
+  analyzeBeerDataWithAI,
 };
