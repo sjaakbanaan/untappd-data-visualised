@@ -11,7 +11,7 @@ const DashboardNav = ({ activeSection, setActiveSection }) => {
     { key: 'checkins', label: 'Checkins', icon: 'UNTAPPD' },
   ];
   if (geminiApiKey) {
-    sections.push({ key: 'ai', label: 'AI', icon: 'STATS' });
+    sections.push({ key: 'ai', label: 'AI', icon: 'AI' });
   }
   if (mapboxKey) {
     sections.push({ key: 'maps', label: 'Maps', icon: 'MAPS' });
@@ -33,7 +33,7 @@ const DashboardNav = ({ activeSection, setActiveSection }) => {
             icon={icon}
             className={`mr-2 w-5 ${activeSection === key ? 'fill-gray-900' : 'fill-white'} `}
           />
-          <span>{label}</span>
+          <span className="-mb-1">{label}</span>
         </button>
       ))}
     </div>
