@@ -23,7 +23,7 @@ const DashboardNav = ({ activeSection, setActiveSection }) => {
         <button
           key={key}
           onClick={() => setActiveSection(key)}
-          className={`mb-0 flex items-center rounded border px-4 py-2 text-lg shadow transition-colors duration-300 md:px-10 md:py-4 ${
+          className={`mb-0 flex items-center justify-center rounded border px-4 py-2 text-lg shadow leading-none transition-colors duration-300 md:px-10 md:py-4 ${
             activeSection === key
               ? 'border-yellow-500 bg-yellow-500 text-gray-900'
               : 'bg-gray-900 text-white hover:bg-gray-700'
@@ -33,7 +33,7 @@ const DashboardNav = ({ activeSection, setActiveSection }) => {
             icon={icon}
             className={`mr-2 w-5 ${activeSection === key ? 'fill-gray-900' : 'fill-white'} `}
           />
-          <span className="-mb-1">{label}</span>
+          <span className="mt-1">{label}</span>
         </button>
       ))}
     </div>
