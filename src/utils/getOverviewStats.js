@@ -6,6 +6,7 @@ import {
   statsCountUniqueFriends,
   checkFullDateRange,
   getDefaultEndDate,
+  getVsTheWorld,
 } from '../utils';
 import { calculateAverageRatingScore } from './getBarChartTopBottomData';
 
@@ -41,6 +42,7 @@ export const getOverviewStats = (filteredData, filterDateRange, infoToShow) => {
     filteredData,
     'global_rating_score'
   );
+  const { percentageHigher, percentageLower } = getVsTheWorld(filteredData);
 
   const stats = [
     {
@@ -118,6 +120,11 @@ export const getOverviewStats = (filteredData, filterDateRange, infoToShow) => {
       key: 'Days active',
       value: totalDays,
       hide: !fullDateRange[0],
+    },
+    {
+      key: 'Rating vs. world',
+      value: `${percentageHigher}%`,
+      suffix: `higher, ${percentageLower}% lower`,
     },
   ];
 

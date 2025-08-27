@@ -5,7 +5,7 @@ const Footer = () => {
       <a href="https://github.com/sjaakbanaan/" target="_blank" rel="noreferrer">
         sjaakbanaan
       </a>
-      <div className="pt-1 text-gray-400">v2.7.0, powered by Untappd</div>
+      <div className="pt-1 text-gray-400">v2.7.1, powered by Untappd</div>
     </div>
   );
 };

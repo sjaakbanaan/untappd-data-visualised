@@ -21,6 +21,7 @@ export const useBasicStats = (filteredData, filterDateRange) => {
       'Years active',
       'Days active',
       'Average rating',
+      'Rating vs. world',
     ],
     []
   );

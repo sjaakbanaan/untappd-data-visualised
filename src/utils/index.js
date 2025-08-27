@@ -32,6 +32,8 @@ import { convertImageToBase64 } from './convertImageToBase64';
 import { setupScrollReveal } from './scrollRevealAnimation';
 import { useShareStats } from './useShareStats';
 import { analyzeBeerDataWithAI } from './aiAnalysis';
+import { getVsTheWorld } from './getVsTheWorld';
+
 export {
   formatDate,
   getDefaultEndDate,
@@ -67,4 +69,5 @@ export {
   setupScrollReveal,
   useShareStats,
   analyzeBeerDataWithAI,
+  getVsTheWorld,
 };
