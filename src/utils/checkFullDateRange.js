@@ -1,12 +1,12 @@
-export const checkFullDateRange = (getDefaultEndDate, beerData, filterDateRange) => {
+export const checkFullDateRange = (getDefaultEndDate, fullBeerData, filterDateRange) => {
   const uniqueDates = new Set(
-    beerData.map((item) => new Date(item.created_at).toISOString().slice(0, 10))
+    fullBeerData.map((item) => new Date(item.created_at).toISOString().slice(0, 10))
   );
-  const firstCheckinDate = [...uniqueDates][0];
+  const firstCheckinDate = [...uniqueDates].sort()[0];
 
   const fullDateRange =
     filterDateRange?.start === firstCheckinDate &&
-    filterDateRange?.end == getDefaultEndDate;
+    filterDateRange?.end === getDefaultEndDate;
 
   return [fullDateRange, firstCheckinDate];
 };

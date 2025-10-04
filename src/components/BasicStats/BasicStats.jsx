@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import StatCard from './StatCard';
 import { useBasicStats } from '../../utils/';
 
-const BasicStats = ({ filteredData, filterDateRange }) => {
-  const { stats } = useBasicStats(filteredData, filterDateRange);
+const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
+  const { stats } = useBasicStats(filteredData, filterDateRange, fullBeerData);
 
   return (
     <div>
@@ -28,6 +28,7 @@ const BasicStats = ({ filteredData, filterDateRange }) => {
 BasicStats.propTypes = {
   filteredData: PropTypes.array.isRequired,
   filterDateRange: PropTypes.object.isRequired,
+  fullBeerData: PropTypes.array.isRequired,
 };
 
 export default BasicStats;

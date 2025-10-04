@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { getOverviewStats, processTopData } from '.';
 import { processTopBeers } from './listProcessing';
 
-export const useBasicStats = (filteredData, filterDateRange) => {
+export const useBasicStats = (filteredData, filterDateRange, fullBeerData = null) => {
   const infoToShow = useMemo(
     () => [
       'Total beers',
@@ -28,8 +28,8 @@ export const useBasicStats = (filteredData, filterDateRange) => {
 
   // Overview stats
   const stats = useMemo(
-    () => getOverviewStats(filteredData, filterDateRange, infoToShow, true),
-    [filteredData, filterDateRange, infoToShow]
+    () => getOverviewStats(filteredData, filterDateRange, infoToShow, fullBeerData),
+    [filteredData, filterDateRange, infoToShow, fullBeerData]
   );
 
   // Structured top lists

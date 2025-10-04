@@ -101,6 +101,8 @@ After setting filters, the following lists are presented in either a chart or li
 - 19-08-2025: v2.6.8 Added the option to set a custom title in your Tappd Wrappd
 - 21-08-2025: v2.7.0 Added AI Beer Analysis (Beta) - Let Gemini AI analyze your Untappd check-ins and discover personalized insights about your beer drinking patterns, preferences, and trends for any selected time period (Gemini API key required).
 - 27-08-2025: v2.7.1 added a global rating vs. your rating comparison in the basic stats overview + fixed AI icon
+- 04-10-2025: v2.7.2 fixed the bug where 'years active' and 'days active' would show up on random date selections
+  
 ## Known bugs
 
 - tell me
