@@ -22,6 +22,7 @@ const Uploader = () => {
     untappd_username: '',
     untappd_avatar: '',
     mapbox_key: '',
+    gemini_api_key: '',
     venue_lat: '',
     venue_lng: '',
     venue_city: '',
@@ -61,7 +62,7 @@ const Uploader = () => {
         // Do something with the JSON data
         const data = reader.result;
         const updatedData = manipulateData(JSON.parse(data), userDetails);
-        setBeerData(updatedData); // Convert back to string if needed
+        setBeerData(updatedData); // This will automatically save to Firebase and generate share code
       };
 
       reader.readAsText(acceptedFiles[0]);

@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { initializeFirestore } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -15,3 +16,4 @@ export const db = initializeFirestore(app, {
   experimentalForceLongPolling: true,
   cacheSizeBytes: 50 * 1024 * 1024, // 50 MB
 });
+export const auth = getAuth(app);

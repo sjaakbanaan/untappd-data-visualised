@@ -59,7 +59,7 @@ const UploadForm = ({ userDetails, handleInputChange }) => {
               type="text"
               placeholder={`Enter ${field.label.toLowerCase()}`}
               name={field.name}
-              value={userDetails[field.name]}
+              value={userDetails[field.name] || ''}
               onChange={handleInputChange}
             />
           </div>

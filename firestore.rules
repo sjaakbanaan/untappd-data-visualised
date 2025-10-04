@@ -1,26 +1,9 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Rules for wrappd stats
-    match /wrappdStats/{document} {
-      // Allow anyone to read wrappd stats
-      allow read: if true;
-      
-      // Allow anyone to create new wrappd stats
-      allow create: if 
-        // Document must have required fields
-        request.resource.data.stats is list &&
-        request.resource.data.createdAt is string &&
-        // Stats array must not be empty
-        request.resource.data.stats.size() > 0;
-      
-      // Prevent updates and deletes
-      allow update, delete: if false;
-    }
-    
-    // Default deny all other access
+    // Temporary: Allow all access for debugging
     match /{document=**} {
-      allow read, write: if false;
+      allow read, write: if true;
     }
   }
 } 

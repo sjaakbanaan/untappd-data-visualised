@@ -11,6 +11,7 @@ import NotificationBar from '../UI/NotificationBar';
 import DashboardNav from './DashboardNav';
 import WrappdShareBox from '../Wrappd/WrappdShareBox';
 import AIAnalysis from '../AIAnalysis/AIAnalysis';
+import ShareCodeManager from '../ShareCode/ShareCodeManager';
 
 // Lazy-load heavy components
 const BasicStats = lazy(() => import('../BasicStats/BasicStats'));
@@ -137,6 +138,7 @@ const Dashboard = () => {
               )}
             </Suspense>
           </div>
+          <ShareCodeManager />
           <WrappdShareBox
             filteredData={filteredData}
             filterDateRange={filterDateRange}
