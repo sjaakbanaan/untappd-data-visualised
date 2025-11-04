@@ -93,13 +93,16 @@ const AIAnalysis = ({ beerData, analysis, setAnalysis, filterDateRange }) => {
                 </span>
                 .
               </h3>
-              <div className="prose prose-sm max-w-none text-gray-300">
-                {analysis.split('\n').map((paragraph, index) => (
-                  <p key={index} className="mb-3">
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
+              <div
+                className="prose prose-sm max-w-none text-gray-300"
+                dangerouslySetInnerHTML={{
+                  __html: analysis
+                    .split('\n')
+                    .filter((p) => p.trim())
+                    .map((paragraph) => `<p class="mb-3">${paragraph.trim()}</p>`)
+                    .join(''),
+                }}
+              />
             </div>
           )}
         </div>

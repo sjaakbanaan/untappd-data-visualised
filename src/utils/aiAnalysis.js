@@ -3,6 +3,7 @@ import { formatWrappdDates, getLocalStorageData } from '../utils';
 import { initializeModel, preferredModels } from './aiModelDiscovery';
 import { handleAIError } from './aiErrorHandler';
 import { prepareAnalysisData, buildAnalysisPrompt } from './prepareAnalysisData';
+import { markdownToHtml } from './markdownToHtml';
 
 export const analyzeBeerDataWithAI = async (beerData) => {
   if (!beerData || beerData.length === 0) {
@@ -28,8 +29,18 @@ export const analyzeBeerDataWithAI = async (beerData) => {
   try {
     const result = await model.generateContent(prompt);
     const response = await result.response;
-    return response.text();
+    const text = response.text();
+    // Convert Markdown to HTML (e.g., **bold** to <strong>bold</strong>)
+    return markdownToHtml(text);
   } catch (error) {
-    return handleAIError(error, prompt, apiKey, availableModels, preferredModels);
+    const errorResult = await handleAIError(
+      error,
+      prompt,
+      apiKey,
+      availableModels,
+      preferredModels
+    );
+    // Convert Markdown to HTML for fallback results too
+    return markdownToHtml(errorResult);
   }
 };

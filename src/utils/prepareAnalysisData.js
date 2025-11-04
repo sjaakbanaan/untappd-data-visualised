@@ -111,8 +111,9 @@ export const buildAnalysisPrompt = (analysisData, beerData, formatWrappdDates) =
     5. Tell the user their top 3 favorite brewery origin countries, tell them about it, but if the user drank a lot of beers from the same country, it's probably the country they live in, so better to focus on the rest.
     6. Tell the user their top 3 favorite beer types, tell them about it, etc.
     7. Don't number the responses, just write them out
-    8. Focus on facts, around 4000 characters
+    8. Focus on facts, around 2000 characters
     9. Keep it engaging and conversational, as if you're sharing insights with a friend.
     10. If the date range is a full or half year, emphasize that like 'the last 6 months' or 'the last year' or 'in 2024'.
+    11. Make use of markdown formatting for the response, like **bold**, *italic*, etc.
   `;
 };
