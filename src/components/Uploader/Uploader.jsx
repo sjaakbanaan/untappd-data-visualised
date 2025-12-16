@@ -75,7 +75,7 @@ const Uploader = () => {
       'application/json': ['.json'],
     },
     maxFiles: 1,
-    maxSize: 15 * 1024 * 1024, // 15 mb max.
+    maxSize: 50 * 1024 * 1024, // 50 mb max.
   });
 
   const fileRejectionItems = fileRejections.map(({ file, errors }) => (
