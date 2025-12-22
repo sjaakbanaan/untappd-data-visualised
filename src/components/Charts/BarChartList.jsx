@@ -34,12 +34,12 @@ const BarChartList = ({ beerData, filterDateRange }) => {
     {
       title: 'Beers per month (with year)',
       name: 'beers_per_month_year',
-      conditional: true,
+      oneYearMinimum: true,
     },
     {
       title: 'Beers per year',
       name: 'beers_per_year',
-      conditional: true,
+      oneYearMinimum: true,
     },
     {
       title: 'Rating scores',
@@ -52,10 +52,12 @@ const BarChartList = ({ beerData, filterDateRange }) => {
     {
       title: 'Your average rating',
       name: 'avg_rating',
+      oneYearMinimum: true,
     },
     {
       title: 'Global average rating',
       name: 'avg_global_rating',
+      oneYearMinimum: true,
     },
   ];
   const [selectedBarChartData, setSelectedBarChartData] = useState(barChartList[0].name);
@@ -75,8 +77,8 @@ const BarChartList = ({ beerData, filterDateRange }) => {
       >
         {beerData.length > 1 &&
           barChartList.map((item) => {
-            if (item.conditional && !isDateRangeGreaterThanOneYear()) {
-              return null; // if the date range is greater than 1 year, don't show the chart
+            if (item.oneYearMinimum && !isDateRangeGreaterThanOneYear()) {
+              return null; // only show the chart if the date range is greater than 1 year
             }
             return (
               <option key={item.name} value={item.name}>
