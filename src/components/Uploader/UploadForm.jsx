@@ -20,9 +20,6 @@ const UploadForm = ({ userDetails, handleInputChange }) => {
     <div className="mb-10">
       <h2 className="mb-3 text-xl text-white">Enter details</h2>
       <p className="mb-5">
-        <strong>Untappd Insiders is required to use this tool!</strong>
-        <br />
-        <br />
         Your home details are needed to overwrite the 'Untappd at Home' values because
         Untappd uses their HQ for your home location. Don't worry, this data is only on
         your computer so not saved or shared in anyway.
@@ -40,6 +37,7 @@ const UploadForm = ({ userDetails, handleInputChange }) => {
         </a>
         .
       </p>
+
       <form>
         {/* Map over the fields array to generate input fields */}
         {fields.map((field) => (
@@ -64,6 +62,40 @@ const UploadForm = ({ userDetails, handleInputChange }) => {
             />
           </div>
         ))}
+        <div className="mb-6">
+        <p className="mb-2 text-sm text-gray-400">Source of JSON</p>
+        <p className="mb-2 text-sm">
+          Did you export your data from the Untappd website because you're an Insider? Or did you create the export with the{' '}
+          <a
+            className="underline hover:no-underline"
+            href="https://github.com/sjaakbanaan/untappd-scraper-xl/"
+            title="Untappd Scraper XL"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Untappd Scraper XL
+          </a>
+          ?
+        </p>
+        <div className="mt-4 flex gap-6">
+          {[
+            { value: 'untappd_insider', label: 'Untappd Insider' },
+            { value: 'custom_export', label: 'Untappd Scraper XL' },
+          ].map(({ value, label }) => (
+            <label key={value} className="flex cursor-pointer items-center gap-2 text-sm text-white">
+              <input
+                type="radio"
+                name="json_source"
+                value={value}
+                checked={(userDetails.json_source ?? 'untappd_insider') === value}
+                onChange={handleInputChange}
+                className="accent-yellow-400"
+              />
+              {label}
+            </label>
+          ))}
+        </div>
+      </div>
       </form>
     </div>
   );

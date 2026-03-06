@@ -11,6 +11,7 @@ import NotificationBar from '../UI/NotificationBar';
 import DashboardNav from './DashboardNav';
 import WrappdShareBox from '../Wrappd/WrappdShareBox';
 import AIAnalysis from '../AIAnalysis/AIAnalysis';
+import ScraperXLDisclaimer from '../ScraperXLDisclaimer';
 
 // Lazy-load heavy components
 const BasicStats = lazy(() => import('../BasicStats/BasicStats'));
@@ -56,6 +57,7 @@ const Dashboard = () => {
   return (
     // All filtering instruments and total result display are up next:
     <div className="container mx-auto p-4 md:p-0">
+      <ScraperXLDisclaimer />
       <div>
         <div className="mb-2 block text-sm font-bold text-white">Set a date range</div>
         <DateSelector

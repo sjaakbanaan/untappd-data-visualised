@@ -1,0 +1,305 @@
+[
+  {
+    "checkin_id": 1320442588,
+    "checkin_url": "https://untappd.com/user/sjaakbanaan/checkin/1320442588",
+    "created_at": "2023-10-07T14:49:21.000Z",
+    "beer": {
+      "name": "Coral Cerveja",
+      "url": "https://untappd.com/b/empresa-de-cervejas-da-madeira-coral-cerveja/92913",
+      "label_url": "https://assets.untappd.com/site/beer_logos/beer-92913_035df_sm.jpeg",
+      "global_rating": 3.07887,
+      "global_rating_count": 20495,
+      "abv": 5.1,
+      "ibu": null,
+      "style": "Lager - Pale",
+      "description": null,
+      "total_checkins": 30063,
+      "unique_users": 22243,
+      "monthly_checkins": 335
+    },
+    "brewery": {
+      "name": "vandeStreek bier - Utrecht, Utrecht - Untappd",
+      "url": "https://untappd.com/vandeStreekBier",
+      "city": "Utrecht",
+      "country": "Netherlands",
+      "lat": 52.1273003,
+      "lng": 5.0870771
+    },
+    "venue": {
+      "name": "vandeStreek Oudegracht",
+      "url": "https://untappd.com/v/vandestreek-oudegracht/11691033",
+      "city": "Utrecht",
+      "country": "Nederland",
+      "lat": 52.0949669,
+      "lng": 5.1168671
+    },
+    "purchased_at": {
+      "name": "vandeStreek Oudegracht",
+      "url": "https://untappd.com/v/vandestreek-oudegracht/11691033",
+      "city": "Utrecht",
+      "country": "Nederland",
+      "lat": 52.0949669,
+      "lng": 5.1168671
+    },
+    "rating": 3,
+    "serving_type": "Draft",
+    "comment": null,
+    "photo_url": "https://assets.untappd.com/photos/2023_10_07/4f82e308ef1318c0dff788bd0df909c2_640x640.jpg",
+    "toasts": {
+      "count": 0,
+      "users": []
+    },
+    "comment_count": 0,
+    "tagged_friends": ["Metz8"],
+    "badges": [],
+    "flavor": ["light bodied", "smooth", "sweet"]
+  },
+  {
+    "checkin_id": 1319728612,
+    "checkin_url": "https://untappd.com/user/sjaakbanaan/checkin/1319728612",
+    "created_at": "2023-10-05T11:27:39.000Z",
+    "beer": {
+      "name": "Spaten Münchner Hell / Premium Lager",
+      "url": "https://untappd.com/b/spaten-franziskaner-lowenbrau-gruppe-spaten-munchner-hell-premium-lager/1633",
+      "label_url": "https://assets.untappd.com/site/beer_logos/beer-1633_d78e8_sm.jpeg",
+      "global_rating": 3.39057,
+      "global_rating_count": 239189,
+      "abv": 5.2,
+      "ibu": 21,
+      "style": "Lager - Helles",
+      "description": "Sold as Spaten Premium Lager in the U.S., Spaten München in the U.K. and Spaten Muni Show More",
+      "total_checkins": 366845,
+      "unique_users": 261729,
+      "monthly_checkins": 2555
+    },
+    "brewery": {
+      "name": "vandeStreek bier - Utrecht, Utrecht - Untappd",
+      "url": "https://untappd.com/vandeStreekBier",
+      "city": "Utrecht",
+      "country": "Netherlands",
+      "lat": 52.1273003,
+      "lng": 5.0870771
+    },
+    "venue": {
+      "name": "vandeStreek Oudegracht",
+      "url": "https://untappd.com/v/vandestreek-oudegracht/11691033",
+      "city": "Utrecht",
+      "country": "Nederland",
+      "lat": 52.0949669,
+      "lng": 5.1168671
+    },
+    "purchased_at": {
+      "name": "vandeStreek Oudegracht",
+      "url": "https://untappd.com/v/vandestreek-oudegracht/11691033",
+      "city": "Utrecht",
+      "country": "Nederland",
+      "lat": 52.0949669,
+      "lng": 5.1168671
+    },
+    "rating": 3,
+    "serving_type": "Bottle",
+    "comment": null,
+    "photo_url": "https://assets.untappd.com/photos/2023_10_05/4d2968dabaa67f491c211d2f737e3705_640x640.jpg",
+    "toasts": {
+      "count": 0,
+      "users": []
+    },
+    "comment_count": 0,
+    "tagged_friends": ["Metz8"],
+    "badges": [],
+    "flavor": ["light bodied", "clean", "smooth"]
+  },
+  {
+    "checkin_id": 1319744394,
+    "checkin_url": "https://untappd.com/user/sjaakbanaan/checkin/1319744394",
+    "created_at": "2023-10-05T14:51:29.000Z",
+    "beer": {
+      "name": "Born In the IPA",
+      "url": "https://untappd.com/b/cerveja-musa-born-in-the-ipa/1400464",
+      "label_url": "https://assets.untappd.com/site/beer_logos/beer-1400464_7d812_sm.jpeg",
+      "global_rating": 3.59592,
+      "global_rating_count": 28746,
+      "abv": 6.5,
+      "ibu": 70,
+      "style": "IPA - American",
+      "description": "Cor laranja, ligeiramente turva. Sabor amargo mas equilibrado com notas complexas de Show More",
+      "total_checkins": 34250,
+      "unique_users": 30942,
+      "monthly_checkins": 153
+    },
+    "brewery": {
+      "name": "vandeStreek bier - Utrecht, Utrecht - Untappd",
+      "url": "https://untappd.com/vandeStreekBier",
+      "city": "Utrecht",
+      "country": "Netherlands",
+      "lat": 52.1273003,
+      "lng": 5.0870771
+    },
+    "venue": {
+      "name": "vandeStreek Oudegracht",
+      "url": "https://untappd.com/v/vandestreek-oudegracht/11691033",
+      "city": "Utrecht",
+      "country": "Nederland",
+      "lat": 52.0949669,
+      "lng": 5.1168671
+    },
+    "purchased_at": {
+      "name": "vandeStreek Oudegracht",
+      "url": "https://untappd.com/v/vandestreek-oudegracht/11691033",
+      "city": "Utrecht",
+      "country": "Nederland",
+      "lat": 52.0949669,
+      "lng": 5.1168671
+    },
+    "rating": 3.75,
+    "serving_type": "Draft",
+    "comment": "Kwartje extra voor vakantie-vibes",
+    "photo_url": "https://assets.untappd.com/photos/2023_10_05/f2426a0b4cf2993557990da3ce90cb7d_640x640.jpg",
+    "toasts": {
+      "count": 1,
+      "users": ["cbeijer"]
+    },
+    "comment_count": 0,
+    "tagged_friends": ["Metz8"],
+    "badges": [
+      {
+        "name": "Uma Cerveja (Level 2)",
+        "text": "Earned the Uma Cerveja (Level 2) badge!",
+        "image_url": "https://assets.untappd.com/badges/bdg_UmaCerveja_sm.jpg"
+      },
+      {
+        "name": "Pass the Guac",
+        "text": "Earned the Pass the Guac badge!",
+        "image_url": "https://assets.untappd.com/badges/bdg_pass_the_guac_sm.jpg"
+      }
+    ],
+    "flavor": ["hoppy", "bitter", "fruity"]
+  },
+  {
+    "checkin_id": 881524127,
+    "checkin_url": "https://untappd.com/user/sjaakbanaan/checkin/881524127",
+    "created_at": "2020-03-27T20:22:04.000Z",
+    "beer": {
+      "name": "N.E. 131",
+      "url": "https://untappd.com/b/cranker-s-brewery-n-e-131/2675871",
+      "label_url": "https://assets.untappd.com/site/beer_logos/beer-2675871_c0941_sm.jpeg",
+      "global_rating": 3.6493,
+      "global_rating_count": 430,
+      "abv": 6.6,
+      "ibu": null,
+      "style": "IPA - New England / Hazy",
+      "description": "A light, juicy, summertime New England IPA with big hop aroma and packed with pineap Show More",
+      "total_checkins": 476,
+      "unique_users": 455,
+      "monthly_checkins": null
+    },
+    "brewery": {
+      "name": "vandeStreek bier - Utrecht, Utrecht - Untappd",
+      "url": "https://untappd.com/vandeStreekBier",
+      "city": "Utrecht",
+      "country": "Netherlands",
+      "lat": 52.1273003,
+      "lng": 5.0870771
+    },
+    "venue": {
+      "name": "vandeStreek Oudegracht",
+      "url": "https://untappd.com/v/vandestreek-oudegracht/11691033",
+      "city": "Utrecht",
+      "country": "Nederland",
+      "lat": 52.0949669,
+      "lng": 5.1168671
+    },
+    "purchased_at": {
+      "name": "vandeStreek Oudegracht",
+      "url": "https://untappd.com/v/vandestreek-oudegracht/11691033",
+      "city": "Utrecht",
+      "country": "Nederland",
+      "lat": 52.0949669,
+      "lng": 5.1168671
+    },
+    "rating": 3.5,
+    "serving_type": "Bottle",
+    "comment": "Abrikoosje, lekker!",
+    "photo_url": null,
+    "toasts": {
+      "count": 3,
+      "users": ["GuiTierrez", "jbweb78", "Lisanne92"]
+    },
+    "comment_count": 0,
+    "tagged_friends": ["HardNekkig"],
+    "badges": [
+      {
+        "name": "Brew Traveler (Level 14)",
+        "text": "Earned the Brew Traveler (Level 14) badge!",
+        "image_url": "https://assets.untappd.com/badges/bdg_traveller_sm.jpg"
+      },
+      {
+        "name": "99 Bottles (Level 85)",
+        "text": "Earned the 99 Bottles (Level 85) badge!",
+        "image_url": "https://assets.untappd.com/badges/bdg_99Bottles_sm.jpg"
+      }
+    ],
+    "flavor": ["smooth", "apricot"]
+  },
+  {
+    "checkin_id": 438295915,
+    "checkin_url": "https://untappd.com/user/sjaakbanaan/checkin/438295915",
+    "created_at": "2017-04-09T09:53:45.000Z",
+    "beer": {
+      "name": "Tsingtao",
+      "url": "https://untappd.com/b/tsingtao-brewery-tsingtao/6601",
+      "label_url": "https://assets.untappd.com/site/beer_logos/beer-6601_fc7ff_sm.jpeg",
+      "global_rating": 2.90833,
+      "global_rating_count": 337796,
+      "abv": 4.7,
+      "ibu": 25,
+      "style": "Lager - Pale",
+      "description": "Tsingtao Beer has a pleasant aroma and a well-balanced taste. It has high-malty flav Show More",
+      "total_checkins": 491006,
+      "unique_users": 373250,
+      "monthly_checkins": 2110
+    },
+    "brewery": {
+      "name": "vandeStreek bier - Utrecht, Utrecht - Untappd",
+      "url": "https://untappd.com/vandeStreekBier",
+      "city": "Utrecht",
+      "country": "Netherlands",
+      "lat": 52.1273003,
+      "lng": 5.0870771
+    },
+    "venue": {
+      "name": "vandeStreek Oudegracht",
+      "url": "https://untappd.com/v/vandestreek-oudegracht/11691033",
+      "city": "Utrecht",
+      "country": "Nederland",
+      "lat": 52.0949669,
+      "lng": 5.1168671
+    },
+    "purchased_at": {
+      "name": "vandeStreek Oudegracht",
+      "url": "https://untappd.com/v/vandestreek-oudegracht/11691033",
+      "city": "Utrecht",
+      "country": "Nederland",
+      "lat": 52.0949669,
+      "lng": 5.1168671
+    },
+    "rating": 2.25,
+    "serving_type": null,
+    "comment": "Op Max!",
+    "photo_url": null,
+    "toasts": {
+      "count": 0,
+      "users": []
+    },
+    "comment_count": 0,
+    "tagged_friends": [],
+    "badges": [
+      {
+        "name": "Riding Steady (Level 16)",
+        "text": "Earned the Riding Steady (Level 16) badge!",
+        "image_url": "https://assets.untappd.com/badges/bdg_RidingSteady_sm.jpg"
+      }
+    ],
+    "flavor": null
+  }
+]

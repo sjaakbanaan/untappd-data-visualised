@@ -33,8 +33,8 @@ export const getBarChartTopBottomData = (beerData, scoreType = 'rating_score') =
     // Object to store occurrences for each beer type
     const beerTypeOccurrences = {};
 
-    // Iterate over beerData to count occurrences
-    beerData.forEach((beer) => {
+    // Iterate over beerData to count occurrences, skipping entries without a style
+    beerData.filter((beer) => !!beer.beer_type).forEach((beer) => {
       const { beer_type } = beer;
       // Increment occurrence count for beer type
       beerTypeOccurrences[beer_type] = beerTypeOccurrences[beer_type]

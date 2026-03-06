@@ -23,11 +23,16 @@ export const filterBeerData = (beerData, filterOverview, filterDateRange, resetL
   }, {});
 
   // Add Date range filter separately
-  filterFunctions.date = (item) =>
-    (!filterDateRange.start ||
-      new Date(item.created_at.split(' ')[0]) >= new Date(filterDateRange.start)) &&
-    (!filterDateRange.end ||
-      new Date(item.created_at.split(' ')[0]) <= new Date(filterDateRange.end));
+  // Use plain string comparison (YYYY-MM-DD ≥ YYYY-MM-DD) to avoid timezone
+  // pitfalls: new Date("YYYY-MM-DD") always parses as UTC midnight, which
+  // can shift dates by a day on non-UTC machines (e.g. CET = UTC+1).
+  filterFunctions.date = (item) => {
+    const itemDate = item.created_at.split(' ')[0];
+    return (
+      (!filterDateRange.start || itemDate >= filterDateRange.start) &&
+      (!filterDateRange.end || itemDate <= filterDateRange.end)
+    );
+  };
 
   // Apply all filters
   return beerData.filter((item) =>

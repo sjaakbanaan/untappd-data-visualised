@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import countriesData from '../data/countries.json';
+import { normaliseCheckins, detectFormat } from './normaliseCheckins';
 
 export const useUploadedJsonUpdater = () => {
   const [beerData, setBeerData] = useState(null);
@@ -11,9 +12,15 @@ export const useUploadedJsonUpdater = () => {
   };
 
   const manipulateData = (data, userDetails) => {
+    // STEP 0: Normalise the incoming JSON into the canonical flat shape.
+    // The json_source radio value is used as a format hint; auto-detection
+    // is used as a fallback when it is absent.
+    const formatHint = userDetails?.json_source ?? detectFormat(data);
+    const normalisedData = normaliseCheckins(data, formatHint);
+
     const uniqueCheckinIds = new Set();
 
-    const updatedData = data.map((item) => {
+    const updatedData = normalisedData.map((item) => {
       // Create a copy of the original item
       let updatedItem = { ...item };
 

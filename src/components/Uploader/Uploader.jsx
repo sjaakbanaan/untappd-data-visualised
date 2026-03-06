@@ -27,6 +27,7 @@ const Uploader = () => {
     venue_city: '',
     venue_country: '',
     venue_state: '',
+    json_source: 'untappd_insider',
   });
 
   useEffect(() => {
