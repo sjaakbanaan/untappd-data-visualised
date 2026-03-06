@@ -33,8 +33,6 @@ const Dashboard = () => {
       title: 'Dashboard',
     });
   });
-
-  const userName = useLocalStorageData('untappd_username');
   const geminiApiKey = useLocalStorageData('gemini_api_key');
   const mapboxKey = useLocalStorageData('mapbox_key');
 
