@@ -4,6 +4,7 @@ const DataContext = createContext();
 
 const DataProvider = ({ children }) => {
   const [beerData, setBeerData] = useState([]);
+  const [badgeData, setBadgeData] = useState(null);
 
   // the main filter list! This is used to reset the filters for all filtering components.
   const resetList = {
@@ -20,7 +21,7 @@ const DataProvider = ({ children }) => {
   };
 
   return (
-    <DataContext.Provider value={{ beerData, setBeerData, resetList }}>
+    <DataContext.Provider value={{ beerData, setBeerData, badgeData, setBadgeData, resetList }}>
       {children}
     </DataContext.Provider>
   );

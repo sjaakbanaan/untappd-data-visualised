@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useDropzone } from 'react-dropzone';
 import { useUploadedJsonUpdater } from '../../utils/';
+import { extractBadges } from '../../utils/extractBadges';
 import UploadForm from './UploadForm';
 import { DataContext } from '../../DataContext';
 
@@ -16,7 +17,7 @@ const Uploader = () => {
     });
   });
 
-  const { setBeerData } = useContext(DataContext);
+  const { setBeerData, setBadgeData } = useContext(DataContext);
   const { manipulateData } = useUploadedJsonUpdater(); // Import and use the hook
   const [userDetails, setUserDetails] = useState({
     untappd_username: '',
@@ -60,9 +61,17 @@ const Uploader = () => {
       reader.onerror = () => console.log('file reading has failed');
       reader.onload = () => {
         // Do something with the JSON data
-        const data = reader.result;
-        const updatedData = manipulateData(JSON.parse(data), userDetails);
-        setBeerData(updatedData); // Convert back to string if needed
+        const rawJson = JSON.parse(reader.result);
+        const updatedData = manipulateData(rawJson, userDetails);
+        setBeerData(updatedData);
+
+        // Extract badge data from scraperxl checkins (each checkin has a `badges` array)
+        const checkins = Array.isArray(rawJson?.checkins) ? rawJson.checkins : rawJson;
+        if (Array.isArray(checkins) && checkins.length > 0 && Array.isArray(checkins[0]?.badges)) {
+          setBadgeData(extractBadges(checkins));
+        } else {
+          setBadgeData(null);
+        }
       };
 
       reader.readAsText(acceptedFiles[0]);

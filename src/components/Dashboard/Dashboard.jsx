@@ -23,6 +23,7 @@ const VenueMap = lazy(() => import('../Maps/VenueMap'));
 const BreweryMap = lazy(() => import('../Maps/BreweryMap'));
 const BeerTypeChart = lazy(() => import('../Charts/BeerTypeChart/BeerTypeChart'));
 const Overview = lazy(() => import('../Overview/Overview'));
+const Badges = lazy(() => import('../Badges/Badges'));
 
 const Dashboard = () => {
   // analytics
@@ -134,6 +135,9 @@ const Dashboard = () => {
                     filterDateRange={filterDateRange}
                   />
                 </div>
+              )}
+              {activeSection === 'badges' && (
+                <Badges />
               )}
             </Suspense>
           </div>

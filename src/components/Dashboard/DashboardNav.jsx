@@ -1,9 +1,12 @@
 import Icon from '../UI/Icon/Icon';
 import { useLocalStorageData } from '../../utils/';
+import { useContext } from 'react';
+import { DataContext } from '../../DataContext';
 
 const DashboardNav = ({ activeSection, setActiveSection }) => {
   const mapboxKey = useLocalStorageData('mapbox_key');
   const geminiApiKey = useLocalStorageData('gemini_api_key');
+  const { badgeData } = useContext(DataContext);
 
   const sections = [
     { key: 'stats', label: 'Stats', icon: 'STATS' },
@@ -15,6 +18,9 @@ const DashboardNav = ({ activeSection, setActiveSection }) => {
   }
   if (mapboxKey) {
     sections.push({ key: 'maps', label: 'Maps', icon: 'MAPS' });
+  }
+  if (badgeData && badgeData.length > 0) {
+    sections.push({ key: 'badges', label: 'Badges', icon: 'BADGE' });
   }
 
   return (
