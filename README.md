@@ -1,4 +1,4 @@
-# Untappd Data Visualised v5
+# Untappd Data Visualised v2.8.1
 
 ## This is the repository for [tappd.online](https:///tappd.online), no need to install anymore!
 
@@ -104,6 +104,7 @@ After setting filters, the following lists are presented in either a chart or li
 - 04-10-2025: v2.7.2 Fixed the bug where 'years active' and 'days active' would show up on random date selections
 - 04-11-2025: v2.7.3 Fixed broken AI analysis
 - 04-03-2026: v2.8.0 Soft launch of the option to use the new Untappd Scraper XL, next to Untappd Insider export
+- 06-03-2026: v2.8.1 Added badges when available from export (currently only Scraper XL export is supported) + showing most checked-in beer data to basic stats 
   
 ## Known bugs
 

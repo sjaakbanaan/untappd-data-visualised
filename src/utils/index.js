@@ -33,6 +33,7 @@ import { setupScrollReveal } from './scrollRevealAnimation';
 import { useShareStats } from './useShareStats';
 import { analyzeBeerDataWithAI } from './aiAnalysis';
 import { getVsTheWorld } from './getVsTheWorld';
+import { statsPopularCheckins } from './statsPopularCheckins';
 
 export {
   formatDate,
@@ -70,4 +71,5 @@ export {
   useShareStats,
   analyzeBeerDataWithAI,
   getVsTheWorld,
+  statsPopularCheckins,
 };

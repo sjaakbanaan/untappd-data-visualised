@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDropzone } from 'react-dropzone';
 import { useUploadedJsonUpdater } from '../../utils/';
 import { extractBadges } from '../../utils/extractBadges';
+import { detectFormat } from '../../utils/normaliseCheckins';
 import UploadForm from './UploadForm';
 import { DataContext } from '../../DataContext';
 
@@ -62,7 +63,17 @@ const Uploader = () => {
       reader.onload = () => {
         // Do something with the JSON data
         const rawJson = JSON.parse(reader.result);
-        const updatedData = manipulateData(rawJson, userDetails);
+
+        const autoDetectedFormat = detectFormat(rawJson);
+        const correctSource = autoDetectedFormat === 'scraper_xl' ? 'custom_export' : 'untappd_insider';
+        const correctedUserDetails = { ...userDetails, json_source: correctSource };
+        
+        if (userDetails.json_source !== correctSource) {
+          setUserDetails(correctedUserDetails);
+          saveToLocalStorage('userDetails', correctedUserDetails);
+        }
+
+        const updatedData = manipulateData(rawJson, correctedUserDetails);
         setBeerData(updatedData);
 
         // Extract badge data from scraperxl checkins (each checkin has a `badges` array)

@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
-import { getOverviewStats, processTopData } from '.';
+import { getOverviewStats } from './getOverviewStats';
+import { processTopData } from './processTopData';
 import { processTopBeers } from './listProcessing';
 
 export const useBasicStats = (filteredData, filterDateRange, fullBeerData = null) => {
@@ -22,6 +23,8 @@ export const useBasicStats = (filteredData, filterDateRange, fullBeerData = null
       'Days active',
       'Average rating',
       'Rating vs. world',
+      'Most checked-in',
+      'Most unique drinkers',
     ],
     []
   );

@@ -82,11 +82,13 @@ const Badges = () => {
 
         {/* Search */}
         <input
+          id="badge-search"
+          name="badge-search"
           type="search"
           value={query}
           onChange={handleSearch}
           placeholder="Search badges… (min. 3 characters)"
-          className="mt-3 w-full max-w-sm rounded border border-gray-600 bg-gray-800 px-3 py-1.5 text-sm text-white outline-none transition-colors duration-200 placeholder:text-gray-500 focus:border-yellow-500"
+          className="mt-3 w-full max-w-xs rounded border border-gray-600 bg-gray-800 px-3 py-1.5 text-sm text-white outline-none transition-colors duration-200 placeholder:text-gray-500 focus:border-yellow-500"
         />
       </div>
 

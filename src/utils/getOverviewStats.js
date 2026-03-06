@@ -7,6 +7,7 @@ import {
   checkFullDateRange,
   getDefaultEndDate,
   getVsTheWorld,
+  statsPopularCheckins,
 } from '../utils';
 import { calculateAverageRatingScore } from './getBarChartTopBottomData';
 
@@ -129,14 +130,16 @@ export const getOverviewStats = (
       value: `${percentageHigher}%`,
       suffix: `higher, ${percentageLower}% lower`,
     },
+    ...statsPopularCheckins(filteredData),
   ];
 
   return stats
     .filter((stat) => !stat.hide && infoToShow.includes(stat.key))
-    .map(({ key, value, short_key, suffix }) => ({
+    .map(({ key, value, short_key, suffix, suffixLink }) => ({
       key,
       short_key,
       value,
       suffix,
+      suffixLink,
     }));
 };

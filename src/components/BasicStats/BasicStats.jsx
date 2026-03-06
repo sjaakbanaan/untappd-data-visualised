@@ -17,6 +17,7 @@ const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
                   statKey={item.key}
                   value={item.value}
                   suffix={item.suffix}
+                  suffixLink={item.suffixLink}
                 />
               )
           )}
@@ -32,3 +33,4 @@ BasicStats.propTypes = {
 };
 
 export default BasicStats;
+

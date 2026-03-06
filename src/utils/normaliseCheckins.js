@@ -119,6 +119,8 @@ const normaliseScraperXlItem = (item) => {
     bid: extractIdFromUrl(beer.url),
     global_rating_score: beer.global_rating != null ? parseFloat(beer.global_rating.toFixed(2)) : null,
     global_weighted_rating_score: null, // not available in Scraper XL
+    global_total_checkins: beer.total_checkins ?? null,
+    global_unique_users: beer.unique_users ?? null,
 
     // Brewery — city/country/lat/lng are now individual fields
     brewery_name: cleanBreweryName(brewery.name),
