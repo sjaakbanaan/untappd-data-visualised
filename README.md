@@ -1,11 +1,11 @@
 # Untappd Data Visualised v2.8.1
 
-## This is the repository for [tappd.online](https:///tappd.online), no need to install anymore!
+## This is the repository for [tappd.online](https:///tappd.online)
 
-## Overview
-#### You need to be an _Untappd Insider_ to use this dashboard!
+## Overviewx
+#### You need to either be an _Untappd Insider_ to generate a JSPN export, or you can use [Untappd Scraper XL](https://github.com/sjaakbanaan/untappd-scraper-xl).
 
-This little side project, "untappd-data-visualised," is designed to visualize Untappd data in various formats, such as charts, lists, and maps. It leverages React, Chart.js, MapBox, and some others to provide an interactive and insightful representation of your Untappd check-in history. Chat-GPT helped me a lot with creating this.
+Untappd Data Visualised is designed to visualize Untappd data in various formats, such as charts, lists, and maps. It leverages React, Chart.js, MapBox, and some others to provide an interactive and insightful representation of your Untappd check-in history. Chat-GPT helped me a lot with creating this.
 
 You start by setting a date range, and from there you can start filtering. For example filter by brewery name/city/country or venue name/city/country.
 After setting filters, the following lists are presented in either a chart or list:
@@ -49,6 +49,7 @@ After setting filters, the following lists are presented in either a chart or li
 - Cumulative beer count (year)
 - Beer type apprecation list
 - Basic statistics
+- Badges overview
 ```
 
 ## Screenshots
