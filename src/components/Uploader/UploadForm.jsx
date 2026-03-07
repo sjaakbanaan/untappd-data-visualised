@@ -46,12 +46,12 @@ const UploadForm = ({ userDetails, handleInputChange }) => {
               {field.label}
             </label>
             <input
-              className={`w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none ${
+              className={`w-full appearance-none rounded border bg-gray-700 px-3 py-2 text-white transition-colors duration-200 placeholder:text-gray-400 focus:border-yellow-500 focus:outline-none ${
                 field.name === 'untappd_avatar' &&
                 userDetails[field.name] &&
                 !validateAvatarUrl(userDetails[field.name])
-                  ? 'border-red-500'
-                  : ''
+                  ? 'border-red-500 focus:border-red-500'
+                  : 'border-gray-600'
               }`}
               id={field.name}
               type="text"
