@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import Map, { NavigationControl, FullscreenControl } from 'react-map-gl';
+import ReactMap, { NavigationControl, FullscreenControl } from 'react-map-gl';
 import Pins from './Pins';
 import VenuePopUp from './VenuePopUp';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -13,8 +13,27 @@ const VenueMap = ({ beerData }) => {
     getLocalStorageData('mapbox_key')
   );
 
-  const uniqueVenues = useMemo(() => {
-    return [...new Set(beerData.map((item) => item.venue_name))];
+  // Deduplicate venues to show only the most recent check-in marker for each venue
+  const uniqueVenueCheckins = useMemo(() => {
+    const venueMap = new Map();
+    beerData.forEach((item) => {
+      // Both coordinates must be present for a map marker
+      if (!item.venue_lat || !item.venue_lng) return;
+
+      const key = `${item.venue_lat}-${item.venue_lng}`;
+      const existing = venueMap.get(key);
+
+      // If no check-in exists for this venue, or this one is more recent:
+      if (!existing || new Date(item.created_at) > new Date(existing.created_at)) {
+        venueMap.set(key, item);
+      }
+    });
+    return Array.from(venueMap.values());
+  }, [beerData]);
+
+  // Keep a count of unique venue names for the header
+  const uniqueVenueCount = useMemo(() => {
+    return new Set(beerData.filter((i) => i.venue_name).map((i) => i.venue_name)).size;
   }, [beerData]);
 
   useEffect(() => {
@@ -60,10 +79,10 @@ const VenueMap = ({ beerData }) => {
   return (
     <div>
       <h2 className="mb-6 text-xl font-semibold">
-        Venues checked-in ({uniqueVenues.length})
+        Venues checked-in ({uniqueVenueCount})
       </h2>
       <div className="my-4 overflow-hidden rounded border border-gray-900 shadow-md">
-        <Map
+        <ReactMap
           key={mapKey} // Use mapKey as the key prop
           initialViewState={{
             bounds: boundingBox,
@@ -76,9 +95,9 @@ const VenueMap = ({ beerData }) => {
         >
           <FullscreenControl position="top-left" />
           <NavigationControl position="top-left" />
-          <Pins beerData={beerData} setPopupInfo={setPopupInfo} />
+          <Pins beerData={uniqueVenueCheckins} setPopupInfo={setPopupInfo} />
           {popupInfo && <VenuePopUp setPopupInfo={setPopupInfo} popupInfo={popupInfo} />}
-        </Map>
+        </ReactMap>
       </div>
     </div>
   );

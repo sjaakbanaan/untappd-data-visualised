@@ -1,92 +1,86 @@
-import { useState, useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import ReactGA from 'react-ga4';
 import { useNavigate } from 'react-router-dom';
-
 import { useDropzone } from 'react-dropzone';
+import { ref, uploadBytes } from 'firebase/storage';
+
+import { useAuth } from '../../context/AuthContext';
+import { storage } from '../../firebase';
 import { useUploadedJsonUpdater } from '../../utils/';
 import { extractBadges } from '../../utils/extractBadges';
 import { detectFormat } from '../../utils/normaliseCheckins';
-import UploadForm from './UploadForm';
 import { DataContext } from '../../DataContext';
+import Icon from '../UI/Icon/Icon';
 
 const Uploader = () => {
+  const { user, userProfile } = useAuth();
+  const { setBeerData, setBadgeData } = useContext(DataContext);
+  const { manipulateData } = useUploadedJsonUpdater();
+  const navigate = useNavigate();
+  const [uploading, setUploading] = useState(false);
+
   useEffect(() => {
     ReactGA.send({
       hitType: 'pageview',
       page: '/uploader',
       title: 'Uploader',
     });
-  });
+  }, []);
 
-  const { setBeerData, setBadgeData } = useContext(DataContext);
-  const { manipulateData } = useUploadedJsonUpdater(); // Import and use the hook
-  const [userDetails, setUserDetails] = useState({
-    untappd_username: '',
-    untappd_avatar: '',
-    mapbox_key: '',
-    venue_lat: '',
-    venue_lng: '',
-    venue_city: '',
-    venue_country: '',
-    venue_state: '',
-    json_source: 'untappd_insider',
-  });
-
-  useEffect(() => {
-    // Check for userDetails in local storage
-    const storedUserDetails = localStorage.getItem('userDetails');
-    if (storedUserDetails) {
-      setUserDetails(JSON.parse(storedUserDetails));
-    }
-  }, []); // Run only on component mount
-
-  const saveToLocalStorage = (key, value) => {
-    localStorage.setItem(key, JSON.stringify(value));
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUserDetails({ ...userDetails, [name]: value });
-    saveToLocalStorage('userDetails', { ...userDetails, [name]: value });
-  };
-
-  const navigate = useNavigate(); // Get the navigate object
-
-  const onDrop = (acceptedFiles) => {
-    if (acceptedFiles.length > 0) {
+  const onDrop = async (acceptedFiles) => {
+    if (acceptedFiles.length > 0 && user) {
+      setUploading(true);
+      const file = acceptedFiles[0];
       const reader = new FileReader();
 
       // eslint-disable-next-line no-console
       reader.onabort = () => console.log('file reading was aborted');
       // eslint-disable-next-line no-console
       reader.onerror = () => console.log('file reading has failed');
-      reader.onload = () => {
-        // Do something with the JSON data
-        const rawJson = JSON.parse(reader.result);
+      
+      reader.onload = async () => {
+        try {
+          const rawJson = JSON.parse(reader.result);
+          const autoDetectedFormat = detectFormat(rawJson);
+          const correctSource = autoDetectedFormat === 'scraper_xl' ? 'custom_export' : 'untappd_insider';
+          
+          // Use userProfile from AuthContext instead of local state
+          const currentSettings = {
+            ...userProfile,
+            json_source: correctSource,
+          };
 
-        const autoDetectedFormat = detectFormat(rawJson);
-        const correctSource = autoDetectedFormat === 'scraper_xl' ? 'custom_export' : 'untappd_insider';
-        const correctedUserDetails = { ...userDetails, json_source: correctSource };
-        
-        if (userDetails.json_source !== correctSource) {
-          setUserDetails(correctedUserDetails);
-          saveToLocalStorage('userDetails', correctedUserDetails);
-        }
+          const updatedData = manipulateData(rawJson, currentSettings);
+          setBeerData(updatedData);
 
-        const updatedData = manipulateData(rawJson, correctedUserDetails);
-        setBeerData(updatedData);
+          const checkins = Array.isArray(rawJson?.checkins) ? rawJson.checkins : rawJson;
+          if (Array.isArray(checkins) && checkins.length > 0 && Array.isArray(checkins[0]?.badges)) {
+            setBadgeData(extractBadges(checkins));
+          } else {
+            setBadgeData(null);
+          }
 
-        // Extract badge data from scraperxl checkins (each checkin has a `badges` array)
-        const checkins = Array.isArray(rawJson?.checkins) ? rawJson.checkins : rawJson;
-        if (Array.isArray(checkins) && checkins.length > 0 && Array.isArray(checkins[0]?.badges)) {
-          setBadgeData(extractBadges(checkins));
-        } else {
-          setBadgeData(null);
+          // Upload to Firebase Storage for persistence
+          const storageRef = ref(storage, `users/${user.uid}/untappd_data.json`);
+          await uploadBytes(storageRef, file);
+          
+          // 4. Update local cache
+          try {
+            localStorage.setItem(`untappd_cache_${user.uid}`, reader.result);
+          } catch (e) {
+            console.warn('Failed to update local cache:', e);
+          }
+          
+          navigate('/');
+        } catch (error) {
+          console.error('Error processing or uploading file:', error);
+          alert('Failed to process JSON. Please ensure it is a valid Untappd export.');
+        } finally {
+          setUploading(false);
         }
       };
 
-      reader.readAsText(acceptedFiles[0]);
-      navigate('/');
+      reader.readAsText(file);
     }
   };
 
@@ -96,12 +90,12 @@ const Uploader = () => {
       'application/json': ['.json'],
     },
     maxFiles: 1,
-    maxSize: 50 * 1024 * 1024, // 50 mb max.
+    maxSize: 50 * 1024 * 1024,
   });
 
   const fileRejectionItems = fileRejections.map(({ file, errors }) => (
-    <li key={file.path}>
-      <ul>
+    <li key={file.path} className="text-red-500">
+      <ul className="list-disc pl-5">
         {errors.map((e) => (
           <li key={e.code}>{e.message}</li>
         ))}
@@ -110,31 +104,59 @@ const Uploader = () => {
   ));
 
   return (
-    <div className="mx-auto max-w-3xl bg-gray-800 p-6 text-white shadow-md md:rounded-lg">
-      <UploadForm userDetails={userDetails} handleInputChange={handleInputChange} />
+    <div className="mx-auto max-w-3xl rounded-2xl bg-gray-800 p-10 text-white shadow-2xl">
+      <div className="mb-8 text-center">
+        <h2 className="mb-3 text-3xl font-bold text-yellow-500">Import Your Data</h2>
+        <p className="text-gray-400">
+          Upload your Untappd Insider JSON or Scraper XL export.
+          Your data will be securely stored in the cloud and available every time you log in.
+        </p>
+      </div>
+
+      <div className="mb-10 flex items-center gap-4 rounded-lg border border-yellow-500/20 bg-yellow-500/5 p-4">
+        <Icon icon="EXCLAMATION" className="flex size-4 fill-current" />
+        <p className="flex-1 text-sm text-gray-400">
+          Uploading a new file will replace your current data. You can always see which file source is being used in your settings.
+        </p>
+      </div>
+
       <div
         {...getRootProps()}
-        className="rounded-md border-2 border-dashed border-gray-400 p-8 text-center leading-5"
+        className={`cursor-pointer rounded-xl border-2 border-dashed p-16 text-center transition-all duration-300 ${
+          isDragActive ? 'border-yellow-500 bg-yellow-500/10' : 'border-gray-600 hover:border-gray-500 hover:bg-gray-700/50'
+        }`}
       >
         <input {...getInputProps()} />
-        {isDragActive ? (
-          <p className="text-gray-400">Yes, drop it here!</p>
+        {uploading ? (
+          <div className="flex flex-col items-center gap-4">
+            <div className="size-12 animate-spin rounded-full border-4 border-yellow-500 border-t-transparent"></div>
+            <p className="text-xl font-bold text-yellow-500">Processing & Syncing...</p>
+          </div>
+        ) : isDragActive ? (
+          <p className="text-2xl font-bold text-yellow-500">Drop it here!</p>
         ) : (
-          <div>
-            <p className="mb-4 text-gray-400">
-              Drag 'n' drop your exported JSON file here or
+          <div className="space-y-4">
+            <div className="flex justify-center">
+              <svg className="size-16 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+              </svg>
+            </div>
+            <p className="text-lg text-gray-400">
+              Drag 'n' drop your JSON file here, or click to selecting
             </p>
-            <button className="rounded bg-yellow-500 px-4 py-2 text-black transition-colors duration-300 hover:bg-yellow-400">
+            <button className="rounded-full bg-yellow-500 px-8 py-3 text-lg font-bold text-black shadow-lg transition-transform hover:scale-105 active:scale-95">
               Select JSON file
             </button>
-            {fileRejectionItems.length > 0 && (
-              <p className="mt-4">
-                <ul>{fileRejectionItems}</ul>
-              </p>
-            )}
           </div>
         )}
       </div>
+
+      {fileRejectionItems.length > 0 && (
+        <div className="mt-6 rounded-lg border border-red-500/50 bg-red-500/10 p-4">
+          <h4 className="mb-2 font-bold text-red-500">Selection Errors:</h4>
+          <ul>{fileRejectionItems}</ul>
+        </div>
+      )}
     </div>
   );
 };
