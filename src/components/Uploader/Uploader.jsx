@@ -37,13 +37,14 @@ const Uploader = () => {
       reader.onabort = () => console.log('file reading was aborted');
       // eslint-disable-next-line no-console
       reader.onerror = () => console.log('file reading has failed');
-      
+
       reader.onload = async () => {
         try {
           const rawJson = JSON.parse(reader.result);
           const autoDetectedFormat = detectFormat(rawJson);
-          const correctSource = autoDetectedFormat === 'scraper_xl' ? 'custom_export' : 'untappd_insider';
-          
+          const correctSource =
+            autoDetectedFormat === 'scraper_xl' ? 'custom_export' : 'untappd_insider';
+
           // Use userProfile from AuthContext instead of local state
           const currentSettings = {
             ...userProfile,
@@ -54,7 +55,11 @@ const Uploader = () => {
           setBeerData(updatedData);
 
           const checkins = Array.isArray(rawJson?.checkins) ? rawJson.checkins : rawJson;
-          if (Array.isArray(checkins) && checkins.length > 0 && Array.isArray(checkins[0]?.badges)) {
+          if (
+            Array.isArray(checkins) &&
+            checkins.length > 0 &&
+            Array.isArray(checkins[0]?.badges)
+          ) {
             setBadgeData(extractBadges(checkins));
           } else {
             setBadgeData(null);
@@ -63,7 +68,7 @@ const Uploader = () => {
           // Upload to Firebase Storage for persistence
           const storageRef = ref(storage, `users/${user.uid}/untappd_data.json`);
           await uploadBytes(storageRef, file);
-          
+
           // 4. Update last import timestamp
           await updateProfile({ last_import: new Date().toISOString() });
 
@@ -73,7 +78,7 @@ const Uploader = () => {
           } catch (e) {
             console.warn('Failed to update local cache:', e);
           }
-          
+
           navigate('/');
         } catch (error) {
           console.error('Error processing or uploading file:', error);
@@ -107,11 +112,12 @@ const Uploader = () => {
   ));
 
   return (
-    <div className="mx-auto max-w-3xl rounded-2xl bg-gray-800 p-10 text-white shadow-2xl">
+    <div className="mx-auto max-w-3xl bg-gray-800 p-10 text-white shadow-2xl md:rounded-2xl">
       <div className="mb-8 text-center">
         <h2 className="mb-3 text-3xl font-bold text-yellow-500">Import Your Data</h2>
         <p className="text-gray-400">
-          Your data will be securely stored in the cloud and available every time you log in.
+          Your data will be securely stored in the cloud and available every time you log
+          in.
         </p>
         {userProfile?.last_import && (
           <p className="mt-2 text-sm text-yellow-500/80">
@@ -125,7 +131,9 @@ const Uploader = () => {
       <div
         {...getRootProps()}
         className={`cursor-pointer rounded-xl border-2 border-dashed p-16 text-center transition-all duration-300 ${
-          isDragActive ? 'border-yellow-500 bg-yellow-500/10' : 'border-gray-600 hover:border-gray-500 hover:bg-gray-700/50'
+          isDragActive
+            ? 'border-yellow-500 bg-yellow-500/10'
+            : 'border-gray-600 hover:border-gray-500 hover:bg-gray-700/50'
         }`}
       >
         <input {...getInputProps()} />
@@ -139,8 +147,18 @@ const Uploader = () => {
         ) : (
           <div className="space-y-4">
             <div className="flex justify-center">
-              <svg className="size-16 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+              <svg
+                className="size-16 text-gray-500"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                />
               </svg>
             </div>
             <p className="text-lg text-gray-400">

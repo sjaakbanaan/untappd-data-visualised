@@ -51,7 +51,7 @@ const AuthPage = () => {
 
   return (
     <div className="flex flex-col items-center justify-center bg-gray-900 text-white sm:px-6 lg:px-8">
-      <div className="w-full max-w-md space-y-8 md:rounded-2xl bg-gray-800 p-6 md:p-8 md:shadow-2xl">
+      <div className="w-full max-w-md space-y-8 bg-gray-800 p-6 md:rounded-2xl md:p-8 md:shadow-2xl">
         <div className="text-center">
           <h2 className="mt-0 text-3xl font-extrabold text-yellow-500">
             {isLogin ? 'Welcome back' : 'Create an account'}
@@ -71,7 +71,10 @@ const AuthPage = () => {
           <div className="space-y-4 rounded-md shadow-sm">
             {!isLogin && (
               <div>
-                <label className="mb-1 block text-sm text-gray-400" htmlFor="untappd_username">
+                <label
+                  className="mb-1 block text-sm text-gray-400"
+                  htmlFor="untappd_username"
+                >
                   Untappd Username
                 </label>
                 <input
@@ -156,7 +159,7 @@ const AuthPage = () => {
             onClick={() => setIsLogin(!isLogin)}
             className="text-sm text-yellow-500 transition-colors duration-200 hover:text-yellow-400"
           >
-            {isLogin ? 'Don\'t have an account? Sign up' : 'Already have an account? Sign in'}
+            {isLogin ? 'New here? Sign up!' : 'Returning visitor? Sign in!'}
           </button>
         </div>
       </div>

@@ -54,7 +54,11 @@ const SettingsPage = () => {
   };
 
   const handleDeleteData = async () => {
-    if (!window.confirm('Are you absolutely sure you want to delete all your imported Untappd data? This will remove it from both the cloud and your device and is irreversible.')) {
+    if (
+      !window.confirm(
+        'Are you absolutely sure you want to delete all your imported Untappd data? This will remove it from both the cloud and your device and is irreversible.'
+      )
+    ) {
       return;
     }
 
@@ -62,7 +66,7 @@ const SettingsPage = () => {
     try {
       const storageRef = ref(storage, `users/${user.uid}/untappd_data.json`);
       await deleteObject(storageRef);
-      
+
       // Clear cache too
       const cacheKey = `untappd_cache_${user.uid}`;
       localStorage.removeItem(cacheKey);
@@ -95,24 +99,25 @@ const SettingsPage = () => {
   ];
 
   return (
-    <div className="mx-auto max-w-3xl rounded-xl bg-gray-800 p-8 text-white shadow-2xl">
+    <div className="mx-auto max-w-3xl bg-gray-800 p-8 text-white shadow-2xl md:rounded-2xl">
       <h2 className="mb-6 text-3xl font-bold text-yellow-500">Settings</h2>
-      
+
       {!isProfileComplete && (
         <NotificationBar
           title="Complete Your Setup"
           text={
             <>
-              Please provide your <strong>Untappd username</strong> and <strong>Home city</strong> to
-              unlock the Dashboard and Import features. These are essential for mapping and data
-              processing.
+              Please provide your <strong>Untappd username</strong> and{' '}
+              <strong>Home city</strong> to unlock the Dashboard and Import features.
+              These are essential for mapping and data processing.
             </>
           }
         />
       )}
 
       <p className="mb-8 text-gray-400">
-        Update your personal details and API keys. These settings are persisted to your account.
+        Update your personal details and API keys. These settings are persisted to your
+        account.
       </p>
 
       <NotificationBar text="Don't worry, your data is saved encrypted, meaning only you can access it." />
@@ -120,8 +125,18 @@ const SettingsPage = () => {
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid gap-6 md:grid-cols-2">
           {fields.map((field) => (
-            <div key={field.name} className={field.name === 'untappd_avatar' || field.name === 'mapbox_key' ? 'md:col-span-2' : ''}>
-              <label className="mb-2 block text-sm font-medium text-gray-400" htmlFor={field.name}>
+            <div
+              key={field.name}
+              className={
+                field.name === 'untappd_avatar' || field.name === 'mapbox_key'
+                  ? 'md:col-span-2'
+                  : ''
+              }
+            >
+              <label
+                className="mb-2 block text-sm font-medium text-gray-400"
+                htmlFor={field.name}
+              >
                 {field.label}
               </label>
               <input
@@ -145,7 +160,9 @@ const SettingsPage = () => {
             Save Changes
           </button>
           {status && (
-            <span className={`text-sm ${status.includes('Error') ? 'text-red-500' : 'text-green-500'}`}>
+            <span
+              className={`text-sm ${status.includes('Error') ? 'text-red-500' : 'text-green-500'}`}
+            >
               {status}
             </span>
           )}
@@ -157,12 +174,12 @@ const SettingsPage = () => {
         <p className="mb-6 text-sm text-gray-400">
           Manage your sensitive data and local session settings.
         </p>
-        
+
         <div className="grid gap-6 md:grid-cols-2">
           <div className="rounded-lg bg-gray-900/40 p-5">
             <h4 className="mb-2 font-bold text-gray-200">Clear Local Cache</h4>
             <p className="mb-4 text-xs text-gray-400">
-              Only removes the browser copy of your data. The cloud version stays safe. 
+              Only removes the browser copy of your data. The cloud version stays safe.
               Useful if you sync issues or layout bugs.
             </p>
             <button
@@ -176,7 +193,7 @@ const SettingsPage = () => {
           <div className="rounded-lg border border-red-900/20 bg-red-900/10 p-5">
             <h4 className="mb-2 font-bold text-red-400">Delete Imported Data</h4>
             <p className="mb-4 text-xs text-gray-400">
-              Permanently removes your JSON export from Firebase Storage and this device. 
+              Permanently removes your JSON export from Firebase Storage and this device.
               <strong>This cannot be undone.</strong>
             </p>
             <button

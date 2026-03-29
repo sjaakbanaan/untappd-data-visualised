@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <div className="bg-gray-900 p-4 md:p-4 xl:p-6">
       <div className="container relative mx-auto">
-        <div className="mb-6">
+        <div className="md:mb-6">
           <div className="mb-6 flex items-center justify-end md:mb-0">
             <Navigation />
             {userName && (
@@ -47,7 +47,7 @@ const Header = () => {
             </a>
           </div>
           {!isHomeNotLoggedIn && (
-            <h1 className="mb-2 text-center text-3xl font-bold text-yellow-500 md:text-4xl">
+            <h1 className="mb-2 mt-14 text-center text-3xl font-bold text-yellow-500 md:mt-10 md:text-4xl">
               {isClickable ? <Link to="/">{headerTitle}</Link> : headerTitle}
             </h1>
           )}
