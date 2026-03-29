@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { ref, deleteObject } from 'firebase/storage';
 import { useAuth } from '../../context/AuthContext';
 import { storage } from '../../firebase';
-import Icon from '../UI/Icon/Icon';
+import NotificationBar from '../UI/NotificationBar';
 
 const SettingsPage = () => {
   const { user, userProfile, updateProfile } = useAuth();
@@ -99,29 +99,23 @@ const SettingsPage = () => {
       <h2 className="mb-6 text-3xl font-bold text-yellow-500">Settings</h2>
       
       {!isProfileComplete && (
-        <div className="mb-8 rounded-xl border border-yellow-500/30 bg-yellow-500/10 p-6">
-          <h3 className="mb-2 flex items-center gap-2 font-bold text-yellow-500">
-            <svg className="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
-            Complete Your Setup
-          </h3>
-          <p className="text-sm text-gray-300">
-            Please provide your <strong>Untappd username</strong> and <strong>Home city</strong> to unlock the Dashboard and Import features. These are essential for mapping and data processing.
-          </p>
-        </div>
+        <NotificationBar
+          title="Complete Your Setup"
+          text={
+            <>
+              Please provide your <strong>Untappd username</strong> and <strong>Home city</strong> to
+              unlock the Dashboard and Import features. These are essential for mapping and data
+              processing.
+            </>
+          }
+        />
       )}
 
       <p className="mb-8 text-gray-400">
         Update your personal details and API keys. These settings are persisted to your account.
       </p>
 
-      <div className="mb-10 flex items-center gap-4 rounded-lg border border-yellow-500/20 bg-yellow-500/5 p-4">
-        <Icon icon="EXCLAMATION" className="flex size-4 fill-current" />
-        <p className="flex-1 text-sm text-gray-400">
-          Don't worry, your data is saved encrypted, meaning only you can access it.
-        </p>
-      </div>
+      <NotificationBar text="Don't worry, your data is saved encrypted, meaning only you can access it." />
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid gap-6 md:grid-cols-2">

@@ -10,7 +10,7 @@ import { useUploadedJsonUpdater } from '../../utils/';
 import { extractBadges } from '../../utils/extractBadges';
 import { detectFormat } from '../../utils/normaliseCheckins';
 import { DataContext } from '../../DataContext';
-import Icon from '../UI/Icon/Icon';
+import NotificationBar from '../UI/NotificationBar';
 
 const Uploader = () => {
   const { user, userProfile } = useAuth();
@@ -113,12 +113,7 @@ const Uploader = () => {
         </p>
       </div>
 
-      <div className="mb-10 flex items-center gap-4 rounded-lg border border-yellow-500/20 bg-yellow-500/5 p-4">
-        <Icon icon="EXCLAMATION" className="flex size-4 fill-current" />
-        <p className="flex-1 text-sm text-gray-400">
-          Uploading a new file will replace your current data. You can always see which file source is being used in your settings.
-        </p>
-      </div>
+      <NotificationBar text="Uploading a new file will replace your current data. You can always see which file source is being used in your settings." />
 
       <div
         {...getRootProps()}
