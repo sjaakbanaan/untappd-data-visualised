@@ -1,8 +1,8 @@
 [
   {
-    "origin": ["http://localhost:3000", "http://localhost:3001"],
-    "method": ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"],
-    "responseHeader": ["Content-Type", "x-goog-resumable"],
+    "origin": ["https://tappd.online", "http://localhost:3000", "http://localhost:3001", "http://localhost:5173"],
+    "method": ["GET", "PUT", "POST", "DELETE", "HEAD"],
+    "responseHeader": ["Content-Type", "Authorization", "x-goog-resumable"],
     "maxAgeSeconds": 3600
   }
 ]

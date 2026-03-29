@@ -28,7 +28,10 @@ const Header = () => {
                 target="_blank"
                 rel="noreferrer"
               >
-                <Icon icon="UNTAPPD" className="w-5 fill-yellow-500 transition-transform hover:scale-110" />
+                <Icon
+                  icon="UNTAPPD"
+                  className="w-5 fill-yellow-500 transition-transform hover:scale-110"
+                />
               </a>
             )}
             <a
@@ -37,16 +40,17 @@ const Header = () => {
               target="_blank"
               rel="noreferrer"
             >
-              <Icon icon="GITHUB" className="w-5 fill-white transition-opacity hover:opacity-80" />
+              <Icon
+                icon="GITHUB"
+                className="w-5 fill-white transition-opacity hover:opacity-80"
+              />
             </a>
           </div>
-          <h1 className="mb-2 text-center text-3xl font-bold text-yellow-500 md:text-4xl">
-            {isClickable ? (
-              <Link to="/">{headerTitle}</Link>
-            ) : (
-              headerTitle
-            )}
-          </h1>
+          {!isHomeNotLoggedIn && (
+            <h1 className="mb-2 text-center text-3xl font-bold text-yellow-500 md:text-4xl">
+              {isClickable ? <Link to="/">{headerTitle}</Link> : headerTitle}
+            </h1>
+          )}
           {userName && (
             <h2 className="text-center text-2xl font-bold text-gray-400">{userName}</h2>
           )}
