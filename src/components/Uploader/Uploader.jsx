@@ -6,14 +6,14 @@ import { ref, uploadBytes } from 'firebase/storage';
 
 import { useAuth } from '../../context/AuthContext';
 import { storage } from '../../firebase';
-import { useUploadedJsonUpdater } from '../../utils/';
+import { useUploadedJsonUpdater, formatDate } from '../../utils/';
 import { extractBadges } from '../../utils/extractBadges';
 import { detectFormat } from '../../utils/normaliseCheckins';
 import { DataContext } from '../../DataContext';
 import NotificationBar from '../UI/NotificationBar';
 
 const Uploader = () => {
-  const { user, userProfile } = useAuth();
+  const { user, userProfile, updateProfile } = useAuth();
   const { setBeerData, setBadgeData } = useContext(DataContext);
   const { manipulateData } = useUploadedJsonUpdater();
   const navigate = useNavigate();
@@ -64,7 +64,10 @@ const Uploader = () => {
           const storageRef = ref(storage, `users/${user.uid}/untappd_data.json`);
           await uploadBytes(storageRef, file);
           
-          // 4. Update local cache
+          // 4. Update last import timestamp
+          await updateProfile({ last_import: new Date().toISOString() });
+
+          // 5. Update local cache
           try {
             localStorage.setItem(`untappd_cache_${user.uid}`, reader.result);
           } catch (e) {
@@ -108,9 +111,13 @@ const Uploader = () => {
       <div className="mb-8 text-center">
         <h2 className="mb-3 text-3xl font-bold text-yellow-500">Import Your Data</h2>
         <p className="text-gray-400">
-          Upload your Untappd Insider JSON or Scraper XL export.
           Your data will be securely stored in the cloud and available every time you log in.
         </p>
+        {userProfile?.last_import && (
+          <p className="mt-2 text-sm text-yellow-500/80">
+            Last data import: {formatDate(userProfile.last_import)}
+          </p>
+        )}
       </div>
 
       <NotificationBar text="Uploading a new file will replace your current data. You can always see which file source is being used in your settings." />
