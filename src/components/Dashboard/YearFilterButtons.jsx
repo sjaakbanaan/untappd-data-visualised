@@ -1,6 +1,10 @@
+import { useState } from 'react';
 import { getDefaultStartDate, getDefaultEndDate, checkFullDateRange } from '../../utils/';
 
+const MOBILE_VISIBLE_YEAR_COUNT = 2;
+
 const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) => {
+  const [showAllYears, setShowAllYears] = useState(false);
   // Extract unique years from beerData
   const uniqueYears = [
     ...new Set(beerData.map((item) => new Date(item.created_at).getFullYear())),
@@ -54,7 +58,12 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
         </div>
 
         {uniqueYears.map((year, i) => (
-          <div className="block" key={i}>
+          <div
+            className={`block ${
+              !showAllYears && i >= MOBILE_VISIBLE_YEAR_COUNT ? 'hidden md:block' : 'block'
+            }`}
+            key={i}
+          >
             <button
               className={`mb-0 w-full rounded border px-3 py-2 shadow transition-colors duration-300 ${
                 // set active state, with an exception for the current year, because then the end value fot filterDateRange is not `${year}-12-31` but getDefaultEndDate():
@@ -81,6 +90,20 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
           </div>
         ))}
       </div>
+
+      {/* Show more / fewer toggle — only visible on mobile when there are extra years */}
+      {uniqueYears.length > MOBILE_VISIBLE_YEAR_COUNT && (
+        <button
+          className="mt-3 block text-sm text-yellow-400 underline underline-offset-2 hover:text-yellow-300 md:hidden"
+          onClick={() => setShowAllYears((prev) => !prev)}
+        >
+          {showAllYears
+            ? `Show fewer years ↑`
+            : `Show ${uniqueYears.length - MOBILE_VISIBLE_YEAR_COUNT} more year${
+                uniqueYears.length - MOBILE_VISIBLE_YEAR_COUNT !== 1 ? 's' : ''
+              } ↓`}
+        </button>
+      )}
     </div>
   );
 };

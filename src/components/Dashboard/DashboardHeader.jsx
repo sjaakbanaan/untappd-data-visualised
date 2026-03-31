@@ -10,7 +10,7 @@ const DashboardHeader = ({
 }) => {
   return (
     <div className="mt-10 md:mb-6 md:flex md:items-center md:justify-center">
-      <h2 className="my-3 text-2xl font-bold">
+      <h2 className="my-6 md:my-3 text-2xl font-bold">
         {totalBeerCount} checkins{' '}
         <span className="text-gray-400">in current selection</span>
       </h2>

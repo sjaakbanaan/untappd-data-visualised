@@ -1,10 +1,12 @@
-import { useContext } from 'react';
-import { useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import OverviewFilter from './OverviewFilter';
 import { DataContext } from '../../DataContext';
 import { transformResetList } from '../../utils/';
 
+const MOBILE_VISIBLE_FILTER_COUNT = 2;
+
 const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
+  const [showAllFilters, setShowAllFilters] = useState(false);
   const { resetList } = useContext(DataContext);
   // set empty filter options state
   const [filterOptions, setFilterOptions] = useState(
@@ -37,20 +39,42 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
     setFilterOverview((prevFilter) => ({ ...prevFilter, [key]: updatedValue }));
   };
 
+  const filterEntries = Object.entries(filterOptions);
+
   return (
-    <div className="my-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
-      {Object.entries(filterOptions).map(([key, options]) => (
-        <OverviewFilter
-          key={key}
-          filterKey={key}
-          splitValues={key == 'tagged_friends'}
-          label={`${key.replace('_', ' ')} (${options.length})`}
-          labelPlural={`${key.replace('_', ' ')}s`}
-          options={options}
-          value={filterOverview?.[key] || null} // Pass null if no value is selected
-          onChange={(value) => handleFilterChange(key, value)}
-        />
-      ))}
+    <div>
+      <div className="my-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+        {filterEntries.map(([key, options], i) => (
+          <div
+            key={key}
+            className={!showAllFilters && i >= MOBILE_VISIBLE_FILTER_COUNT ? 'hidden md:block' : 'block'}
+          >
+            <OverviewFilter
+              filterKey={key}
+              splitValues={key == 'tagged_friends'}
+              label={`${key.replace('_', ' ')} (${options.length})`}
+              labelPlural={`${key.replace('_', ' ')}s`}
+              options={options}
+              value={filterOverview?.[key] || null} // Pass null if no value is selected
+              onChange={(value) => handleFilterChange(key, value)}
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* Show more / fewer — only on mobile when extra filters exist */}
+      {filterEntries.length > MOBILE_VISIBLE_FILTER_COUNT && (
+        <button
+          className="mb-4 block text-sm text-yellow-400 underline underline-offset-2 hover:text-yellow-300 md:hidden"
+          onClick={() => setShowAllFilters((prev) => !prev)}
+        >
+          {showAllFilters
+            ? `Show fewer filters ↑`
+            : `Show ${filterEntries.length - MOBILE_VISIBLE_FILTER_COUNT} more filter${
+                filterEntries.length - MOBILE_VISIBLE_FILTER_COUNT !== 1 ? 's' : ''
+              } ↓`}
+        </button>
+      )}
     </div>
   );
 };

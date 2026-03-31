@@ -1,4 +1,4 @@
-# Untappd Data Visualised v2.9.0
+# Untappd Data Visualised v2.9.1
 
 ## This is the repository for [tappd.online](https:///tappd.online)
 
@@ -67,6 +67,7 @@ After setting filters, the following lists are presented in either a chart or li
 - 06-03-2026: v2.8.1 Added badges when available from export (currently only Scraper XL export is supported) + showing most checked-in beer data to basic stats
 - 07-03-2026: v2.8.2 Added the option to group badges by level (steps of 10)
 - 31-03-2026: v2.9.0 Your uploaded data is now stored online, so you don't need to have JSON ready to upload every time you visit the site. Just log in and your data will be there.
+- 31-03-2026: v2.9.1 Fixed a bug where filtering on 'tagged friends' wouldn't return a complete list + improved mobile UX
 
 ## Known bugs
 
