@@ -22,7 +22,10 @@ const OverviewFilter = ({
   if (splitValues) {
     formattedOptions = [
       ...new Set(
-        options.flatMap((item) => item.split(',')).filter(Boolean) // This removes any empty strings that may occur from leading commas
+        options
+          .flatMap((item) => item.split(','))
+          .map((s) => s.trim()) // strip leading/trailing spaces (scraper XL joins with ', ')
+          .filter(Boolean) // This removes any empty strings that may occur from leading commas
       ),
     ].sort(); // Sorts the array alphabetically
   }
