@@ -9,14 +9,14 @@ const LandingPage = () => {
           Untappd Data Visualised
         </h1>
         <p className="mb-8 text-xl text-gray-300 md:text-2xl">
-          Track your beer journey with style. Beautiful charts, maps, and stats 
-          from your Untappd check-ins, now saved and accessible anywhere.
+          Track your beer journey with style. Beautiful charts, maps, and stats from your
+          Untappd check-ins, now saved and accessible anywhere.
         </p>
-        
+
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Link
             to="/login"
-            className="w-full rounded-full bg-yellow-500 px-10 py-4 text-xl font-bold text-black transition-transform duration-300 hover:scale-105 sm:w-auto"
+            className="w-full rounded-full bg-yellow-500 px-10 py-4 text-xl font-bold text-gray-800 transition-transform duration-300 hover:scale-105 sm:w-auto"
           >
             Get Started
           </Link>
@@ -33,19 +33,21 @@ const LandingPage = () => {
         </div>
 
         <div className="mt-20 grid gap-8 md:grid-cols-3">
-          <div className="rounded-2xl bg-gray-800/50 p-6 backdrop-blur-sm">
-            <h3 className="mb-2 text-xl font-bold text-yellow-500">Persisted Data</h3>
-            <p className="text-gray-400">
-              Upload once, access everywhere. Your beer data is securely stored in the cloud.
-            </p>
-          </div>
-          <div className="rounded-2xl bg-gray-800/50 p-6 backdrop-blur-sm">
+          <div className="rounded-2xl bg-gray-800/50 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-2xl">
             <h3 className="mb-2 text-xl font-bold text-yellow-500">Visual Insights</h3>
             <p className="text-gray-400">
-              Interactive maps, brewery statistics, and check-in trends at your fingertips.
+              Interactive maps, brewery statistics, and check-in trends at your
+              fingertips.
             </p>
           </div>
-          <div className="rounded-2xl bg-gray-800/50 p-6 backdrop-blur-sm">
+          <div className="rounded-2xl bg-gray-800/50 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+            <h3 className="mb-2 text-xl font-bold text-yellow-500">Persisted Data</h3>
+            <p className="text-gray-400">
+              Upload once, access everywhere. Your beer data is securely stored in the
+              cloud.
+            </p>
+          </div>
+          <div className="rounded-2xl bg-gray-800/50 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-2xl">
             <h3 className="mb-2 text-xl font-bold text-yellow-500">Tappd Wrappd</h3>
             <p className="text-gray-400">
               Relive your year in beer with our custom-made year-in-review experience.
