@@ -1,14 +1,15 @@
-/* eslint-disable no-console */
 import { useState } from 'react';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../firebase';
-import { useLocalStorageData, convertImageToBase64 } from '.';
+import { useAuth } from '../context/AuthContext';
+import { convertImageToBase64 } from '.';
 
 export const useShareStats = () => {
   const [shareLink, setShareLink] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const userName = useLocalStorageData('untappd_username');
-  const userAvatar = useLocalStorageData('untappd_avatar');
+  const { userProfile } = useAuth();
+  const userName = userProfile?.untappd_username;
+  const userAvatar = userProfile?.untappd_avatar;
 
   const handleShare = async (
     stats,

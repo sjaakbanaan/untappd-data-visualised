@@ -13,7 +13,6 @@ import { normalizeString } from './normalizeString';
 import { isFilterOverviewSet } from './isFilterOverviewSet';
 import { useCounter } from './useCounter';
 import { useUploadedJsonUpdater } from './useUploadedJsonUpdater';
-import { getLocalStorageData } from './getLocalStorageData';
 import { statsCountTotal } from './statsCountTotal';
 import { statsCountUnique } from './statsCountUnique';
 import { statsCountUniqueFriends } from './statsCountUniqueFriends';
@@ -23,7 +22,6 @@ import { formatWrappdDates } from './formatWrappdDates';
 import { getOverviewStats } from './getOverviewStats';
 import { processTopData } from './processTopData';
 import { useBasicStats } from './useBasicStats';
-import { useLocalStorageData } from './useLocalStorageData';
 import { toDataURL } from './toDataURL';
 import { getBarChartRatingData } from './getBarChartRatingData';
 import { transformResetList } from './transformResetList';
@@ -52,7 +50,6 @@ export {
   isFilterOverviewSet,
   useCounter,
   useUploadedJsonUpdater,
-  getLocalStorageData,
   statsCountTotal,
   statsCountUnique,
   statsCountUniqueFriends,
@@ -61,7 +58,6 @@ export {
   getOverviewStats,
   processTopData,
   useBasicStats,
-  useLocalStorageData,
   toDataURL,
   getBarChartRatingData,
   transformResetList,

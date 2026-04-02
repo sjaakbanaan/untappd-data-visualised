@@ -1,20 +1,18 @@
 /* eslint-disable no-console */
-import { formatWrappdDates, getLocalStorageData } from '../utils';
+import { formatWrappdDates } from '../utils';
 import { initializeModel, preferredModels } from './aiModelDiscovery';
 import { handleAIError } from './aiErrorHandler';
 import { prepareAnalysisData, buildAnalysisPrompt } from './prepareAnalysisData';
 import { markdownToHtml } from './markdownToHtml';
 
-export const analyzeBeerDataWithAI = async (beerData) => {
+export const analyzeBeerDataWithAI = async (beerData, apiKey) => {
   if (!beerData || beerData.length === 0) {
     throw new Error('No beer data available for analysis');
   }
 
-  const apiKey = getLocalStorageData('gemini_api_key');
-
   if (!apiKey) {
     throw new Error(
-      'Gemini API key not found. Please add your Gemini API key in the upload form.'
+      'Gemini API key not found. Please add your Gemini API key in Settings.'
     );
   }
 

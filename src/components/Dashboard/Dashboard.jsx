@@ -1,7 +1,8 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
 import ReactGA from 'react-ga4';
 
-import { useDashboardData, useLocalStorageData } from '../../utils/';
+import { useDashboardData } from '../../utils/';
+import { useAuth } from '../../context/AuthContext';
 
 import DashboardHeader from './DashboardHeader';
 import YearFilterButtons from './YearFilterButtons';
@@ -34,8 +35,9 @@ const Dashboard = () => {
       title: 'Dashboard',
     });
   });
-  const geminiApiKey = useLocalStorageData('gemini_api_key');
-  const mapboxKey = useLocalStorageData('mapbox_key');
+  const { userProfile } = useAuth();
+  const geminiApiKey = userProfile?.gemini_api_key;
+  const mapboxKey = userProfile?.mapbox_key;
 
   // let's fetch all that nice data via the useDashboardData() hook:
   const {
@@ -133,6 +135,7 @@ const Dashboard = () => {
                     analysis={aiAnalysis}
                     setAnalysis={setAiAnalysis}
                     filterDateRange={filterDateRange}
+                    geminiApiKey={geminiApiKey}
                   />
                 </div>
               )}

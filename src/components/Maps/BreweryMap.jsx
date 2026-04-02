@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import Map, { NavigationControl, FullscreenControl, Source, Layer } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { getLocalStorageData } from '../../utils/';
+import { useAuth } from '../../context/AuthContext';
 
 // For more information on data-driven styles, see https://www.mapbox.com/help/gl-dds-ref/
 const dataLayer = {
@@ -15,18 +15,13 @@ const dataLayer = {
 
 const BreweryMap = ({ beerData }) => {
   const [allData, setAllData] = useState(null);
-  const [storedMapBoxKey, setStoredMapBoxKey] = useState(
-    getLocalStorageData('mapbox_key')
-  );
+  const { userProfile } = useAuth();
+  const storedMapBoxKey = userProfile?.mapbox_key;
 
   const uniqueCountries = useMemo(() => {
     return [...new Set(beerData.map((item) => item.brewery_country))];
   }, [beerData]);
 
-  useEffect(() => {
-    // Check for Mapbox key in local storage
-    setStoredMapBoxKey(getLocalStorageData('mapbox_key'));
-  }, []); // Run only on component mount
 
   useEffect(() => {
     /* data fetch */

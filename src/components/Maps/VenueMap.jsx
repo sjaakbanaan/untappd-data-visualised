@@ -3,15 +3,14 @@ import ReactMap, { NavigationControl, FullscreenControl } from 'react-map-gl';
 import Pins from './Pins';
 import VenuePopUp from './VenuePopUp';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { getLocalStorageData } from '../../utils/';
+import { useAuth } from '../../context/AuthContext';
 
 const VenueMap = ({ beerData }) => {
   const [popupInfo, setPopupInfo] = useState(null);
   const [boundingBox, setBoundingBox] = useState(null);
   const [mapKey, setMapKey] = useState(null); // Add state for the map 'key'
-  const [storedMapboxKey, setStoredMapboxKey] = useState(
-    getLocalStorageData('mapbox_key')
-  );
+  const { userProfile } = useAuth();
+  const storedMapboxKey = userProfile?.mapbox_key;
 
   // Deduplicate venues to show only the most recent check-in marker for each venue
   const uniqueVenueCheckins = useMemo(() => {
@@ -36,10 +35,6 @@ const VenueMap = ({ beerData }) => {
     return new Set(beerData.filter((i) => i.venue_name).map((i) => i.venue_name)).size;
   }, [beerData]);
 
-  useEffect(() => {
-    // Check for userDetails in local storage
-    setStoredMapboxKey(getLocalStorageData('mapbox_key'));
-  }, []); // Run only on component mount
 
   useEffect(() => {
     const getBoundingBox = (beerData) => {

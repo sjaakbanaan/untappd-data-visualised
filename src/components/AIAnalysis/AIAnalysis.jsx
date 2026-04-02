@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { analyzeBeerDataWithAI, formatWrappdDates } from '../../utils/';
 
-const AIAnalysis = ({ beerData, analysis, setAnalysis, filterDateRange }) => {
+const AIAnalysis = ({ beerData, analysis, setAnalysis, filterDateRange, geminiApiKey }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const prevBeerDataRef = useRef();
@@ -34,7 +34,7 @@ const AIAnalysis = ({ beerData, analysis, setAnalysis, filterDateRange }) => {
     setError('');
 
     try {
-      const result = await analyzeBeerDataWithAI(beerData);
+      const result = await analyzeBeerDataWithAI(beerData, geminiApiKey);
       setAnalysis(result);
     } catch (err) {
       setError('Failed to analyze data. Please check your API key and try again.');
