@@ -68,16 +68,17 @@ const Dashboard = () => {
           setFilterOverview={setFilterOverview}
           totalBeerCount={filteredData.length}
           setFilterDateRange={setFilterDateRange}
+          onFilterClick={() => setIsSidebarOpen(true)}
         />
-        <div className="mb-8 flex items-center justify-center">
-          <button
-            onClick={() => setIsSidebarOpen(true)}
-            className="flex items-center gap-2 rounded-lg bg-yellow-500 px-6 py-3 text-black transition-colors hover:bg-yellow-400"
-          >
-            <Icon icon="FILTER" className="w-4" />
-            Refine Filters
-          </button>
-        </div>
+        {/* Floating Action Button for Filters */}
+        <button
+          onClick={() => setIsSidebarOpen(true)}
+          className="fixed bottom-6 right-6 z-40 flex items-center justify-center gap-2 rounded-full bg-yellow-500 p-4 font-bold text-black shadow-2xl transition-all hover:scale-105 hover:bg-yellow-400 md:px-6 md:py-3 lg:bottom-10 lg:right-10"
+          aria-label="Refine filters"
+        >
+          <Icon icon="FILTER" className="w-5" />
+          <span className="hidden md:inline">Refine filters</span>
+        </button>
       </div>
 
       <FilterSidebar

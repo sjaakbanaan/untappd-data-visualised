@@ -25,7 +25,7 @@ const FilterSidebar = ({
 
       {/* Sidebar Panel */}
       <div
-        className={`fixed inset-y-0 right-0 z-50 w-full max-w-md transform bg-[#121212] p-6 shadow-2xl transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-y-0 right-0 z-50 w-full max-w-md transform bg-gray-900 p-6 shadow-2xl transition-transform duration-300 ease-in-out ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         } overflow-y-auto border-l border-gray-800`}
       >
@@ -61,18 +61,27 @@ const FilterSidebar = ({
             <DateSelector
               beerData={beerData}
               filterDateRange={filterDateRange}
-              setFilterDateRange={setFilterDateRange}
+              setFilterDateRange={(val) => {
+                setFilterDateRange(val);
+                onClose();
+              }}
             />
           </div>
           <YearFilterButtons
             beerData={beerData}
             filterDateRange={filterDateRange}
-            setFilterDateRange={setFilterDateRange}
+            setFilterDateRange={(val) => {
+              setFilterDateRange(val);
+              onClose();
+            }}
           />
           <OverviewFilters
             beerData={filteredData}
             filterOverview={filterOverview}
-            setFilterOverview={setFilterOverview}
+            setFilterOverview={(val) => {
+              setFilterOverview(val);
+              onClose();
+            }}
           />
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { getDefaultStartDate, getDefaultEndDate } from '../../utils/';
 import { useContext } from 'react';
 import { DataContext } from '../../DataContext';
+import Icon from '../UI/Icon/Icon';
 
 const ResetFilters = ({ setFilterOverview, setFilterDateRange }) => {
   const { resetList } = useContext(DataContext);
@@ -15,14 +16,14 @@ const ResetFilters = ({ setFilterOverview, setFilterDateRange }) => {
   };
 
   return (
-    <div className="mb-12 md:mb-0 md:ml-4">
-      <button
-        className="rounded border-yellow-500 bg-yellow-500 px-3 py-2 text-black shadow transition-colors duration-300 hover:bg-yellow-400"
-        onClick={handleResetFilters}
-      >
-        Reset to last 6 months
-      </button>
-    </div>
+    <a
+      href="#"
+      onClick={handleResetFilters}
+      className="text-yellow-500 flex underline hover:text-yellow-400 ml-4 hover:no-underline text-sm"
+    >
+      <Icon icon="CLOSE" className="mr-1 w-3 fill-yellow-500" />
+      Reset filters
+    </a>
   );
 };
 
