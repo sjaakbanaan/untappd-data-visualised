@@ -3,7 +3,7 @@ import OverviewFilter from './OverviewFilter';
 import { DataContext } from '../../DataContext';
 import { transformResetList } from '../../utils/';
 
-const MOBILE_VISIBLE_FILTER_COUNT = 2;
+const MOBILE_VISIBLE_FILTER_COUNT = 4;
 
 const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
   const [showAllFilters, setShowAllFilters] = useState(false);
@@ -47,7 +47,9 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
         {filterEntries.map(([key, options], i) => (
           <div
             key={key}
-            className={!showAllFilters && i >= MOBILE_VISIBLE_FILTER_COUNT ? 'hidden' : 'block'}
+            className={
+              !showAllFilters && i >= MOBILE_VISIBLE_FILTER_COUNT ? 'hidden' : 'block'
+            }
           >
             <OverviewFilter
               filterKey={key}

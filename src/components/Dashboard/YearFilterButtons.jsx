@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { getDefaultStartDate, getDefaultEndDate, checkFullDateRange } from '../../utils/';
 
-const MOBILE_VISIBLE_YEAR_COUNT = 2;
+const MOBILE_VISIBLE_YEAR_COUNT = 8;
 
 const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) => {
   const [showAllYears, setShowAllYears] = useState(false);
@@ -60,7 +60,7 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
         {uniqueYears.map((year, i) => (
           <div
             className={`inline-block ${
-              !showAllYears && i >= MOBILE_VISIBLE_YEAR_COUNT ? 'hidden' : ''
+              !showAllYears && i >= MOBILE_VISIBLE_YEAR_COUNT ? 'hidden md:inline-block' : ''
             }`}
             key={i}
           >
@@ -94,7 +94,7 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
       {/* Show more / fewer toggle */}
       {uniqueYears.length > MOBILE_VISIBLE_YEAR_COUNT && (
         <button
-          className="mt-4 block text-sm text-yellow-400 underline underline-offset-2 hover:text-yellow-300"
+          className="mt-4 block text-sm text-yellow-400 underline underline-offset-2 hover:text-yellow-300 md:hidden"
           onClick={() => setShowAllYears((prev) => !prev)}
         >
           {showAllYears
