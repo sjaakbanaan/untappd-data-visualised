@@ -43,11 +43,11 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
 
   return (
     <div>
-      <div className="my-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+      <div className="my-4 flex flex-col gap-4">
         {filterEntries.map(([key, options], i) => (
           <div
             key={key}
-            className={!showAllFilters && i >= MOBILE_VISIBLE_FILTER_COUNT ? 'hidden md:block' : 'block'}
+            className={!showAllFilters && i >= MOBILE_VISIBLE_FILTER_COUNT ? 'hidden' : 'block'}
           >
             <OverviewFilter
               filterKey={key}
@@ -65,7 +65,7 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
       {/* Show more / fewer — only on mobile when extra filters exist */}
       {filterEntries.length > MOBILE_VISIBLE_FILTER_COUNT && (
         <button
-          className="mb-4 block text-sm text-yellow-400 underline underline-offset-2 hover:text-yellow-300 md:hidden"
+          className="mb-4 block text-sm text-yellow-400 underline underline-offset-2 hover:text-yellow-300"
           onClick={() => setShowAllFilters((prev) => !prev)}
         >
           {showAllFilters

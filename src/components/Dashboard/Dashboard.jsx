@@ -5,14 +5,13 @@ import { useDashboardData } from '../../utils/';
 import { useAuth } from '../../context/AuthContext';
 
 import DashboardHeader from './DashboardHeader';
-import YearFilterButtons from './YearFilterButtons';
-import DateSelector from './DateSelector';
-import OverviewFilters from '../Overview/OverviewFilters';
+import FilterSidebar from './FilterSidebar';
 import NotificationBar from '../UI/NotificationBar';
 import DashboardNav from './DashboardNav';
 import WrappdShareBox from '../Wrappd/WrappdShareBox';
 import AIAnalysis from '../AIAnalysis/AIAnalysis';
 import ScraperXLDisclaimer from '../ScraperXLDisclaimer';
+import Icon from '../UI/Icon/Icon';
 
 // Lazy-load heavy components
 const BasicStats = lazy(() => import('../BasicStats/BasicStats'));
@@ -55,27 +54,14 @@ const Dashboard = () => {
   // Add state for AI analysis to persist across tab switches
   const [aiAnalysis, setAiAnalysis] = useState('');
 
+  // Sidebar toggle state
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   return (
     // All filtering instruments and total result display are up next:
     <div className="container mx-auto p-4 md:p-0">
       <ScraperXLDisclaimer />
       <div>
-        <div className="mb-2 block text-sm font-bold text-white">Set a date range</div>
-        <DateSelector
-          beerData={beerData}
-          filterDateRange={filterDateRange}
-          setFilterDateRange={setFilterDateRange}
-        />
-        <YearFilterButtons
-          beerData={beerData}
-          filterDateRange={filterDateRange}
-          setFilterDateRange={setFilterDateRange}
-        />
-        <OverviewFilters
-          beerData={filteredData}
-          filterOverview={filterOverview}
-          setFilterOverview={setFilterOverview}
-        />
         <DashboardHeader
           filterDateRange={filterDateRange}
           filterOverview={filterOverview}
@@ -83,7 +69,28 @@ const Dashboard = () => {
           totalBeerCount={filteredData.length}
           setFilterDateRange={setFilterDateRange}
         />
+        <div className="mb-8 flex items-center justify-center">
+          <button
+            onClick={() => setIsSidebarOpen(true)}
+            className="flex items-center gap-2 rounded-lg bg-yellow-500 px-6 py-3 text-black transition-colors hover:bg-yellow-400"
+          >
+            <Icon icon="FILTER" className="w-4" />
+            Refine Filters
+          </button>
+        </div>
       </div>
+
+      <FilterSidebar
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
+        beerData={beerData}
+        filteredData={filteredData}
+        filterDateRange={filterDateRange}
+        setFilterDateRange={setFilterDateRange}
+        filterOverview={filterOverview}
+        setFilterOverview={setFilterOverview}
+      />
+
       {filteredData && filteredData.length > 0 ? (
         <div>
           {/* section Buttons */}
@@ -139,9 +146,7 @@ const Dashboard = () => {
                   />
                 </div>
               )}
-              {activeSection === 'badges' && (
-                <Badges />
-              )}
+              {activeSection === 'badges' && <Badges />}
             </Suspense>
           </div>
           <WrappdShareBox

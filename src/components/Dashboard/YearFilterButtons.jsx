@@ -17,12 +17,12 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
   );
 
   return (
-    <div className="mb-8 md:mb-8">
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-flow-row xl:grid-cols-8">
-        <div className="block">
+    <div className="mb-8">
+      <div className="flex flex-wrap gap-2">
+        <div className="inline-block">
           <button
             key="set-last-6-months"
-            className={`mb-0 w-full rounded border px-3 py-2 shadow transition-colors duration-300 ${
+            className={`mb-0 whitespace-nowrap rounded border px-3 py-2 text-sm shadow transition-colors duration-300 ${
               filterDateRange?.start === getDefaultStartDate() &&
               filterDateRange?.end == getDefaultEndDate()
                 ? 'border-yellow-500 bg-yellow-500 text-gray-900'
@@ -38,10 +38,10 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
             last 6 months
           </button>
         </div>
-        <div className="block">
+        <div className="inline-block">
           <button
             key="set-all-time"
-            className={`mb-0 w-full rounded border px-3 py-2 shadow transition-colors duration-300 ${
+            className={`mb-0 whitespace-nowrap rounded border px-3 py-2 text-sm shadow transition-colors duration-300 ${
               fullDateRange[0]
                 ? 'border-yellow-500 bg-yellow-500 text-gray-900'
                 : 'bg-gray-900 text-white hover:bg-gray-700'
@@ -59,13 +59,13 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
 
         {uniqueYears.map((year, i) => (
           <div
-            className={`block ${
-              !showAllYears && i >= MOBILE_VISIBLE_YEAR_COUNT ? 'hidden md:block' : 'block'
+            className={`inline-block ${
+              !showAllYears && i >= MOBILE_VISIBLE_YEAR_COUNT ? 'hidden' : ''
             }`}
             key={i}
           >
             <button
-              className={`mb-0 w-full rounded border px-3 py-2 shadow transition-colors duration-300 ${
+              className={`mb-0 whitespace-nowrap rounded border px-3 py-2 text-sm shadow transition-colors duration-300 ${
                 // set active state, with an exception for the current year, because then the end value fot filterDateRange is not `${year}-12-31` but getDefaultEndDate():
                 (filterDateRange?.start === `${year}-01-01` &&
                   filterDateRange?.end === `${year}-12-31`) ||
@@ -91,10 +91,10 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
         ))}
       </div>
 
-      {/* Show more / fewer toggle — only visible on mobile when there are extra years */}
+      {/* Show more / fewer toggle */}
       {uniqueYears.length > MOBILE_VISIBLE_YEAR_COUNT && (
         <button
-          className="mt-3 block text-sm text-yellow-400 underline underline-offset-2 hover:text-yellow-300 md:hidden"
+          className="mt-4 block text-sm text-yellow-400 underline underline-offset-2 hover:text-yellow-300"
           onClick={() => setShowAllYears((prev) => !prev)}
         >
           {showAllYears
