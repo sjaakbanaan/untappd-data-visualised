@@ -2,7 +2,7 @@ import { createContext, useState, useEffect, useMemo } from 'react';
 import { ref, getBytes } from 'firebase/storage';
 import { useAuth } from './context/AuthContext';
 import { storage } from './firebase';
-import { useUploadedJsonUpdater } from './utils';
+import { useUploadedJsonUpdater, getCache, setCache, clearOldCache } from './utils';
 import { extractBadges } from './utils/extractBadges';
 import { detectFormat } from './utils/normaliseCheckins';
 
@@ -44,9 +44,13 @@ const DataProvider = ({ children }) => {
       try {
         let rawJson;
         
-        // 1. Check local cache first
+        // 1. Check local cache (IndexedDB)
         const cacheKey = `untappd_cache_${user.uid}`;
-        const cachedData = localStorage.getItem(cacheKey);
+        
+        // Cleanup old localStorage keys if they exist
+        clearOldCache('untappd_cache_');
+        
+        const cachedData = await getCache(cacheKey);
         
         if (cachedData) {
           try {
@@ -54,7 +58,6 @@ const DataProvider = ({ children }) => {
           } catch (e) {
             // eslint-disable-next-line no-console
             console.error('Error parsing cached data:', e);
-            localStorage.removeItem(cacheKey); // Clear corrupt cache
           }
         }
 
@@ -66,12 +69,12 @@ const DataProvider = ({ children }) => {
           const text = decoder.decode(bytes);
           rawJson = JSON.parse(text);
           
-          // 3. Save to cache
+          // 3. Save to cache (IndexedDB)
           try {
-            localStorage.setItem(cacheKey, text);
+            await setCache(cacheKey, text);
           } catch (e) {
             // eslint-disable-next-line no-console
-            console.warn('Failed to save to localStorage (likely size limit):', e);
+            console.warn('Failed to save to IndexedDB:', e);
           }
         }
 

@@ -6,7 +6,7 @@ import { ref, uploadBytes } from 'firebase/storage';
 
 import { useAuth } from '../../context/AuthContext';
 import { storage } from '../../firebase';
-import { useUploadedJsonUpdater, formatDate } from '../../utils/';
+import { useUploadedJsonUpdater, formatDate, setCache, clearOldCache } from '../../utils/';
 import { extractBadges } from '../../utils/extractBadges';
 import { detectFormat } from '../../utils/normaliseCheckins';
 import { DataContext } from '../../DataContext';
@@ -72,10 +72,13 @@ const Uploader = () => {
           // 4. Update last import timestamp
           await updateProfile({ last_import: new Date().toISOString() });
 
-          // 5. Update local cache
+          // 5. Update local cache (IndexedDB)
           try {
-            localStorage.setItem(`untappd_cache_${user.uid}`, reader.result);
+            // Cleanup old localStorage keys if they exist
+            clearOldCache('untappd_cache_');
+            await setCache(`untappd_cache_${user.uid}`, reader.result);
           } catch (e) {
+            // eslint-disable-next-line no-console
             console.warn('Failed to update local cache:', e);
           }
 
