@@ -1,5 +1,5 @@
-import Icon from '../UI/Icon/Icon';
 import { formatDate } from '../../utils/';
+import FilterTag from './FilterTag';
 
 const DashboardHeader = ({
   filterDateRange,
@@ -10,7 +10,7 @@ const DashboardHeader = ({
   onFilterClick,
 }) => {
   const activeFilters = Object.entries(filterOverview).filter(
-    ([key, value]) => value !== ''
+    ([, value]) => value !== ''
   );
 
   const handleClearFilter = (key, e) => {
@@ -23,27 +23,9 @@ const DashboardHeader = ({
     setFilterDateRange((prev) => ({ ...prev, [type]: '' }));
   };
 
-  const FilterTag = ({ label, value, onClear, onClick, isPlaceholder }) => (
-    <span
-      onClick={onClick}
-      className="flex items-center gap-1 cursor-pointer whitespace-nowrap rounded border border-yellow-500/20 bg-yellow-500/10 px-2 py-1 text-sm font-normal text-yellow-500 transition-colors hover:bg-yellow-500/20"
-    >
-      {label && <span className="text-gray-400">{label}:</span>}
-      {isPlaceholder ? '[...]' : value}
-      {onClear && !isPlaceholder && (
-        <span
-          onClick={onClear}
-          className="ml-1 flex items-center justify-center rounded-full p-0.5 transition-transform duration-300 hover:rotate-90"
-        >
-          <Icon icon="CLOSE" className="w-2 fill-yellow-500" />
-        </span>
-      )}
-    </span>
-  );
-
   return (
-    <div className="md:flex border-yellow-500 border md:items-center md:justify-center mb-6 md:mb-10 py-6 rounded-lg px-4">
-      <h2 className="flex flex-wrap items-center justify-center gap-2 text-center text-2xl md:text-3xl font-bold md:my-3">
+    <div className="mb-6 px-4 py-6 md:mb-10 md:flex md:items-center md:justify-center">
+      <h2 className="flex flex-wrap items-center justify-center gap-2 text-center text-2xl font-bold md:my-3 md:text-3xl">
         <span className="-mt-2.5">
           {totalBeerCount.toLocaleString()} check-in
           {totalBeerCount !== 1 ? 's' : ''}

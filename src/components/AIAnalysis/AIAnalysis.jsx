@@ -2,7 +2,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { analyzeBeerDataWithAI, formatWrappdDates } from '../../utils/';
 
-const AIAnalysis = ({ beerData, analysis, setAnalysis, filterDateRange, geminiApiKey }) => {
+const AIAnalysis = ({
+  beerData,
+  analysis,
+  setAnalysis,
+  filterDateRange,
+  geminiApiKey,
+}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const prevBeerDataRef = useRef();
@@ -46,10 +52,10 @@ const AIAnalysis = ({ beerData, analysis, setAnalysis, filterDateRange, geminiAp
 
   return (
     <div className="container mx-auto">
-      <div className="mb-6 mx-auto xl:w-1/2">
+      <div className="mx-auto mb-6 xl:w-1/2">
         <h2 className="mb-4 text-2xl font-bold text-white">
           AI beer analysis
-          <span className="text-gray-500 text-sm ml-2">BETA</span>
+          <span className="ml-2 text-sm text-gray-500">BETA</span>
         </h2>
 
         <div className="block overflow-hidden border border-white p-6 shadow-lg md:rounded-lg">

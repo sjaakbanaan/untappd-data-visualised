@@ -60,7 +60,9 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
         {uniqueYears.map((year, i) => (
           <div
             className={`inline-block ${
-              !showAllYears && i >= MOBILE_VISIBLE_YEAR_COUNT ? 'hidden md:inline-block' : ''
+              !showAllYears && i >= MOBILE_VISIBLE_YEAR_COUNT
+                ? 'hidden md:inline-block'
+                : ''
             }`}
             key={i}
           >
@@ -98,7 +100,7 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
           onClick={() => setShowAllYears((prev) => !prev)}
         >
           {showAllYears
-            ? `Show fewer years ↑`
+            ? 'Show fewer years ↑'
             : `Show ${uniqueYears.length - MOBILE_VISIBLE_YEAR_COUNT} more year${
                 uniqueYears.length - MOBILE_VISIBLE_YEAR_COUNT !== 1 ? 's' : ''
               } ↓`}

@@ -1,4 +1,3 @@
-import React from 'react';
 import DateSelector from './DateSelector';
 import YearFilterButtons from './YearFilterButtons';
 import OverviewFilters from '../Overview/OverviewFilters';
@@ -25,7 +24,7 @@ const FilterSidebar = ({
 
       {/* Sidebar Panel */}
       <div
-        className={`fixed inset-y-0 right-0 z-50 w-full max-w-md transform bg-gray-900 p-6 shadow-2xl transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-y-0 right-0 z-50 w-full max-w-md bg-gray-900 p-6 shadow-2xl transition-transform duration-300 ease-in-out ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         } overflow-y-auto border-l border-gray-800`}
       >
@@ -38,7 +37,7 @@ const FilterSidebar = ({
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
+              className="size-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
