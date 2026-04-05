@@ -21,8 +21,8 @@ const ResetFilters = ({ setFilterOverview, setFilterDateRange }) => {
       onClick={handleResetFilters}
       className="text-yellow-500 flex underline hover:text-yellow-400 ml-4 hover:no-underline text-sm"
     >
-      <Icon icon="CLOSE" className="mr-1 w-3 fill-yellow-500" />
-      Reset filters
+      <Icon icon="CLOSE" className="mr-1 w-2 fill-yellow-500" />
+      reset filters
     </a>
   );
 };

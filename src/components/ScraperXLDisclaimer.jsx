@@ -11,12 +11,12 @@ const ScraperXLDisclaimer = () => {
     // 2. The user hasn't dismissed it this session
     const userDetails = JSON.parse(localStorage.getItem('userDetails') ?? '{}');
     const isScraperXL = userDetails?.json_source === 'custom_export';
-    const isDismissed = sessionStorage.getItem(DISMISSED_KEY) === 'true';
+    const isDismissed = localStorage.getItem(DISMISSED_KEY) === 'true';
     setVisible(isScraperXL && !isDismissed);
   }, []);
 
   const handleDismiss = () => {
-    sessionStorage.setItem(DISMISSED_KEY, 'true');
+    localStorage.setItem(DISMISSED_KEY, 'true');
     setVisible(false);
   };
 
