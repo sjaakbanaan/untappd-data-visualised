@@ -22,20 +22,20 @@ const Header = () => {
     <div className="bg-gray-900 p-4 md:p-4 xl:p-6">
       <div className="container relative mx-auto">
         <div className="md:mb-6">
-          <div className="flex justify-between">
-            <div className="flex flex-row items-center gap-3">
+          <div className="flex justify-between gap-2 md:gap-10">
+            <div className="flex w-full flex-row items-center gap-3 overflow-hidden">
               {!isHomeNotLoggedIn && (
                 <h1 className="mb-2 text-center text-3xl font-bold text-yellow-500 md:text-4xl">
                   {isClickable ? <Link to="/">{headerTitle}</Link> : headerTitle}
                 </h1>
               )}
               {userName && (
-                <h2 className="text-center text-2xl font-bold text-gray-400">
+                <h2 className="text-center text-xl font-bold text-gray-400 lg:text-2xl">
                   for {userName}
                 </h2>
               )}
             </div>
-            <div className="mb-6 flex items-center md:mb-0">
+            <div className="flex items-center md:mb-0">
               {/* Desktop navigation */}
               <div className="hidden md:block">
                 <Navigation />

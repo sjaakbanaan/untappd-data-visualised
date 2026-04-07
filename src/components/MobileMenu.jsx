@@ -4,17 +4,14 @@ import { useAuth } from '../context/AuthContext';
 import { DataContext } from '../DataContext';
 import Icon from './UI/Icon/Icon';
 
-const ADMIN_EMAIL = 'davidtuk@gmail.com';
-
 const MobileMenu = ({ isOpen, onClose }) => {
   const { beerData } = useContext(DataContext);
-  const { user, userProfile, logout } = useAuth();
+  const { userProfile, logout } = useAuth();
   const location = useLocation();
   const { pathname } = location;
 
   const isProfileComplete = !!(userProfile?.untappd_username && userProfile?.venue_city);
   const hasData = beerData && beerData.length > 0;
-  const isAdmin = user?.email === ADMIN_EMAIL;
 
   const handleNavClick = () => {
     onClose();
@@ -79,17 +76,27 @@ const MobileMenu = ({ isOpen, onClose }) => {
             </Link>
           )}
           {userProfile && isProfileComplete && (
-            <Link to="/upload" className={linkClasses('/upload')} onClick={handleNavClick}>
+            <Link
+              to="/upload"
+              className={linkClasses('/upload')}
+              onClick={handleNavClick}
+            >
               Import
             </Link>
           )}
-          {isAdmin && (
-            <Link to="/leaderboard" className={linkClasses('/leaderboard')} onClick={handleNavClick}>
-              Leaderboard
-            </Link>
-          )}
+          <Link
+            to="/leaderboard"
+            className={linkClasses('/leaderboard')}
+            onClick={handleNavClick}
+          >
+            Leaderboard
+          </Link>
           {userProfile && (
-            <Link to="/settings" className={linkClasses('/settings')} onClick={handleNavClick}>
+            <Link
+              to="/settings"
+              className={linkClasses('/settings')}
+              onClick={handleNavClick}
+            >
               Settings
             </Link>
           )}
