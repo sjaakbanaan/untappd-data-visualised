@@ -8,7 +8,6 @@ import DashboardHeader from './DashboardHeader';
 import FilterSidebar from './FilterSidebar';
 import NotificationBar from '../UI/NotificationBar';
 import DashboardNav from './DashboardNav';
-import WrappdShareBox from '../Wrappd/WrappdShareBox';
 import AIAnalysis from '../AIAnalysis/AIAnalysis';
 import ScraperXLDisclaimer from '../ScraperXLDisclaimer';
 import Icon from '../UI/Icon/Icon';
@@ -150,11 +149,6 @@ const Dashboard = () => {
               {activeSection === 'badges' && <Badges />}
             </Suspense>
           </div>
-          <WrappdShareBox
-            filteredData={filteredData}
-            filterDateRange={filterDateRange}
-            filterOverview={filterOverview}
-          />
         </div>
       ) : (
         // in case of no results:

@@ -42,6 +42,16 @@ const Navigation = () => {
             </Link>
           </li>
         )}
+        {userProfile && isProfileComplete && (
+          <li>
+            <Link
+              to="/my-wrappd"
+              className={`transition-colors hover:text-yellow-500 ${pathname === '/my-wrappd' ? 'text-yellow-500' : 'text-white'}`}
+            >
+              Wrappd
+            </Link>
+          </li>
+        )}
         <li>
           <Link
             to="/leaderboard"

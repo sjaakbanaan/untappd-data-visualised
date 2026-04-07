@@ -84,6 +84,15 @@ const MobileMenu = ({ isOpen, onClose }) => {
               Import
             </Link>
           )}
+          {userProfile && isProfileComplete && (
+            <Link
+              to="/my-wrappd"
+              className={linkClasses('/my-wrappd')}
+              onClick={handleNavClick}
+            >
+              Wrappd
+            </Link>
+          )}
           <Link
             to="/leaderboard"
             className={linkClasses('/leaderboard')}
