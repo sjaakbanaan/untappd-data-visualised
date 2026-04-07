@@ -1,4 +1,4 @@
-# Untappd Data Visualised v2.9.1
+# Tappd (Untappd Data Visualised) v2.9.1
 
 ## This is the repository for [tappd.online](https:///tappd.online)
 
@@ -8,7 +8,7 @@
 
 ## Overview
 
-Untappd Data Visualised is designed to visualize Untappd data in various formats, such as charts, lists, and maps. It leverages React, Chart.js, MapBox, and some others to provide an interactive and insightful representation of your Untappd check-in history. Using LLM's made creating this a lot easier and faster.
+Tappd is designed to visualize Untappd data in various formats, such as charts, lists, and maps. It leverages React, Chart.js, MapBox, and some others to provide an interactive and insightful representation of your Untappd check-in history. Using LLM's made creating this a lot easier and faster.
 
 ## Prerequisites
 

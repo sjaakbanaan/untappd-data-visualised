@@ -17,6 +17,15 @@ service cloud.firestore {
       // Prevent updates and deletes
       allow update, delete: if false;
     }
+
+    // Rules for leaderboard
+    match /leaderboard/{uid} {
+      // Any authenticated user can read the leaderboard
+      allow read: if request.auth != null;
+
+      // Authenticated users can only write their own leaderboard entry
+      allow write: if request.auth != null && request.auth.uid == uid;
+    }
     
     // Default deny all other access
     match /{document=**} {

@@ -4,11 +4,15 @@ import ICONS from './icons';
 const Icon = ({ icon, pathFill = '', ...props }) => {
   const iconData = ICONS[icon];
   if (!iconData) return null;
-  const { path, viewBox } = iconData;
+  const { path, viewBox, stroke: isStroke } = iconData;
 
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox={viewBox} {...props}>
-      <path fill={pathFill} d={path} />
+      {isStroke ? (
+        <path d={path} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+      ) : (
+        <path fill={pathFill} d={path} />
+      )}
     </svg>
   );
 };

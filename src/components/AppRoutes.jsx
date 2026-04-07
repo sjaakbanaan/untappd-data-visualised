@@ -8,6 +8,7 @@ import Wrappd from './Wrappd/Wrappd';
 import AuthPage from './Auth/AuthPage';
 import LandingPage from './Home/LandingPage';
 import SettingsPage from './Settings/SettingsPage';
+import LeaderboardPage from './Leaderboard/LeaderboardPage';
 
 const AppRoutes = () => {
   const { beerData, dataLoading } = useContext(DataContext);
@@ -58,6 +59,7 @@ const AppRoutes = () => {
         } 
       />
       <Route path="/settings" element={user ? <SettingsPage /> : <Navigate to="/login" replace />} />
+      <Route path="/leaderboard" element={user ? <LeaderboardPage /> : <Navigate to="/login" replace />} />
       <Route path="/wrappd/:id" element={<Wrappd />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

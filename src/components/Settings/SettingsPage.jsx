@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { ref, deleteObject } from 'firebase/storage';
+import { doc, setDoc } from 'firebase/firestore';
 import { useAuth } from '../../context/AuthContext';
-import { storage } from '../../firebase';
+import { storage, db } from '../../firebase';
 import NotificationBar from '../UI/NotificationBar';
 
 const SettingsPage = () => {
@@ -16,6 +17,7 @@ const SettingsPage = () => {
     venue_country: '',
     venue_lat: '',
     venue_lng: '',
+    hide_from_leaderboard: false,
   });
   const [status, setStatus] = useState('');
   const isProfileComplete = !!(userProfile?.untappd_username && userProfile?.venue_city);
@@ -30,8 +32,8 @@ const SettingsPage = () => {
   }, [userProfile]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    const { name, value, type, checked } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
   };
 
   const handleSubmit = async (e) => {
@@ -39,6 +41,16 @@ const SettingsPage = () => {
     setStatus('Saving...');
     try {
       await updateProfile(formData);
+
+      // Sync leaderboard visibility immediately
+      if (user?.uid) {
+        await setDoc(
+          doc(db, 'leaderboard', user.uid),
+          { hideFromLeaderboard: !!formData.hide_from_leaderboard },
+          { merge: true }
+        );
+      }
+
       setStatus('Settings saved successfully!');
       setTimeout(() => setStatus(''), 3000);
     } catch (error) {
@@ -151,6 +163,23 @@ const SettingsPage = () => {
             </div>
           ))}
         </div>
+
+        <label
+          htmlFor="hide_from_leaderboard"
+          className="mt-6 flex cursor-pointer items-center gap-3 rounded-lg border border-gray-700 bg-gray-900/40 px-4 py-3 transition-colors hover:border-gray-500"
+        >
+          <input
+            type="checkbox"
+            id="hide_from_leaderboard"
+            name="hide_from_leaderboard"
+            checked={!!formData.hide_from_leaderboard}
+            onChange={handleChange}
+            className="size-4 accent-yellow-500"
+          />
+          <span className="text-sm text-gray-300">
+            Don&apos;t show my profile in the Leaderboard
+          </span>
+        </label>
 
         <div className="flex items-center justify-between pt-6">
           <button

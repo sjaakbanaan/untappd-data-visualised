@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useMemo } from 'react';
+import { createContext, useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import { ref, getBytes } from 'firebase/storage';
 import { useAuth } from './context/AuthContext';
 import { storage } from './firebase';
@@ -27,6 +27,13 @@ const DataProvider = ({ children }) => {
   const [beerData, setBeerData] = useState([]);
   const [badgeData, setBadgeData] = useState(null);
   const [dataLoading, setDataLoading] = useState(true);
+  const skipNextFetchRef = useRef(false);
+
+  // Call this from the Uploader to prevent the DataContext effect from
+  // re-fetching and overwriting the data that was just set directly.
+  const skipNextFetch = useCallback(() => {
+    skipNextFetchRef.current = true;
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,6 +41,12 @@ const DataProvider = ({ children }) => {
         setBeerData([]);
         setBadgeData(null);
         setDataLoading(false);
+        return;
+      }
+
+      // If the Uploader just set the data directly, skip this refetch cycle
+      if (skipNextFetchRef.current) {
+        skipNextFetchRef.current = false;
         return;
       }
 
@@ -118,8 +131,9 @@ const DataProvider = ({ children }) => {
     badgeData, 
     setBadgeData, 
     resetList, 
-    dataLoading 
-  }), [beerData, badgeData, dataLoading]);
+    dataLoading,
+    skipNextFetch,
+  }), [beerData, badgeData, dataLoading, skipNextFetch]);
 
   return (
     <DataContext.Provider value={value}>

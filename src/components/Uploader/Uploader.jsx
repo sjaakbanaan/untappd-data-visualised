@@ -9,12 +9,13 @@ import { storage } from '../../firebase';
 import { useUploadedJsonUpdater, formatDate, setCache, clearOldCache } from '../../utils/';
 import { extractBadges } from '../../utils/extractBadges';
 import { detectFormat } from '../../utils/normaliseCheckins';
+import { updateLeaderboard } from '../../utils/updateLeaderboard';
 import { DataContext } from '../../DataContext';
 import NotificationBar from '../UI/NotificationBar';
 
 const Uploader = () => {
   const { user, userProfile, updateProfile } = useAuth();
-  const { setBeerData, setBadgeData } = useContext(DataContext);
+  const { setBeerData, setBadgeData, skipNextFetch } = useContext(DataContext);
   const { manipulateData } = useUploadedJsonUpdater();
   const navigate = useNavigate();
   const [uploading, setUploading] = useState(false);
@@ -69,10 +70,18 @@ const Uploader = () => {
           const storageRef = ref(storage, `users/${user.uid}/untappd_data.json`);
           await uploadBytes(storageRef, file);
 
-          // 4. Update last import timestamp
+          // 4. Update leaderboard stats
+          await updateLeaderboard(user, userProfile?.untappd_username, updatedData);
+
+          // 5. Tell DataContext to skip the next refetch cycle – we already
+          //    set beerData directly, so when updateProfile triggers the
+          //    useEffect (via userProfile dependency), it shouldn't overwrite it.
+          skipNextFetch();
+
+          // 6. Update last import timestamp
           await updateProfile({ last_import: new Date().toISOString() });
 
-          // 5. Update local cache (IndexedDB)
+          // 7. Update local cache (IndexedDB)
           try {
             // Cleanup old localStorage keys if they exist
             clearOldCache('untappd_cache_');
@@ -84,6 +93,7 @@ const Uploader = () => {
 
           navigate('/');
         } catch (error) {
+          // eslint-disable-next-line no-console
           console.error('Error processing or uploading file:', error);
           alert('Failed to process JSON. Please ensure it is a valid Untappd export.');
         } finally {

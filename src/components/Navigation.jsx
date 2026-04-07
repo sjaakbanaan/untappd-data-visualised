@@ -3,14 +3,17 @@ import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { DataContext } from '../DataContext';
 
+const ADMIN_EMAIL = 'davidtuk@gmail.com';
+
 const Navigation = () => {
   const { beerData } = useContext(DataContext);
-  const { userProfile, logout } = useAuth();
+  const { user, userProfile, logout } = useAuth();
   const location = useLocation();
   const { pathname } = location;
 
   const isProfileComplete = !!(userProfile?.untappd_username && userProfile?.venue_city);
   const hasData = beerData && beerData.length > 0;
+  const isAdmin = user?.email === ADMIN_EMAIL;
 
   return (
     <nav className="mr-3">
@@ -45,6 +48,16 @@ const Navigation = () => {
             </Link>
           </li>
         )}
+        {isAdmin && (
+          <li>
+            <Link
+              to="/leaderboard"
+              className={`transition-colors hover:text-yellow-500 ${pathname === '/leaderboard' ? 'text-yellow-500' : 'text-white'}`}
+            >
+              Leaderboard
+            </Link>
+          </li>
+        )}
         {userProfile && (
           <li>
             <Link 
@@ -71,3 +84,4 @@ const Navigation = () => {
 };
 
 export default Navigation;
+

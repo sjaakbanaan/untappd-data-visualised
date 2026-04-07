@@ -5,9 +5,12 @@ const LandingPage = () => {
   return (
     <div className="flex min-h-[70vh] flex-col items-center justify-center py-10 text-center">
       <div className="max-w-4xl px-4">
-        <h1 className="mb-6 text-5xl font-extrabold text-yellow-500 md:text-7xl">
-          Untappd Data Visualised
+        <h1 className="mb-4 text-5xl font-extrabold text-yellow-500 md:text-7xl">
+          Tappd
         </h1>
+        <h2 className="mb-8 text-xl font-extrabold text-gray-400 md:text-2xl">
+          Untappd Data Visualised
+        </h2>
         <p className="mb-8 text-xl text-gray-300 md:text-2xl">
           Track your beer journey with style. Beautiful charts, maps, and stats from your
           Untappd check-ins, now saved and accessible anywhere.
