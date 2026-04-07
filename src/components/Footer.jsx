@@ -8,7 +8,7 @@ const Footer = () => {
         <span>v{version}, powered by your drinking habits</span>
         <Icon
           icon="BEER"
-          className="w-4 -mt-1 fill-yellow-500 transition-transform duration-300 hover:scale-125"
+          className="-mt-1 w-4 fill-yellow-500 transition-transform duration-300 hover:scale-125"
         />
       </div>
     </div>

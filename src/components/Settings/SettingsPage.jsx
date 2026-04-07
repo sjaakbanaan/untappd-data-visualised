@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ref, deleteObject } from 'firebase/storage';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc, deleteDoc } from 'firebase/firestore';
 import { useAuth } from '../../context/AuthContext';
 import { storage, db } from '../../firebase';
 import NotificationBar from '../UI/NotificationBar';
@@ -82,6 +82,14 @@ const SettingsPage = () => {
       // Clear cache too
       const cacheKey = `untappd_cache_${user.uid}`;
       localStorage.removeItem(cacheKey);
+
+      // Remove from leaderboard too for full privacy/cleanup
+      try {
+        await deleteDoc(doc(db, 'leaderboard', user.uid));
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.warn('Leaderboard entry already gone or failed to delete:', e);
+      }
 
       setStatus('All imported data deleted successfully! Reloading...');
       setTimeout(() => window.location.reload(), 2000);

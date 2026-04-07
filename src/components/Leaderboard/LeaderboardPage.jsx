@@ -33,7 +33,12 @@ const LeaderboardPage = () => {
         const snapshot = await getDocs(q);
         const data = snapshot.docs
           .map((d) => ({ id: d.id, ...d.data() }))
-          .filter((entry) => !entry.hideFromLeaderboard);
+          .filter(
+            (entry) =>
+              !entry.hideFromLeaderboard &&
+              entry.untappd_username &&
+              entry.untappd_username !== 'Unknown'
+          );
         setRawEntries(data);
       } catch (err) {
         // eslint-disable-next-line no-console
@@ -73,13 +78,11 @@ const LeaderboardPage = () => {
     return map;
   }, [rawEntries, sortKey]);
 
-  // Podium is always top 3 by uniqueCheckins desc — unaffected by table sort
+  // Podium is always top 3 by CURRENT sort key - keeps dashboard consistent
   const podiumEntries = useMemo(
     () =>
-      [...rawEntries]
-        .sort((a, b) => (b.uniqueCheckins ?? 0) - (a.uniqueCheckins ?? 0))
-        .slice(0, 3),
-    [rawEntries]
+      [...rawEntries].sort((a, b) => (b[sortKey] ?? 0) - (a[sortKey] ?? 0)).slice(0, 3),
+    [rawEntries, sortKey]
   );
 
   const columns = [
@@ -139,28 +142,35 @@ const LeaderboardPage = () => {
         <div className="overflow-hidden rounded-2xl border border-gray-700/60 bg-gray-800/60 shadow-2xl backdrop-blur">
           {/* Top 3 podium cards — always sorted by unique beers, unaffected by table sort */}
           {podiumEntries.length >= 1 && (
-            <div className="grid grid-cols-1 gap-px border-b border-gray-700/60 sm:grid-cols-3">
+            <div className="flex flex-col border-b border-gray-700/60 sm:flex-row">
+              {/* Note: we reorder them visually if we want 2nd-1st-3rd style, but for now linear is fine */}
               {podiumEntries.map((entry, idx) => (
                 <div
                   key={entry.id}
-                  className={`relative flex flex-col items-center gap-1 p-6 text-center transition-all ${
+                  className={`relative flex flex-1 flex-col items-center gap-1 p-8 text-center transition-all sm:p-6 ${
                     idx === 0
-                      ? 'bg-yellow-500/10'
+                      ? 'z-10 bg-yellow-500/15 ring-2 ring-yellow-500/20'
                       : idx === 1
                         ? 'bg-gray-700/30'
                         : 'bg-amber-900/10'
                   }`}
                 >
-                  <span className="text-4xl">{MEDAL[idx]}</span>
-                  <span className="mt-1 text-lg font-black text-white">
+                  <span className={`text-4xl ${idx === 0 ? 'scale-125' : ''}`}>
+                    {MEDAL[idx]}
+                  </span>
+                  <span
+                    className={`mt-2 font-black text-white ${idx === 0 ? 'text-xl' : 'text-lg'}`}
+                  >
                     {entry.untappd_username}
                   </span>
                   <span
-                    className={`text-3xl font-black ${idx === 0 ? 'text-yellow-500' : 'text-gray-300'}`}
+                    className={`font-black ${idx === 0 ? 'text-4xl text-yellow-500' : 'text-3xl text-gray-300'}`}
                   >
-                    {(entry.uniqueCheckins ?? 0).toLocaleString()}
+                    {(entry[sortKey] ?? 0).toLocaleString()}
                   </span>
-                  <span className="text-xs text-gray-500">unique beers</span>
+                  <span className="text-xs font-medium uppercase tracking-tighter text-gray-500">
+                    {columns.find((c) => c.key === sortKey)?.label.split(' ')[1]}
+                  </span>
                 </div>
               ))}
             </div>

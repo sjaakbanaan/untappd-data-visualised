@@ -7,7 +7,10 @@ import { filterDuplicateBeers } from './filterDuplicateBeers';
  * them to the `leaderboard/{uid}` Firestore document.
  */
 export const updateLeaderboard = async (user, username, beerData) => {
-  if (!user?.uid || !Array.isArray(beerData) || beerData.length === 0) return;
+  // username is REQUIRED to avoid leaking PII (emails) to the public leaderboard
+  if (!user?.uid || !username || !Array.isArray(beerData) || beerData.length === 0) {
+    return;
+  }
 
   try {
     const totalCheckins = beerData.length;
@@ -25,7 +28,7 @@ export const updateLeaderboard = async (user, username, beerData) => {
     await setDoc(
       doc(db, 'leaderboard', user.uid),
       {
-        untappd_username: username || user.email || 'Unknown',
+        untappd_username: username,
         totalCheckins,
         uniqueCheckins,
         hideFromLeaderboard,

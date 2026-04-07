@@ -70,8 +70,10 @@ const Uploader = () => {
           const storageRef = ref(storage, `users/${user.uid}/untappd_data.json`);
           await uploadBytes(storageRef, file);
 
-          // 4. Update leaderboard stats
-          await updateLeaderboard(user, userProfile?.untappd_username, updatedData);
+          // 4. Update leaderboard stats (only if user has a username)
+          if (userProfile?.untappd_username) {
+            await updateLeaderboard(user, userProfile.untappd_username, updatedData);
+          }
 
           // 5. Tell DataContext to skip the next refetch cycle – we already
           //    set beerData directly, so when updateProfile triggers the

@@ -73,10 +73,10 @@ const Dashboard = () => {
         <button
           onClick={() => setIsSidebarOpen(true)}
           className="fixed bottom-6 right-6 z-40 flex items-center justify-center gap-2 rounded-full bg-yellow-500 p-4 font-bold text-black shadow-2xl transition-all hover:scale-105 hover:bg-yellow-400 md:px-6 md:py-3 lg:bottom-10 lg:right-10"
-          aria-label="Refine filters"
+          aria-label="Refine Filters"
         >
           <Icon icon="FILTER" className="w-5" />
-          <span className="hidden md:inline">Refine filters</span>
+          <span className="hidden md:inline">Refine Filters</span>
         </button>
       </div>
 
