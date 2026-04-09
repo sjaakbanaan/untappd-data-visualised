@@ -47,6 +47,21 @@ export const setCache = async (key, value) => {
   });
 };
 
+export const deleteCache = async (key) => {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(DB_NAME, 1);
+    request.onsuccess = (e) => {
+      const db = e.target.result;
+      const transaction = db.transaction(STORE_NAME, 'readwrite');
+      const store = transaction.objectStore(STORE_NAME);
+      const deleteRequest = store.delete(key);
+      deleteRequest.onsuccess = () => resolve();
+      deleteRequest.onerror = () => reject(deleteRequest.error);
+    };
+    request.onerror = (e) => reject(e.target.error);
+  });
+};
+
 export const clearOldCache = (keyPrefix) => {
   // Utility to clear old localStorage keys to free up space
   Object.keys(localStorage).forEach((key) => {

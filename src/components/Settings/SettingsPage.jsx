@@ -4,6 +4,7 @@ import { doc, setDoc, deleteDoc } from 'firebase/firestore';
 import { useAuth } from '../../context/AuthContext';
 import { storage, db } from '../../firebase';
 import NotificationBar from '../UI/NotificationBar';
+import { deleteCache } from '../../utils';
 
 const SettingsPage = () => {
   const { user, userProfile, updateProfile } = useAuth();
@@ -58,9 +59,10 @@ const SettingsPage = () => {
     }
   };
 
-  const handleClearCache = () => {
+  const handleClearCache = async () => {
     const cacheKey = `untappd_cache_${user?.uid}`;
     localStorage.removeItem(cacheKey);
+    await deleteCache(cacheKey);
     setStatus('Cache cleared successfully! Reloading...');
     setTimeout(() => window.location.reload(), 1500);
   };
@@ -82,6 +84,7 @@ const SettingsPage = () => {
       // Clear cache too
       const cacheKey = `untappd_cache_${user.uid}`;
       localStorage.removeItem(cacheKey);
+      await deleteCache(cacheKey);
 
       // Remove from leaderboard too for full privacy/cleanup
       try {
@@ -98,6 +101,7 @@ const SettingsPage = () => {
         // Just clear cache if object is already gone
         const cacheKey = `untappd_cache_${user.uid}`;
         localStorage.removeItem(cacheKey);
+        await deleteCache(cacheKey);
         setStatus('No cloud data found. Local cache cleared. Reloading...');
         setTimeout(() => window.location.reload(), 2000);
       } else {
@@ -189,7 +193,7 @@ const SettingsPage = () => {
           </span>
         </label>
 
-        <div className="flex items-center justify-between pt-6">
+        <div className="flex items-center gap-4 justify-between pt-6">
           <button
             type="submit"
             className="rounded-lg bg-yellow-500 px-8 py-3 font-bold text-black transition-transform hover:scale-105 active:scale-95"

@@ -1,5 +1,5 @@
 import formatDate from './formatDate';
-import { getCache, setCache, clearOldCache } from './indexedDB';
+import { getCache, setCache, deleteCache, clearOldCache } from './indexedDB';
 import { getDefaultEndDate } from './getDefaulEndDate';
 import { getDefaultStartDate } from './getDefaultStartDate';
 import { transformRatingData } from './transformRatingData';
@@ -71,5 +71,6 @@ export {
   statsPopularCheckins,
   getCache,
   setCache,
+  deleteCache,
   clearOldCache,
 };

@@ -1,4 +1,4 @@
-# Tappd (Untappd Data Visualised) v3.0.1
+# Tappd (Untappd Data Visualised) v3.0.2
 
 ## This is the repository for [tappd.online](https:///tappd.online)
 

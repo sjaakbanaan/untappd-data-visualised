@@ -177,90 +177,92 @@ const LeaderboardPage = () => {
           )}
 
           {/* Full ranked table */}
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-gray-700/60 text-left text-xs font-bold uppercase tracking-widest text-gray-500">
-                <th className="px-6 py-4">#</th>
-                <th className="px-6 py-4">Username</th>
-                <th
-                  className={`cursor-pointer px-6 py-4 text-right transition-colors hover:text-yellow-400 ${sortKey === 'uniqueCheckins' ? 'text-yellow-500' : ''}`}
-                  onClick={() => handleSort('uniqueCheckins')}
-                >
-                  Unique Beers{' '}
-                  {sortKey === 'uniqueCheckins' ? (
-                    sortDir === 'desc' ? (
-                      '↓'
-                    ) : (
-                      '↑'
-                    )
-                  ) : (
-                    <span className="opacity-30">↕</span>
-                  )}
-                </th>
-                <th
-                  className={`cursor-pointer px-6 py-4 text-right transition-colors hover:text-yellow-400 ${sortKey === 'totalCheckins' ? 'text-yellow-500' : ''}`}
-                  onClick={() => handleSort('totalCheckins')}
-                >
-                  Total Check-ins{' '}
-                  {sortKey === 'totalCheckins' ? (
-                    sortDir === 'desc' ? (
-                      '↓'
-                    ) : (
-                      '↑'
-                    )
-                  ) : (
-                    <span className="opacity-30">↕</span>
-                  )}
-                </th>
-                <th className="hidden px-6 py-4 text-right md:table-cell">
-                  Last Updated
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {entries.map((entry) => (
-                <tr
-                  key={entry.id}
-                  className={`border-b border-gray-700/40 transition-colors last:border-0 hover:bg-gray-700/30 ${rankMap[entry.id] <= 3 ? 'font-semibold' : ''}`}
-                >
-                  <td className="px-6 py-4 text-gray-500">
-                    <span
-                      className={
-                        rankMap[entry.id] <= 3
-                          ? 'font-bold text-yellow-500/70'
-                          : 'text-gray-600'
-                      }
-                    >
-                      #{rankMap[entry.id]}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4">
-                    <a
-                      href={`https://untappd.com/user/${entry.untappd_username}`}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-white transition-colors hover:text-yellow-500"
-                    >
-                      {entry.untappd_username}
-                    </a>
-                  </td>
-                  <td
-                    className={`px-6 py-4 text-right ${sortKey === 'uniqueCheckins' ? 'font-bold text-yellow-400' : 'text-gray-300'}`}
+          <div className="overflow-x-scroll overflow-y-hidden">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-gray-700/60 text-left text-xs font-bold uppercase tracking-widest text-gray-500">
+                  <th className="px-6 py-4">#</th>
+                  <th className="px-6 py-4">Username</th>
+                  <th
+                    className={`cursor-pointer px-6 py-4 text-right transition-colors hover:text-yellow-400 ${sortKey === 'uniqueCheckins' ? 'text-yellow-500' : ''}`}
+                    onClick={() => handleSort('uniqueCheckins')}
                   >
-                    {(entry.uniqueCheckins ?? 0).toLocaleString()}
-                  </td>
-                  <td
-                    className={`px-6 py-4 text-right ${sortKey === 'totalCheckins' ? 'font-bold text-yellow-400' : 'text-gray-300'}`}
+                    Unique Beers{' '}
+                    {sortKey === 'uniqueCheckins' ? (
+                      sortDir === 'desc' ? (
+                        '↓'
+                      ) : (
+                        '↑'
+                      )
+                    ) : (
+                      <span className="opacity-30">↕</span>
+                    )}
+                  </th>
+                  <th
+                    className={`cursor-pointer px-6 py-4 text-right transition-colors hover:text-yellow-400 ${sortKey === 'totalCheckins' ? 'text-yellow-500' : ''}`}
+                    onClick={() => handleSort('totalCheckins')}
                   >
-                    {(entry.totalCheckins ?? 0).toLocaleString()}
-                  </td>
-                  <td className="hidden px-6 py-4 text-right text-gray-600 md:table-cell">
-                    {formatDate(entry.lastUpdated)}
-                  </td>
+                    Total Check-ins{' '}
+                    {sortKey === 'totalCheckins' ? (
+                      sortDir === 'desc' ? (
+                        '↓'
+                      ) : (
+                        '↑'
+                      )
+                    ) : (
+                      <span className="opacity-30">↕</span>
+                    )}
+                  </th>
+                  <th className="hidden px-6 py-4 text-right md:table-cell">
+                    Last Updated
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {entries.map((entry) => (
+                  <tr
+                    key={entry.id}
+                    className={`border-b border-gray-700/40 transition-colors last:border-0 hover:bg-gray-700/30 ${rankMap[entry.id] <= 3 ? 'font-semibold' : ''}`}
+                  >
+                    <td className="px-6 py-4 text-gray-500">
+                      <span
+                        className={
+                          rankMap[entry.id] <= 3
+                            ? 'font-bold text-yellow-500/70'
+                            : 'text-gray-600'
+                        }
+                      >
+                        #{rankMap[entry.id]}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4">
+                      <a
+                        href={`https://untappd.com/user/${entry.untappd_username}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-white transition-colors hover:text-yellow-500"
+                      >
+                        {entry.untappd_username}
+                      </a>
+                    </td>
+                    <td
+                      className={`px-6 py-4 text-right ${sortKey === 'uniqueCheckins' ? 'font-bold text-yellow-400' : 'text-gray-300'}`}
+                    >
+                      {(entry.uniqueCheckins ?? 0).toLocaleString()}
+                    </td>
+                    <td
+                      className={`px-6 py-4 text-right ${sortKey === 'totalCheckins' ? 'font-bold text-yellow-400' : 'text-gray-300'}`}
+                    >
+                      {(entry.totalCheckins ?? 0).toLocaleString()}
+                    </td>
+                    <td className="hidden px-6 py-4 text-right text-gray-600 md:table-cell">
+                      {formatDate(entry.lastUpdated)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
           <div className="border-t border-gray-700/40 px-6 py-3 text-right text-xs text-gray-600">
             {entries.length} participant{entries.length !== 1 ? 's' : ''}
