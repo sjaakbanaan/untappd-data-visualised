@@ -168,16 +168,13 @@ const LeaderboardPage = () => {
                   >
                     {(entry[sortKey] ?? 0).toLocaleString()}
                   </span>
-                  <span className="text-xs font-medium uppercase tracking-tighter text-gray-500">
-                    {columns.find((c) => c.key === sortKey)?.label.split(' ')[1]}
-                  </span>
                 </div>
               ))}
             </div>
           )}
 
           {/* Full ranked table */}
-          <div className="overflow-x-scroll overflow-y-hidden">
+          <div className="overflow-x-auto overflow-y-hidden">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-gray-700/60 text-left text-xs font-bold uppercase tracking-widest text-gray-500">
