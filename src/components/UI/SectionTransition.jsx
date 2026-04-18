@@ -5,7 +5,7 @@ import gsap from 'gsap';
  * Wraps section content and plays a fade-in-up animation
  * every time the `sectionKey` prop changes.
  */
-const SectionTransition = ({ sectionKey, children }) => {
+const SectionTransition = ({ sectionKey, children, skipMove }) => {
   const containerRef = useRef(null);
 
   useLayoutEffect(() => {
@@ -18,18 +18,19 @@ const SectionTransition = ({ sectionKey, children }) => {
     gsap.killTweensOf(targets);
 
     // Slide up — quick
-    gsap.fromTo(
-      targets,
-      { y: 40 },
-      {
-        y: 0,
-        duration: 1,
-        ease: 'power3.out',
-        stagger: 0.08,
-        clearProps: 'transform',
-      }
-    );
-
+    if (!skipMove) {
+      gsap.fromTo(
+        targets,
+        { y: 40 },
+        {
+          y: 0,
+          duration: 1,
+          ease: 'power3.out',
+          stagger: 0.08,
+          clearProps: 'transform',
+        }
+      );
+    }
     // Fade in — longer, softer
     gsap.fromTo(
       targets,
@@ -42,7 +43,7 @@ const SectionTransition = ({ sectionKey, children }) => {
         stagger: 0.08,
       }
     );
-  }, [sectionKey]);
+  }, [sectionKey, skipMove]);
 
   return (
     <div ref={containerRef} className="contents">

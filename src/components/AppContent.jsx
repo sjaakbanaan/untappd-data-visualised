@@ -2,6 +2,7 @@ import { useLocation } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import AppRoutes from './AppRoutes';
+import PageTransition from './UI/PageTransition';
 
 const AppContent = () => {
   const location = useLocation();
@@ -13,7 +14,9 @@ const AppContent = () => {
       <div
         className={`${isWrappdRoute ? 'bg-gray-900 md:bg-wrappd-gradient' : 'px-1 md:px-6'}`}
       >
-        <AppRoutes />
+        <PageTransition>
+          <AppRoutes />
+        </PageTransition>
         {!isWrappdRoute && <Footer />}
       </div>
     </>
