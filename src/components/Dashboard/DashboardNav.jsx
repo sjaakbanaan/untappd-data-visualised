@@ -30,8 +30,8 @@ const DashboardNav = ({ activeSection, setActiveSection }) => {
         <button
           key={key}
           onClick={() => setActiveSection(key)}
-          className={`mb-0 flex items-center justify-center rounded border px-4 py-2 text-lg shadow transition-colors duration-300 md:px-10 md:py-4 text-white  hover:bg-gray-700 ${
-            activeSection === key ? 'bg-gray-800 tex text-gray-900' : 'bg-gray-900'
+          className={`mb-0 flex items-center justify-center rounded border px-4 py-2 text-lg text-white shadow transition-colors duration-300 hover:bg-gray-700 md:px-10  md:py-4 ${
+            activeSection === key ? 'bg-gray-800 text-gray-900' : 'bg-gray-900'
           }`}
         >
           <Icon

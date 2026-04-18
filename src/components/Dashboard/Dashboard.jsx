@@ -1,4 +1,5 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
+import SectionTransition from '../UI/SectionTransition';
 import ReactGA from 'react-ga4';
 
 import { useDashboardData } from '../../utils/';
@@ -101,52 +102,54 @@ const Dashboard = () => {
           {/* Conditional Loading */}
           <div className="grid gap-6 rounded md:py-4 lg:grid-cols-2 lg:gap-10 lg:gap-y-24 xl:py-6">
             <Suspense fallback={<div>Loading...</div>}>
-              {activeSection === 'stats' && (
-                <>
-                  <BasicStats
-                    filteredData={filteredData}
-                    beerData={beerData}
-                    filterDateRange={filterDateRange}
-                    filterOverview={filterOverview}
-                    fullBeerData={beerData}
-                  />
-                  <TopTableList beerData={filteredData} />
-                </>
-              )}
-              {activeSection === 'charts' && (
-                <>
-                  <PieChartList beerData={filteredData} />
-                  <BarChartList
-                    beerData={filteredData}
-                    filterDateRange={filterDateRange}
-                  />
-                  <LineChart beerData={filteredData} />
-                  <BeerTypeChart beerData={filteredData} />
-                </>
-              )}
-              {activeSection === 'maps' && mapboxKey && (
-                <>
-                  <VenueMap beerData={filteredData} />
-                  <BreweryMap beerData={filteredData} />
-                </>
-              )}
-              {activeSection === 'checkins' && (
-                <div className="lg:col-span-2">
-                  <Overview beerData={filteredData} />
-                </div>
-              )}
-              {activeSection === 'ai' && geminiApiKey && (
-                <div className="lg:col-span-2">
-                  <AIAnalysis
-                    beerData={filteredData}
-                    analysis={aiAnalysis}
-                    setAnalysis={setAiAnalysis}
-                    filterDateRange={filterDateRange}
-                    geminiApiKey={geminiApiKey}
-                  />
-                </div>
-              )}
-              {activeSection === 'badges' && <Badges />}
+              <SectionTransition sectionKey={activeSection}>
+                {activeSection === 'stats' && (
+                  <>
+                    <BasicStats
+                      filteredData={filteredData}
+                      beerData={beerData}
+                      filterDateRange={filterDateRange}
+                      filterOverview={filterOverview}
+                      fullBeerData={beerData}
+                    />
+                    <TopTableList beerData={filteredData} />
+                  </>
+                )}
+                {activeSection === 'charts' && (
+                  <>
+                    <PieChartList beerData={filteredData} />
+                    <BarChartList
+                      beerData={filteredData}
+                      filterDateRange={filterDateRange}
+                    />
+                    <LineChart beerData={filteredData} />
+                    <BeerTypeChart beerData={filteredData} />
+                  </>
+                )}
+                {activeSection === 'maps' && mapboxKey && (
+                  <>
+                    <VenueMap beerData={filteredData} />
+                    <BreweryMap beerData={filteredData} />
+                  </>
+                )}
+                {activeSection === 'checkins' && (
+                  <div className="lg:col-span-2">
+                    <Overview beerData={filteredData} />
+                  </div>
+                )}
+                {activeSection === 'ai' && geminiApiKey && (
+                  <div className="lg:col-span-2">
+                    <AIAnalysis
+                      beerData={filteredData}
+                      analysis={aiAnalysis}
+                      setAnalysis={setAiAnalysis}
+                      filterDateRange={filterDateRange}
+                      geminiApiKey={geminiApiKey}
+                    />
+                  </div>
+                )}
+                {activeSection === 'badges' && <Badges />}
+              </SectionTransition>
             </Suspense>
           </div>
         </div>

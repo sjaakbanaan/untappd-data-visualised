@@ -35,7 +35,6 @@ const VenueMap = ({ beerData }) => {
     return new Set(beerData.filter((i) => i.venue_name).map((i) => i.venue_name)).size;
   }, [beerData]);
 
-
   useEffect(() => {
     const getBoundingBox = (beerData) => {
       const uniqueCombinations = new Set(); // Set to track unique combinations

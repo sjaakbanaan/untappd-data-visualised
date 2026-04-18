@@ -22,7 +22,6 @@ const BreweryMap = ({ beerData }) => {
     return [...new Set(beerData.map((item) => item.brewery_country))];
   }, [beerData]);
 
-
   useEffect(() => {
     /* data fetch */
     fetch('/geojson-countries.json')
