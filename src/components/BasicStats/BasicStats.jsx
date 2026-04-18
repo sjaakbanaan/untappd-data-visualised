@@ -1,28 +1,26 @@
 import PropTypes from 'prop-types';
 import StatCard from './StatCard';
+import CardCarousel from '../UI/CardCarousel';
 import { useBasicStats } from '../../utils/';
 
 const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
   const { stats } = useBasicStats(filteredData, filterDateRange, fullBeerData);
+  const visibleStats = stats.filter((item) => !item.hide);
+
+  if (visibleStats.length === 0) return null;
 
   return (
-    <div>
-      <ul className="grid grid-cols-2 gap-6 md:grid-cols-3">
-        {stats.length > 0 &&
-          stats.map(
-            (item, i) =>
-              !item.hide && (
-                <StatCard
-                  key={i}
-                  statKey={item.key}
-                  value={item.value}
-                  suffix={item.suffix}
-                  suffixLink={item.suffixLink}
-                />
-              )
-          )}
-      </ul>
-    </div>
+    <CardCarousel cardSelector=".carousel-card">
+      {visibleStats.map((item, i) => (
+        <StatCard
+          key={i}
+          statKey={item.key}
+          value={item.value}
+          suffix={item.suffix}
+          suffixLink={item.suffixLink}
+        />
+      ))}
+    </CardCarousel>
   );
 };
 
@@ -33,4 +31,3 @@ BasicStats.propTypes = {
 };
 
 export default BasicStats;
-

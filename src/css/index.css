@@ -62,4 +62,20 @@
   .mapboxgl-popup-close-button {
     margin-right: 8px;
   }
+
+  /* ── Card Carousel: styles that can't be expressed as Tailwind utilities ── */
+  .carousel-card {
+    background: linear-gradient(135deg, rgba(31, 41, 55, 0.95), rgba(17, 24, 39, 0.98));
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+      0 1px 0 rgba(255, 255, 255, 0.06) inset;
+  }
+
+  .stat-value-gradient {
+    background: linear-gradient(135deg, #fbbf24, #eab308, #f59e0b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 }
