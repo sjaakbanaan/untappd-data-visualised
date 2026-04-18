@@ -80,8 +80,11 @@ const Uploader = () => {
           //    useEffect (via userProfile dependency), it shouldn't overwrite it.
           skipNextFetch();
 
-          // 6. Update last import timestamp
-          await updateProfile({ last_import: new Date().toISOString() });
+          // 6. Update last import timestamp + persist detected source format
+          await updateProfile({
+            last_import: new Date().toISOString(),
+            json_source: correctSource,
+          });
 
           // 7. Update local cache (IndexedDB)
           try {

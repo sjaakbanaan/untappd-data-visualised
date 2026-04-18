@@ -1,78 +1,91 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import TopTable from './TopTable';
+import { useAuth } from '../../context/AuthContext';
+
+const allTableOptions = [
+  {
+    dataType: 'topBeers',
+    scoreType: 'rating_score',
+    key: 'topBeersRatingScore',
+    title: 'Top 10 rated beers (by you)',
+    showPhotos: true,
+  },
+  {
+    dataType: 'topBeers',
+    scoreType: 'global_weighted_rating_score',
+    key: 'topBeersGloalRatingScore',
+    title: 'Top 10 rated beers (global / you (diff))',
+    selfCompare: true,
+    showPhotos: true,
+    insiderOnly: true,
+  },
+  {
+    dataType: 'topBeers',
+    scoreType: 'beer_abv',
+    key: 'topBeersAbv',
+    title: 'Top 10 strongest beers',
+    showPhotos: true,
+  },
+  {
+    dataType: 'topBeers',
+    scoreType: 'total_toasts',
+    key: 'topBeersTotalToasts',
+    title: 'Top 10 toasts',
+    showPhotos: true,
+  },
+  {
+    dataType: 'topBeers',
+    scoreType: 'total_comments',
+    key: 'TopBeersTotalComments',
+    title: 'Top 10 comments',
+    showPhotos: true,
+  },
+  {
+    dataType: 'flavorProfiles',
+    lowerCase: true,
+    key: 'flavorProfiles',
+    title: 'Top 10 flavour profiles',
+  },
+  {
+    dataType: 'friends',
+    key: 'friends',
+    title: 'Top 10 tagged friends',
+  },
+  {
+    dataType: 'topByRating',
+    scoreType: 'brewery_name',
+    key: 'breweryRating',
+    title: 'Top 10 breweries by rating',
+    ratingType: 'rating_score',
+  },
+  {
+    dataType: 'topByRating',
+    scoreType: 'brewery_name',
+    key: 'breweryRatingGlobal',
+    title: 'Top 10 breweries by rating (global)',
+    ratingType: 'global_rating_score',
+  },
+  {
+    dataType: 'topByRating',
+    scoreType: 'beer_type',
+    key: 'topByRatingBeerType',
+    title: 'Top 10 beer types by rating',
+    ratingType: 'rating_score',
+  },
+];
+
+// Hide "Top 10 rated beers (global / you (diff))" if the json was exported with the scraper XL
 
 const TopTableList = ({ beerData }) => {
-  const tableList = [
-    {
-      dataType: 'topBeers',
-      scoreType: 'rating_score',
-      key: 'topBeersRatingScore',
-      title: 'Top 10 rated beers (by you)',
-      showPhotos: true,
-    },
-    {
-      dataType: 'topBeers',
-      scoreType: 'global_weighted_rating_score',
-      key: 'topBeersGloalRatingScore',
-      title: 'Top 10 rated beers (global / you (diff))',
-      selfCompare: true,
-      showPhotos: true,
-    },
-    {
-      dataType: 'topBeers',
-      scoreType: 'beer_abv',
-      key: 'topBeersAbv',
-      title: 'Top 10 strongest beers',
-      showPhotos: true,
-    },
-    {
-      dataType: 'topBeers',
-      scoreType: 'total_toasts',
-      key: 'topBeersTotalToasts',
-      title: 'Top 10 toasts',
-      showPhotos: true,
-    },
-    {
-      dataType: 'topBeers',
-      scoreType: 'total_comments',
-      key: 'TopBeersTotalComments',
-      title: 'Top 10 comments',
-      showPhotos: true,
-    },
-    {
-      dataType: 'flavorProfiles',
-      lowerCase: true,
-      key: 'flavorProfiles',
-      title: 'Top 10 flavour profiles',
-    },
-    {
-      dataType: 'friends',
-      key: 'friends',
-      title: 'Top 10 tagged friends',
-    },
-    {
-      dataType: 'topByRating',
-      scoreType: 'brewery_name',
-      key: 'breweryRating',
-      title: 'Top 10 breweries by rating',
-      ratingType: 'rating_score',
-    },
-    {
-      dataType: 'topByRating',
-      scoreType: 'brewery_name',
-      key: 'breweryRatingGlobal',
-      title: 'Top 10 breweries by rating (global)',
-      ratingType: 'global_rating_score',
-    },
-    {
-      dataType: 'topByRating',
-      scoreType: 'beer_type',
-      key: 'topByRatingBeerType',
-      title: 'Top 10 beer types by rating',
-      ratingType: 'rating_score',
-    },
-  ];
+  const { userProfile } = useAuth();
+  const isScraperXL = userProfile?.json_source === 'custom_export';
+
+  const tableList = useMemo(
+    () =>
+      isScraperXL ? allTableOptions.filter((opt) => !opt.insiderOnly) : allTableOptions,
+    [isScraperXL]
+  );
 
   const [selectedTopList, setSelectedTopList] = useState(tableList[0].key);
   //  get extra data based on chosen option:

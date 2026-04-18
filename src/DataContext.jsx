@@ -22,7 +22,7 @@ const resetList = {
 };
 
 const DataProvider = ({ children }) => {
-  const { user, userProfile } = useAuth();
+  const { user, userProfile, updateProfile } = useAuth();
   const { manipulateData } = useUploadedJsonUpdater();
   const [beerData, setBeerData] = useState([]);
   const [badgeData, setBadgeData] = useState(null);
@@ -93,7 +93,12 @@ const DataProvider = ({ children }) => {
 
         const autoDetectedFormat = detectFormat(rawJson);
         const correctSource = autoDetectedFormat === 'scraper_xl' ? 'custom_export' : 'untappd_insider';
-        
+
+        // Persist json_source to Firestore if it changed
+        if (userProfile?.json_source !== correctSource) {
+          updateProfile({ json_source: correctSource });
+        }
+
         const currentSettings = {
           ...userProfile,
           json_source: correctSource,

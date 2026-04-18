@@ -1,19 +1,20 @@
 import { useState, useEffect } from 'react';
+import { useAuth } from '../context/AuthContext';
 
 const DISMISSED_KEY = 'scraperxl_disclaimer_dismissed';
 
 const ScraperXLDisclaimer = () => {
+  const { userProfile } = useAuth();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     // Show only when:
     // 1. The uploaded source is scraper_xl
     // 2. The user hasn't dismissed it this session
-    const userDetails = JSON.parse(localStorage.getItem('userDetails') ?? '{}');
-    const isScraperXL = userDetails?.json_source === 'custom_export';
+    const isScraperXL = userProfile?.json_source === 'custom_export';
     const isDismissed = localStorage.getItem(DISMISSED_KEY) === 'true';
     setVisible(isScraperXL && !isDismissed);
-  }, []);
+  }, [userProfile]);
 
   const handleDismiss = () => {
     localStorage.setItem(DISMISSED_KEY, 'true');
