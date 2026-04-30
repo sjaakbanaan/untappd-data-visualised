@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 
-const DateSelector = ({ beerData, filterDateRange, setFilterDateRange }) => {
+const DateSelector = ({ beerData, filterDateRange, setFilterDateRange, onDateBlur }) => {
   const [formattedEarliestDate, setFormattedEarliestDate] = useState('');
   const [formattedLatestDate, setFormattedLatestDate] = useState('');
   const [startButtonFlicker, setStartButtonFlicker] = useState('');
+  const containerRef = useRef(null);
 
   // Calculate the minimum start date
   useEffect(() => {
@@ -36,6 +37,22 @@ const DateSelector = ({ beerData, filterDateRange, setFilterDateRange }) => {
     // setIsInvalidRange(false); // Reset invalid range state when the range is valid
   };
 
+  // Close sidebar only when focus leaves the entire date input container
+  const handleBlur = useCallback(() => {
+    if (!onDateBlur) return;
+    // relatedTarget is the element receiving focus next.
+    // If it's still inside our container, the user is switching between
+    // the two date inputs or interacting with the native datepicker — don't close.
+    requestAnimationFrame(() => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(document.activeElement)
+      ) {
+        onDateBlur();
+      }
+    });
+  }, [onDateBlur]);
+
   useEffect(() => {
     setStartButtonFlicker('');
     // Adding a small delay before re-adding the class to trigger the animation
@@ -46,7 +63,11 @@ const DateSelector = ({ beerData, filterDateRange, setFilterDateRange }) => {
 
   return (
     <div>
-      <div className="mb-8 grid gap-4 md:grid-cols-2">
+      <div
+        ref={containerRef}
+        className="mb-8 grid gap-4 md:grid-cols-2"
+        onBlur={handleBlur}
+      >
         <input
           type="date"
           className={`w-full appearance-none rounded border bg-gray-900 px-3 py-2 leading-tight text-white shadow focus:outline-none md:w-auto ${startButtonFlicker}`}

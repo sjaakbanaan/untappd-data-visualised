@@ -5,6 +5,8 @@ import { storage } from './firebase';
 import { useUploadedJsonUpdater, getCache, setCache, clearOldCache } from './utils';
 import { extractBadges } from './utils/extractBadges';
 import { detectFormat } from './utils/normaliseCheckins';
+import { getDefaultStartDate } from './utils/getDefaultStartDate';
+import { getDefaultEndDate } from './utils/getDefaulEndDate';
 
 const DataContext = createContext();
 
@@ -28,6 +30,12 @@ const DataProvider = ({ children }) => {
   const [badgeData, setBadgeData] = useState(null);
   const [dataLoading, setDataLoading] = useState(true);
   const skipNextFetchRef = useRef(false);
+
+  const [filterDateRange, setFilterDateRange] = useState({
+    start: getDefaultStartDate(),
+    end: getDefaultEndDate(),
+  });
+  const [filterOverview, setFilterOverview] = useState(resetList);
 
   // Call this from the Uploader to prevent the DataContext effect from
   // re-fetching and overwriting the data that was just set directly.
@@ -138,7 +146,11 @@ const DataProvider = ({ children }) => {
     resetList, 
     dataLoading,
     skipNextFetch,
-  }), [beerData, badgeData, dataLoading, skipNextFetch]);
+    filterDateRange,
+    setFilterDateRange,
+    filterOverview,
+    setFilterOverview,
+  }), [beerData, badgeData, dataLoading, skipNextFetch, filterDateRange, filterOverview]);
 
   return (
     <DataContext.Provider value={value}>

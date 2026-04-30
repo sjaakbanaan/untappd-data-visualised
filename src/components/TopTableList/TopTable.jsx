@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import {
   processTopBeers,
@@ -35,14 +36,17 @@ const TopTable = ({
     decrement,
   } = useCounter(initMinimumCheckins);
 
-  const processingFunction = processingFunctions[dataType] || processTopBeers;
-  const scoreTypeVal = scoreType ?? '';
-  const getList = processingFunction(
-    beerData,
-    scoreTypeVal,
-    dataType == 'topByRating' ? minimumCheckins : itemsToShow,
-    ratingType
-  );
+  const getList = useMemo(() => {
+    const processingFunction = processingFunctions[dataType] || processTopBeers;
+    const scoreTypeVal = scoreType ?? '';
+    return processingFunction(
+      beerData,
+      scoreTypeVal,
+      dataType === 'topByRating' ? minimumCheckins : itemsToShow,
+      ratingType
+    );
+  }, [beerData, dataType, scoreType, minimumCheckins, ratingType, itemsToShow]);
+
   const { processedList, suffix, onEmpty } = getList;
 
   return (

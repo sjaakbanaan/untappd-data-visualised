@@ -71,17 +71,17 @@ const Dashboard = () => {
 
   useLayoutEffect(() => {
     if (animationStatus === 'animating' && fabRef.current) {
-      gsap.fromTo(
-        fabRef.current,
-        { opacity: 0 },
-        {
-          opacity: 1,
-          duration: 1.2,
-          ease: 'power2.out',
-          delay: 0.4,
-          onComplete: () => setAnimationStatus('done'),
-        }
-      );
+      gsap.set(fabRef.current, { y: 40, opacity: 0 });
+
+      // Slide up — quick
+      gsap.to(fabRef.current, {
+        y: 0,
+        duration: 0.6,
+        ease: 'power3.out',
+        clearProps: 'transform',
+        opacity: 1,
+        onComplete: () => setAnimationStatus('done'),
+      });
     }
   }, [animationStatus]);
 
@@ -99,19 +99,21 @@ const Dashboard = () => {
           onFilterClick={() => setIsSidebarOpen(true)}
         />
         {/* Floating Action Button for Filters */}
-        {!dataLoading && beerData.length > 0 && createPortal(
-          <button
-            ref={fabRef}
-            style={{ opacity: animationStatus === 'done' ? 1 : 0 }}
-            onClick={() => setIsSidebarOpen(true)}
-            className="fixed bottom-6 right-6 z-40 flex items-center justify-center gap-2 rounded-full bg-yellow-500 p-4 font-bold text-black shadow-2xl transition hover:scale-105 hover:bg-yellow-400 md:px-6 md:py-3 lg:bottom-10 lg:right-10"
-            aria-label="Refine Filters"
-          >
-            <Icon icon="FILTER" className="w-5" />
-            <span className="hidden md:inline">Refine Filters</span>
-          </button>,
-          document.body
-        )}
+        {!dataLoading &&
+          beerData.length > 0 &&
+          createPortal(
+            <button
+              ref={fabRef}
+              style={{ opacity: animationStatus === 'done' ? 1 : 0 }}
+              onClick={() => setIsSidebarOpen(true)}
+              className="fixed bottom-6 right-6 z-40 flex items-center justify-center gap-2 rounded-full bg-yellow-500 p-4 font-bold text-black shadow-2xl transition hover:scale-105 hover:bg-yellow-400 md:px-6 md:py-3 lg:bottom-10 lg:right-10"
+              aria-label="Refine Filters"
+            >
+              <Icon icon="FILTER" className="w-5" />
+              <span className="hidden md:inline">Refine Filters</span>
+            </button>,
+            document.body
+          )}
       </div>
 
       <FilterSidebar
@@ -134,7 +136,7 @@ const Dashboard = () => {
           />
           {/* Conditional Loading */}
           <div className="grid gap-6 rounded md:py-4 lg:grid-cols-2 lg:gap-10 lg:gap-y-24 xl:py-6">
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={null}>
               <SectionTransition sectionKey={activeSection}>
                 {activeSection === 'stats' && (
                   <>

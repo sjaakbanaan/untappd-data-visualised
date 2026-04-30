@@ -60,10 +60,8 @@ const FilterSidebar = ({
             <DateSelector
               beerData={beerData}
               filterDateRange={filterDateRange}
-              setFilterDateRange={(val) => {
-                setFilterDateRange(val);
-                onClose();
-              }}
+              setFilterDateRange={setFilterDateRange}
+              onDateBlur={onClose}
             />
           </div>
           <YearFilterButtons
