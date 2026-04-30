@@ -17,7 +17,8 @@ export const useShareStats = () => {
     filterDateRange,
     topLists,
     filterOverview,
-    shareLinkTitle
+    shareLinkTitle,
+    venueLocations = []
   ) => {
     setIsLoading(true);
     try {
@@ -53,6 +54,14 @@ export const useShareStats = () => {
         ? await convertImageToBase64(userAvatar)
         : null;
 
+      const validVenueLocations = (venueLocations || [])
+        .filter((v) => v.venue_lat && v.venue_lng)
+        .map((v) => ({
+          lat: v.venue_lat,
+          lng: v.venue_lng,
+          name: v.venue_name || '',
+        }));
+
       const statsData = {
         userName: userName,
         userAvatar: processedUserAvatar,
@@ -62,6 +71,7 @@ export const useShareStats = () => {
         endDate: filterDateRange.end,
         filterOverview: filterOverview,
         shareLinkTitle: shareLinkTitle || '',
+        venueLocations: validVenueLocations,
         createdAt: new Date().toISOString(),
       };
 

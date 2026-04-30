@@ -67,3 +67,56 @@
 .mapboxgl-popup-content {
   padding: 15px 20px 15px 15px !important;
 }
+
+/* ─── Wrappd Stacking Cards ─────────────────────────────────────────── */
+
+.wrappd-card {
+  --index0: calc(var(--index) - 1);
+  --reverse-index: calc(var(--numcards) - var(--index0));
+  --reverse-index0: calc(var(--reverse-index) - 1);
+  top: calc(var(--index0) * 24px);
+}
+
+/* Scroll-driven animation — only in supporting browsers */
+@supports (animation-timeline: scroll()) {
+  #wrappd-cards {
+    view-timeline-name: --wrappd-cards-scroll;
+    view-timeline-axis: block;
+  }
+
+  .wrappd-card {
+    /* Fade in on entry, fade out on exit — view() tracks natural scroll position */
+    animation: wrappd-card-fade linear both;
+    animation-timeline: view();
+    animation-range: entry 0% exit 100%;
+  }
+
+  .wrappd-card__content {
+    --start-range: calc(var(--index0) / var(--numcards) * 100%);
+    --end-range: calc(var(--index) / var(--numcards) * 100%);
+    animation: wrappd-card-scale linear forwards;
+    animation-timeline: --wrappd-cards-scroll;
+    animation-range: exit-crossing var(--start-range) exit-crossing var(--end-range);
+  }
+}
+
+@keyframes wrappd-card-scale {
+  to {
+    transform: scale(calc(1 - (var(--reverse-index0) * 0.025)));
+  }
+}
+
+@keyframes wrappd-card-fade {
+  0% {
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

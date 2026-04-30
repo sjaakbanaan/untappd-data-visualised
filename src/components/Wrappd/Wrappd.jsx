@@ -24,6 +24,7 @@ const Wrappd = () => {
   const [userAvatar, setUserAvatar] = useState(null);
   const [topLists, setTopLists] = useState(null);
   const [filterOverview, setFilterOverview] = useState(null);
+  const [venueLocations, setVenueLocations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [shareLinkTitle, setShareLinkTitle] = useState('');
@@ -45,6 +46,7 @@ const Wrappd = () => {
           setUserAvatar(data.userAvatar || undefined);
           setTopLists(data.topLists || []);
           setFilterOverview(data.filterOverview || {});
+          setVenueLocations(data.venueLocations || []);
           setShareLinkTitle(data.shareLinkTitle || '');
         } else {
           setError('Stats not found');
@@ -92,6 +94,7 @@ const Wrappd = () => {
       topLists={topLists}
       filterOverview={filterOverview}
       shareLinkTitle={shareLinkTitle}
+      venueLocations={venueLocations}
     />
   );
 };

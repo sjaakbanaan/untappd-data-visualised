@@ -1,12 +1,42 @@
-import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import WrappdTopStats from './WrappdTopStats';
-import WrappdHeader from './WrappdHeader';
-import WrappdStats from './WrappdStats';
+import WrappdCardHero from './WrappdCardHero';
+import WrappdCardStats from './WrappdCardStats';
+import WrappdCardMap from './WrappdCardMap';
 import WrappdPhotos from './WrappdPhotos';
+import WrappdTopStats from './WrappdTopStats';
 import WrappdFooter from './WrappdFooter';
-import ScrollReveal from './ScrollReveal';
-import gsap from 'gsap';
+
+/**
+ * Wraps a section in the stacking card shell.
+ * --index and --numcards CSS custom props drive the sticky offset and scale animation.
+ * Fade in/out is handled via CSS animation-timeline: view() in index.css.
+ */
+const StackCard = ({
+  index,
+  numCards,
+  bg = 'bg-gray-900',
+  extraClass = '',
+  children,
+}) => (
+  <li
+    className={`wrappd-card sticky pb-px ${extraClass}`}
+    style={{ '--index': index, '--numcards': numCards }}
+  >
+    <div
+      className={`wrappd-card__content origin-top overflow-hidden rounded-3xl will-change-transform min-h-[85vh] shadow-2xl shadow-gray-950 ${bg}`}
+    >
+      {children}
+    </div>
+  </li>
+);
+
+StackCard.propTypes = {
+  index: PropTypes.number.isRequired,
+  numCards: PropTypes.number.isRequired,
+  bg: PropTypes.string,
+  extraClass: PropTypes.string,
+  children: PropTypes.node.isRequired,
+};
 
 const WrappdLayout = ({
   userName,
@@ -16,112 +46,114 @@ const WrappdLayout = ({
   topLists,
   filterOverview,
   shareLinkTitle,
+  venueLocations,
 }) => {
-  // Create a ref for the container to apply 3D effects
-  const containerRef = useRef(null);
-  // Find the list of top beers which will be used for photos
+  // Beer photos from the Top 5 beers list
   const photosList = topLists.find((item) => item.title === 'Top 5 beers');
+  const hasPhotos = photosList?.items?.filter((i) => i.photo_url).length >= 5;
+  const hasMap = venueLocations && venueLocations.length > 0;
 
-  useEffect(() => {
-    const container = containerRef.current;
+  // Total beers used for the hero background decoration
+  const totalBeersStat = stats.find((s) => s.key === 'Total beers');
+  const totalBeers = totalBeersStat?.value ?? '';
 
-    // Only apply 3D effect on desktop (screens wider than 768px)
-    if (window.innerWidth < 768) return;
+  // Build the card list dynamically so we can get the right --numcards count
+  const cards = [
+    {
+      key: 'hero',
+      bg: 'bg-gray-900',
+      content: (
+        <WrappdCardHero
+          userName={userName}
+          userAvatar={userAvatar}
+          dateRange={dateRange}
+          filterOverview={filterOverview}
+          shareLinkTitle={shareLinkTitle}
+          totalBeers={totalBeers}
+        />
+      ),
+    },
+    {
+      key: 'stats',
+      bg: 'bg-gray-900',
+      content: <WrappdCardStats stats={stats} dateRange={dateRange} />,
+    },
+    ...(hasPhotos
+      ? [
+          {
+            key: 'photos',
+            bg: 'bg-gray-900',
+            content: (
+              <div className="p-8 md:p-14">
+                <div className="mb-8 flex items-center gap-3">
+                  <span className="text-2xl" role="img" aria-label="Photos">
+                    📸
+                  </span>
+                  <h2 className="text-xl font-bold text-wrappdYellow">Top Beer Photos</h2>
+                  <div className="h-px flex-1 bg-gray-700" />
+                </div>
+                <WrappdPhotos photosList={photosList} />
+              </div>
+            ),
+          },
+        ]
+      : []),
+    ...(hasMap
+      ? [
+          {
+            key: 'map',
+            bg: 'bg-gray-950',
+            content: <WrappdCardMap venueLocations={venueLocations} />,
+          },
+        ]
+      : []),
+    {
+      key: 'toplists',
+      bg: 'bg-gray-900',
+      content: (
+        <div className="flex flex-col justify-between p-8 md:p-14">
+          <div>
+            <div className="mb-10 flex items-center gap-3">
+              <span className="text-2xl" role="img" aria-label="Top lists">
+                🏆
+              </span>
+              <h2 className="text-xl font-bold text-wrappdYellow">Your Top 5s</h2>
+              <div className="h-px flex-1 bg-gray-700" />
+            </div>
+            <div className="grid gap-10 md:grid-cols-2">
+              {topLists.map((topList, index) => (
+                <WrappdTopStats
+                  key={index}
+                  title={topList.title}
+                  items={topList.items.slice(0, 5)}
+                  valueKey={topList.valueKey}
+                  suffix={topList.suffix}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="mt-14 border-t border-gray-800 pt-10">
+            <WrappdFooter />
+          </div>
+        </div>
+      ),
+    },
+  ];
 
-    /**
-     * Handles mouse movement to create a 3D tilt effect
-     * Calculates rotation based on mouse position relative to container center
-     */
-    const handleMouseMove = (e) => {
-      const rect = container.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-
-      // Calculate rotation angles (divided by 200 to make the effect subtle)
-      const rotateX = (y - centerY) / 150;
-      const rotateY = (centerX - x) / 150;
-
-      // Animate the container rotation using GSAP
-      gsap.to(container, {
-        rotateX: rotateX,
-        rotateY: rotateY,
-        duration: 0.5,
-        ease: 'power2.out',
-        transformPerspective: 2600,
-      });
-    };
-
-    /**
-     * Resets the container rotation when mouse leaves
-     */
-    const handleMouseLeave = () => {
-      gsap.to(container, {
-        rotateX: 0,
-        rotateY: 0,
-        duration: 1,
-        ease: 'power2.out',
-      });
-    };
-
-    // Add event listeners for mouse movement
-    container.addEventListener('mousemove', handleMouseMove);
-    container.addEventListener('mouseleave', handleMouseLeave);
-
-    // Cleanup: remove event listeners when component unmounts
-    return () => {
-      container.removeEventListener('mousemove', handleMouseMove);
-      container.removeEventListener('mouseleave', handleMouseLeave);
-    };
-  }, []);
+  const numCards = cards.length;
 
   return (
-    <div className="pb-12 pt-4 md:py-20">
-      {/* Main container with 3D transform effect */}
-      <div
-        ref={containerRef}
-        className="transform-3d container mx-auto max-w-screen-md overflow-hidden bg-gray-900 px-4 py-8 shadow-2xl shadow-gray-950 transition-transform duration-1000 ease-out md:rounded-3xl md:p-10"
+    <div className="px-2 py-8 md:px-0 md:pb-0 md:pt-16">
+      <ul
+        id="wrappd-cards"
+        className="mx-auto flex list-none flex-col p-0 md:pb-16 lg:max-w-screen-md xl:max-w-screen-lg"
       >
-        {/* Header section with user info and date range */}
-        <ScrollReveal>
-          <WrappdHeader
-            userName={userName}
-            userAvatar={userAvatar}
-            dateRange={dateRange}
-            filterOverview={filterOverview}
-            shareLinkTitle={shareLinkTitle}
-          />
-        </ScrollReveal>
-
-        {/* Statistics section */}
-        <ScrollReveal>
-          <WrappdStats stats={stats} dateRange={dateRange} />
-        </ScrollReveal>
-
-        {/* Photos section showing top beers */}
-        <ScrollReveal>
-          <WrappdPhotos photosList={photosList} />
-        </ScrollReveal>
-
-        {/* Top lists section (beers, breweries, venues, etc.) */}
-        {topLists.map((topList, index) => (
-          <ScrollReveal key={index}>
-            <WrappdTopStats
-              title={topList.title}
-              items={topList.items.slice(0, 5)} // needed because i add way more items for the photos
-              valueKey={topList.valueKey}
-              suffix={topList.suffix}
-            />
-          </ScrollReveal>
+        {cards.map(({ key, bg, content }, i) => (
+          <StackCard key={key} index={i + 1} numCards={numCards} bg={bg}>
+            {content}
+          </StackCard>
         ))}
-
-        {/* Footer section */}
-        <ScrollReveal>
-          <WrappdFooter />
-        </ScrollReveal>
-      </div>
+      </ul>
     </div>
   );
 };
@@ -148,6 +180,7 @@ WrappdLayout.propTypes = {
   ).isRequired,
   filterOverview: PropTypes.object.isRequired,
   shareLinkTitle: PropTypes.string,
+  venueLocations: PropTypes.array,
 };
 
 export default WrappdLayout;

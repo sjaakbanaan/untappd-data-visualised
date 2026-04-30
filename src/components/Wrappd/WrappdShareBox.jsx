@@ -77,15 +77,27 @@ const WrappdShareBox = ({ filterDateRange, filterOverview, filteredData }) => {
 
               <div className="pt-4">
                 <button
-                  onClick={() =>
+                  onClick={() => {
+                    const venueLocations = (filteredData || []).filter(
+                      (item, index, self) =>
+                        item.venue_lat &&
+                        item.venue_lng &&
+                        index ===
+                          self.findIndex(
+                            (t) =>
+                              t.venue_lat === item.venue_lat &&
+                              t.venue_lng === item.venue_lng
+                          )
+                    );
                     handleShare(
                       stats,
                       filterDateRange,
                       topLists,
                       filterOverview,
-                      shareLinkTitle
-                    )
-                  }
+                      shareLinkTitle,
+                      venueLocations
+                    );
+                  }}
                   disabled={isLoading}
                   className="group relative flex items-center gap-3 overflow-hidden rounded-full bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all hover:scale-105 hover:bg-black active:scale-95 disabled:opacity-70"
                 >

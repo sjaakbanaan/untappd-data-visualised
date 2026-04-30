@@ -4,7 +4,7 @@ const WrappdPhotos = ({ photosList }) => {
   // return null if there are less than 5 photos
   if (photosList.items.filter((item) => item.photo_url).length < 5) return null;
   return (
-    <div className="mb-10 grid grid-flow-row grid-cols-2 grid-rows-2 gap-4 md:mt-14 md:grid-cols-12">
+    <div className="grid grid-flow-row grid-cols-2 grid-rows-2 gap-4 md:grid-cols-12">
       {photosList.items
         .filter((item) => item.photo_url)
         .slice(0, 5)
