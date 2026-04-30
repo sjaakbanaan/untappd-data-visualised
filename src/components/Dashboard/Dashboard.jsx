@@ -1,8 +1,7 @@
-import { useState, useEffect, useLayoutEffect, useRef, lazy, Suspense } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { createPortal } from 'react-dom';
 import SectionTransition from '../UI/SectionTransition';
 import ReactGA from 'react-ga4';
-import gsap from 'gsap';
 
 import { useDashboardData } from '../../utils/';
 import { useAuth } from '../../context/AuthContext';
@@ -59,31 +58,14 @@ const Dashboard = () => {
 
   // Sidebar toggle state
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const fabRef = useRef(null);
-  const [animationStatus, setAnimationStatus] = useState('hidden'); // 'hidden', 'animating', 'done'
+  const [fabVisible, setFabVisible] = useState(false);
 
-  // Animate FAB in when data is ready
-  useLayoutEffect(() => {
-    if (!dataLoading && beerData.length > 0 && animationStatus === 'hidden') {
-      setAnimationStatus('animating');
+  // Trigger FAB fade-in when data is ready
+  useEffect(() => {
+    if (!dataLoading && beerData.length > 0) {
+      setFabVisible(true);
     }
-  }, [dataLoading, beerData.length, animationStatus]);
-
-  useLayoutEffect(() => {
-    if (animationStatus === 'animating' && fabRef.current) {
-      gsap.set(fabRef.current, { y: 40, opacity: 0 });
-
-      // Slide up — quick
-      gsap.to(fabRef.current, {
-        y: 0,
-        duration: 0.6,
-        ease: 'power3.out',
-        clearProps: 'transform',
-        opacity: 1,
-        onComplete: () => setAnimationStatus('done'),
-      });
-    }
-  }, [animationStatus]);
+  }, [dataLoading, beerData.length]);
 
   return (
     // All filtering instruments and total result display are up next:
@@ -103,10 +85,10 @@ const Dashboard = () => {
           beerData.length > 0 &&
           createPortal(
             <button
-              ref={fabRef}
-              style={{ opacity: animationStatus === 'done' ? 1 : 0 }}
               onClick={() => setIsSidebarOpen(true)}
-              className="fixed bottom-6 right-6 z-40 flex items-center justify-center gap-2 rounded-full bg-yellow-500 p-4 font-bold text-black shadow-2xl transition hover:scale-105 hover:bg-yellow-400 md:px-6 md:py-3 lg:bottom-10 lg:right-10"
+              className={`fixed bottom-6 right-6 z-40 flex items-center justify-center gap-2 rounded-full bg-yellow-500 p-4 font-bold text-black shadow-2xl transition-all duration-500 ease-out hover:scale-105 hover:bg-yellow-400 md:px-6 md:py-3 lg:bottom-10 lg:right-10 ${
+                fabVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+              }`}
               aria-label="Refine Filters"
             >
               <Icon icon="FILTER" className="w-5" />
