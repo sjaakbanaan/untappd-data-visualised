@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { DataContext } from '../../DataContext';
 import BadgeCard from './BadgeCard';
+import BadgeTransition from '../UI/BadgeTransition';
 
 const PAGE_SIZE = 50;
 
@@ -45,7 +46,7 @@ const Badges = () => {
     if (!groupByLevel) return null;
     const groups = [];
     const groupMap = new Map();
-    
+
     shown.forEach((badge) => {
       const groupName = getLevelGroup(badge.level);
       if (!groupMap.has(groupName)) {
@@ -54,7 +55,7 @@ const Badges = () => {
       }
       groupMap.get(groupName).push(badge);
     });
-    
+
     return { groups, groupMap };
   })();
 
@@ -98,15 +99,15 @@ const Badges = () => {
       {/* Grid */}
       {!groupByLevel ? (
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {shown.length > 0 ? (
-            shown.map((badge) => (
-              <BadgeCard key={badge.baseName} badge={badge} />
-            ))
-          ) : (
-            <p className="col-span-full text-center text-sm text-gray-400">
-              No badges found for &ldquo;{query}&rdquo;.
-            </p>
-          )}
+          <BadgeTransition sectionKey={`${activeQuery}-${filtered.length}`}>
+            {shown.length > 0 ? (
+              shown.map((badge) => <BadgeCard key={badge.baseName} badge={badge} />)
+            ) : (
+              <p className="col-span-full text-center text-sm text-gray-400">
+                No badges found for &ldquo;{query}&rdquo;.
+              </p>
+            )}
+          </BadgeTransition>
         </div>
       ) : (
         <div className="space-y-8">
@@ -120,9 +121,13 @@ const Badges = () => {
                   </span>
                 </h3>
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                  {groupedBadges.groupMap.get(groupName).map((badge) => (
-                    <BadgeCard key={badge.baseName} badge={badge} />
-                  ))}
+                  <BadgeTransition
+                    sectionKey={`${groupName}-${groupedBadges.groupMap.get(groupName).length}`}
+                  >
+                    {groupedBadges.groupMap.get(groupName).map((badge) => (
+                      <BadgeCard key={badge.baseName} badge={badge} />
+                    ))}
+                  </BadgeTransition>
                 </div>
               </div>
             ))

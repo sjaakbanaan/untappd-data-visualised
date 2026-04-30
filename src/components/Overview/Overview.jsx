@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import OverviewCard from './OverviewCard';
 import Pagination from './Pagination';
 import Icon from '../UI/Icon/Icon';
+import SectionTransition from '../UI/SectionTransition';
 
 const Overview = ({ beerData, lessCols }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -86,9 +87,11 @@ const Overview = ({ beerData, lessCols }) => {
             ${lessCols ? 'lg:grid-cols-3' : 'lg:grid-cols-4'}
           `}
         >
-          {sortedBeerData.slice(startIndex, endIndex).map((item, i) => (
-            <OverviewCard key={i} item={item} />
-          ))}
+          <SectionTransition skipMove sectionKey={sortedBeerData}>
+            {sortedBeerData.slice(startIndex, endIndex).map((item, i) => (
+              <OverviewCard key={i} item={item} />
+            ))}
+          </SectionTransition>
         </div>
         <Pagination
           currentPage={currentPage}

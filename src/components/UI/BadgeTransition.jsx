@@ -5,7 +5,7 @@ import gsap from 'gsap';
  * Wraps section content and plays a fade-in-up animation
  * every time the `sectionKey` prop changes.
  */
-const SectionTransition = ({ sectionKey, children, skipMove }) => {
+const BadgeTransition = ({ sectionKey, children }) => {
   const containerRef = useRef(null);
 
   useLayoutEffect(() => {
@@ -14,35 +14,26 @@ const SectionTransition = ({ sectionKey, children, skipMove }) => {
 
     const targets = [...el.children];
 
-    // Kill any running tweens so rapid switches stay snappy
-    gsap.killTweensOf(targets);
-
     // Set initial state immediately
-    gsap.set(targets, { opacity: 0 });
-    if (!skipMove) {
-      gsap.set(targets, { y: 40 });
-    }
+    gsap.set(targets, { y: 40, opacity: 0 });
 
     // Slide up — quick
-    if (!skipMove) {
-      gsap.to(targets, {
-        y: 0,
-        duration: 1,
-        ease: 'power3.out',
-        stagger: 0.08,
-        clearProps: 'transform',
-      });
-    }
+    gsap.to(targets, {
+      y: 0,
+      duration: 1, // Reset to a reasonable value, user can tweak
+      ease: 'power3.out',
+      stagger: 0.02,
+      clearProps: 'transform',
+    });
 
     // Fade in — longer, softer
     gsap.to(targets, {
       opacity: 1,
-      duration: 1.4,
-      delay: 0.2,
+      duration: 1,
       ease: 'power2.out',
-      stagger: 0.08,
+      stagger: 0.04,
     });
-  }, [sectionKey, skipMove]);
+  }, [sectionKey]);
 
   return (
     <div ref={containerRef} className="contents">
@@ -51,4 +42,4 @@ const SectionTransition = ({ sectionKey, children, skipMove }) => {
   );
 };
 
-export default SectionTransition;
+export default BadgeTransition;

@@ -16,28 +16,23 @@ const PageTransition = ({ children }) => {
 
     gsap.killTweensOf(el);
 
+    // Set initial state immediately
+    gsap.set(el, { y: 40, opacity: 0 });
+
     // Slide up — quick
-    gsap.fromTo(
-      el,
-      { y: 40 },
-      {
-        y: 0,
-        duration: 0.6,
-        ease: 'power3.out',
-        clearProps: 'transform',
-      }
-    );
+    gsap.to(el, {
+      y: 0,
+      duration: 0.6,
+      ease: 'power3.out',
+      clearProps: 'transform',
+    });
 
     // Fade in — longer, softer
-    gsap.fromTo(
-      el,
-      { opacity: 0 },
-      {
-        opacity: 1,
-        duration: 1.4,
-        ease: 'power2.out',
-      }
-    );
+    gsap.to(el, {
+      opacity: 1,
+      duration: 1.4,
+      ease: 'power2.out',
+    });
   }, [location.pathname]);
 
   return <div ref={containerRef}>{children}</div>;

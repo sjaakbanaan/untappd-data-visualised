@@ -5,7 +5,7 @@ import { filterBeerData, getDefaultStartDate, getDefaultEndDate } from '.';
 
 export const useDashboardData = () => {
   // BEHOLD! THE ALMIGHTHY BEER DATA!
-  const { beerData, resetList } = useContext(DataContext);
+  const { beerData, resetList, dataLoading } = useContext(DataContext);
 
   // prepare the useStates for the incoming data:
   const [filteredData, setFilteredData] = useState([]);
@@ -36,5 +36,6 @@ export const useDashboardData = () => {
     setFilterOverview,
     filterDateRange,
     setFilterDateRange,
+    dataLoading,
   };
 };

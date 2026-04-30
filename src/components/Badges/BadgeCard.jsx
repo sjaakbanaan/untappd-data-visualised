@@ -17,7 +17,7 @@ const BadgeCard = ({ badge }) => {
       href={badgeUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex items-center gap-4 overflow-hidden rounded-lg border border-gray-700 bg-gray-800 p-4 transition-all duration-200 hover:border-yellow-500/60 hover:bg-gray-700"
+      className="group flex items-center gap-4 overflow-hidden rounded-lg border border-gray-700 bg-gray-800 p-4 transition-colors duration-200 hover:border-yellow-500/60 hover:bg-gray-700"
     >
       {image_url ? (
         <img
