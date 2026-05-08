@@ -1,5 +1,4 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
-import { createPortal } from 'react-dom';
 import SectionTransition from '../UI/SectionTransition';
 import ReactGA from 'react-ga4';
 
@@ -7,12 +6,10 @@ import { useDashboardData } from '../../utils/';
 import { useAuth } from '../../context/AuthContext';
 
 import DashboardHeader from './DashboardHeader';
-import FilterSidebar from './FilterSidebar';
 import NotificationBar from '../UI/NotificationBar';
 import DashboardNav from './DashboardNav';
 import AIAnalysis from '../AIAnalysis/AIAnalysis';
 import ScraperXLDisclaimer from '../ScraperXLDisclaimer';
-import Icon from '../UI/Icon/Icon';
 
 // Lazy-load heavy components
 const BasicStats = lazy(() => import('../BasicStats/BasicStats'));
@@ -47,7 +44,7 @@ const Dashboard = () => {
     setFilterOverview,
     filterDateRange,
     setFilterDateRange,
-    dataLoading,
+    setIsFilterSidebarOpen,
   } = useDashboardData();
 
   // set a default active dashboard menu item:
@@ -55,17 +52,6 @@ const Dashboard = () => {
 
   // Add state for AI analysis to persist across tab switches
   const [aiAnalysis, setAiAnalysis] = useState('');
-
-  // Sidebar toggle state
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [fabVisible, setFabVisible] = useState(false);
-
-  // Trigger FAB fade-in when data is ready
-  useEffect(() => {
-    if (!dataLoading && beerData.length > 0) {
-      setFabVisible(true);
-    }
-  }, [dataLoading, beerData.length]);
 
   return (
     // All filtering instruments and total result display are up next:
@@ -78,36 +64,9 @@ const Dashboard = () => {
           setFilterOverview={setFilterOverview}
           totalBeerCount={filteredData.length}
           setFilterDateRange={setFilterDateRange}
-          onFilterClick={() => setIsSidebarOpen(true)}
+          onFilterClick={() => setIsFilterSidebarOpen(true)}
         />
-        {/* Floating Action Button for Filters */}
-        {!dataLoading &&
-          beerData.length > 0 &&
-          createPortal(
-            <button
-              onClick={() => setIsSidebarOpen(true)}
-              className={`fixed bottom-6 right-6 z-40 flex items-center justify-center gap-2 rounded-full bg-yellow-500 p-4 font-bold text-black shadow-2xl transition-all duration-500 ease-out hover:scale-105 hover:bg-yellow-400 md:px-6 md:py-3 lg:bottom-10 lg:right-10 ${
-                fabVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
-              }`}
-              aria-label="Refine Filters"
-            >
-              <Icon icon="FILTER" className="w-5" />
-              <span className="hidden md:inline">Refine Filters</span>
-            </button>,
-            document.body
-          )}
       </div>
-
-      <FilterSidebar
-        isOpen={isSidebarOpen}
-        onClose={() => setIsSidebarOpen(false)}
-        beerData={beerData}
-        filteredData={filteredData}
-        filterDateRange={filterDateRange}
-        setFilterDateRange={setFilterDateRange}
-        filterOverview={filterOverview}
-        setFilterOverview={setFilterOverview}
-      />
 
       {filteredData && filteredData.length > 0 ? (
         <div>

@@ -13,6 +13,8 @@ export const useDashboardData = () => {
     setFilterDateRange,
     filterOverview,
     setFilterOverview,
+    isFilterSidebarOpen,
+    setIsFilterSidebarOpen,
   } = useContext(DataContext);
 
   // prepare the useStates for the incoming data:
@@ -39,6 +41,8 @@ export const useDashboardData = () => {
     setFilterOverview,
     filterDateRange,
     setFilterDateRange,
+    isFilterSidebarOpen,
+    setIsFilterSidebarOpen,
     dataLoading,
   };
 };

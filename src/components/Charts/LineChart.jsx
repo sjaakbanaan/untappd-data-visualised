@@ -23,17 +23,26 @@ ChartJS.register(
 );
 
 const LineChart = ({ beerData }) => {
-  // Extract years and calculate cumulative counts per year
-  const peroidCounts = {};
-  let cumulativeCount = 0;
+  // Count check-ins per calendar year, then cumulative totals (oldest → newest).
+  // Array order from exports is often newest-first; a running sum in that order
+  // mislabels each year and can reverse the x-axis.
+  const countsByYear = {};
   beerData.forEach((beer) => {
     const year = new Date(beer.created_at).getFullYear();
-    cumulativeCount += 1; // Increment cumulative count
-    peroidCounts[year] = cumulativeCount;
+    countsByYear[year] = (countsByYear[year] || 0) + 1;
   });
 
-  // Generate labels and data based on yearly counts
-  const labels = Object.keys(peroidCounts);
+  const yearsAsc = Object.keys(countsByYear)
+    .map(Number)
+    .sort((a, b) => a - b);
+
+  let cumulative = 0;
+  const cumulativeByYear = yearsAsc.map((y) => {
+    cumulative += countsByYear[y];
+    return cumulative;
+  });
+
+  const labels = yearsAsc.map(String);
 
   const options = {
     responsive: true,
@@ -70,7 +79,7 @@ const LineChart = ({ beerData }) => {
     datasets: [
       {
         label: 'Beers',
-        data: labels.map((year) => peroidCounts[year]),
+        data: cumulativeByYear,
         borderColor: '#fdba11',
         backgroundColor: '#fdba11',
       },

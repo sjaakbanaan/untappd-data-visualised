@@ -56,6 +56,7 @@ After setting filters, the following lists are presented in either a chart or li
 - 31-03-2026: v2.9.1 Fixed a bug where filtering on 'tagged friends' wouldn't return a complete list + improved mobile UX
 - 08-04-2026: v3.0.0 Added a leaderboard functionality + rebranded to Tappd + improved (mobile) UX + fixed bug where you had to hard refresh after uploading a new json.
 - 18-04-2026: v3.0.3 Fixed 'Top 10 rated beers (global / you (diff))' - hide when json was exported with the scraper XL, otherwise it will just show the global ratings
+- 01-05-2026: v3.1.0 Refactored Wrappd UX, and added maps and more basic statistics + small bug fixes.
 
 ## Known bugs
 

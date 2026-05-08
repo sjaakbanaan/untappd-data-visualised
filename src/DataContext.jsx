@@ -138,6 +138,8 @@ const DataProvider = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, userProfile, manipulateData]);
 
+  const [isFilterSidebarOpen, setIsFilterSidebarOpen] = useState(false);
+
   const value = useMemo(() => ({ 
     beerData, 
     setBeerData, 
@@ -150,7 +152,9 @@ const DataProvider = ({ children }) => {
     setFilterDateRange,
     filterOverview,
     setFilterOverview,
-  }), [beerData, badgeData, dataLoading, skipNextFetch, filterDateRange, filterOverview]);
+    isFilterSidebarOpen,
+    setIsFilterSidebarOpen,
+  }), [beerData, badgeData, dataLoading, skipNextFetch, filterDateRange, filterOverview, isFilterSidebarOpen]);
 
   return (
     <DataContext.Provider value={value}>
