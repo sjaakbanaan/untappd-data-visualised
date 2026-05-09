@@ -82,7 +82,7 @@ const TopTable = ({
                     />
                     <div
                       aria-hidden
-                      className="pointer-events-none absolute inset-0 z-[1] bg-gray-900 opacity-0 transition-opacity duration-[1000ms] group-hover:opacity-80"
+                      className="pointer-events-none absolute inset-0 z-[1] bg-gray-900 opacity-0 transition-opacity duration-1000 group-hover:opacity-80"
                     />
                   </>
                 )}

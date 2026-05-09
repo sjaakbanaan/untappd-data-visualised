@@ -4,16 +4,26 @@ const OverviewCard = ({ item }) => {
   return (
     <div
       key={item.checkin_id}
-      style={{
-        backgroundImage: `url(${item.photo_url})`,
-      }}
-      className="block overflow-hidden bg-gray-800 bg-cover bg-center shadow-lg transition-transform duration-300 hover:scale-110 md:rounded-lg"
+      className="group relative min-h-64 overflow-hidden bg-gray-800 shadow-lg md:rounded-lg"
     >
+      {item.photo_url && (
+        <>
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 z-0 origin-center bg-cover bg-center transition-transform duration-[1200ms] group-hover:scale-[1.2]"
+            style={{ backgroundImage: `url(${item.photo_url})` }}
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 z-[1] bg-gray-900 opacity-0 transition-opacity duration-1000 group-hover:opacity-80"
+          />
+        </>
+      )}
       <a
         href={item.checkin_url}
         target="_blank"
         rel="noopener noreferrer"
-        className={`block h-full min-h-96 ${item.photo_url && 'bg-gray-800/50'} p-4 pb-8 md:rounded-lg`}
+        className={`relative z-10 block h-full min-h-96 ${item.photo_url && 'bg-gray-800/50'} p-4 pb-8 md:rounded-lg md:p-6`}
       >
         <h2 className="mb-2 text-xl font-semibold text-white">{item.beer_name}</h2>
         <p className="mb-4">{item.brewery_name}</p>
