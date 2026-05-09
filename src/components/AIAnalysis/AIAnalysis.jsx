@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { useState, useEffect, useRef } from 'react';
-import { analyzeBeerDataWithAI, formatWrappdDates } from '../../utils/';
+import { analyzeBeerDataWithAI, formatWrappdDates, useDashboardData } from '../../utils/';
 
 const AIAnalysis = ({
   beerData,
@@ -12,6 +12,7 @@ const AIAnalysis = ({
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const prevBeerDataRef = useRef();
+  const { setIsFilterSidebarOpen } = useDashboardData();
 
   // Reset analysis when beerData changes
   useEffect(() => {
@@ -58,18 +59,40 @@ const AIAnalysis = ({
           <span className="ml-2 text-sm text-gray-500">BETA</span>
         </h2>
 
-        <div className="block overflow-hidden border border-white p-6 shadow-lg md:rounded-lg">
+        <div className="block overflow-hidden border border-white px-6 py-10 shadow-lg md:rounded-lg">
           <div className="mb-4 text-center">
-            <p className="text-gray-300">
-              Get AI-powered insights for{' '}
-              <span className="font-bold">
+            <p className="mb-2 text-gray-300">
+              Get AI-powered insights for:
+              <button
+                className="ml-2 cursor-pointer items-center gap-1 whitespace-nowrap rounded border border-yellow-500/20 bg-yellow-500/10 px-2 py-1 text-sm font-normal text-yellow-500 transition-colors hover:bg-yellow-500/20"
+                onClick={() => setIsFilterSidebarOpen(true)}
+              >
                 {formatWrappdDates(filterDateRange.start, filterDateRange.end)}
-              </span>
-              .
+              </button>
             </p>
           </div>
 
-          <div className="flex justify-center">
+          {analysis && (
+            <div className="mt-6 block overflow-hidden bg-gray-700 p-6 shadow-lg md:rounded-lg">
+              <h3 className="mb-4 text-xl font-semibold text-yellow-500">
+                Your analysis for{' '}
+                <span className="font-bold">
+                  {formatWrappdDates(filterDateRange.start, filterDateRange.end)}
+                </span>
+              </h3>
+              <div
+                className="prose prose-sm max-w-none text-gray-300"
+                dangerouslySetInnerHTML={{
+                  __html: analysis
+                    .split('\n')
+                    .filter((p) => p.trim())
+                    .map((paragraph) => `<p class="mb-3">${paragraph.trim()}</p>`)
+                    .join(''),
+                }}
+              />
+            </div>
+          )}
+          <div className="mt-8 flex justify-center">
             <button
               onClick={analyzeBeerData}
               disabled={isLoading || !beerData || beerData.length === 0}
@@ -87,28 +110,6 @@ const AIAnalysis = ({
           {error && (
             <div className="mt-4 rounded border border-red-400 bg-red-900/50 p-3 text-red-300">
               {error}
-            </div>
-          )}
-
-          {analysis && (
-            <div className="mt-6 block overflow-hidden bg-gray-700 p-6 shadow-lg md:rounded-lg">
-              <h3 className="mb-4 text-xl font-semibold text-yellow-500">
-                Your analysis for{' '}
-                <span className="font-bold">
-                  {formatWrappdDates(filterDateRange.start, filterDateRange.end)}
-                </span>
-                .
-              </h3>
-              <div
-                className="prose prose-sm max-w-none text-gray-300"
-                dangerouslySetInnerHTML={{
-                  __html: analysis
-                    .split('\n')
-                    .filter((p) => p.trim())
-                    .map((paragraph) => `<p class="mb-3">${paragraph.trim()}</p>`)
-                    .join(''),
-                }}
-              />
             </div>
           )}
         </div>

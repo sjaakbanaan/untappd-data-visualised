@@ -20,7 +20,7 @@ const WrappdCardHero = ({
       >
         <span
           className="block font-extrabold leading-none text-gray-800"
-          style={{ fontSize: 'clamp(12rem, 25vw, 20rem)', lineHeight: 0.85 }}
+          style={{ fontSize: 'clamp(12rem, 25vw, 14rem)', lineHeight: 0.85 }}
         >
           {totalBeers}
         </span>

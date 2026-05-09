@@ -3,7 +3,7 @@ import { version } from '../../package.json';
 
 const Footer = () => {
   return (
-    <div className="my-5 p-3 text-center text-yellow-500 md:my-10">
+    <div className="my-5 p-3 text-center text-yellow-500 md:my-4">
       <div className="flex items-center justify-center gap-2 pt-1 text-gray-400">
         <span>v{version}, powered by your drinking habits</span>
         <Icon

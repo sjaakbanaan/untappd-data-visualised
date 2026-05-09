@@ -32,7 +32,7 @@ const WrappdCardMap = ({ venueLocations }) => {
   if (!mapboxKey || !hasData) return null;
 
   return (
-    <div className="relative size-full min-h-[85vh] overflow-hidden">
+    <div className="relative size-full min-h-[75vh] overflow-hidden">
       {/* Text Content Overlay */}
       <div className="relative z-10 p-8 md:p-14">
         <div className="flex items-center gap-3">
@@ -40,7 +40,7 @@ const WrappdCardMap = ({ venueLocations }) => {
             🗺️
           </span>
           <h2 className="text-xl font-bold text-wrappdYellow">Where You Drank</h2>
-          <div className="h-px flex-1 bg-gray-800/50" />
+          <div className="flex-1 bg-gray-800/50" />
           <span className="rounded bg-black/20 px-2 py-1 text-sm text-gray-400 backdrop-blur-sm">
             {venueLocations.length} venues
           </span>

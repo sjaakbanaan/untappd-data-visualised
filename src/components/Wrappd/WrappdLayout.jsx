@@ -19,11 +19,11 @@ const StackCard = ({
   children,
 }) => (
   <li
-    className={`wrappd-card sticky pb-px ${extraClass}`}
+    className={`wrappd-card sticky ${extraClass}`}
     style={{ '--index': index, '--numcards': numCards }}
   >
     <div
-      className={`wrappd-card__content origin-top overflow-hidden rounded-3xl will-change-transform min-h-[85vh] shadow-2xl shadow-gray-950 ${bg}`}
+      className={`wrappd-card__content min-h-[75vh] origin-top overflow-hidden rounded-3xl shadow-2xl shadow-gray-950 will-change-transform ${bg}`}
     >
       {children}
     </div>
@@ -149,7 +149,13 @@ const WrappdLayout = ({
         className="mx-auto flex list-none flex-col p-0 md:pb-16 lg:max-w-screen-md xl:max-w-screen-lg"
       >
         {cards.map(({ key, bg, content }, i) => (
-          <StackCard key={key} index={i + 1} numCards={numCards} bg={bg}>
+          <StackCard
+            key={key}
+            index={i + 1}
+            numCards={numCards}
+            extraClass={i !== numCards - 1 ? 'mb-10' : ''}
+            bg={bg}
+          >
             {content}
           </StackCard>
         ))}

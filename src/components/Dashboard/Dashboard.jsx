@@ -121,6 +121,7 @@ const Dashboard = () => {
                       setAnalysis={setAiAnalysis}
                       filterDateRange={filterDateRange}
                       geminiApiKey={geminiApiKey}
+                      setIsFilterSidebarOpen={setIsFilterSidebarOpen}
                     />
                   </div>
                 )}

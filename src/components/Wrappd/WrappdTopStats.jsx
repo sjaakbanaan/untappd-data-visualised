@@ -4,7 +4,7 @@ const WrappdTopStats = ({ title, items, valueKey = 'value', suffix = '' }) => {
   if (!items || items.length === 0) return null;
 
   return (
-    <div>
+    <div className="min-w-0">
       <div className="mb-4 text-lg font-bold text-wrappdYellow">{title}</div>
       <ol className="space-y-2">
         {items.map((item, i) => (
@@ -16,19 +16,19 @@ const WrappdTopStats = ({ title, items, valueKey = 'value', suffix = '' }) => {
               </span>
 
               {/* Name */}
-              <div className="min-w-0 flex-1 truncate text-sm">
+              <div className="min-w-0 flex-1 text-sm">
                 {item.url ? (
                   <a
                     href={item.url}
                     title={`See checkin for ${item.name}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-wrappdYellow hover:underline"
+                    className="block truncate hover:text-wrappdYellow hover:underline"
                   >
                     {item.name}
                   </a>
                 ) : (
-                  item.name
+                  <span className="block truncate">{item.name}</span>
                 )}
               </div>
 
