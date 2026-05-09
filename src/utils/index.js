@@ -33,6 +33,18 @@ import { useShareStats } from './useShareStats';
 import { analyzeBeerDataWithAI } from './aiAnalysis';
 import { getVsTheWorld } from './getVsTheWorld';
 import { statsPopularCheckins } from './statsPopularCheckins';
+import {
+  analysisMatchesRange,
+  buildStoredAnalysisPayload,
+  formatAnalysisTimestamp,
+  getAnalysisCreatedAt,
+  getAnalysisRange,
+  readStoredAnalysis,
+  removeStoredAnalysis,
+  serializeBeerDataForAnalysis,
+  writeStoredAnalysis,
+} from './aiAnalysisStorage';
+import { formatAnalysisHtml } from './formatAnalysisHtml';
 
 export {
   formatDate,
@@ -73,4 +85,14 @@ export {
   setCache,
   deleteCache,
   clearOldCache,
+  analysisMatchesRange,
+  buildStoredAnalysisPayload,
+  formatAnalysisHtml,
+  formatAnalysisTimestamp,
+  getAnalysisCreatedAt,
+  getAnalysisRange,
+  readStoredAnalysis,
+  removeStoredAnalysis,
+  serializeBeerDataForAnalysis,
+  writeStoredAnalysis,
 };

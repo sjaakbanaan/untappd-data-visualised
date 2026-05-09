@@ -21,21 +21,21 @@ Tappd is designed to visualize Untappd data in various formats, such as charts, 
 
 Go to [tappd.online](https:///tappd.online) and upload your export. Set a date range, and start filtering. For example filter by brewery name/city/country or venue name/city/country.
 After setting filters, the following lists are presented in either a chart or list:
-| Category | Subcategory | Items |
-|----------------|-------------|------|
-| **Beer** | Top lists | Top beers (rated / most drank / strongest), Top beer styles, Top flavor combinations / flavor profiles |
-| | Analysis | Beer type appreciation list, Beer types by rating |
-| | Filters | Filter by beer type |
-| **Breweries** | Top lists | Top breweries, Top brewery countries, Top brewery cities |
-| | Analysis | Breweries by rating |
-| | Filters | Filter by breweries, Filter by brewery countries, Filter by brewery cities |
-| **Venues** | Top lists | Top venues, Top venue countries, Top venue cities, Top venues purchased |
-| | Filters | Filter by venues drank at, Filter by countries drank at, Filter by cities drank at |
-| **Social** | Interaction | Tagged friends, Filter by tagged friends, Top toasts, Top comments |
-| **Maps** | Visualization | Show check-ins on a map, Map displaying venues checked-in, Map displaying brewery countries |
-| **Statistics** | Frequency | Beer ABV distribution, Rating score distribution, Serving type distribution, Beers per day / month / year |
-| | General | Cumulative beer count (year), Basic statistics |
-| **Achievements** | Overview | Badges overview |
+| Category         | Subcategory   | Items                                                                                                     |
+| ---------------- | ------------- | --------------------------------------------------------------------------------------------------------- |
+| **Beer**         | Top lists     | Top beers (rated / most drank / strongest), Top beer styles, Top flavor combinations / flavor profiles    |
+|                  | Analysis      | Beer type appreciation list, Beer types by rating                                                         |
+|                  | Filters       | Filter by beer type                                                                                       |
+| **Breweries**    | Top lists     | Top breweries, Top brewery countries, Top brewery cities                                                  |
+|                  | Analysis      | Breweries by rating                                                                                       |
+|                  | Filters       | Filter by breweries, Filter by brewery countries, Filter by brewery cities                                |
+| **Venues**       | Top lists     | Top venues, Top venue countries, Top venue cities, Top venues purchased                                   |
+|                  | Filters       | Filter by venues drank at, Filter by countries drank at, Filter by cities drank at                        |
+| **Social**       | Interaction   | Tagged friends, Filter by tagged friends, Top toasts, Top comments                                        |
+| **Maps**         | Visualization | Show check-ins on a map, Map displaying venues checked-in, Map displaying brewery countries               |
+| **Statistics**   | Frequency     | Beer ABV distribution, Rating score distribution, Serving type distribution, Beers per day / month / year |
+|                  | General       | Cumulative beer count (year), Basic statistics                                                            |
+| **Achievements** | Overview      | Badges overview                                                                                           |
 
 ## Screenshots
 
@@ -57,6 +57,7 @@ After setting filters, the following lists are presented in either a chart or li
 - 08-04-2026: v3.0.0 Added a leaderboard functionality + rebranded to Tappd + improved (mobile) UX + fixed bug where you had to hard refresh after uploading a new json.
 - 18-04-2026: v3.0.3 Fixed 'Top 10 rated beers (global / you (diff))' - hide when json was exported with the scraper XL, otherwise it will just show the global ratings
 - 01-05-2026: v3.1.0 Refactored Wrappd UX, and added maps and more basic statistics + small bug fixes.
+- 10-05-2026: v3.4.0 feat: update AIAnalysis component with enhanced analysis storage functionality and improved data handling
 
 ## Known bugs
 
