@@ -38,7 +38,7 @@ const SectionTransition = ({ sectionKey, children, skipMove }) => {
     gsap.to(targets, {
       opacity: 1,
       duration: 1.4,
-      delay: 0.2,
+      delay: 0.1,
       ease: 'power2.out',
       stagger: 0.08,
     });

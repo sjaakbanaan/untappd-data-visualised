@@ -45,8 +45,8 @@ const AppRoutes = () => {
         }
       />
       <Route path="/login" element={user ? <Navigate to="/" replace /> : <AuthPage />} />
-      <Route 
-        path="/upload" 
+      <Route
+        path="/upload"
         element={
           user ? (
             !isProfileComplete ? (
@@ -57,12 +57,18 @@ const AppRoutes = () => {
           ) : (
             <Navigate to="/login" replace />
           )
-        } 
+        }
       />
-      <Route path="/settings" element={user ? <SettingsPage /> : <Navigate to="/login" replace />} />
-      <Route path="/leaderboard" element={user ? <LeaderboardPage /> : <Navigate to="/login" replace />} />
-      <Route 
-        path="/my-wrappd" 
+      <Route
+        path="/settings"
+        element={user ? <SettingsPage /> : <Navigate to="/login" replace />}
+      />
+      <Route
+        path="/leaderboard"
+        element={user ? <LeaderboardPage /> : <Navigate to="/login" replace />}
+      />
+      <Route
+        path="/my-wrappd"
         element={
           user ? (
             !isProfileComplete ? (
@@ -73,7 +79,7 @@ const AppRoutes = () => {
           ) : (
             <Navigate to="/login" replace />
           )
-        } 
+        }
       />
       <Route path="/wrappd/:id" element={<Wrappd />} />
       <Route path="*" element={<Navigate to="/" replace />} />

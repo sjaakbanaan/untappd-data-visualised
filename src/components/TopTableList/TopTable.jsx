@@ -71,13 +71,23 @@ const TopTable = ({
             processedList.map((item, i) => (
               <li
                 key={i}
-                className={`${showPhotos ? 'min-h-64 overflow-hidden bg-gray-800 bg-cover bg-center shadow-lg transition-transform duration-300 hover:scale-110 md:rounded-lg ' : 'py-2'}`}
-                style={
-                  item.photo_url ? { backgroundImage: `url(${item.photo_url})` } : null
-                }
+                className={`${showPhotos ? 'group relative min-h-64 overflow-hidden bg-gray-800 shadow-lg md:rounded-lg' : 'py-2'}`}
               >
+                {showPhotos && item.photo_url && (
+                  <>
+                    <div
+                      aria-hidden
+                      className="pointer-events-none absolute inset-0 z-0 origin-center bg-cover bg-center transition-transform duration-[1200ms] group-hover:scale-[1.2]"
+                      style={{ backgroundImage: `url(${item.photo_url})` }}
+                    />
+                    <div
+                      aria-hidden
+                      className="pointer-events-none absolute inset-0 z-[1] bg-gray-900 opacity-0 transition-opacity duration-[1000ms] group-hover:opacity-80"
+                    />
+                  </>
+                )}
                 <div
-                  className={`flex h-full items-center justify-between ${lowerCase && 'lowercase'}`}
+                  className={`flex h-full items-center justify-between ${showPhotos ? 'relative z-10 min-h-64' : ''} ${lowerCase && 'lowercase'}`}
                 >
                   <a
                     href={item.url}

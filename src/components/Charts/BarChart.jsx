@@ -15,6 +15,19 @@ import {
 import ChartModal from './ChartModal';
 import NotificationBar from '../UI/NotificationBar';
 
+/** Vertical yellow gradient aligned to the chart plot area (shared by all bars). */
+const barBackgroundGradient = (context) => {
+  const chart = context.chart;
+  const { ctx, chartArea } = chart;
+  if (!chartArea) {
+    return '#eab308';
+  }
+  const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+  gradient.addColorStop(0, '#ca8a04'); // yellow-600
+  gradient.addColorStop(1, '#fde047'); // yellow-300
+  return gradient;
+};
+
 const BarChart = ({ beerData, dataType = '', trailingChar = '' }) => {
   const openModal = () => setOpen(true);
   const [open, setOpen] = useState(false);
@@ -89,7 +102,8 @@ const BarChart = ({ beerData, dataType = '', trailingChar = '' }) => {
       {
         label: 'total',
         data: data,
-        backgroundColor: '#eab308', // Yellow-500
+        backgroundColor: barBackgroundGradient,
+        hoverBackgroundColor: barBackgroundGradient,
         hoverOffset: 8,
       },
     ],

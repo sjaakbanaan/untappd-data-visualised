@@ -6,6 +6,18 @@ import { processTopData } from '../../utils/';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+const barBackgroundGradient = (context) => {
+  const chart = context.chart;
+  const { ctx, chartArea } = chart;
+  if (!chartArea) {
+    return '#eab308';
+  }
+  const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+  gradient.addColorStop(0, '#ca8a04'); // yellow-800?
+  gradient.addColorStop(1, '#fde047'); // yellow-600
+  return gradient;
+};
+
 const PieChart = ({ beerData, dataType, urlType = '' }) => {
   const { labels, topChartData, topItems } = processTopData(beerData, dataType, urlType);
 

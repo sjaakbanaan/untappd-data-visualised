@@ -14,7 +14,7 @@ const AppContent = () => {
   const isWrappdRoute = location.pathname.startsWith('/wrappd');
   const isDashboard = location.pathname === '/';
   const isGenerator = location.pathname === '/my-wrappd';
-  
+
   // Routes where the filter button and sidebar should be visible
   const showFilters = isDashboard || isGenerator;
 
@@ -64,19 +64,21 @@ const AppContent = () => {
             setFilterOverview={setFilterOverview}
           />
 
-          {!dataLoading && beerData.length > 0 && createPortal(
-            <button
-              onClick={() => setIsFilterSidebarOpen(true)}
-              className={`fixed bottom-6 right-6 z-40 flex items-center justify-center gap-2 rounded-full bg-yellow-500 p-4 font-bold text-black shadow-2xl transition-all duration-500 ease-out hover:scale-105 hover:bg-yellow-400 md:px-6 md:py-3 lg:bottom-10 lg:right-10 ${
-                fabVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
-              }`}
-              aria-label="Refine Filters"
-            >
-              <Icon icon="FILTER" className="w-5" />
-              <span className="hidden md:inline">Refine Filters</span>
-            </button>,
-            document.body
-          )}
+          {!dataLoading &&
+            beerData.length > 0 &&
+            createPortal(
+              <button
+                onClick={() => setIsFilterSidebarOpen(true)}
+                className={`fixed bottom-6 right-6 z-40 flex items-center justify-center gap-2 rounded-full bg-yellow-500 p-4 font-bold text-black shadow-2xl transition-all duration-500 ease-out hover:scale-105 hover:bg-yellow-400 md:px-6 md:py-3 lg:bottom-10 lg:right-10 ${
+                  fabVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+                }`}
+                aria-label="Refine Filters"
+              >
+                <Icon icon="FILTER" className="w-5" />
+                <span className="hidden md:inline">Refine Filters</span>
+              </button>,
+              document.body
+            )}
         </>
       )}
     </>
