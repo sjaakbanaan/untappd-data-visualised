@@ -12,6 +12,8 @@ const BadgeCard = ({ badge }) => {
     .replace(/-+/g, '-');
   const badgeUrl = `https://untappdbadges.home.blog/${formattedName}/`;
 
+  // https://untappd.com/user/sjaakbanaan/badges/1369178343
+
   return (
     <a
       href={badgeUrl}

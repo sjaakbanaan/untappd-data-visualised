@@ -68,6 +68,15 @@
   padding: 15px 20px 15px 15px !important;
 }
 
+.mapboxgl-popup-content {
+  background: #111827 !important;
+  @apply text-white rounded-xl shadow-2xl;
+}
+
+.mapboxgl-popup-tip {
+  border-bottom-color: #111827 !important;
+}
+
 /* ─── Wrappd Stacking Cards ─────────────────────────────────────────── */
 
 .wrappd-card {
