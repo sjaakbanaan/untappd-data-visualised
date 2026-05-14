@@ -1,0 +1,128 @@
+const path = require('path');
+
+module.exports = {
+  env: {
+    es6: true,
+    browser: true,
+    node: true,
+    jest: true,
+  },
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+    'plugin:react-hooks/recommended',
+    'plugin:tailwindcss/recommended',
+    'prettier',
+  ],
+  root: true,
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 2021,
+    sourceType: 'module',
+  },
+  settings: {
+    react: {
+      version: 'detect',
+    },
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx'],
+      },
+    },
+    tailwindcss: {
+      // Absolute path so eslint-plugin-tailwindcss / tailwind-api-utils can
+      // resolve `tailwindcss` from the project root (relative "./..." breaks).
+      config: path.join(__dirname, 'tailwind.config.js'),
+      cssFiles: [path.join(__dirname, 'src/css/**/*.css')],
+      officialSorting: true,
+    },
+  },
+  plugins: ['react', 'react-hooks', 'jsx-a11y', 'import', 'tailwindcss'],
+  ignorePatterns: ['node_modules/', '*.html', '*.css'],
+  rules: {
+    camelcase: [
+      'off',
+      {
+        ignoreDestructuring: true,
+        allow: ['UNSAFE_componentWillMount'],
+      },
+    ],
+    'comma-dangle': 'off',
+    eqeqeq: 'off',
+    'no-unused-expressions': 'warn',
+    'array-callback-return': 'warn',
+    'prefer-const': 'warn',
+    'global-require': 0,
+    'max-len': 'off',
+    'no-console': 1,
+    'no-underscore-dangle': [
+      'error',
+      {
+        allow: ['_id', '__typename', '__schema'],
+      },
+    ],
+    'no-param-reassign': 0,
+    'no-shadow': 'off',
+    'object-curly-newline': 'off',
+    'valid-jsdoc': 'off',
+    'react/react-in-jsx-scope': 'off',
+    'react/prop-types': 'off',
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
+    'import/no-unresolved': [
+      2,
+      {
+        commonjs: true,
+        caseSensitive: true,
+      },
+    ],
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        jsx: 'never',
+      },
+    ],
+    'import/no-dynamic-require': 'off',
+    'import/prefer-default-export': 'off',
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        packageDir: __dirname,
+        devDependencies: true,
+        optionalDependencies: false,
+        peerDependencies: false,
+      },
+    ],
+    'jsx-a11y/anchor-is-valid': 'off',
+    'jsx-a11y/media-has-caption': 'off',
+    'jsx-a11y/label-has-associated-control': [
+      'error',
+      {
+        required: {
+          some: ['nesting', 'id'],
+        },
+      },
+    ],
+    'jsx-a11y/label-has-for': [
+      'error',
+      {
+        required: {
+          some: ['nesting', 'id'],
+        },
+      },
+    ],
+    'jsx-quotes': ['error', 'prefer-double'],
+    quotes: ['error', 'single'],
+    'react/jsx-uses-vars': 'error',
+    'react/no-array-index-key': 'off',
+    'react/jsx-one-expression-per-line': 0,
+    'react/no-find-dom-node': 1,
+    'react/jsx-uses-react': 'off',
+    'react/no-unescaped-entities': 'off',
+  },
+};
