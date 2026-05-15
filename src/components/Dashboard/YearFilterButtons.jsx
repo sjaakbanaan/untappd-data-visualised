@@ -18,26 +18,8 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
 
   return (
     <div className="mb-8">
+      <div className="mb-2 block text-sm font-bold text-white">Year selection</div>
       <div className="flex flex-wrap gap-2">
-        <div className="inline-block">
-          <button
-            key="set-last-6-months"
-            className={`mb-0 whitespace-nowrap rounded border px-3 py-2 text-sm shadow transition-colors duration-300 ${
-              filterDateRange?.start === getDefaultStartDate() &&
-              filterDateRange?.end == getDefaultEndDate()
-                ? 'border-yellow-500 bg-yellow-500 text-gray-900'
-                : 'bg-gray-900 text-white hover:bg-gray-700'
-            }`}
-            onClick={() =>
-              setFilterDateRange({
-                start: getDefaultStartDate(),
-                end: getDefaultEndDate(),
-              })
-            }
-          >
-            last 6 months
-          </button>
-        </div>
         <div className="inline-block">
           <button
             key="set-all-time"
@@ -91,6 +73,25 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
             </button>
           </div>
         ))}
+        <div className="inline-block">
+          <button
+            key="set-last-6-months"
+            className={`mb-0 whitespace-nowrap rounded border px-3 py-2 text-sm shadow transition-colors duration-300 ${
+              filterDateRange?.start === getDefaultStartDate() &&
+              filterDateRange?.end == getDefaultEndDate()
+                ? 'border-yellow-500 bg-yellow-500 text-gray-900'
+                : 'bg-gray-900 text-white hover:bg-gray-700'
+            }`}
+            onClick={() =>
+              setFilterDateRange({
+                start: getDefaultStartDate(),
+                end: getDefaultEndDate(),
+              })
+            }
+          >
+            last 6 months
+          </button>
+        </div>
       </div>
 
       {/* Show more / fewer toggle */}

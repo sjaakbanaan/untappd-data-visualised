@@ -63,11 +63,7 @@ const DateSelector = ({ beerData, filterDateRange, setFilterDateRange, onDateBlu
 
   return (
     <div>
-      <div
-        ref={containerRef}
-        className="mb-8 grid gap-4 md:grid-cols-2"
-        onBlur={handleBlur}
-      >
+      <div ref={containerRef} className="grid gap-4 md:grid-cols-2" onBlur={handleBlur}>
         <input
           type="date"
           className={`w-full appearance-none rounded border bg-gray-900 px-3 py-2 leading-tight text-white shadow focus:outline-none md:w-auto ${startButtonFlicker}`}

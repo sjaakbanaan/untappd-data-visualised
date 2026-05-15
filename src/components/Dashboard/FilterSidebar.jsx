@@ -54,8 +54,16 @@ const FilterSidebar = ({
 
         <div className="flex flex-col gap-6">
           <div>
+            <YearFilterButtons
+              beerData={beerData}
+              filterDateRange={filterDateRange}
+              setFilterDateRange={(val) => {
+                setFilterDateRange(val);
+                onClose();
+              }}
+            />
             <div className="mb-2 block text-sm font-bold text-white">
-              Set a date range
+              Custom date range
             </div>
             <DateSelector
               beerData={beerData}
@@ -64,14 +72,6 @@ const FilterSidebar = ({
               onDateBlur={onClose}
             />
           </div>
-          <YearFilterButtons
-            beerData={beerData}
-            filterDateRange={filterDateRange}
-            setFilterDateRange={(val) => {
-              setFilterDateRange(val);
-              onClose();
-            }}
-          />
           <OverviewFilters
             beerData={filteredData}
             filterOverview={filterOverview}
