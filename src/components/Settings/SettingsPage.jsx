@@ -1,13 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { ref, deleteObject } from 'firebase/storage';
 import { doc, setDoc, deleteDoc } from 'firebase/firestore';
 import { useAuth } from '../../context/AuthContext';
+import { DataContext } from '../../DataContext';
 import { storage, db } from '../../firebase';
 import NotificationBar from '../UI/NotificationBar';
 import { deleteCache } from '../../utils';
 
 const SettingsPage = () => {
   const { user, userProfile, updateProfile } = useAuth();
+  const { beerData } = useContext(DataContext);
   const [formData, setFormData] = useState({
     untappd_username: '',
     untappd_avatar: '',
@@ -22,6 +24,13 @@ const SettingsPage = () => {
   });
   const [status, setStatus] = useState('');
   const isProfileComplete = !!(userProfile?.untappd_username && userProfile?.venue_city);
+  const hasSavedValue = (value) =>
+    value !== undefined && value !== null && value.toString().trim() !== '';
+  const hasHomeDetails = ['venue_city', 'venue_country', 'venue_lat', 'venue_lng'].every(
+    (field) => hasSavedValue(userProfile?.[field])
+  );
+  const hasImportedData = Array.isArray(beerData) && beerData.length > 0;
+  const hasDangerZoneActions = hasHomeDetails || hasImportedData;
 
   useEffect(() => {
     if (userProfile) {
@@ -210,42 +219,49 @@ const SettingsPage = () => {
         </div>
       </form>
 
-      <div className="mt-12 rounded-xl border border-red-500/20 bg-red-500/5 p-8">
-        <h3 className="mb-4 text-xl font-bold text-red-500">Advanced / Danger Zone</h3>
-        <p className="mb-6 text-sm text-gray-400">
-          Manage your sensitive data and local session settings.
-        </p>
+      {hasDangerZoneActions && (
+        <div className="mt-12 rounded-xl border border-red-500/20 bg-red-500/5 p-8">
+          <h3 className="mb-4 text-xl font-bold text-red-500">Advanced / Danger Zone</h3>
+          <p className="mb-6 text-sm text-gray-400">
+            Manage your sensitive data and local session settings.
+          </p>
 
-        <div className="grid gap-6 md:grid-cols-2">
-          <div className="rounded-lg bg-gray-900/40 p-5">
-            <h4 className="mb-2 font-bold text-gray-200">Clear Local Cache</h4>
-            <p className="mb-4 text-xs text-gray-400">
-              Only removes the browser copy of your data. The cloud version stays safe.
-              Useful if you sync issues or layout bugs.
-            </p>
-            <button
-              onClick={handleClearCache}
-              className="w-full rounded-lg border border-gray-600 px-4 py-2 text-sm font-bold text-gray-300 transition-colors hover:bg-gray-700 active:bg-gray-600"
-            >
-              Clear Cache & Reload
-            </button>
-          </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            {hasHomeDetails && (
+              <div className="rounded-lg bg-gray-900/40 p-5">
+                <h4 className="mb-2 font-bold text-gray-200">Clear Local Cache</h4>
+                <p className="mb-4 text-xs text-gray-400">
+                  Only removes the browser copy of your data. The cloud version stays
+                  safe. Useful if you sync issues or layout bugs.
+                </p>
+                <button
+                  onClick={handleClearCache}
+                  className="w-full rounded-lg border border-gray-600 px-4 py-2 text-sm font-bold text-gray-300 transition-colors hover:bg-gray-700 active:bg-gray-600"
+                >
+                  Clear Cache & Reload
+                </button>
+              </div>
+            )}
 
-          <div className="rounded-lg border border-red-900/20 bg-red-900/10 p-5">
-            <h4 className="mb-2 font-bold text-red-400">Delete Imported Data</h4>
-            <p className="mb-4 text-xs text-gray-400">
-              Permanently removes your JSON export from Firebase Storage and this device.
-              <strong>This cannot be undone.</strong>
-            </p>
-            <button
-              onClick={handleDeleteData}
-              className="w-full rounded-lg border border-red-600/30 bg-red-600/20 px-4 py-2 text-sm font-bold text-red-400 transition-all hover:text-red-300 hover:bg-red-600/30"
-            >
-              Delete All Data
-            </button>
+            {hasImportedData && (
+              <div className="rounded-lg border border-red-900/20 bg-red-900/10 p-5">
+                <h4 className="mb-2 font-bold text-red-400">Delete Imported Data</h4>
+                <p className="mb-4 text-xs text-gray-400">
+                  Permanently removes your JSON export from Firebase Storage and this
+                  device.
+                  <strong>This cannot be undone.</strong>
+                </p>
+                <button
+                  onClick={handleDeleteData}
+                  className="w-full rounded-lg border border-red-600/30 bg-red-600/20 px-4 py-2 text-sm font-bold text-red-400 transition-all hover:text-red-300 hover:bg-red-600/30"
+                >
+                  Delete All Data
+                </button>
+              </div>
+            )}
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
