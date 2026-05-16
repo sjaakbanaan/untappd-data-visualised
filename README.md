@@ -1,4 +1,4 @@
-# Tappd (Untappd Data Visualised) v3.4.2
+# Tappd (Untappd Data Visualised) v3.4.3
 
 ## This is the repository for [tappd.online](https:///tappd.online)
 
@@ -59,6 +59,7 @@ After setting filters, the following lists are presented in either a chart or li
 - 01-05-2026: v3.1.0 Refactored Wrappd UX, and added maps and more basic statistics + small bug fixes.
 - 10-05-2026: v3.4.0 feat: update AIAnalysis component with enhanced analysis storage functionality and improved data handling
 - 15-05-2026: v3.4.2 improved layout and functionality in sidebar + funny little effect on dashboard tab buttons
+- 16-05-2026: v3.4.3 added Tappd Wrappd backlog so you don't have to recreate them
 
 ## Known bugs
 

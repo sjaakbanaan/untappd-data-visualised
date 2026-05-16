@@ -13,16 +13,6 @@ export const formatWrappdDates = (start, end) => {
     );
   };
 
-  // Helper function to check if a date range is exactly 6 months
-  const isLastSixMonths = (start, end) => {
-    // Check if the range is exactly 6 months apart
-    const monthDiff =
-      (end.getFullYear() - start.getFullYear()) * 12 +
-      (end.getMonth() - start.getMonth());
-
-    return monthDiff === 6;
-  };
-
   // Helper function to check if a date range is exactly one year ago
   const isLastYear = (start, end) => {
     const lastYear = new Date(today.getFullYear() - 1, 0, 1);
@@ -35,10 +25,6 @@ export const formatWrappdDates = (start, end) => {
   // Check for special cases
   if (isFullYear(startDate, endDate)) {
     return endDate.getFullYear().toString();
-  }
-
-  if (isLastSixMonths(startDate, endDate)) {
-    return 'the last 6 months';
   }
 
   if (isLastYear(startDate, endDate)) {
@@ -59,6 +45,14 @@ export const formatWrappdDates = (start, end) => {
   const endMonth = endDate.toLocaleString('en-US', { month: 'short' });
   const endDay = addOrdinalSuffix(endDate.getDate());
   const endYear = endDate.getFullYear();
+
+  if (
+    startYear !== endYear &&
+    startDate.getMonth() === endDate.getMonth() &&
+    startDate.getDate() === endDate.getDate()
+  ) {
+    return `${startMonth} ${startDay} ${startYear}`;
+  }
 
   if (startYear === endYear && startMonth === endMonth) {
     return `${startMonth} ${startDay} - ${endDay} ${startYear}`;

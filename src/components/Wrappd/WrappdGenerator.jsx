@@ -1,9 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import ReactGA from 'react-ga4';
 import { useDashboardData } from '../../utils/';
+import WrappdBacklog from './WrappdBacklog';
 import WrappdShareBox from './WrappdShareBox';
 
 const WrappdGenerator = () => {
+  const [backlogRefreshKey, setBacklogRefreshKey] = useState(0);
+
   useEffect(() => {
     ReactGA.send({
       hitType: 'pageview',
@@ -12,11 +15,7 @@ const WrappdGenerator = () => {
     });
   }, []);
 
-  const {
-    filteredData,
-    filterOverview,
-    filterDateRange,
-  } = useDashboardData();
+  const { filteredData, filterOverview, filterDateRange } = useDashboardData();
 
   return (
     <div className="mx-auto max-w-3xl bg-gray-800 p-6 text-white shadow-2xl md:rounded-2xl md:p-10">
@@ -32,14 +31,22 @@ const WrappdGenerator = () => {
           filteredData={filteredData}
           filterDateRange={filterDateRange}
           filterOverview={filterOverview}
+          lookupRefreshKey={backlogRefreshKey}
+          onShareCreated={() => setBacklogRefreshKey((key) => key + 1)}
         />
       </div>
-      
+
       <div className="mt-8 text-center text-sm text-gray-400">
         <p>
-          Tip: Use the dashboard filters to select specific years or categories before generating your Wrappd.
+          Tip: Use the dashboard filters to select specific years or categories before
+          generating your Wrappd.
         </p>
       </div>
+
+      <WrappdBacklog
+        refreshKey={backlogRefreshKey}
+        onWrappdDeleted={() => setBacklogRefreshKey((key) => key + 1)}
+      />
     </div>
   );
 };

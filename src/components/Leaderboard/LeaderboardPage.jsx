@@ -91,7 +91,7 @@ const LeaderboardPage = () => {
   ];
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-10">
+    <div className="mx-auto max-w-4xl px-4 pb-10">
       {/* Header */}
       <div className="mb-10 text-center">
         <h2 className="mb-2 text-4xl font-black text-yellow-500">Leaderboard</h2>

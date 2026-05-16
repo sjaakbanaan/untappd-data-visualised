@@ -8,7 +8,7 @@ import { convertImageToBase64 } from '.';
 export const useShareStats = () => {
   const [shareLink, setShareLink] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { userProfile } = useAuth();
+  const { user, userProfile } = useAuth();
   const userName = userProfile?.untappd_username;
   const userAvatar = userProfile?.untappd_avatar;
 
@@ -63,6 +63,7 @@ export const useShareStats = () => {
         }));
 
       const statsData = {
+        userId: user?.uid || '',
         userName: userName,
         userAvatar: processedUserAvatar,
         topLists: validTopLists,
@@ -82,9 +83,11 @@ export const useShareStats = () => {
       await navigator.clipboard.writeText(shareUrl);
 
       console.log('Link copied to clipboard!');
+      return shareUrl;
     } catch (error) {
       console.error('Failed to create share link:', error);
       alert(`Failed to create share link: ${error.message}`);
+      return null;
     } finally {
       setIsLoading(false);
     }
