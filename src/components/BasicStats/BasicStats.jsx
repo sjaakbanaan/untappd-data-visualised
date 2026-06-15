@@ -74,9 +74,13 @@ const getDaysCoverage = (days) => {
 const expandCompactComparisonDays = (compact) => {
   if (!compact?.days || !compact?.dictionaries) return [];
 
-  return compact.days.map((day) => {
+  const dayEntries = Array.isArray(compact.days)
+    ? compact.days.map((day) => [day.d, day])
+    : Object.entries(compact.days);
+
+  return dayEntries.map(([date, day]) => {
     const expanded = {
-      date: day.d,
+      date,
       total: day.t,
     };
 
@@ -487,8 +491,11 @@ const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
       }
 
       if (!cancelled) {
+        const status = selectedUser.comparisonStatsStatus
+          ? ` Status: ${selectedUser.comparisonStatsStatus}.`
+          : '';
         setComparisonError(
-          `${selectedUser.untappd_username} is visible, but has not published comparison data with the latest app version yet.`
+          `${selectedUser.untappd_username} is visible, but has not published comparison data with the latest app version yet.${status}`
         );
         setComparisonLoading(false);
       }

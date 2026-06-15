@@ -34,6 +34,9 @@ export const updateLeaderboard = async (user, username, beerData) => {
       ? null
       : buildComparisonStatsCompact(beerData);
     const coverage = getDataCoverage(beerData);
+    const comparisonStatsSize = comparisonStatsCompact
+      ? JSON.stringify(comparisonStatsCompact).length
+      : 0;
 
     if (hideFromLeaderboard) {
       await deleteComparisonData(user.uid);
@@ -49,6 +52,12 @@ export const updateLeaderboard = async (user, username, beerData) => {
         comparisonDataVersion: hideFromLeaderboard ? null : COMPARISON_DATA_VERSION,
         comparisonStoragePath: null,
         comparisonStatsCompact,
+        comparisonStatsStatus: hideFromLeaderboard ? 'hidden' : 'ready',
+        comparisonStatsDayCount: comparisonStatsCompact
+          ? Object.keys(comparisonStatsCompact.days || {}).length
+          : 0,
+        comparisonStatsSize,
+        comparisonStatsUpdatedAt: new Date().toISOString(),
         comparisonStatsDays: [],
         firstCheckinDate: coverage.firstCheckinDate,
         lastCheckinDate: coverage.lastCheckinDate,

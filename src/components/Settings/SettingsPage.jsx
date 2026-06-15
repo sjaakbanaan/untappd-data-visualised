@@ -68,14 +68,24 @@ const SettingsPage = () => {
             comparisonDataVersion: null,
             comparisonStoragePath: null,
             comparisonStatsCompact: null,
+            comparisonStatsStatus: 'hidden',
+            comparisonStatsDayCount: 0,
+            comparisonStatsSize: 0,
+            comparisonStatsUpdatedAt: new Date().toISOString(),
             comparisonStatsDays: [],
           };
         } else if (Array.isArray(beerData) && beerData.length > 0) {
           const coverage = getDataCoverage(beerData);
+          const comparisonStatsCompact = buildComparisonStatsCompact(beerData);
           comparisonUpdate = {
             comparisonDataVersion: COMPARISON_DATA_VERSION,
             comparisonStoragePath: null,
-            comparisonStatsCompact: buildComparisonStatsCompact(beerData),
+            comparisonStatsCompact,
+            comparisonStatsStatus: 'ready',
+            comparisonStatsDayCount: Object.keys(comparisonStatsCompact.days || {})
+              .length,
+            comparisonStatsSize: JSON.stringify(comparisonStatsCompact).length,
+            comparisonStatsUpdatedAt: new Date().toISOString(),
             comparisonStatsDays: [],
             firstCheckinDate: coverage.firstCheckinDate,
             lastCheckinDate: coverage.lastCheckinDate,

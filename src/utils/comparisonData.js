@@ -240,45 +240,48 @@ export const buildComparisonStatsCompact = (beerData) => {
     return acc;
   }, {});
 
-  const compactDays = days.map((day) => ({
-    d: day.date,
-    t: day.total,
-    u: compactSet(day.uniqueBeerIds, dictionaries.uniqueBeerIds),
-    b: compactSet(day.breweries, dictionaries.breweries),
-    s: compactSet(day.beerStyles, dictionaries.beerStyles),
-    v: compactSet(day.venues, dictionaries.venues),
-    p: compactSet(day.purchaseVenues, dictionaries.purchaseVenues),
-    ci: compactSet(day.cities, dictionaries.cities),
-    co: compactSet(day.countries, dictionaries.countries),
-    bc: compactSet(day.breweryCountries, dictionaries.breweryCountries),
-    f: compactSet(day.friends, dictionaries.friends),
-    ph: day.photos,
-    to: day.toasts,
-    cm: day.comments,
-    rs: Number(day.ratingSum.toFixed(3)),
-    rc: day.ratingCount,
-    gs: Number(day.globalRatingSum.toFixed(3)),
-    gc: day.globalRatingCount,
-    hi: day.higherThanGlobal,
-    lo: day.lowerThanGlobal,
-    mc: day.mostCheckedIn
-      ? {
-          n: day.mostCheckedIn.beer_name || '',
-          u: day.mostCheckedIn.beer_url || '',
-          v: day.mostCheckedIn.global_total_checkins || 0,
-        }
-      : null,
-    mu: day.mostUniqueDrinkers
-      ? {
-          n: day.mostUniqueDrinkers.beer_name || '',
-          u: day.mostUniqueDrinkers.beer_url || '',
-          v: day.mostUniqueDrinkers.global_unique_users || 0,
-        }
-      : null,
-  }));
+  const compactDays = days.reduce((acc, day) => {
+    acc[day.date] = {
+      t: day.total,
+      u: compactSet(day.uniqueBeerIds, dictionaries.uniqueBeerIds),
+      b: compactSet(day.breweries, dictionaries.breweries),
+      s: compactSet(day.beerStyles, dictionaries.beerStyles),
+      v: compactSet(day.venues, dictionaries.venues),
+      p: compactSet(day.purchaseVenues, dictionaries.purchaseVenues),
+      ci: compactSet(day.cities, dictionaries.cities),
+      co: compactSet(day.countries, dictionaries.countries),
+      bc: compactSet(day.breweryCountries, dictionaries.breweryCountries),
+      f: compactSet(day.friends, dictionaries.friends),
+      ph: day.photos,
+      to: day.toasts,
+      cm: day.comments,
+      rs: Number(day.ratingSum.toFixed(3)),
+      rc: day.ratingCount,
+      gs: Number(day.globalRatingSum.toFixed(3)),
+      gc: day.globalRatingCount,
+      hi: day.higherThanGlobal,
+      lo: day.lowerThanGlobal,
+      mc: day.mostCheckedIn
+        ? {
+            n: day.mostCheckedIn.beer_name || '',
+            u: day.mostCheckedIn.beer_url || '',
+            v: day.mostCheckedIn.global_total_checkins || 0,
+          }
+        : null,
+      mu: day.mostUniqueDrinkers
+        ? {
+            n: day.mostUniqueDrinkers.beer_name || '',
+            u: day.mostUniqueDrinkers.beer_url || '',
+            v: day.mostUniqueDrinkers.global_unique_users || 0,
+          }
+        : null,
+    };
+
+    return acc;
+  }, {});
 
   return {
-    version: 2,
+    version: 3,
     ...getDataCoverage(beerData),
     dictionaries: COMPACT_KEYS.reduce((acc, key) => {
       acc[key] = dictionaries[key].values;
