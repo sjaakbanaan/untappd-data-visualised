@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { getDateRangeDayCount } from '../../utils/getDateRangeDayCount';
 
 /**
  * Finds a stat by key from the saved stats array.
@@ -51,9 +52,7 @@ SectionHeading.propTypes = {
 };
 
 const WrappdCardStats = ({ stats, dateRange }) => {
-  const totalDays =
-    dateRange &&
-    Math.round((new Date(dateRange.end) - new Date(dateRange.start)) / (1000 * 60 * 60 * 24));
+  const totalDays = getDateRangeDayCount(dateRange);
 
   const total = getStat(stats, 'Total beers');
   const unique = getStat(stats, 'Unique beers');

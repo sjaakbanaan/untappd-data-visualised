@@ -20,6 +20,7 @@ import { statsCountUniqueFriends } from './statsCountUniqueFriends';
 import { checkFullDateRange } from './checkFullDateRange';
 import { getBarChartHourData } from './getBarChartHourData';
 import { formatWrappdDates } from './formatWrappdDates';
+import { getDateRangeDayCount } from './getDateRangeDayCount';
 import { getOverviewStats } from './getOverviewStats';
 import { processTopData } from './processTopData';
 import { useBasicStats } from './useBasicStats';
@@ -68,6 +69,7 @@ export {
   statsCountUniqueFriends,
   checkFullDateRange,
   formatWrappdDates,
+  getDateRangeDayCount,
   getOverviewStats,
   processTopData,
   useBasicStats,

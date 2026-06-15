@@ -10,6 +10,7 @@ import {
   statsPopularCheckins,
 } from '../utils';
 import { calculateAverageRatingScore } from './getBarChartTopBottomData';
+import { getDateRangeDayCount } from './getDateRangeDayCount';
 
 export const getOverviewStats = (
   filteredData,
@@ -18,10 +19,7 @@ export const getOverviewStats = (
   fullBeerData = null
 ) => {
   const totalUniqueBeerCount = filteredData && filterDuplicateBeers(filteredData)?.length;
-  const totalDays =
-    filterDateRange &&
-    (new Date(filterDateRange.end) - new Date(filterDateRange.start)) /
-      (1000 * 60 * 60 * 24);
+  const totalDays = getDateRangeDayCount(filterDateRange);
 
   const totalPhotos = statsCountTotal(filteredData, 'photo_url');
   const totalVenues = statsCountUnique(filteredData, 'venue_name');

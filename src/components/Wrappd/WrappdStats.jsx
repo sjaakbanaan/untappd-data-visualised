@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
+import { getDateRangeDayCount } from '../../utils/getDateRangeDayCount';
 
 const WrappdStats = ({ stats, dateRange }) => {
-  const totalDays =
-    dateRange &&
-    (new Date(dateRange.end) - new Date(dateRange.start)) / (1000 * 60 * 60 * 24);
+  const totalDays = getDateRangeDayCount(dateRange);
 
   return (
     <div className="mb-10 grid grid-cols-2 gap-4 text-xl md:grid-flow-col">
