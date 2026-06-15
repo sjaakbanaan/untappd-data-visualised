@@ -178,7 +178,7 @@ const DashboardNavButton = ({
         animateFill(false);
       }}
       className={`relative mb-0 flex items-center justify-center overflow-hidden rounded border px-4 py-2 text-lg shadow transition-[color,background-color] duration-300 md:px-10 md:py-4 ${
-        isActive ? 'border-amber-600/50 bg-gray-800' : 'border-gray-600 bg-gray-900'
+        isActive ? 'border-white bg-gray-800' : 'border-gray-600 bg-gray-900'
       }`}
     >
       <span

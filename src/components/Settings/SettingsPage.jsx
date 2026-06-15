@@ -6,6 +6,14 @@ import { DataContext } from '../../DataContext';
 import { storage, db } from '../../firebase';
 import NotificationBar from '../UI/NotificationBar';
 import { deleteCache } from '../../utils';
+import {
+  buildComparisonStatsDays,
+  COMPARISON_DATA_VERSION,
+  deleteComparisonData,
+  getDataCoverage,
+  getComparisonStoragePath,
+  uploadComparisonData,
+} from '../../utils/comparisonData';
 
 const SettingsPage = () => {
   const { user, userProfile, updateProfile } = useAuth();
@@ -54,9 +62,40 @@ const SettingsPage = () => {
 
       // Sync leaderboard visibility immediately
       if (user?.uid) {
+        let comparisonUpdate = {};
+
+        if (formData.hide_from_leaderboard) {
+          await deleteComparisonData(user.uid);
+          comparisonUpdate = {
+            comparisonDataVersion: null,
+            comparisonStoragePath: null,
+            comparisonStatsDays: [],
+          };
+        } else if (Array.isArray(beerData) && beerData.length > 0) {
+          const coverage = getDataCoverage(beerData);
+          comparisonUpdate = {
+            comparisonDataVersion: COMPARISON_DATA_VERSION,
+            comparisonStoragePath: null,
+            comparisonStatsDays: buildComparisonStatsDays(beerData),
+            firstCheckinDate: coverage.firstCheckinDate,
+            lastCheckinDate: coverage.lastCheckinDate,
+          };
+
+          try {
+            await uploadComparisonData(user, beerData);
+            comparisonUpdate.comparisonStoragePath = getComparisonStoragePath(user.uid);
+          } catch (error) {
+            // eslint-disable-next-line no-console
+            console.warn('Failed to upload comparison data to Storage:', error);
+          }
+        }
+
         await setDoc(
           doc(db, 'leaderboard', user.uid),
-          { hideFromLeaderboard: !!formData.hide_from_leaderboard },
+          {
+            hideFromLeaderboard: !!formData.hide_from_leaderboard,
+            ...comparisonUpdate,
+          },
           { merge: true }
         );
       }
@@ -97,6 +136,7 @@ const SettingsPage = () => {
 
       // Remove from leaderboard too for full privacy/cleanup
       try {
+        await deleteComparisonData(user.uid);
         await deleteDoc(doc(db, 'leaderboard', user.uid));
       } catch (e) {
         // eslint-disable-next-line no-console

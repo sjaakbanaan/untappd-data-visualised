@@ -126,7 +126,7 @@ export const getOverviewStats = (
     {
       key: 'Rating vs. world',
       value: `${percentageHigher}%`,
-      suffix: `higher, ${percentageLower}% lower`,
+      suffix: `${percentageLower}% lower`,
     },
     ...statsPopularCheckins(filteredData),
   ];
