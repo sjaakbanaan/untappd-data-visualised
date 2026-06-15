@@ -1,4 +1,4 @@
-import { doc, setDoc, getDoc, writeBatch } from 'firebase/firestore';
+import { deleteDoc, doc, setDoc, getDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 import { filterDuplicateBeers } from './filterDuplicateBeers';
 import {
@@ -11,33 +11,16 @@ import {
 export const writeComparisonMonthDocs = async (uid, monthDocs, oldMonthIds = []) => {
   const nextMonthIds = monthDocs.map((month) => month.id);
   const staleMonthIds = oldMonthIds.filter((monthId) => !nextMonthIds.includes(monthId));
-  const writes = [
-    ...monthDocs.map((month) => ({
-      type: 'set',
-      ref: doc(db, 'leaderboard', uid, 'comparisonMonths', month.id),
-      data: {
-        ...month,
-        updatedAt: new Date().toISOString(),
-      },
-    })),
-    ...staleMonthIds.map((monthId) => ({
-      type: 'delete',
-      ref: doc(db, 'leaderboard', uid, 'comparisonMonths', monthId),
-    })),
-  ];
 
-  for (let i = 0; i < writes.length; i += 450) {
-    const batch = writeBatch(db);
-
-    writes.slice(i, i + 450).forEach((write) => {
-      if (write.type === 'delete') {
-        batch.delete(write.ref);
-      } else {
-        batch.set(write.ref, write.data);
-      }
+  for (const month of monthDocs) {
+    await setDoc(doc(db, 'leaderboard', uid, 'comparisonMonths', month.id), {
+      ...month,
+      updatedAt: new Date().toISOString(),
     });
+  }
 
-    await batch.commit();
+  for (const monthId of staleMonthIds) {
+    await deleteDoc(doc(db, 'leaderboard', uid, 'comparisonMonths', monthId));
   }
 };
 
