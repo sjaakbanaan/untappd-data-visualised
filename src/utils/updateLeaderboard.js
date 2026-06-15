@@ -118,5 +118,6 @@ export const updateLeaderboard = async (user, username, beerData) => {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Failed to update leaderboard:', error);
+    throw error;
   }
 };

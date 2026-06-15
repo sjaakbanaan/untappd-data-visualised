@@ -3,10 +3,16 @@ import ReactGA from 'react-ga4';
 import { useNavigate } from 'react-router-dom';
 import { useDropzone } from 'react-dropzone';
 import { ref, uploadBytes } from 'firebase/storage';
+import { doc, getDoc } from 'firebase/firestore';
 
 import { useAuth } from '../../context/AuthContext';
-import { storage } from '../../firebase';
-import { useUploadedJsonUpdater, formatDate, setCache, clearOldCache } from '../../utils/';
+import { db, storage } from '../../firebase';
+import {
+  useUploadedJsonUpdater,
+  formatDate,
+  setCache,
+  clearOldCache,
+} from '../../utils/';
 import { extractBadges } from '../../utils/extractBadges';
 import { detectFormat } from '../../utils/normaliseCheckins';
 import { updateLeaderboard } from '../../utils/updateLeaderboard';
@@ -70,9 +76,22 @@ const Uploader = () => {
           const storageRef = ref(storage, `users/${user.uid}/untappd_data.json`);
           await uploadBytes(storageRef, file);
 
-          // 4. Update leaderboard stats (only if user has a username)
-          if (userProfile?.untappd_username) {
-            await updateLeaderboard(user, userProfile.untappd_username, updatedData);
+          // 4. Update leaderboard stats
+          let leaderboardUsername = userProfile?.untappd_username;
+
+          if (!leaderboardUsername) {
+            const existingLeaderboardDoc = await getDoc(doc(db, 'leaderboard', user.uid));
+            leaderboardUsername = existingLeaderboardDoc.exists()
+              ? existingLeaderboardDoc.data().untappd_username
+              : null;
+          }
+
+          if (leaderboardUsername) {
+            await updateLeaderboard(user, leaderboardUsername, updatedData);
+          } else {
+            throw new Error(
+              'Could not publish comparison stats because no Untappd username is available.'
+            );
           }
 
           // 5. Tell DataContext to skip the next refetch cycle – we already

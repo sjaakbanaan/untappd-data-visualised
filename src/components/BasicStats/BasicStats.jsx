@@ -529,9 +529,20 @@ const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
       }
 
       if (!cancelled) {
-        const status = selectedUser.comparisonStatsStatus
-          ? ` Status: ${selectedUser.comparisonStatsStatus}.`
-          : '';
+        const statusDetails = [
+          selectedUser.comparisonStatsStatus
+            ? `status: ${selectedUser.comparisonStatsStatus}`
+            : null,
+          selectedUser.comparisonStatsMonthCount != null
+            ? `months: ${selectedUser.comparisonStatsMonthCount}`
+            : null,
+          selectedUser.comparisonStatsUpdatedAt
+            ? `updated: ${formatCoverageDate(
+                selectedUser.comparisonStatsUpdatedAt.split('T')[0]
+              )}`
+            : null,
+        ].filter(Boolean);
+        const status = statusDetails.length > 0 ? ` (${statusDetails.join(', ')})` : '';
         setComparisonError(
           `${selectedUser.untappd_username} is visible, but has not published comparison data with the latest app version yet.${status}`
         );
