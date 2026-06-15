@@ -2,12 +2,10 @@ import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 import { filterDuplicateBeers } from './filterDuplicateBeers';
 import {
-  buildComparisonStatsDays,
+  buildComparisonStatsCompact,
   COMPARISON_DATA_VERSION,
   deleteComparisonData,
   getDataCoverage,
-  getComparisonStoragePath,
-  uploadComparisonData,
 } from './comparisonData';
 
 /**
@@ -32,24 +30,13 @@ export const updateLeaderboard = async (user, username, beerData) => {
     const hideFromLeaderboard = userDoc.exists()
       ? !!userDoc.data().hide_from_leaderboard
       : false;
-    const comparisonStatsDays = hideFromLeaderboard
-      ? []
-      : buildComparisonStatsDays(beerData);
+    const comparisonStatsCompact = hideFromLeaderboard
+      ? null
+      : buildComparisonStatsCompact(beerData);
     const coverage = getDataCoverage(beerData);
-    let comparisonDataVersion = hideFromLeaderboard ? null : COMPARISON_DATA_VERSION;
-    let comparisonStoragePath = null;
 
     if (hideFromLeaderboard) {
       await deleteComparisonData(user.uid);
-    } else {
-      try {
-        await uploadComparisonData(user, beerData);
-        comparisonStoragePath = getComparisonStoragePath(user.uid);
-      } catch (error) {
-        comparisonDataVersion = COMPARISON_DATA_VERSION;
-        // eslint-disable-next-line no-console
-        console.warn('Failed to upload comparison data to Storage:', error);
-      }
     }
 
     await setDoc(
@@ -59,9 +46,10 @@ export const updateLeaderboard = async (user, username, beerData) => {
         totalCheckins,
         uniqueCheckins,
         hideFromLeaderboard,
-        comparisonDataVersion,
-        comparisonStoragePath,
-        comparisonStatsDays,
+        comparisonDataVersion: hideFromLeaderboard ? null : COMPARISON_DATA_VERSION,
+        comparisonStoragePath: null,
+        comparisonStatsCompact,
+        comparisonStatsDays: [],
         firstCheckinDate: coverage.firstCheckinDate,
         lastCheckinDate: coverage.lastCheckinDate,
         lastUpdated: new Date().toISOString(),

@@ -7,12 +7,10 @@ import { storage, db } from '../../firebase';
 import NotificationBar from '../UI/NotificationBar';
 import { deleteCache } from '../../utils';
 import {
-  buildComparisonStatsDays,
+  buildComparisonStatsCompact,
   COMPARISON_DATA_VERSION,
   deleteComparisonData,
   getDataCoverage,
-  getComparisonStoragePath,
-  uploadComparisonData,
 } from '../../utils/comparisonData';
 
 const SettingsPage = () => {
@@ -69,6 +67,7 @@ const SettingsPage = () => {
           comparisonUpdate = {
             comparisonDataVersion: null,
             comparisonStoragePath: null,
+            comparisonStatsCompact: null,
             comparisonStatsDays: [],
           };
         } else if (Array.isArray(beerData) && beerData.length > 0) {
@@ -76,18 +75,11 @@ const SettingsPage = () => {
           comparisonUpdate = {
             comparisonDataVersion: COMPARISON_DATA_VERSION,
             comparisonStoragePath: null,
-            comparisonStatsDays: buildComparisonStatsDays(beerData),
+            comparisonStatsCompact: buildComparisonStatsCompact(beerData),
+            comparisonStatsDays: [],
             firstCheckinDate: coverage.firstCheckinDate,
             lastCheckinDate: coverage.lastCheckinDate,
           };
-
-          try {
-            await uploadComparisonData(user, beerData);
-            comparisonUpdate.comparisonStoragePath = getComparisonStoragePath(user.uid);
-          } catch (error) {
-            // eslint-disable-next-line no-console
-            console.warn('Failed to upload comparison data to Storage:', error);
-          }
         }
 
         await setDoc(

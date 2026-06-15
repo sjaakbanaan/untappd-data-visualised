@@ -8,6 +8,17 @@ import { useBasicStats } from '../../utils/useBasicStats';
 import { getDateRangeDayCount } from '../../utils/getDateRangeDayCount';
 
 const DEMO_COMPARISON_USER_ID = '__demo_comparison_user__';
+const COMPACT_COMPARISON_KEYS = [
+  ['uniqueBeerIds', 'u'],
+  ['breweries', 'b'],
+  ['beerStyles', 's'],
+  ['venues', 'v'],
+  ['purchaseVenues', 'p'],
+  ['cities', 'ci'],
+  ['countries', 'co'],
+  ['breweryCountries', 'bc'],
+  ['friends', 'f'],
+];
 
 const getCheckinDate = (item) => item?.created_at?.split(' ')[0] || null;
 
@@ -58,6 +69,51 @@ const getDaysCoverage = (days) => {
     firstCheckinDate: dates[0] || null,
     lastCheckinDate: dates[dates.length - 1] || null,
   };
+};
+
+const expandCompactComparisonDays = (compact) => {
+  if (!compact?.days || !compact?.dictionaries) return [];
+
+  return compact.days.map((day) => {
+    const expanded = {
+      date: day.d,
+      total: day.t,
+    };
+
+    COMPACT_COMPARISON_KEYS.forEach(([key, compactKey]) => {
+      const dictionary = compact.dictionaries[key] || [];
+      expanded[key] = Array.isArray(day[compactKey])
+        ? day[compactKey].map((itemIndex) => dictionary[itemIndex]).filter(Boolean)
+        : [];
+    });
+
+    return {
+      ...expanded,
+      photos: day.ph,
+      toasts: day.to,
+      comments: day.cm,
+      ratingSum: day.rs,
+      ratingCount: day.rc,
+      globalRatingSum: day.gs,
+      globalRatingCount: day.gc,
+      higherThanGlobal: day.hi,
+      lowerThanGlobal: day.lo,
+      mostCheckedIn: day.mc
+        ? {
+            beer_name: day.mc.n,
+            beer_url: day.mc.u,
+            global_total_checkins: day.mc.v,
+          }
+        : null,
+      mostUniqueDrinkers: day.mu
+        ? {
+            beer_name: day.mu.n,
+            beer_url: day.mu.u,
+            global_unique_users: day.mu.v,
+          }
+        : null,
+    };
+  });
 };
 
 const formatGlobalVal = (val) => {
@@ -296,13 +352,15 @@ const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
     () => filterDataByDateRange(comparisonData, filterDateRange),
     [comparisonData, filterDateRange]
   );
-  const comparisonStatsDays = useMemo(
-    () =>
-      Array.isArray(selectedUser?.comparisonStatsDays)
-        ? selectedUser.comparisonStatsDays
-        : [],
-    [selectedUser]
-  );
+  const comparisonStatsDays = useMemo(() => {
+    if (selectedUser?.comparisonStatsCompact) {
+      return expandCompactComparisonDays(selectedUser.comparisonStatsCompact);
+    }
+
+    return Array.isArray(selectedUser?.comparisonStatsDays)
+      ? selectedUser.comparisonStatsDays
+      : [];
+  }, [selectedUser]);
   const hasComparisonStatsDays = comparisonStatsDays.length > 0;
   const { stats: rawComparisonStats } = useBasicStats(
     comparisonFilteredData,
