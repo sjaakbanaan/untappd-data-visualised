@@ -345,6 +345,7 @@ const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
   const [comparisonUsers, setComparisonUsers] = useState([]);
   const [selectedUserId, setSelectedUserId] = useState('');
   const [comparisonData, setComparisonData] = useState([]);
+  const [comparisonMonthCompacts, setComparisonMonthCompacts] = useState([]);
   const [comparisonLoading, setComparisonLoading] = useState(false);
   const [comparisonError, setComparisonError] = useState('');
 
@@ -357,6 +358,10 @@ const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
     [comparisonData, filterDateRange]
   );
   const comparisonStatsDays = useMemo(() => {
+    if (comparisonMonthCompacts.length > 0) {
+      return comparisonMonthCompacts.flatMap(expandCompactComparisonDays);
+    }
+
     if (selectedUser?.comparisonStatsCompact) {
       return expandCompactComparisonDays(selectedUser.comparisonStatsCompact);
     }
@@ -364,7 +369,7 @@ const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
     return Array.isArray(selectedUser?.comparisonStatsDays)
       ? selectedUser.comparisonStatsDays
       : [];
-  }, [selectedUser]);
+  }, [comparisonMonthCompacts, selectedUser]);
   const hasComparisonStatsDays = comparisonStatsDays.length > 0;
   const { stats: rawComparisonStats } = useBasicStats(
     comparisonFilteredData,
@@ -468,6 +473,7 @@ const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
 
     const fetchComparisonData = async () => {
       setComparisonData([]);
+      setComparisonMonthCompacts([]);
       setComparisonError('');
       setComparisonLoading(false);
 
@@ -481,6 +487,38 @@ const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
           setComparisonLoading(false);
         }
         return;
+      }
+
+      if (
+        Array.isArray(selectedUser.comparisonStatsMonths) &&
+        selectedUser.comparisonStatsMonths.length > 0
+      ) {
+        try {
+          const snapshot = await getDocs(
+            collection(db, 'leaderboard', selectedUser.id, 'comparisonMonths')
+          );
+          const requestedMonths = new Set(selectedUser.comparisonStatsMonths);
+          const monthCompacts = snapshot.docs
+            .filter((monthDoc) => requestedMonths.has(monthDoc.id))
+            .map((monthDoc) => monthDoc.data().comparisonStatsCompact)
+            .filter(Boolean);
+
+          if (!cancelled) {
+            setComparisonMonthCompacts(monthCompacts);
+            setComparisonLoading(false);
+          }
+          return;
+        } catch (error) {
+          // eslint-disable-next-line no-console
+          console.error('Failed to fetch comparison month data:', error);
+          if (!cancelled) {
+            setComparisonError(
+              `Could not load ${selectedUser.untappd_username}'s comparison data.`
+            );
+            setComparisonLoading(false);
+          }
+          return;
+        }
       }
 
       if (hasComparisonStatsDays) {

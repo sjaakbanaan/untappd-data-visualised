@@ -291,6 +291,28 @@ export const buildComparisonStatsCompact = (beerData) => {
   };
 };
 
+export const buildComparisonStatsMonthDocs = (beerData) => {
+  if (!Array.isArray(beerData)) return [];
+
+  const byMonth = beerData.reduce((acc, item) => {
+    const date = getCheckinDate(item);
+    if (!date) return acc;
+
+    const month = date.slice(0, 7);
+    if (!acc[month]) acc[month] = [];
+    acc[month].push(item);
+
+    return acc;
+  }, {});
+
+  return Object.entries(byMonth)
+    .map(([month, monthData]) => ({
+      id: month,
+      comparisonStatsCompact: buildComparisonStatsCompact(monthData),
+    }))
+    .sort((a, b) => a.id.localeCompare(b.id));
+};
+
 export const getComparisonStoragePath = (uid) =>
   uid ? `public-comparison/${uid}.json` : null;
 

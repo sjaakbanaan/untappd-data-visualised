@@ -1,17 +1,18 @@
 import { useState, useContext, useEffect } from 'react';
 import { ref, deleteObject } from 'firebase/storage';
-import { doc, setDoc, deleteDoc } from 'firebase/firestore';
+import { doc, setDoc, deleteDoc, getDoc } from 'firebase/firestore';
 import { useAuth } from '../../context/AuthContext';
 import { DataContext } from '../../DataContext';
 import { storage, db } from '../../firebase';
 import NotificationBar from '../UI/NotificationBar';
 import { deleteCache } from '../../utils';
 import {
-  buildComparisonStatsCompact,
+  buildComparisonStatsMonthDocs,
   COMPARISON_DATA_VERSION,
   deleteComparisonData,
   getDataCoverage,
 } from '../../utils/comparisonData';
+import { writeComparisonMonthDocs } from '../../utils/updateLeaderboard';
 
 const SettingsPage = () => {
   const { user, userProfile, updateProfile } = useAuth();
@@ -61,14 +62,26 @@ const SettingsPage = () => {
       // Sync leaderboard visibility immediately
       if (user?.uid) {
         let comparisonUpdate = {};
+        const leaderboardDoc = await getDoc(doc(db, 'leaderboard', user.uid));
+        const oldMonthIds = leaderboardDoc.exists()
+          ? leaderboardDoc.data().comparisonStatsMonths || []
+          : [];
 
         if (formData.hide_from_leaderboard) {
-          await deleteComparisonData(user.uid);
+          try {
+            await deleteComparisonData(user.uid);
+          } catch (error) {
+            // eslint-disable-next-line no-console
+            console.warn('Failed to delete legacy comparison data from Storage:', error);
+          }
+          await writeComparisonMonthDocs(user.uid, [], oldMonthIds);
           comparisonUpdate = {
             comparisonDataVersion: null,
             comparisonStoragePath: null,
             comparisonStatsCompact: null,
             comparisonStatsStatus: 'hidden',
+            comparisonStatsMonths: [],
+            comparisonStatsMonthCount: 0,
             comparisonStatsDayCount: 0,
             comparisonStatsSize: 0,
             comparisonStatsUpdatedAt: new Date().toISOString(),
@@ -76,15 +89,25 @@ const SettingsPage = () => {
           };
         } else if (Array.isArray(beerData) && beerData.length > 0) {
           const coverage = getDataCoverage(beerData);
-          const comparisonStatsCompact = buildComparisonStatsCompact(beerData);
+          const comparisonMonthDocs = buildComparisonStatsMonthDocs(beerData);
+          const comparisonStatsMonths = comparisonMonthDocs.map((month) => month.id);
+          await writeComparisonMonthDocs(user.uid, comparisonMonthDocs, oldMonthIds);
           comparisonUpdate = {
             comparisonDataVersion: COMPARISON_DATA_VERSION,
             comparisonStoragePath: null,
-            comparisonStatsCompact,
+            comparisonStatsCompact: null,
             comparisonStatsStatus: 'ready',
-            comparisonStatsDayCount: Object.keys(comparisonStatsCompact.days || {})
-              .length,
-            comparisonStatsSize: JSON.stringify(comparisonStatsCompact).length,
+            comparisonStatsMonths,
+            comparisonStatsMonthCount: comparisonStatsMonths.length,
+            comparisonStatsDayCount: comparisonMonthDocs.reduce(
+              (count, month) =>
+                count + Object.keys(month.comparisonStatsCompact.days || {}).length,
+              0
+            ),
+            comparisonStatsSize: comparisonMonthDocs.reduce(
+              (size, month) => size + JSON.stringify(month.comparisonStatsCompact).length,
+              0
+            ),
             comparisonStatsUpdatedAt: new Date().toISOString(),
             comparisonStatsDays: [],
             firstCheckinDate: coverage.firstCheckinDate,
