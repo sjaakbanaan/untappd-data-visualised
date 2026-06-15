@@ -86,45 +86,54 @@ export const AuthProvider = ({ children }) => {
       if (currentUser) {
         // Listen to user profile changes
         const userDocRef = doc(db, 'users', currentUser.uid);
-        const unsubscribeProfile = onSnapshot(userDocRef, (docSnap) => {
-          if (docSnap.exists()) {
-            const rawData = docSnap.data();
-            const secret = `${import.meta.env.VITE_FIREBASE_API_KEY}_${currentUser.uid}`;
-            const decryptedData = { ...rawData };
+        const unsubscribeProfile = onSnapshot(
+          userDocRef,
+          (docSnap) => {
+            if (docSnap.exists()) {
+              const rawData = docSnap.data();
+              const secret = `${import.meta.env.VITE_FIREBASE_API_KEY}_${currentUser.uid}`;
+              const decryptedData = { ...rawData };
 
-            ENCRYPTED_FIELDS.forEach((field) => {
-              const value = decryptedData[field];
-              if (typeof value === 'string' && value.startsWith('enc:')) {
-                try {
-                  const ciphertext = value.replace('enc:', '');
-                  const bytes = CryptoJS.AES.decrypt(ciphertext, secret);
-                  const decryptedValue = bytes.toString(CryptoJS.enc.Utf8);
+              ENCRYPTED_FIELDS.forEach((field) => {
+                const value = decryptedData[field];
+                if (typeof value === 'string' && value.startsWith('enc:')) {
+                  try {
+                    const ciphertext = value.replace('enc:', '');
+                    const bytes = CryptoJS.AES.decrypt(ciphertext, secret);
+                    const decryptedValue = bytes.toString(CryptoJS.enc.Utf8);
 
-                  if (decryptedValue !== '') {
-                    // Restore original types: check if it's a number (for lat/lng)
-                    if (field === 'venue_lat' || field === 'venue_lng') {
-                      decryptedData[field] = parseFloat(decryptedValue);
+                    if (decryptedValue !== '') {
+                      // Restore original types: check if it's a number (for lat/lng)
+                      if (field === 'venue_lat' || field === 'venue_lng') {
+                        decryptedData[field] = parseFloat(decryptedValue);
+                      } else {
+                        decryptedData[field] = decryptedValue;
+                      }
                     } else {
-                      decryptedData[field] = decryptedValue;
+                      // If decryption returns empty string but original was not empty,
+                      // it might be corrupted or using a different key.
+                      // For now, we leave as is or set to original value.
                     }
-                  } else {
-                    // If decryption returns empty string but original was not empty,
-                    // it might be corrupted or using a different key.
-                    // For now, we leave as is or set to original value.
+                  } catch (e) {
+                    // eslint-disable-next-line no-console
+                    console.error(`Failed to decrypt ${field}:`, e);
                   }
-                } catch (e) {
-                  // eslint-disable-next-line no-console
-                  console.error(`Failed to decrypt ${field}:`, e);
                 }
-              }
-            });
+              });
 
-            setUserProfile(decryptedData);
-          } else {
+              setUserProfile(decryptedData);
+            } else {
+              setUserProfile(null);
+            }
+            setLoading(false);
+          },
+          (error) => {
+            // eslint-disable-next-line no-console
+            console.error(`Failed to listen to user profile ${currentUser.uid}:`, error);
             setUserProfile(null);
+            setLoading(false);
           }
-          setLoading(false);
-        });
+        );
         return () => unsubscribeProfile();
       } else {
         setUserProfile(null);

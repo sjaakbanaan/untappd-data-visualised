@@ -50,6 +50,15 @@ service cloud.firestore {
         allow write: if request.auth != null && request.auth.uid == uid;
       }
     }
+
+    // Rules for user profiles
+    match /users/{uid} {
+      // Signed-in users can read profile metadata; sensitive fields are encrypted client-side.
+      allow read: if request.auth != null;
+
+      // Users can write only their own profile document.
+      allow write: if request.auth != null && request.auth.uid == uid;
+    }
     
     // Default deny all other access
     match /{document=**} {
