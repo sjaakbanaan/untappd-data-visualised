@@ -10,23 +10,31 @@ const getNumericValue = (value) => {
   return Number.isFinite(normalized) ? normalized : null;
 };
 
-const formatDelta = (value, comparisonValue) => {
+const getDelta = (value, comparisonValue) => {
   const current = getNumericValue(value);
   const comparison = getNumericValue(comparisonValue);
 
   if (current === null || comparison === null) return null;
 
   const delta = current - comparison;
-  if (delta === 0) return 'same';
+  if (delta === 0) {
+    return {
+      direction: 'same',
+      label: 'same as you',
+    };
+  }
 
-  const sign = delta > 0 ? '+' : '';
   const decimals = Number.isInteger(delta) ? 0 : 2;
+  const absoluteDelta = Math.abs(delta).toFixed(decimals);
 
-  return `${sign}${delta.toFixed(decimals)}`;
+  return {
+    direction: delta > 0 ? 'more' : 'less',
+    label: `${absoluteDelta} ${delta > 0 ? 'less than you' : 'more than you'}`,
+  };
 };
 
 const StatCard = ({ statKey, value, suffix, suffixLink, comparison }) => {
-  const delta = comparison ? formatDelta(value, comparison.value) : null;
+  const delta = comparison ? getDelta(value, comparison.value) : null;
 
   return (
     <li
@@ -75,14 +83,14 @@ const StatCard = ({ statKey, value, suffix, suffixLink, comparison }) => {
             {delta && (
               <div
                 className={`mt-2 text-right text-xs font-bold ${
-                  delta.startsWith('+')
+                  delta.direction === 'more'
                     ? 'text-green-400'
-                    : delta === 'same'
+                    : delta.direction === 'same'
                       ? 'text-gray-500'
                       : 'text-red-400'
                 }`}
               >
-                {delta === 'same' ? 'same as you' : `${delta} vs you`}
+                {delta.label}
               </div>
             )}
           </div>

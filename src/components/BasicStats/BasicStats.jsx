@@ -456,10 +456,7 @@ const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
       : null;
 
   useEffect(() => {
-    if (
-      selectedUserId &&
-      !comparableUsers.some((entry) => entry.id === selectedUserId)
-    ) {
+    if (selectedUserId && !comparableUsers.some((entry) => entry.id === selectedUserId)) {
       setSelectedUserId('');
     }
   }, [comparableUsers, selectedUserId]);
@@ -607,7 +604,7 @@ const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
     <div>
       <div className="mb-6 border border-gray-700 bg-gray-800 p-5 shadow-lg md:rounded-lg md:p-6">
         <div className="flex flex-col gap-5 md:flex-row">
-          <div className="mb-4 flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <h3 className="text-2xl font-black text-white">Compare stats</h3>
             <span className="rounded bg-yellow-500 px-2 py-1 text-xs font-black uppercase tracking-widest text-black">
               New
@@ -617,19 +614,25 @@ const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
             Compare with
           </label>
           <div>
-            <select
-              id="stats-comparison-user"
-              value={selectedUserId}
-              onChange={(event) => setSelectedUserId(event.target.value)}
-              className="w-full appearance-none rounded border border-gray-600 bg-gray-900 px-3 py-2 pr-10 text-white shadow focus:border-yellow-500 focus:outline-none md:min-w-72"
-            >
-              <option value="">Just me</option>
-              {comparableUsers.map((entry) => (
-                <option key={entry.id} value={entry.id}>
-                  {entry.untappd_username}
-                </option>
-              ))}
-            </select>
+            {comparableUsers.length > 0 ? (
+              <select
+                id="stats-comparison-user"
+                value={selectedUserId}
+                onChange={(event) => setSelectedUserId(event.target.value)}
+                className="w-full appearance-none rounded border border-gray-600 bg-gray-900 px-3 py-2 pr-10 text-white shadow focus:border-yellow-500 focus:outline-none"
+              >
+                <option value="">Just me</option>
+                {comparableUsers.map((entry) => (
+                  <option key={entry.id} value={entry.id}>
+                    {entry.untappd_username}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <div className="rounded border border-gray-700 bg-gray-900/40 px-4 py-3 text-sm text-gray-400 md:min-w-72">
+                No coverage for this date range for you or other users.
+              </div>
+            )}
           </div>
         </div>
 
