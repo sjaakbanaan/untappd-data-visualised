@@ -71,6 +71,25 @@ const getDaysCoverage = (days) => {
   };
 };
 
+const getPublishedDate = (entry) =>
+  entry?.comparisonStatsUpdatedAt?.split('T')[0] ||
+  entry?.lastUpdated?.split('T')[0] ||
+  null;
+
+const extendCoverageToPublishedDate = (coverage, entry) => {
+  const publishedDate = getPublishedDate(entry);
+
+  if (!publishedDate) return coverage;
+
+  return {
+    ...coverage,
+    lastCheckinDate:
+      !coverage.lastCheckinDate || publishedDate > coverage.lastCheckinDate
+        ? publishedDate
+        : coverage.lastCheckinDate,
+  };
+};
+
 const expandCompactComparisonDays = (compact) => {
   if (!compact?.days || !compact?.dictionaries) return [];
 
@@ -387,18 +406,18 @@ const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
     () => new Map(comparisonStats.map((item) => [item.key, item])),
     [comparisonStats]
   );
-  const comparisonCoverage = useMemo(
-    () =>
-      hasComparisonStatsDays
-        ? getDaysCoverage(comparisonStatsDays)
-        : comparisonData.length > 0
-          ? getDataCoverage(comparisonData)
-          : {
-              firstCheckinDate: selectedUser?.firstCheckinDate || null,
-              lastCheckinDate: selectedUser?.lastCheckinDate || null,
-            },
-    [comparisonData, comparisonStatsDays, hasComparisonStatsDays, selectedUser]
-  );
+  const comparisonCoverage = useMemo(() => {
+    const coverage = hasComparisonStatsDays
+      ? getDaysCoverage(comparisonStatsDays)
+      : comparisonData.length > 0
+        ? getDataCoverage(comparisonData)
+        : {
+            firstCheckinDate: selectedUser?.firstCheckinDate || null,
+            lastCheckinDate: selectedUser?.lastCheckinDate || null,
+          };
+
+    return extendCoverageToPublishedDate(coverage, selectedUser);
+  }, [comparisonData, comparisonStatsDays, hasComparisonStatsDays, selectedUser]);
   const hasComparisonCoverage = hasFullRangeCoverage(comparisonCoverage, filterDateRange);
   const hasComparisonRows =
     (hasComparisonStatsDays && comparisonStats.length > 0) ||
@@ -599,14 +618,16 @@ const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
               </span>
             )}
             {!comparisonLoading && coverageLabel && (
-              <span>Public data from {coverageLabel}</span>
+              <span>
+                {selectedUser.untappd_username} has public data from {coverageLabel}
+              </span>
             )}
           </div>
         )}
         {showCoverageWarning && (
           <div className="mt-4 rounded border border-yellow-500/40 bg-yellow-500/10 p-3 text-sm text-yellow-100">
             {selectedUser.untappd_username} does not have public data for the full
-            selected range. Pick a range within {coverageLabel || 'their available data'}
+            selected range. Pick a range within {coverageLabel || 'their available data'}{' '}
             to compare these stats.
           </div>
         )}
