@@ -521,7 +521,11 @@ const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
         }
       }
 
-      if (hasComparisonStatsDays) {
+      if (
+        selectedUser.comparisonStatsCompact ||
+        (Array.isArray(selectedUser.comparisonStatsDays) &&
+          selectedUser.comparisonStatsDays.length > 0)
+      ) {
         if (!cancelled) {
           setComparisonLoading(false);
         }
@@ -555,7 +559,7 @@ const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
     return () => {
       cancelled = true;
     };
-  }, [fullBeerData, hasComparisonStatsDays, selectedUser, selectedUserId]);
+  }, [fullBeerData, selectedUser, selectedUserId]);
 
   return (
     <div>
