@@ -32,12 +32,19 @@ const filterDataByDateRange = (data, filterDateRange) =>
     );
   });
 
-const hasFullRangeCoverage = (entry, filterDateRange) => {
-  if (!entry?.firstCheckinDate || !entry?.lastCheckinDate) return false;
+const hasPublishedComparisonData = (entry) =>
+  entry.id === DEMO_COMPARISON_USER_ID ||
+  (Array.isArray(entry.comparisonStatsMonths) &&
+    entry.comparisonStatsMonths.length > 0) ||
+  !!entry.comparisonStatsCompact ||
+  (Array.isArray(entry.comparisonStatsDays) && entry.comparisonStatsDays.length > 0);
+
+const hasFullRangeCoverage = (coverage, filterDateRange) => {
+  if (!coverage?.firstCheckinDate || !coverage?.lastCheckinDate) return false;
 
   return (
-    (!filterDateRange.start || entry.firstCheckinDate <= filterDateRange.start) &&
-    (!filterDateRange.end || entry.lastCheckinDate >= filterDateRange.end)
+    (!filterDateRange.start || coverage.firstCheckinDate <= filterDateRange.start) &&
+    (!filterDateRange.end || coverage.lastCheckinDate >= filterDateRange.end)
   );
 };
 
@@ -368,9 +375,27 @@ const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
   const [comparisonLoading, setComparisonLoading] = useState(false);
   const [comparisonError, setComparisonError] = useState('');
 
+  const comparableUsers = useMemo(
+    () =>
+      comparisonUsers.filter((entry) => {
+        if (!hasPublishedComparisonData(entry)) return false;
+
+        return hasFullRangeCoverage(
+          extendCoverageToPublishedDate(
+            {
+              firstCheckinDate: entry.firstCheckinDate || null,
+              lastCheckinDate: entry.lastCheckinDate || null,
+            },
+            entry
+          ),
+          filterDateRange
+        );
+      }),
+    [comparisonUsers, filterDateRange]
+  );
   const selectedUser = useMemo(
-    () => comparisonUsers.find((entry) => entry.id === selectedUserId) || null,
-    [comparisonUsers, selectedUserId]
+    () => comparableUsers.find((entry) => entry.id === selectedUserId) || null,
+    [comparableUsers, selectedUserId]
   );
   const comparisonFilteredData = useMemo(
     () => filterDataByDateRange(comparisonData, filterDateRange),
@@ -418,28 +443,26 @@ const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
 
     return extendCoverageToPublishedDate(coverage, selectedUser);
   }, [comparisonData, comparisonStatsDays, hasComparisonStatsDays, selectedUser]);
-  const hasComparisonCoverage = hasFullRangeCoverage(comparisonCoverage, filterDateRange);
   const hasComparisonRows =
     (hasComparisonStatsDays && comparisonStats.length > 0) ||
     comparisonFilteredData.length > 0;
   const canCompare =
-    selectedUser &&
-    hasComparisonCoverage &&
-    hasComparisonRows &&
-    !comparisonLoading &&
-    !comparisonError;
+    selectedUser && hasComparisonRows && !comparisonLoading && !comparisonError;
   const coverageLabel =
     comparisonCoverage.firstCheckinDate && comparisonCoverage.lastCheckinDate
       ? `${formatCoverageDate(comparisonCoverage.firstCheckinDate)} to ${formatCoverageDate(
           comparisonCoverage.lastCheckinDate
         )}`
       : null;
-  const showCoverageWarning =
-    selectedUser &&
-    !comparisonLoading &&
-    !comparisonError &&
-    hasComparisonRows &&
-    !hasComparisonCoverage;
+
+  useEffect(() => {
+    if (
+      selectedUserId &&
+      !comparableUsers.some((entry) => entry.id === selectedUserId)
+    ) {
+      setSelectedUserId('');
+    }
+  }, [comparableUsers, selectedUserId]);
 
   useEffect(() => {
     let cancelled = false;
@@ -583,7 +606,7 @@ const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
   return (
     <div>
       <div className="mb-6 border border-gray-700 bg-gray-800 p-5 shadow-lg md:rounded-lg md:p-6">
-        <div className="flex flex-col md:flex-row gap-5">
+        <div className="flex flex-col gap-5 md:flex-row">
           <div className="mb-4 flex flex-wrap items-center gap-3">
             <h3 className="text-2xl font-black text-white">Compare stats</h3>
             <span className="rounded bg-yellow-500 px-2 py-1 text-xs font-black uppercase tracking-widest text-black">
@@ -601,7 +624,7 @@ const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
               className="w-full appearance-none rounded border border-gray-600 bg-gray-900 px-3 py-2 pr-10 text-white shadow focus:border-yellow-500 focus:outline-none md:min-w-72"
             >
               <option value="">Just me</option>
-              {comparisonUsers.map((entry) => (
+              {comparableUsers.map((entry) => (
                 <option key={entry.id} value={entry.id}>
                   {entry.untappd_username}
                 </option>
@@ -622,13 +645,6 @@ const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
                 {selectedUser.untappd_username} has public data from {coverageLabel}
               </span>
             )}
-          </div>
-        )}
-        {showCoverageWarning && (
-          <div className="mt-4 rounded border border-yellow-500/40 bg-yellow-500/10 p-3 text-sm text-yellow-100">
-            {selectedUser.untappd_username} does not have public data for the full
-            selected range. Pick a range within {coverageLabel || 'their available data'}{' '}
-            to compare these stats.
           </div>
         )}
         {comparisonError && (

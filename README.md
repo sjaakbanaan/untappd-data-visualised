@@ -60,6 +60,7 @@ After setting filters, the following lists are presented in either a chart or li
 - 10-05-2026: v3.4.0 feat: update AIAnalysis component with enhanced analysis storage functionality and improved data handling
 - 15-05-2026: v3.4.2 improved layout and functionality in sidebar + funny little effect on dashboard tab buttons
 - 16-05-2026: v3.4.3 added Tappd Wrappd backlog so you don't have to recreate them
+- 16-06-2026: v3.5.0 replaced the map inside Wrappd with an open-source one + added a new feature (in beta) to compare basic stats with other users for the current date range.
 
 ## Known bugs
 
