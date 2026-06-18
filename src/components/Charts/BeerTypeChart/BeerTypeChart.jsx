@@ -49,7 +49,7 @@ const BeerTypeChart = ({ beerData }) => {
 
       {dataList.length > 10 && (
         <button
-          className="mb-4 rounded border bg-gray-900 px-3 py-2 text-white shadow transition-colors duration-300 hover:bg-gray-700"
+          className="mb-4 rounded border border-gray-600 bg-gray-900 px-3 py-2 text-white shadow transition-colors duration-300 hover:bg-gray-700"
           type="button"
           onClick={() => setListToggle(!listToggle)}
         >

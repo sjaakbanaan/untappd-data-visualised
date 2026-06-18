@@ -20,7 +20,7 @@ const WrappdGenerator = () => {
   return (
     <div className="mx-auto max-w-3xl bg-gray-800 p-6 text-white shadow-2xl md:rounded-2xl md:p-10">
       <div className="mb-8 text-center">
-        <h2 className="mb-3 text-3xl font-bold text-yellow-500">Your Tappd Wrappd</h2>
+        <h2 className="mb-3 text-3xl font-bold text-yellow-500">My Tappd Wrappd</h2>
         <p className="text-gray-400">
           Generate a summary of your beer journey to share with friends.
         </p>

@@ -42,7 +42,7 @@ const Pagination = ({
       <button
         className={`${
           currentPage === 1 ? 'cursor-not-allowed' : 'hover:bg-gray-700'
-        } my-2 mr-2 rounded border bg-gray-900 px-3 py-2 text-white shadow transition-colors duration-300`}
+        } my-2 mr-2 rounded border border-gray-600 bg-gray-900 px-3 py-2 text-white shadow transition-colors duration-300`}
         onClick={handlePrevPage}
         disabled={currentPage === 1}
       >
@@ -88,7 +88,7 @@ const Pagination = ({
       <button
         className={`${
           currentPage === totalPages ? 'cursor-not-allowed' : 'hover:bg-gray-700'
-        } my-2 ml-2 rounded border bg-gray-900 px-3 py-2 text-white shadow transition-colors duration-300`}
+        } my-2 ml-2 rounded border border-gray-600 bg-gray-900 px-3 py-2 text-white shadow transition-colors duration-300`}
         onClick={handleNextPage}
         disabled={currentPage === totalPages}
       >

@@ -26,7 +26,7 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
             className={`mb-0 whitespace-nowrap rounded border px-3 py-2 text-sm shadow transition-colors duration-300 ${
               fullDateRange[0]
                 ? 'border-yellow-500 bg-yellow-500 text-gray-900'
-                : 'bg-gray-900 text-white hover:bg-gray-700'
+                : 'border-gray-600 bg-gray-900 text-white hover:bg-gray-700'
             }`}
             onClick={() =>
               setFilterDateRange({
@@ -56,7 +56,7 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
                 (filterDateRange?.start === `${year}-01-01` &&
                   filterDateRange?.end === getDefaultEndDate())
                   ? 'border-yellow-500 bg-yellow-500 text-gray-900 hover:bg-yellow-400'
-                  : 'bg-gray-900 text-white hover:bg-gray-700'
+                  : 'border-gray-600 bg-gray-900 text-white hover:bg-gray-700'
               }`}
               onClick={() =>
                 setFilterDateRange({
@@ -80,7 +80,7 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
               filterDateRange?.start === getDefaultStartDate() &&
               filterDateRange?.end == getDefaultEndDate()
                 ? 'border-yellow-500 bg-yellow-500 text-gray-900'
-                : 'bg-gray-900 text-white hover:bg-gray-700'
+                : 'border-gray-600 bg-gray-900 text-white hover:bg-gray-700'
             }`}
             onClick={() =>
               setFilterDateRange({

@@ -52,14 +52,16 @@ const Navigation = () => {
             </Link>
           </li>
         )}
-        <li>
-          <Link
-            to="/leaderboard"
-            className={`transition-colors hover:text-yellow-500 ${pathname === '/leaderboard' ? 'text-yellow-500' : 'text-white'}`}
-          >
-            Leaderboard
-          </Link>
-        </li>
+        {userProfile && isProfileComplete && (
+          <li>
+            <Link
+              to="/leaderboard"
+              className={`transition-colors hover:text-yellow-500 ${pathname === '/leaderboard' ? 'text-yellow-500' : 'text-white'}`}
+            >
+              Leaderboard
+            </Link>
+          </li>
+        )}
         {userProfile && (
           <li>
             <Link

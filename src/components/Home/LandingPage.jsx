@@ -39,8 +39,7 @@ const LandingPage = () => {
           <div className="rounded-2xl bg-gray-800/50 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-2xl">
             <h3 className="mb-2 text-xl font-bold text-yellow-500">Visual Insights</h3>
             <p className="text-gray-400">
-              Interactive maps, brewery statistics, and check-in trends at your
-              fingertips.
+              Interactive maps, graphs, lists, AI analysis, check-in trends and much more.
             </p>
           </div>
           <div className="rounded-2xl bg-gray-800/50 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-2xl">

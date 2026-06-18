@@ -11,9 +11,7 @@ const Header = () => {
   const userName = userProfile?.untappd_username;
 
   const isDashboard = location.pathname === '/' && user;
-  const isHomeNotLoggedIn = location.pathname === '/' && !user;
-  const isClickable = !isDashboard || isHomeNotLoggedIn;
-
+  const isClickable = !isDashboard && location.pathname !== '/';
   const headerTitle = 'Tappd';
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -24,11 +22,9 @@ const Header = () => {
         <div className="md:mb-6">
           <div className="flex justify-between gap-2 md:gap-10">
             <div className="flex w-full flex-row items-center gap-3 overflow-hidden">
-              {!isHomeNotLoggedIn && (
-                <h1 className="mb-2 text-center text-3xl font-bold text-yellow-500 md:text-4xl">
-                  {isClickable ? <Link to="/">{headerTitle}</Link> : headerTitle}
-                </h1>
-              )}
+              <h1 className="mb-2 text-center text-3xl font-bold text-yellow-500 md:text-4xl">
+                {isClickable ? <Link to="/">{headerTitle}</Link> : headerTitle}
+              </h1>
               {userName && (
                 <h2 className="text-center text-xl font-bold text-gray-400 lg:text-2xl">
                   for {userName}

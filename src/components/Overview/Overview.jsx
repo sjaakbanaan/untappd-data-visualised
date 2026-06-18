@@ -58,7 +58,7 @@ const Overview = ({ beerData, lessCols }) => {
                 ${
                   sortCriteria === item.type
                     ? 'border-yellow-500 bg-yellow-500 text-gray-900'
-                    : 'bg-gray-900 text-white hover:bg-gray-700'
+                    : 'border-gray-600 bg-gray-900 text-white hover:bg-gray-700'
                 }`}
                 type="button"
                 onClick={() => toggleSortCriteria(item.type)}

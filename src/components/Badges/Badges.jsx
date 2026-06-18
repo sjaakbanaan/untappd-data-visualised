@@ -144,7 +144,7 @@ const Badges = () => {
         <div className="mt-8 flex justify-center">
           <button
             onClick={() => setVisible((v) => v + PAGE_SIZE)}
-            className="rounded border border-yellow-500 px-6 py-2 text-sm font-semibold text-yellow-400 transition-colors duration-200 hover:bg-yellow-500 hover:text-gray-900"
+            className="my-2 ml-2 rounded border border-yellow-600 bg-gray-900 px-3 py-2 text-yellow-500 shadow transition-colors duration-300 hover:bg-yellow-500 hover:text-gray-900"
           >
             Show more ({filtered.length - visible} remaining)
           </button>

@@ -71,7 +71,7 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
           onClick={() => setShowAllFilters((prev) => !prev)}
         >
           {showAllFilters
-            ? `Show fewer filters ↑`
+            ? 'Show fewer filters ↑'
             : `Show ${filterEntries.length - MOBILE_VISIBLE_FILTER_COUNT} more filter${
                 filterEntries.length - MOBILE_VISIBLE_FILTER_COUNT !== 1 ? 's' : ''
               } ↓`}

@@ -9,6 +9,16 @@ import FilterSidebar from './Dashboard/FilterSidebar';
 import Icon from './UI/Icon/Icon';
 import { useDashboardData } from '../utils';
 
+const DEFAULT_TITLE = 'Tappd (Untappd Data Visualised)';
+
+const pageTitles = {
+  '/login': 'Login - Tappd',
+  '/upload': 'Upload - Tappd',
+  '/settings': 'Settings - Tappd',
+  '/leaderboard': 'Leaderboard - Tappd',
+  '/my-wrappd': 'My Wrappd - Tappd',
+};
+
 const AppContent = () => {
   const location = useLocation();
   const isWrappdRoute = location.pathname.startsWith('/wrappd');
@@ -31,6 +41,12 @@ const AppContent = () => {
   } = useDashboardData();
 
   const [fabVisible, setFabVisible] = useState(false);
+
+  useEffect(() => {
+    if (!isWrappdRoute) {
+      document.title = pageTitles[location.pathname] || DEFAULT_TITLE;
+    }
+  }, [isWrappdRoute, location.pathname]);
 
   // Trigger Filter Button fade-in when data is ready
   useEffect(() => {

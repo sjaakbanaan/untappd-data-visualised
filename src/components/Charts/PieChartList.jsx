@@ -58,7 +58,7 @@ const PieChartList = ({ beerData }) => {
     <div>
       <h2 className="mb-6 text-xl font-semibold">Frequency pie charts</h2>
       <select
-        className="mb-8 w-full appearance-none rounded border border-white bg-gray-900 px-3 py-2 leading-tight text-white shadow focus:outline-none"
+        className="mb-8 w-full appearance-none rounded border border-gray-600 bg-gray-900 px-3 py-2 leading-tight text-white shadow focus:outline-none"
         value={selectedPieChartData}
         onChange={(e) => setSelectedPieChartData(e.target.value)}
       >
