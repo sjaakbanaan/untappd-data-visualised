@@ -270,7 +270,7 @@ const SettingsPage = () => {
         <div className="flex items-center gap-4 justify-between pt-6">
           <button
             type="submit"
-            className="rounded-lg bg-yellow-500 px-8 py-3 font-bold text-black transition-transform hover:scale-105 active:scale-95"
+            className="rounded-full bg-yellow-500 px-8 pb-4 pt-3 text-lg font-bold text-black shadow-lg transition-transform hover:scale-105 active:scale-95"
           >
             Save Changes
           </button>

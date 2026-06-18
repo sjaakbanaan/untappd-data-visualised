@@ -75,7 +75,7 @@ const VenueMap = ({ beerData }) => {
       <h2 className="mb-6 text-xl font-semibold">
         Venues checked-in ({uniqueVenueCount})
       </h2>
-      <div className="my-4 overflow-hidden rounded border border-gray-900 shadow-md">
+      <div className="my-4 overflow-hidden rounded border border-gray-600 shadow-md">
         <ReactMap
           key={mapKey} // Use mapKey as the key prop
           initialViewState={{

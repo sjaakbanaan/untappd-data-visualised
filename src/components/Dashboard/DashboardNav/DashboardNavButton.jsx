@@ -5,6 +5,14 @@ import { buildLiquidPath } from './buildLiquidPath';
 import { DRAIN_DURATION, FILL_DURATION, POINTER_LAG } from './navAnimationConstants';
 
 const WAVE_ANGLE_DURATION = 3;
+const BUBBLES = [
+  { x: 16, size: 5, duration: 2.6, delay: -0.2, drift: 8 },
+  { x: 31, size: 3, duration: 2.1, delay: -1.1, drift: -6 },
+  { x: 47, size: 4, duration: 2.9, delay: -1.7, drift: 10 },
+  { x: 64, size: 6, duration: 3.2, delay: -0.8, drift: -8 },
+  { x: 78, size: 3, duration: 2.4, delay: -1.9, drift: 5 },
+  { x: 89, size: 4, duration: 2.7, delay: -0.5, drift: -7 },
+];
 
 const DashboardNavButton = ({
   sectionKey,
@@ -211,6 +219,19 @@ const DashboardNavButton = ({
             d={buildLiquidPath(0, 0, 0)}
           />
         </svg>
+        {BUBBLES.map(({ x, size, duration, delay, drift }) => (
+          <span
+            key={`${x}-${size}`}
+            className="dashboard-nav-bubble"
+            style={{
+              '--bubble-x': `${x}%`,
+              '--bubble-size': `${size}px`,
+              '--bubble-duration': `${duration}s`,
+              '--bubble-delay': `${delay}s`,
+              '--bubble-drift': `${drift}px`,
+            }}
+          />
+        ))}
       </span>
       <span
         style={labelColorTransitionStyle}

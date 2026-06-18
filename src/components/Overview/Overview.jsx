@@ -67,7 +67,7 @@ const Overview = ({ beerData, lessCols }) => {
                 {sortCriteria === item.type && (
                   <Icon
                     icon="ARROW"
-                    style={{ width: '16px', height: '16px' }}
+                    style={{ width: '24px', height: '24px' }}
                     className={`ml-2 fill-black ${sortOrder === 'asc' && 'rotate-180'}`}
                   />
                 )}

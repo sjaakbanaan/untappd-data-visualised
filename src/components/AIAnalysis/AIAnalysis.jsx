@@ -151,7 +151,7 @@ const AIAnalysis = ({
           <span className="ml-2 text-sm text-gray-500">BETA</span>
         </h2>
 
-        <div className="block overflow-hidden border border-white px-6 py-10 shadow-lg md:rounded-lg">
+        <div className="block overflow-hidden border border-gray-600 px-6 py-10 shadow-lg md:rounded-lg">
           <div className="mb-4 text-center">
             <p className="mb-2 text-gray-300">
               Get AI-powered insights for:
@@ -163,28 +163,27 @@ const AIAnalysis = ({
               </button>
             </p>
             {analysisFilterMismatch && (
-              <p className="mb-2 text-sm text-amber-200/90">
-                Your date filter is set to{' '}
-                {formatWrappdDates(filterDateRange.start, filterDateRange.end)}.<br />
-                Run analyze to replace this with insights for the current range.
+              <p className="mt-6 text-sm text-amber-200/90">
+                Run analyze to replace your last analysis with insights for the current
+                range.
               </p>
             )}
           </div>
 
           {showAnalyzeButton && (
-            <div className="flex justify-center">
+            <div className="my-10 flex justify-center">
               <button
                 type="button"
                 onClick={analyzeBeerData}
                 disabled={isLoading || !hasBeerData}
-                className={`mx-2 mb-0 flex items-center rounded border px-6 py-3 shadow transition-colors duration-300
+                className={`rounded-full px-8 pb-4 pt-3 text-lg font-bold shadow-lg transition-transform hover:scale-105 active:scale-95
                   ${
                     isLoading || !hasBeerData
                       ? 'cursor-not-allowed border-gray-600 bg-gray-600 text-gray-400'
-                      : 'border-yellow-500 bg-yellow-500 text-gray-900 hover:bg-yellow-400'
+                      : 'border-yellow-500 bg-yellow-500 text-black'
                   }`}
               >
-                {isLoading ? 'Analyzing...' : 'Analyze my checkins'}
+                {isLoading ? 'Analyzing...' : 'Analyze My Checkins'}
               </button>
             </div>
           )}

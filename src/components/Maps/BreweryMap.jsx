@@ -65,7 +65,7 @@ const BreweryMap = ({ beerData }) => {
       <h2 className="mb-6 text-xl font-semibold">
         Brewery countries ({uniqueCountries.length})
       </h2>
-      <div className="my-4 overflow-hidden rounded border border-gray-900 shadow-md">
+      <div className="my-4 overflow-hidden rounded border border-gray-600 shadow-md">
         <Map
           initialViewState={{
             latitude: 52.089928,

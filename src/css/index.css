@@ -77,6 +77,45 @@
   border-bottom-color: #111827 !important;
 }
 
+.dashboard-nav-bubble {
+  position: absolute;
+  bottom: -12px;
+  left: var(--bubble-x);
+  z-index: 1;
+  width: var(--bubble-size);
+  height: var(--bubble-size);
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow:
+    inset 0 0 2px rgba(255, 255, 255, 0.9),
+    0 0 5px rgba(255, 255, 255, 0.22);
+  opacity: 0;
+  transform: translate3d(-50%, 0, 0) scale(0.7);
+  animation: dashboard-nav-bubble-rise var(--bubble-duration) linear var(--bubble-delay)
+    infinite;
+}
+
+@keyframes dashboard-nav-bubble-rise {
+  0% {
+    opacity: 0;
+    transform: translate3d(-50%, 10px, 0) scale(0.95);
+  }
+  18% {
+    opacity: 0.65;
+  }
+  72% {
+    opacity: 0;
+    transform: translate3d(calc(-50% + var(--bubble-drift)), -70px, 0) scale(1.52);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-nav-bubble {
+    animation: none;
+  }
+}
+
 /* ─── Wrappd Stacking Cards ─────────────────────────────────────────── */
 
 .wrappd-card {

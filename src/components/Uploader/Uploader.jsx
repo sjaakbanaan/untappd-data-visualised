@@ -201,7 +201,7 @@ const Uploader = () => {
             <p className="text-lg text-gray-400">
               Drag 'n' drop your JSON file here, or click to selecting
             </p>
-            <button className="rounded-full bg-yellow-500 px-8 py-3 text-lg font-bold text-black shadow-lg transition-transform hover:scale-105 active:scale-95">
+            <button className="rounded-full bg-yellow-500 px-8 pb-4 pt-3 text-lg font-bold text-black shadow-lg transition-transform hover:scale-105 active:scale-95">
               Select JSON file
             </button>
           </div>
