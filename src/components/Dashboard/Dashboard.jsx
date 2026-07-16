@@ -59,6 +59,7 @@ const Dashboard = () => {
       <ScraperXLDisclaimer />
       <div>
         <DashboardHeader
+          beerData={beerData}
           filterDateRange={filterDateRange}
           filterOverview={filterOverview}
           setFilterOverview={setFilterOverview}

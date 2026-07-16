@@ -2,6 +2,7 @@ import { formatDate } from '../../utils/';
 import FilterTag from './FilterTag';
 
 const DashboardHeader = ({
+  beerData,
   filterDateRange,
   filterOverview,
   setFilterOverview,
@@ -20,7 +21,16 @@ const DashboardHeader = ({
 
   const handleClearDate = (type, e) => {
     e.stopPropagation();
-    setFilterDateRange((prev) => ({ ...prev, [type]: '' }));
+
+    const knownDates = beerData
+      .map((item) => item.created_at?.split(' ')[0])
+      .filter(Boolean)
+      .sort();
+    const resetDate = type === 'start' ? knownDates[0] : knownDates.at(-1);
+
+    if (resetDate) {
+      setFilterDateRange((prev) => ({ ...prev, [type]: resetDate }));
+    }
   };
 
   return (

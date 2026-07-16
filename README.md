@@ -61,6 +61,7 @@ After setting filters, the following lists are presented in either a chart or li
 - 16-06-2026: v3.5.0 replaced the map inside Wrappd with an open-source one + added a new feature (in beta) to compare basic stats with other users for the current date range.
 - 18-06-2026: v3.5.1 added bubble animation to dashboard nav button, implemented dynamic page titles in AppContent and refine UI styles across various components for consistency.
 - 16-07-2026: v.3.6.0 added GitHub link to Footer, removed from Header and MobileMenu, and introduced new icons for Settings and Logout in Navigation
+- 16-07-2026: v3.6.1 feat: pass beerData to DashboardHeader and update date range reset logic based on available beer creation dates
 
 ## Known bugs
 
