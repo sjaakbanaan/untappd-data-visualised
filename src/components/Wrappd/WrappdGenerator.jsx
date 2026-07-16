@@ -26,7 +26,17 @@ const WrappdGenerator = () => {
 
   return (
     <>
-      <div className="mx-auto mb-8 max-w-3xl bg-gray-800 p-6 text-white shadow-2xl md:rounded-2xl md:p-10">
+      <video
+        className="mx-auto w-full max-w-3xl object-cover"
+        autoPlay
+        loop
+        muted
+        playsInline
+        aria-hidden="true"
+      >
+        <source src="/media/output.mp4" type="video/mp4" />
+      </video>
+      <div className="mx-auto mb-8 max-w-3xl bg-gray-800 p-6 text-white shadow-2xl md:rounded-b-2xl md:p-10">
         <WrappdShareBox
           filteredData={filteredData}
           beerData={beerData}
