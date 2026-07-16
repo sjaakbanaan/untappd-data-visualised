@@ -146,7 +146,7 @@ const WrappdLayout = ({
     <div className="px-2 py-8 md:px-0 md:pb-0 md:pt-16">
       <ul
         id="wrappd-cards"
-        className="mx-auto flex list-none flex-col p-0 md:pb-16 lg:max-w-screen-md xl:max-w-screen-lg"
+        className="mx-auto flex list-none flex-col p-0 md:max-w-screen-sm md:pb-16 lg:max-w-screen-md xl:max-w-screen-lg"
       >
         {cards.map(({ key, bg, content }, i) => (
           <StackCard

@@ -18,15 +18,8 @@ const WrappdGenerator = () => {
   const { filteredData, filterOverview, filterDateRange } = useDashboardData();
 
   return (
-    <div className="mx-auto max-w-3xl bg-gray-800 p-6 text-white shadow-2xl md:rounded-2xl md:p-10">
-      <div className="mb-8 text-center">
-        <h2 className="mb-3 text-3xl font-bold text-yellow-500">My Tappd Wrappd</h2>
-        <p className="text-gray-400">
-          Generate a summary of your beer journey to share with friends.
-        </p>
-      </div>
-
-      <div className="rounded-xl bg-gray-700/50 p-1">
+    <>
+      <div className="mx-auto mb-8 max-w-3xl bg-gray-800 p-6 text-white shadow-2xl md:rounded-2xl md:p-10">
         <WrappdShareBox
           filteredData={filteredData}
           filterDateRange={filterDateRange}
@@ -35,19 +28,16 @@ const WrappdGenerator = () => {
           onShareCreated={() => setBacklogRefreshKey((key) => key + 1)}
         />
       </div>
-
-      <div className="mt-8 text-center text-sm text-gray-400">
-        <p>
-          Tip: Use the dashboard filters to select specific years or categories before
-          generating your Wrappd.
-        </p>
+      <div className="mx-auto max-w-3xl bg-gray-800 p-6 text-white shadow-2xl md:rounded-2xl md:p-10">
+        <div className="mb-8 text-center">
+          <h2 className="mb-3 text-3xl font-bold text-yellow-500">Previous Wrappds</h2>
+        </div>
+        <WrappdBacklog
+          refreshKey={backlogRefreshKey}
+          onWrappdDeleted={() => setBacklogRefreshKey((key) => key + 1)}
+        />
       </div>
-
-      <WrappdBacklog
-        refreshKey={backlogRefreshKey}
-        onWrappdDeleted={() => setBacklogRefreshKey((key) => key + 1)}
-      />
-    </div>
+    </>
   );
 };
 

@@ -602,7 +602,7 @@ const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
 
   return (
     <div>
-      <div className="mb-6 border border-gray-700 bg-gray-800 p-5 shadow-lg md:rounded-lg md:p-6">
+      <div className="mb-6 border border-yellow-500/20 bg-yellow-500/10 p-5 shadow-lg md:rounded-lg md:p-6">
         <div className="flex flex-col gap-5 md:flex-row">
           <div className="flex flex-wrap items-center gap-3">
             <h3 className="text-2xl font-black text-white">Compare stats</h3>
@@ -630,7 +630,7 @@ const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
               </select>
             ) : (
               <div className="rounded border border-gray-700 bg-gray-900/40 px-4 py-3 text-sm text-gray-400 md:min-w-72">
-                No coverage for this date range for you or other users.
+                No coverage for this date range for other users.
               </div>
             )}
           </div>

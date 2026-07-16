@@ -2,9 +2,7 @@
 
 ## This is the repository for [tappd.online](https:///tappd.online)
 
-## NEW!
-
-**Your uploaded data is now stored online, so you don't need to have JSON ready to upload every time you visit the site. Just log in and your data will be there.**
+**Your uploaded data is stored online, so you don't need to have JSON ready to upload every time you visit the site. Just log in and your data will be there.**
 
 ## Overview
 
@@ -19,7 +17,7 @@ Tappd is designed to visualize Untappd data in various formats, such as charts, 
 
 ## How to use
 
-Go to [tappd.online](https:///tappd.online) and upload your export. Set a date range, and start filtering. For example filter by brewery name/city/country or venue name/city/country.
+Go to [tappd.online](https:///tappd.online), create an account and upload your export. Set a date range, and start filtering. For example filter by brewery name/city/country or venue name/city/country.
 After setting filters, the following lists are presented in either a chart or list:
 | Category         | Subcategory   | Items                                                                                                     |
 | ---------------- | ------------- | --------------------------------------------------------------------------------------------------------- |
