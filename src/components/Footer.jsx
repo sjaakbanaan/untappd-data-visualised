@@ -10,6 +10,16 @@ const Footer = () => {
           icon="BEER"
           className="-mt-1 w-4 fill-yellow-500 transition-transform duration-300 hover:scale-125"
         />
+        <a
+          href="https://github.com/sjaakbanaan/untappd-data-visualised/"
+          title="GitHub repository"
+          aria-label="GitHub repository"
+          target="_blank"
+          rel="noreferrer"
+          className="transition-opacity hover:opacity-80"
+        >
+          <Icon icon="GITHUB" className="-mt-1 w-4 fill-white" />
+        </a>
       </div>
     </div>
   );

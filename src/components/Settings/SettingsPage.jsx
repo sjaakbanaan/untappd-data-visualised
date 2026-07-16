@@ -286,7 +286,7 @@ const SettingsPage = () => {
 
       {hasDangerZoneActions && (
         <div className="mt-12 rounded-xl border border-red-500/20 bg-red-500/5 p-8">
-          <h3 className="mb-4 text-xl font-bold text-red-500">Advanced / Danger Zone</h3>
+          <h3 className="mb-4 text-xl font-bold text-red-500">Danger Zone</h3>
           <p className="mb-6 text-sm text-gray-400">
             Manage your sensitive data and local session settings.
           </p>

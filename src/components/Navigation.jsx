@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { DataContext } from '../DataContext';
+import Icon from './UI/Icon/Icon';
 
 const Navigation = () => {
   const { beerData } = useContext(DataContext);
@@ -66,9 +67,11 @@ const Navigation = () => {
           <li>
             <Link
               to="/settings"
+              title="Settings"
+              aria-label="Settings"
               className={`transition-colors hover:text-yellow-500 ${pathname === '/settings' ? 'text-yellow-500' : 'text-white'}`}
             >
-              Settings
+              <Icon icon="SETTINGS" className="w-5" />
             </Link>
           </li>
         )}
@@ -76,9 +79,11 @@ const Navigation = () => {
           <li>
             <button
               onClick={logout}
-              className="text-gray-400 transition-colors hover:text-red-500"
+              title="Logout"
+              aria-label="Logout"
+              className="flex items-center justify-center text-white transition-colors hover:text-red-500"
             >
-              Logout
+              <Icon icon="LOGOUT" className="size-5" />
             </button>
           </li>
         )}

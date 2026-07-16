@@ -50,17 +50,6 @@ const Header = () => {
                   />
                 </a>
               )}
-              <a
-                href="https://github.com/sjaakbanaan/untappd-data-visualised/"
-                title="Github repository"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Icon
-                  icon="GITHUB"
-                  className="hidden w-5 fill-white transition-opacity hover:opacity-80 md:block"
-                />
-              </a>
               {/* Mobile hamburger button */}
               <button
                 onClick={() => setIsMobileMenuOpen(true)}

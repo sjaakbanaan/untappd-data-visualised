@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useAutoScroll } from '../../utils/useAutoScroll';
 import WrappdCardHero from './WrappdCardHero';
 import WrappdCardStats from './WrappdCardStats';
 import WrappdCardMap from './WrappdCardMap';
@@ -17,6 +18,8 @@ const WrappdLayout = ({
   shareLinkTitle,
   venueLocations,
 }) => {
+  const layoutRef = useAutoScroll();
+
   // Beer photos from the Top 5 beers list
   const photosList = topLists.find((item) => item.title === 'Top 5 beers');
   const hasPhotos = photosList?.items?.filter((i) => i.photo_url).length >= 5;
@@ -112,7 +115,7 @@ const WrappdLayout = ({
   const numCards = cards.length;
 
   return (
-    <div className="px-2 py-8 md:px-0 md:pb-0 md:pt-16">
+    <div ref={layoutRef} className="px-2 py-8 md:px-0 md:pb-0 md:pt-16">
       <ul
         id="wrappd-cards"
         className="mx-auto flex list-none flex-col p-0 md:max-w-screen-sm md:pb-16 lg:max-w-screen-md xl:max-w-screen-lg"

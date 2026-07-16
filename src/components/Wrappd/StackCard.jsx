@@ -31,3 +31,5 @@ StackCard.propTypes = {
   extraClass: PropTypes.string,
   children: PropTypes.node.isRequired,
 };
+
+export default StackCard;

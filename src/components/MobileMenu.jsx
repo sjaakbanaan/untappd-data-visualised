@@ -125,15 +125,6 @@ const MobileMenu = ({ isOpen, onClose }) => {
               </a>
             </>
           )}
-          <a
-            href="https://github.com/sjaakbanaan/untappd-data-visualised/"
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center gap-3 rounded-lg px-4 py-3 text-lg font-medium text-gray-300 transition-colors hover:bg-gray-800 hover:text-white"
-          >
-            <Icon icon="GITHUB" className="w-5 fill-white" />
-            GitHub
-          </a>
 
           {/* Logout */}
           {userProfile && (
