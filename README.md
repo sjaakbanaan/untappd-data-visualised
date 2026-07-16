@@ -37,11 +37,11 @@ After setting filters, the following lists are presented in either a chart or li
 
 ## Screenshots
 
-<img width="1440" height="2374" alt="screencapture-tappd-online-2026-07-16-20_53_03" src="https://github.com/user-attachments/assets/2d50478c-8e70-41e5-984c-e96025693c1b" />
-
 <img width="1440" height="2271" alt="screencapture-tappd-online-2026-07-16-20_51_42" src="https://github.com/user-attachments/assets/4e0f9969-2edd-4261-9aea-2fa7bf497b26" />
 
 <img width="1440" height="1826" alt="screencapture-tappd-online-2026-07-16-20_52_29" src="https://github.com/user-attachments/assets/b3de901d-7631-480c-b39f-115350460d59" />
+
+<img width="1440" height="2374" alt="screencapture-tappd-online-2026-07-16-20_53_03" src="https://github.com/user-attachments/assets/2d50478c-8e70-41e5-984c-e96025693c1b" />
 
 <img width="1440" height="1082" alt="screencapture-tappd-online-2026-07-16-20_53_54" src="https://github.com/user-attachments/assets/937c6250-8575-4b9d-96b4-84c9fd98cc4f" />
 
