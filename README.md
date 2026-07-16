@@ -47,6 +47,8 @@ After setting filters, the following lists are presented in either a chart or li
 
 <img width="1440" height="2054" alt="screencapture-tappd-online-2026-07-16-20_54_09" src="https://github.com/user-attachments/assets/ff61d23c-5d12-46f0-86bb-e1596e52ad40" />
 
+https://github.com/user-attachments/assets/fe72a847-d21c-464c-9d70-6891316fec89
+
 ## Recent changelog
 
 - 08-04-2026: v3.0.0 Added a leaderboard functionality + rebranded to Tappd + improved (mobile) UX + fixed bug where you had to hard refresh after uploading a new json.
