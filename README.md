@@ -37,13 +37,15 @@ After setting filters, the following lists are presented in either a chart or li
 
 ## Screenshots
 
-<img width="3600" height="5758" alt="screencapture-tappd-online-2026-03-07-17_36_52" src="https://github.com/user-attachments/assets/bc1765c2-67b4-43cf-a43f-9939c1cf46cc" />
+<img width="1440" height="2374" alt="screencapture-tappd-online-2026-07-16-20_53_03" src="https://github.com/user-attachments/assets/2d50478c-8e70-41e5-984c-e96025693c1b" />
 
-<img width="3600" height="5646" alt="screencapture-tappd-online-2026-03-07-17_37_11" src="https://github.com/user-attachments/assets/adbc4a56-0300-46a4-a04a-9b18c6a4aed0" />
+<img width="1440" height="2271" alt="screencapture-tappd-online-2026-07-16-20_51_42" src="https://github.com/user-attachments/assets/4e0f9969-2edd-4261-9aea-2fa7bf497b26" />
 
-<img width="3600" height="3902" alt="screencapture-tappd-online-2026-03-07-17_37_34" src="https://github.com/user-attachments/assets/8874bc18-bf7e-4e73-a6e3-b466adfda9bd" />
+<img width="1440" height="1826" alt="screencapture-tappd-online-2026-07-16-20_52_29" src="https://github.com/user-attachments/assets/b3de901d-7631-480c-b39f-115350460d59" />
 
-<img width="677" alt="Screenshot 2025-04-21 at 21 47 01" src="https://github.com/user-attachments/assets/ea076421-28ba-472b-91b6-90f0468fc10f" />
+<img width="1440" height="1082" alt="screencapture-tappd-online-2026-07-16-20_53_54" src="https://github.com/user-attachments/assets/937c6250-8575-4b9d-96b4-84c9fd98cc4f" />
+
+<img width="1440" height="2054" alt="screencapture-tappd-online-2026-07-16-20_54_09" src="https://github.com/user-attachments/assets/ff61d23c-5d12-46f0-86bb-e1596e52ad40" />
 
 ## Recent changelog
 
