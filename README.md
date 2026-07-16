@@ -1,4 +1,4 @@
-# Tappd (Untappd Data Visualised) v3.6.0
+# Tappd (Untappd Data Visualised) v3.6.2
 
 ## This is the repository for [tappd.online](https:///tappd.online)
 
@@ -49,11 +49,6 @@ After setting filters, the following lists are presented in either a chart or li
 
 ## Recent changelog
 
-- 04-03-2026: v2.8.0 Soft launch of the option to use the new Untappd Scraper XL, next to Untappd Insider export
-- 06-03-2026: v2.8.1 Added badges when available from export (currently only Scraper XL export is supported) + showing most checked-in beer data to basic stats
-- 07-03-2026: v2.8.2 Added the option to group badges by level (steps of 10)
-- 31-03-2026: v2.9.0 Your uploaded data is now stored online, so you don't need to have JSON ready to upload every time you visit the site. Just log in and your data will be there.
-- 31-03-2026: v2.9.1 Fixed a bug where filtering on 'tagged friends' wouldn't return a complete list + improved mobile UX
 - 08-04-2026: v3.0.0 Added a leaderboard functionality + rebranded to Tappd + improved (mobile) UX + fixed bug where you had to hard refresh after uploading a new json.
 - 18-04-2026: v3.0.3 Fixed 'Top 10 rated beers (global / you (diff))' - hide when json was exported with the scraper XL, otherwise it will just show the global ratings
 - 01-05-2026: v3.1.0 Refactored Wrappd UX, and added maps and more basic statistics + small bug fixes.
@@ -64,6 +59,7 @@ After setting filters, the following lists are presented in either a chart or li
 - 18-06-2026: v3.5.1 added bubble animation to dashboard nav button, implemented dynamic page titles in AppContent and refine UI styles across various components for consistency.
 - 16-07-2026: v.3.6.0 added GitHub link to Footer, removed from Header and MobileMenu, and introduced new icons for Settings and Logout in Navigation
 - 16-07-2026: v3.6.1 feat: pass beerData to DashboardHeader and update date range reset logic based on available beer creation dates
+- 16-07-2026 v3.6.2 enhance Uploader notification, and improve Wrappd components with new filtering functionality
 
 ## Known bugs
 

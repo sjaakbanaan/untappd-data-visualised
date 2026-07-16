@@ -163,7 +163,7 @@ const Uploader = () => {
         )}
       </div>
 
-      <NotificationBar text="Uploading a new file will replace your current data. You can always see which file source is being used in your settings." />
+      <NotificationBar text="Uploading a new file will replace your current data." />
 
       <div
         {...getRootProps()}

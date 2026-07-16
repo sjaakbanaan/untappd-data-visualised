@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { useAuth } from '../../context/AuthContext';
-import { useShareStats, formatWrappdDates, useBasicStats } from '../../utils';
+import { useShareStats, formatDate, useBasicStats } from '../../utils';
+import FilterTag from '../Dashboard/FilterTag';
 
 const sortByCreatedAtDesc = (a, b) => {
   return new Date(b.createdAt || 0) - new Date(a.createdAt || 0);
@@ -13,6 +14,9 @@ const WrappdShareBox = ({
   filterDateRange,
   filterOverview,
   filteredData,
+  beerData,
+  setFilterDateRange,
+  onFilterClick,
   lookupRefreshKey = 0,
   onShareCreated,
 }) => {
@@ -24,6 +28,20 @@ const WrappdShareBox = ({
   const [isCheckingExistingWrappd, setIsCheckingExistingWrappd] = useState(true);
 
   const untappdUsername = userProfile?.untappd_username;
+
+  const handleClearDate = (type, event) => {
+    event.stopPropagation();
+
+    const knownDates = beerData
+      .map((item) => item.created_at?.split(' ')[0])
+      .filter(Boolean)
+      .sort();
+    const resetDate = type === 'start' ? knownDates[0] : knownDates.at(-1);
+
+    if (resetDate) {
+      setFilterDateRange((previousRange) => ({ ...previousRange, [type]: resetDate }));
+    }
+  };
 
   // reset share link when beerData changes
   useEffect(() => {
@@ -130,9 +148,21 @@ const WrappdShareBox = ({
               {!existingWrappd
                 ? 'Create a visual summary of your beer journey for:'
                 : 'You already have a Wrappd created for:'}
-              <div className="font-black text-white">
-                {formatWrappdDates(filterDateRange.start, filterDateRange.end)}
-              </div>
+              <span className="mt-2 flex flex-wrap items-center justify-center gap-2 font-black">
+                <FilterTag
+                  value={filterDateRange.start ? formatDate(filterDateRange.start) : null}
+                  isPlaceholder={!filterDateRange.start}
+                  onClear={(event) => handleClearDate('start', event)}
+                  onClick={onFilterClick}
+                />
+                <span className="font-normal text-gray-400">and</span>
+                <FilterTag
+                  value={filterDateRange.end ? formatDate(filterDateRange.end) : null}
+                  isPlaceholder={!filterDateRange.end}
+                  onClear={(event) => handleClearDate('end', event)}
+                  onClick={onFilterClick}
+                />
+              </span>
             </p>
 
             <p>
@@ -249,6 +279,9 @@ WrappdShareBox.propTypes = {
   filterDateRange: PropTypes.object.isRequired,
   filterOverview: PropTypes.object,
   filteredData: PropTypes.array,
+  beerData: PropTypes.array.isRequired,
+  setFilterDateRange: PropTypes.func.isRequired,
+  onFilterClick: PropTypes.func.isRequired,
   lookupRefreshKey: PropTypes.number,
   onShareCreated: PropTypes.func,
 };

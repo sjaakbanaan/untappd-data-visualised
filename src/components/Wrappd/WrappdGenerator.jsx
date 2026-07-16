@@ -15,15 +15,25 @@ const WrappdGenerator = () => {
     });
   }, []);
 
-  const { filteredData, filterOverview, filterDateRange } = useDashboardData();
+  const {
+    beerData,
+    filteredData,
+    filterOverview,
+    filterDateRange,
+    setFilterDateRange,
+    setIsFilterSidebarOpen,
+  } = useDashboardData();
 
   return (
     <>
       <div className="mx-auto mb-8 max-w-3xl bg-gray-800 p-6 text-white shadow-2xl md:rounded-2xl md:p-10">
         <WrappdShareBox
           filteredData={filteredData}
+          beerData={beerData}
           filterDateRange={filterDateRange}
+          setFilterDateRange={setFilterDateRange}
           filterOverview={filterOverview}
+          onFilterClick={() => setIsFilterSidebarOpen(true)}
           lookupRefreshKey={backlogRefreshKey}
           onShareCreated={() => setBacklogRefreshKey((key) => key + 1)}
         />
