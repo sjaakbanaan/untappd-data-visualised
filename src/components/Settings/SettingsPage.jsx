@@ -267,7 +267,7 @@ const SettingsPage = () => {
           </span>
         </label>
 
-        <div className="flex items-center gap-4 justify-between pt-6">
+        <div className="flex items-center justify-between gap-4 pt-6">
           <button
             type="submit"
             className="rounded-full bg-yellow-500 px-8 pb-4 pt-3 text-lg font-bold text-black shadow-lg transition-transform hover:scale-105 active:scale-95"
@@ -318,7 +318,7 @@ const SettingsPage = () => {
                 </p>
                 <button
                   onClick={handleDeleteData}
-                  className="w-full rounded-lg border border-red-600/30 bg-red-600/20 px-4 py-2 text-sm font-bold text-red-400 transition-all hover:text-red-300 hover:bg-red-600/30"
+                  className="w-full rounded-lg border border-red-600/30 bg-red-600/20 px-4 py-2 text-sm font-bold text-red-400 transition-all hover:bg-red-600/30 hover:text-red-300"
                 >
                   Delete All Data
                 </button>

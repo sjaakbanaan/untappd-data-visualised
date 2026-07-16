@@ -24,7 +24,7 @@ const WrappdHeader = ({
         <div className="flex flex-col truncate">
           <h1 className="mb-1 truncate text-3xl">{userName}</h1>
           <div className="whitespace-normal text-wrappdYellow">
-            {shareLinkTitle && <h2 className="text-xl mt-1">{shareLinkTitle}</h2>}
+            {shareLinkTitle && <h2 className="mt-1 text-xl">{shareLinkTitle}</h2>}
             <h3 className="text-gray-400">
               {formatWrappdDates(dateRange.start, dateRange.end)}
             </h3>

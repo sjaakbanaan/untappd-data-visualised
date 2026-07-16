@@ -94,6 +94,14 @@ yarn start # npm run start
 
 This will open the app on localhost:3000 in your default web browser. Log in with your existing account (or create one on [tappd.online](https://tappd.online)). Update your settings and upload your JSON to get started.
 
+### Linting
+
+Run ESLint for all JavaScript and JSX files:
+
+```bash
+npx eslint . --ext .js,.jsx --ignore-pattern dist/
+```
+
 ## License
 
 This project is licensed under the MIT License.

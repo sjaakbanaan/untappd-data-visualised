@@ -111,7 +111,7 @@ const WrappdShareBox = ({
   ]);
 
   return (
-    <div className="relative z-10 flex flex-col items-center gap-8 text-center">
+    <div className="relative z-10 flex flex-col items-center gap-8 p-6 text-center md:p-8">
       <div className="w-full max-w-lg">
         <h2 className="mb-4 text-3xl font-bold text-yellow-500">
           {!existingWrappd ? 'Generate Your Wrappd' : 'Watch Your Wrappd'}
