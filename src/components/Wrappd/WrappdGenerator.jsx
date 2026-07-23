@@ -21,6 +21,7 @@ const WrappdGenerator = () => {
     filterOverview,
     filterDateRange,
     setFilterDateRange,
+    filterYears,
     setIsFilterSidebarOpen,
   } = useDashboardData();
 
@@ -43,6 +44,7 @@ const WrappdGenerator = () => {
           filterDateRange={filterDateRange}
           setFilterDateRange={setFilterDateRange}
           filterOverview={filterOverview}
+          filterYears={filterYears}
           onFilterClick={() => setIsFilterSidebarOpen(true)}
           lookupRefreshKey={backlogRefreshKey}
           onShareCreated={() => setBacklogRefreshKey((key) => key + 1)}

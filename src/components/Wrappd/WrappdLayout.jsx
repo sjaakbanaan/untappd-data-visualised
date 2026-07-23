@@ -15,6 +15,7 @@ const WrappdLayout = ({
   stats,
   topLists,
   filterOverview,
+  filterYears = [],
   shareLinkTitle,
   venueLocations,
 }) => {
@@ -40,6 +41,7 @@ const WrappdLayout = ({
           userAvatar={userAvatar}
           dateRange={dateRange}
           filterOverview={filterOverview}
+          filterYears={filterYears}
           shareLinkTitle={shareLinkTitle}
           totalBeers={totalBeers}
         />
@@ -157,6 +159,7 @@ WrappdLayout.propTypes = {
     })
   ).isRequired,
   filterOverview: PropTypes.object.isRequired,
+  filterYears: PropTypes.arrayOf(PropTypes.number),
   shareLinkTitle: PropTypes.string,
   venueLocations: PropTypes.array,
 };

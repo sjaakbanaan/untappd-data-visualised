@@ -24,6 +24,7 @@ const Wrappd = () => {
   const [userAvatar, setUserAvatar] = useState(null);
   const [topLists, setTopLists] = useState(null);
   const [filterOverview, setFilterOverview] = useState(null);
+  const [filterYears, setFilterYears] = useState([]);
   const [venueLocations, setVenueLocations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -46,6 +47,7 @@ const Wrappd = () => {
           setUserAvatar(data.userAvatar || undefined);
           setTopLists(data.topLists || []);
           setFilterOverview(data.filterOverview || {});
+          setFilterYears(data.filterYears || []);
           setVenueLocations(data.venueLocations || []);
           setShareLinkTitle(data.shareLinkTitle || '');
         } else {
@@ -93,6 +95,7 @@ const Wrappd = () => {
       stats={stats}
       topLists={topLists}
       filterOverview={filterOverview}
+      filterYears={filterYears}
       shareLinkTitle={shareLinkTitle}
       venueLocations={venueLocations}
     />

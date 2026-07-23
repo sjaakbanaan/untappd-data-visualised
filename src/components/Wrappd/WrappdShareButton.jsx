@@ -3,7 +3,7 @@ import Icon from '../UI/Icon/Icon';
 
 const WrappdShareButton = ({ userName }) => {
   return (
-    <div className="mt-4 md:mt-0">
+    <div>
       <button
         type="button"
         aria-label="Share"

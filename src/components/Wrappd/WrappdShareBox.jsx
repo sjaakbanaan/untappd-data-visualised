@@ -10,9 +10,26 @@ const sortByCreatedAtDesc = (a, b) => {
   return new Date(b.createdAt || 0) - new Date(a.createdAt || 0);
 };
 
+// Normalize a filterOverview to a comparable string (drops empty filters,
+// tolerates the old single-string format, ignores value/key order)
+const normalizeFilterOverview = (overview) =>
+  JSON.stringify(
+    Object.entries(overview || {})
+      .map(([key, value]) => [
+        key,
+        (Array.isArray(value) ? value : value ? [value] : []).map(String).sort(),
+      ])
+      .filter(([, values]) => values.length > 0)
+      .sort(([a], [b]) => a.localeCompare(b))
+  );
+
+const normalizeFilterYears = (years) =>
+  JSON.stringify((years || []).map(Number).sort((a, b) => a - b));
+
 const WrappdShareBox = ({
   filterDateRange,
   filterOverview,
+  filterYears = [],
   filteredData,
   beerData,
   setFilterDateRange,
@@ -81,7 +98,11 @@ const WrappdShareBox = ({
 
             if (
               wrappd.startDate === filterDateRange.start &&
-              wrappd.endDate === filterDateRange.end
+              wrappd.endDate === filterDateRange.end &&
+              normalizeFilterOverview(wrappd.filterOverview) ===
+                normalizeFilterOverview(filterOverview) &&
+              normalizeFilterYears(wrappd.filterYears) ===
+                normalizeFilterYears(filterYears)
             ) {
               wrappdMap.set(docSnap.id, {
                 id: docSnap.id,
@@ -105,6 +126,8 @@ const WrappdShareBox = ({
   }, [
     filterDateRange?.end,
     filterDateRange?.start,
+    filterOverview,
+    filterYears,
     lookupRefreshKey,
     untappdUsername,
     user?.uid,
@@ -223,7 +246,8 @@ const WrappdShareBox = ({
                     topLists,
                     filterOverview,
                     shareLinkTitle,
-                    venueLocations
+                    venueLocations,
+                    filterYears
                   );
 
                   if (shareUrl) {
@@ -278,6 +302,7 @@ const WrappdShareBox = ({
 WrappdShareBox.propTypes = {
   filterDateRange: PropTypes.object.isRequired,
   filterOverview: PropTypes.object,
+  filterYears: PropTypes.arrayOf(PropTypes.number),
   filteredData: PropTypes.array,
   beerData: PropTypes.array.isRequired,
   setFilterDateRange: PropTypes.func.isRequired,

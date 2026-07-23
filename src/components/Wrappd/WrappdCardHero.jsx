@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
-import { formatWrappdDates } from '../../utils/';
-import ActiveFiltersDisplay from './ActiveFiltersDisplay';
+import WrappdActiveFilters from './WrappdActiveFilters';
 import WrappdShareButton from './WrappdShareButton';
 
 const WrappdCardHero = ({
@@ -8,11 +7,15 @@ const WrappdCardHero = ({
   userAvatar,
   dateRange,
   filterOverview,
+  filterYears = [],
   shareLinkTitle,
   totalBeers,
 }) => {
   return (
-    <div className="relative flex flex-col justify-between bg-gray-900 p-8 pb-[20vh] md:p-14 md:pb-[20vh]">
+    // min-h must match the StackCard shell so the absolutely-positioned
+    // check-in number always sits at the card's bottom edge, regardless of
+    // how much content the hero has
+    <div className="relative flex min-h-[75vh] flex-col justify-between bg-gray-900 p-8 pb-[20vh] md:p-14 md:pb-[20vh]">
       {/* Decorative large number in background */}
       <div
         aria-hidden="true"
@@ -26,43 +29,46 @@ const WrappdCardHero = ({
         </span>
       </div>
 
-      {/* Top: logo wordmark */}
-      <div className="relative z-10 flex items-center gap-3">
-        <img src="/logo-wrappd.svg" className="w-10 opacity-60" alt="" />
-        <span className="text-sm font-bold uppercase tracking-widest text-gray-500">
-          Tappd Wrappd
-        </span>
+      {/* Top: logo wordmark + share */}
+      <div className="relative z-10 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <img src="/logo-wrappd.svg" className="w-10 opacity-60" alt="" />
+          <span className="text-sm font-bold uppercase tracking-widest text-gray-500">
+            Tappd Wrappd
+          </span>
+        </div>
+        <WrappdShareButton userName={userName} />
       </div>
 
       {/* Centre: user info */}
       <div className="relative z-10 flex flex-1 flex-col justify-center py-12">
-        {userAvatar && userAvatar.startsWith('data:image/jpeg;base64') && (
-          <img
-            crossOrigin="anonymous"
-            className="mb-6 w-20 rounded-full ring-4 ring-wrappdYellow ring-offset-4 ring-offset-gray-900 md:w-28"
-            src={userAvatar}
-            alt=""
-          />
-        )}
-        <h1 className="mb-2 text-4xl font-extrabold leading-none md:text-6xl">
-          {userName}
-        </h1>
+        <div className="mb-8 flex items-center gap-5 md:gap-7">
+          {userAvatar && userAvatar.startsWith('data:image/jpeg;base64') && (
+            <img
+              crossOrigin="anonymous"
+              className="size-16 shrink-0 rounded-full object-cover ring-4 ring-wrappdYellow ring-offset-4 ring-offset-gray-900 md:size-24"
+              src={userAvatar}
+              alt=""
+            />
+          )}
+          <h1 className="text-3xl font-extrabold leading-tight md:text-5xl">
+            {userName}
+          </h1>
+        </div>
         {shareLinkTitle && (
-          <p className="mb-1 text-2xl font-bold text-wrappdYellow md:text-3xl">
+          <p className="mb-2 text-2xl font-bold text-wrappdYellow md:text-3xl">
             {shareLinkTitle}
           </p>
         )}
-        <p className="text-xl text-gray-400 md:text-2xl">
-          {formatWrappdDates(dateRange.start, dateRange.end)}
-        </p>
-        <div className="mt-2 text-sm text-gray-500">
-          <ActiveFiltersDisplay filterOverview={filterOverview} />
-        </div>
+        <WrappdActiveFilters
+          filterOverview={filterOverview}
+          dateRange={dateRange}
+          filterYears={filterYears}
+        />
       </div>
 
-      {/* Bottom: share + scroll hint */}
-      <div className="relative z-10 flex items-center justify-between">
-        <WrappdShareButton userName={userName} />
+      {/* Bottom: scroll hint */}
+      <div className="relative z-10 flex items-center justify-center">
         <div className="flex flex-col items-center gap-1 text-gray-600">
           <span className="text-xs uppercase tracking-widest">Scroll</span>
           <svg
@@ -90,6 +96,7 @@ WrappdCardHero.propTypes = {
     end: PropTypes.string,
   }).isRequired,
   filterOverview: PropTypes.object.isRequired,
+  filterYears: PropTypes.arrayOf(PropTypes.number),
   shareLinkTitle: PropTypes.string,
   totalBeers: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };

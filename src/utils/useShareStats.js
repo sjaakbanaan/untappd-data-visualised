@@ -18,7 +18,8 @@ export const useShareStats = () => {
     topLists,
     filterOverview,
     shareLinkTitle,
-    venueLocations = []
+    venueLocations = [],
+    filterYears = []
   ) => {
     setIsLoading(true);
     try {
@@ -71,6 +72,7 @@ export const useShareStats = () => {
         startDate: filterDateRange.start,
         endDate: filterDateRange.end,
         filterOverview: filterOverview,
+        filterYears: filterYears || [],
         shareLinkTitle: shareLinkTitle || '',
         venueLocations: validVenueLocations,
         createdAt: new Date().toISOString(),
