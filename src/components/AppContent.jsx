@@ -30,7 +30,6 @@ const AppContent = () => {
 
   const {
     beerData,
-    filteredData,
     filterOverview,
     setFilterOverview,
     filterDateRange,
@@ -73,7 +72,6 @@ const AppContent = () => {
             isOpen={isFilterSidebarOpen}
             onClose={() => setIsFilterSidebarOpen(false)}
             beerData={beerData}
-            filteredData={filteredData}
             filterDateRange={filterDateRange}
             setFilterDateRange={setFilterDateRange}
             filterOverview={filterOverview}

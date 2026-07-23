@@ -31,10 +31,14 @@ const OverviewFilter = ({
   }
 
   // Format options for react-select
-  const selectOptions = formattedOptions.map((option) => ({
+  const toOption = (option) => ({
     label: filterKey == 'brewery_state' ? translateStates(option, statesData) : option,
     value: option,
-  }));
+  });
+  const selectOptions = formattedOptions.map(toOption);
+
+  // Normalise the incoming value to an array of selected values
+  const selectedValues = Array.isArray(value) ? value : value ? [value] : [];
 
   return (
     <div>
@@ -45,15 +49,17 @@ const OverviewFilter = ({
         id={labelPlural}
         placeholder="Choose.."
         options={selectOptions}
-        onChange={(selectedOption) =>
-          onChange(selectedOption ? selectedOption.value : null)
-        } // Handle null value
+        isMulti
+        onChange={(selectedOptions) =>
+          onChange(selectedOptions ? selectedOptions.map((option) => option.value) : [])
+        }
         isClearable
         isSearchable
-        value={value ? { label: value, value } : null} // handle null value
+        closeMenuOnSelect={false}
+        value={selectedValues.map(toOption)}
         unstyled
         classNames={{
-          clearIndicator: () => classNames('p-2'),
+          clearIndicator: () => classNames('text-gray-600', 'p-2'),
           control: ({ isFocused }) =>
             classNames(
               'bg-gray-900',
@@ -79,7 +85,28 @@ const OverviewFilter = ({
               'hover:cursor-pointer'
             ),
           placeholder: () => classNames('text-white', 'mx-0.5'),
-          valueContainer: () => classNames('py-0.5', 'px-2', 'text-yellow-500'),
+          valueContainer: () =>
+            classNames('py-0.5', 'px-2', 'text-yellow-500', 'gap-1', 'flex-wrap'),
+          multiValue: () =>
+            classNames(
+              'bg-yellow-500/10',
+              'border',
+              'border-yellow-500/20',
+              'rounded',
+              'items-center',
+              'my-0.5'
+            ),
+          multiValueLabel: () => classNames('py-0.5', 'pl-2', 'pr-1', 'text-yellow-500'),
+          multiValueRemove: () =>
+            classNames(
+              'px-1',
+              'self-stretch',
+              'flex',
+              'items-center',
+              'rounded-r',
+              'hover:bg-yellow-500',
+              'hover:text-gray-900'
+            ),
         }}
       />
     </div>

@@ -1,19 +1,23 @@
 export const filterBeerData = (beerData, filterOverview, filterDateRange, resetList) => {
-  // Helper function to generate filter functions dynamically
+  // Helper function to generate filter functions dynamically.
+  // Each filter holds an array of selected values (a plain string is also
+  // tolerated for backwards compatibility); an item matches when its value
+  // equals any of the selected values.
   const generateFilterFunction = (filterKey) => (item) => {
-    if (!filterOverview[filterKey]) return true;
+    const rawValue = filterOverview[filterKey];
+    const filterValues = (Array.isArray(rawValue) ? rawValue : rawValue ? [rawValue] : [])
+      .map((value) => value.toString().toLowerCase());
+    if (filterValues.length === 0) return true;
 
     const itemValue = item[filterKey]?.toString().toLowerCase();
-    const filterValue = filterOverview[filterKey].toString().toLowerCase();
 
     if (filterKey === 'tagged_friends') {
-      // For tagged_friends, check if the selected friend is in the comma-separated list
-      return (
-        itemValue?.split(',').some((friend) => friend.trim() === filterValue) || false
-      );
+      // For tagged_friends, check if any selected friend is in the comma-separated list
+      const friends = itemValue?.split(',').map((friend) => friend.trim()) || [];
+      return filterValues.some((filterValue) => friends.includes(filterValue));
     }
 
-    return itemValue === filterValue;
+    return filterValues.includes(itemValue);
   };
 
   // Dynamically create filter functions based on resetList keys

@@ -10,13 +10,18 @@ const DashboardHeader = ({
   setFilterDateRange,
   onFilterClick,
 }) => {
-  const activeFilters = Object.entries(filterOverview).filter(
-    ([, value]) => value !== ''
-  );
+  // Flatten to one entry per selected value (filters hold arrays of values)
+  const activeFilters = Object.entries(filterOverview).flatMap(([key, value]) => {
+    const values = Array.isArray(value) ? value : value ? [value] : [];
+    return values.map((v) => [key, v]);
+  });
 
-  const handleClearFilter = (key, e) => {
+  const handleClearFilter = (key, valueToRemove, e) => {
     e.stopPropagation();
-    setFilterOverview((prev) => ({ ...prev, [key]: '' }));
+    setFilterOverview((prev) => {
+      const values = Array.isArray(prev[key]) ? prev[key] : prev[key] ? [prev[key]] : [];
+      return { ...prev, [key]: values.filter((v) => v !== valueToRemove) };
+    });
   };
 
   const handleClearDate = (type, e) => {
@@ -63,10 +68,10 @@ const DashboardHeader = ({
           <>
             {activeFilters.map(([key, value]) => (
               <FilterTag
-                key={key}
+                key={`${key}-${value}`}
                 label={key.replace('_', ' ')}
                 value={value}
-                onClear={(e) => handleClearFilter(key, e)}
+                onClear={(e) => handleClearFilter(key, value, e)}
                 onClick={onFilterClick}
               />
             ))}

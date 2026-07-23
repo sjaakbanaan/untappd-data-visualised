@@ -1,11 +1,16 @@
 import { useContext, useState, useEffect } from 'react';
 import OverviewFilter from './OverviewFilter';
 import { DataContext } from '../../DataContext';
-import { transformResetList } from '../../utils/';
+import { transformResetList, filterBeerData } from '../../utils/';
 
 const MOBILE_VISIBLE_FILTER_COUNT = 4;
 
-const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
+const OverviewFilters = ({
+  beerData,
+  filterOverview,
+  setFilterOverview,
+  filterDateRange,
+}) => {
   const [showAllFilters, setShowAllFilters] = useState(false);
   const { resetList } = useContext(DataContext);
   // set empty filter options state
@@ -19,7 +24,18 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
     const uniqueOptions = {};
 
     filterKeys.forEach((key) => {
-      uniqueOptions[key] = [...new Set(beerData.map((item) => item[key]))]
+      // Facet-style options: build each dropdown's options from data matching
+      // all *other* filters (and the date range), but not its own selection.
+      // Otherwise, selecting one value would remove all sibling options.
+      const otherFilters = { ...filterOverview, [key]: [] };
+      const dataForKey = filterBeerData(
+        beerData,
+        otherFilters,
+        filterDateRange,
+        resetList
+      );
+
+      uniqueOptions[key] = [...new Set(dataForKey.map((item) => item[key]))]
         .filter(Boolean)
         .filter(
           (option) =>
@@ -30,13 +46,11 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
 
     // Update state with unique filter options
     setFilterOptions(uniqueOptions);
-  }, [beerData, resetList]);
+  }, [beerData, resetList, filterOverview, filterDateRange]);
 
-  // Function to handle filter changes
+  // Function to handle filter changes; value is an array of selected values
   const handleFilterChange = (key, value) => {
-    // If value is null, remove the filter from the overview
-    const updatedValue = value === null ? '' : value;
-    setFilterOverview((prevFilter) => ({ ...prevFilter, [key]: updatedValue }));
+    setFilterOverview((prevFilter) => ({ ...prevFilter, [key]: value || [] }));
   };
 
   const filterEntries = Object.entries(filterOptions);
@@ -57,7 +71,7 @@ const OverviewFilters = ({ beerData, filterOverview, setFilterOverview }) => {
               label={`${key.replace('_', ' ')} (${options.length})`}
               labelPlural={`${key.replace('_', ' ')}s`}
               options={options}
-              value={filterOverview?.[key] || null} // Pass null if no value is selected
+              value={filterOverview?.[key] || []}
               onChange={(value) => handleFilterChange(key, value)}
             />
           </div>

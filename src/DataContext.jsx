@@ -10,17 +10,18 @@ import { getDefaultEndDate } from './utils/getDefaulEndDate';
 
 const DataContext = createContext();
 
+// Each filter holds an array of selected values; an empty array means inactive
 const resetList = {
-  brewery_name: '',
-  brewery_city: '',
-  brewery_state: '',
-  brewery_country: '',
-  venue_name: '',
-  venue_city: '',
-  venue_country: '',
-  purchase_venue: '',
-  tagged_friends: '',
-  beer_type: '',
+  brewery_name: [],
+  brewery_city: [],
+  brewery_state: [],
+  brewery_country: [],
+  venue_name: [],
+  venue_city: [],
+  venue_country: [],
+  purchase_venue: [],
+  tagged_friends: [],
+  beer_type: [],
 };
 
 const DataProvider = ({ children }) => {

@@ -6,7 +6,6 @@ const FilterSidebar = ({
   isOpen,
   onClose,
   beerData,
-  filteredData,
   filterDateRange,
   setFilterDateRange,
   filterOverview,
@@ -72,13 +71,14 @@ const FilterSidebar = ({
               onDateBlur={onClose}
             />
           </div>
+          {/* Keep the sidebar open so multiple values can be selected.
+              Pass the full dataset; OverviewFilters computes facet-style
+              options per filter so selections don't wipe out sibling options. */}
           <OverviewFilters
-            beerData={filteredData}
+            beerData={beerData}
             filterOverview={filterOverview}
-            setFilterOverview={(val) => {
-              setFilterOverview(val);
-              onClose();
-            }}
+            setFilterOverview={setFilterOverview}
+            filterDateRange={filterDateRange}
           />
         </div>
       </div>

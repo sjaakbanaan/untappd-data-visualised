@@ -1,8 +1,9 @@
 const ActiveFiltersDisplay = ({ filterOverview }) => {
-  // Filter out empty values and create an array of active filters
-  const activeFilters = Object.entries(filterOverview)
-    .filter(([, value]) => value && value !== '')
-    .map(([, value]) => value);
+  // Flatten to a list of active filter values. Filters hold arrays of values,
+  // but old saved shares may still contain plain strings.
+  const activeFilters = Object.values(filterOverview || {}).flatMap((value) =>
+    Array.isArray(value) ? value : value ? [value] : []
+  );
 
   return (
     <div>
