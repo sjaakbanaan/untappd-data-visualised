@@ -62,6 +62,7 @@ https://github.com/user-attachments/assets/fe72a847-d21c-464c-9d70-6891316fec89
 - 16-07-2026: v.3.6.0 added GitHub link to Footer, removed from Header and MobileMenu, and introduced new icons for Settings and Logout in Navigation
 - 16-07-2026: v3.6.1 feat: pass beerData to DashboardHeader and update date range reset logic based on available beer creation dates
 - 16-07-2026 v3.6.2 enhance Uploader notification, and improve Wrappd components with new filtering functionality
+- 23-08-2026: v3.7.0 Big update: added multiselect to all filters on the dashboard, but also in Wrappd!
 
 ## Known bugs
 

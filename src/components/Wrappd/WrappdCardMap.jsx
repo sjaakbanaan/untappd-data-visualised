@@ -28,9 +28,20 @@ const WrappdCardMap = ({ venueLocations }) => {
     if (!hasData) return null;
     const lats = venues.map((v) => v.lat);
     const lngs = venues.map((v) => v.lng);
+    const minLat = Math.min(...lats);
+    const maxLat = Math.max(...lats);
+    const minLng = Math.min(...lngs);
+    const maxLng = Math.max(...lngs);
+
+    // Expand the box well beyond the outermost venues so the area of interest
+    // sits comfortably in the middle of the card (especially on mobile).
+    // The minimum margin keeps single-city maps from zooming in too far.
+    const latMargin = Math.max((maxLat - minLat) * 0.1, 0.4);
+    const lngMargin = Math.max((maxLng - minLng) * 0.1, 0.4);
+
     return [
-      [Math.min(...lngs), Math.min(...lats)],
-      [Math.max(...lngs), Math.max(...lats)],
+      [Math.max(minLng - lngMargin, -180), Math.max(minLat - latMargin, -90)],
+      [Math.min(maxLng + lngMargin, 180), Math.min(maxLat + latMargin, 90)],
     ];
   }, [venues, hasData]);
 
@@ -61,7 +72,8 @@ const WrappdCardMap = ({ venueLocations }) => {
           key={mapKey}
           initialViewState={{
             bounds: boundingBox,
-            fitBoundsOptions: { padding: 80 },
+            // Extra top padding keeps venues clear of the card heading
+            fitBoundsOptions: { padding: { top: 96, bottom: 48, left: 32, right: 32 } },
           }}
           style={{ width: '100%', height: '100%' }}
           mapStyle={OPENFREEMAP_DARK_STYLE}

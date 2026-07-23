@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import DateSelector from './DateSelector';
 import YearFilterButtons from './YearFilterButtons';
 import OverviewFilters from '../Overview/OverviewFilters';
@@ -13,6 +14,21 @@ const FilterSidebar = ({
   filterYears,
   setFilterYears,
 }) => {
+  // Tracks whether any filter was changed since the sidebar was opened,
+  // to show a "filters applied" notification
+  const [filtersChanged, setFiltersChanged] = useState(false);
+
+  useEffect(() => {
+    if (!isOpen) setFiltersChanged(false);
+  }, [isOpen]);
+
+  const withChangeFlag =
+    (setter) =>
+    (...args) => {
+      setFiltersChanged(true);
+      setter(...args);
+    };
+
   return (
     <>
       {/* Backdrop */}
@@ -59,9 +75,9 @@ const FilterSidebar = ({
             <YearFilterButtons
               beerData={beerData}
               filterDateRange={filterDateRange}
-              setFilterDateRange={setFilterDateRange}
+              setFilterDateRange={withChangeFlag(setFilterDateRange)}
               filterYears={filterYears}
-              setFilterYears={setFilterYears}
+              setFilterYears={withChangeFlag(setFilterYears)}
             />
             <div className="mb-2 block text-sm font-bold text-white">
               Custom date range
@@ -69,11 +85,11 @@ const FilterSidebar = ({
             <DateSelector
               beerData={beerData}
               filterDateRange={filterDateRange}
-              setFilterDateRange={(val) => {
+              setFilterDateRange={withChangeFlag((val) => {
                 // A custom range replaces any specific year selection
                 setFilterYears([]);
                 setFilterDateRange(val);
-              }}
+              })}
               onDateBlur={onClose}
             />
           </div>
@@ -83,11 +99,25 @@ const FilterSidebar = ({
           <OverviewFilters
             beerData={beerData}
             filterOverview={filterOverview}
-            setFilterOverview={setFilterOverview}
+            setFilterOverview={withChangeFlag(setFilterOverview)}
             filterDateRange={filterDateRange}
             filterYears={filterYears}
           />
         </div>
+
+        {/* Notification once any filter changed while the sidebar is open */}
+        {filtersChanged && (
+          <div className="sticky bottom-0 -mx-6 -mb-6 mt-8 border-t border-gray-600 bg-gray-900/95 px-6 py-4 backdrop-blur-sm">
+            <div className="flex justify-end gap-4">
+              <button
+                onClick={onClose}
+                className="shrink-0 rounded bg-yellow-500 px-4 py-2 text-sm font-bold text-gray-900 transition-colors hover:bg-yellow-400"
+              >
+                Show changes
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
