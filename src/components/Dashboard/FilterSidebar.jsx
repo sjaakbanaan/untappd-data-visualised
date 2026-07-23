@@ -107,11 +107,11 @@ const FilterSidebar = ({
 
         {/* Notification once any filter changed while the sidebar is open */}
         {filtersChanged && (
-          <div className="sticky bottom-0 -mx-6 -mb-6 mt-8 border-t border-gray-600 bg-gray-900/95 px-6 py-4 backdrop-blur-sm">
-            <div className="flex justify-end gap-4">
+          <div className="sticky bottom-0 -mx-6 -mb-6 mt-8 border-t border-gray-600 bg-gray-900/95 px-6 py-6 backdrop-blur-sm">
+            <div className="flex justify-end">
               <button
                 onClick={onClose}
-                className="shrink-0 rounded bg-yellow-500 px-4 py-2 text-sm font-bold text-gray-900 transition-colors hover:bg-yellow-400"
+                className="mb-0 flex items-center rounded border border-gray-600 bg-gray-700 px-3 py-2 text-white shadow transition-colors duration-300 hover:bg-gray-900"
               >
                 Show changes
               </button>
