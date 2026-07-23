@@ -21,6 +21,7 @@ import { checkFullDateRange } from './checkFullDateRange';
 import { getBarChartHourData } from './getBarChartHourData';
 import { formatWrappdDates } from './formatWrappdDates';
 import { getDateRangeDayCount } from './getDateRangeDayCount';
+import { getYearsDateRange } from './getYearsDateRange';
 import { getOverviewStats } from './getOverviewStats';
 import { processTopData } from './processTopData';
 import { useBasicStats } from './useBasicStats';
@@ -70,6 +71,7 @@ export {
   checkFullDateRange,
   formatWrappdDates,
   getDateRangeDayCount,
+  getYearsDateRange,
   getOverviewStats,
   processTopData,
   useBasicStats,

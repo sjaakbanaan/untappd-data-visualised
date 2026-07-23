@@ -1,9 +1,20 @@
 import { useState } from 'react';
-import { getDefaultStartDate, getDefaultEndDate, checkFullDateRange } from '../../utils/';
+import {
+  getDefaultStartDate,
+  getDefaultEndDate,
+  getYearsDateRange,
+  checkFullDateRange,
+} from '../../utils/';
 
 const MOBILE_VISIBLE_YEAR_COUNT = 8;
 
-const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) => {
+const YearFilterButtons = ({
+  beerData,
+  filterDateRange,
+  setFilterDateRange,
+  filterYears,
+  setFilterYears,
+}) => {
   const [showAllYears, setShowAllYears] = useState(false);
   // Extract unique years from beerData
   const uniqueYears = [
@@ -16,6 +27,16 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
     filterDateRange
   );
 
+  // Toggle a year on/off; the date range is kept in sync with the span of the
+  // selected years, while filterYears excludes unselected years in between
+  const toggleYear = (year) => {
+    const nextYears = filterYears.includes(year)
+      ? filterYears.filter((y) => y !== year)
+      : [...filterYears, year].sort();
+    setFilterYears(nextYears);
+    setFilterDateRange(getYearsDateRange(nextYears));
+  };
+
   return (
     <div className="mb-8">
       <div className="mb-2 block text-sm font-bold text-white">Year selection</div>
@@ -24,16 +45,17 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
           <button
             key="set-all-time"
             className={`mb-0 whitespace-nowrap rounded border px-3 py-2 text-sm shadow transition-colors duration-300 ${
-              fullDateRange[0]
+              fullDateRange[0] && filterYears.length === 0
                 ? 'border-yellow-500 bg-yellow-500 text-gray-900'
                 : 'border-gray-600 bg-gray-900 text-white hover:bg-gray-700'
             }`}
-            onClick={() =>
+            onClick={() => {
+              setFilterYears([]);
               setFilterDateRange({
                 start: `${fullDateRange[1]}`,
                 end: getDefaultEndDate(),
-              })
-            }
+              });
+            }}
           >
             all time
           </button>
@@ -50,24 +72,11 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
           >
             <button
               className={`mb-0 whitespace-nowrap rounded border px-3 py-2 text-sm shadow transition-colors duration-300 ${
-                // set active state, with an exception for the current year, because then the end value fot filterDateRange is not `${year}-12-31` but getDefaultEndDate():
-                (filterDateRange?.start === `${year}-01-01` &&
-                  filterDateRange?.end === `${year}-12-31`) ||
-                (filterDateRange?.start === `${year}-01-01` &&
-                  filterDateRange?.end === getDefaultEndDate())
+                filterYears.includes(year)
                   ? 'border-yellow-500 bg-yellow-500 text-gray-900 hover:bg-yellow-400'
                   : 'border-gray-600 bg-gray-900 text-white hover:bg-gray-700'
               }`}
-              onClick={() =>
-                setFilterDateRange({
-                  start: `${year}-01-01`,
-                  // set today's date in case the selected year is the current one:
-                  end:
-                    getDefaultEndDate() < `${year}-12-31`
-                      ? getDefaultEndDate()
-                      : `${year}-12-31`,
-                })
-              }
+              onClick={() => toggleYear(year)}
             >
               {year}
             </button>
@@ -78,16 +87,18 @@ const YearFilterButtons = ({ beerData, filterDateRange, setFilterDateRange }) =>
             key="set-last-6-months"
             className={`mb-0 whitespace-nowrap rounded border px-3 py-2 text-sm shadow transition-colors duration-300 ${
               filterDateRange?.start === getDefaultStartDate() &&
-              filterDateRange?.end == getDefaultEndDate()
+              filterDateRange?.end == getDefaultEndDate() &&
+              filterYears.length === 0
                 ? 'border-yellow-500 bg-yellow-500 text-gray-900'
                 : 'border-gray-600 bg-gray-900 text-white hover:bg-gray-700'
             }`}
-            onClick={() =>
+            onClick={() => {
+              setFilterYears([]);
               setFilterDateRange({
                 start: getDefaultStartDate(),
                 end: getDefaultEndDate(),
-              })
-            }
+              });
+            }}
           >
             last 6 months
           </button>

@@ -10,6 +10,7 @@ const OverviewFilters = ({
   filterOverview,
   setFilterOverview,
   filterDateRange,
+  filterYears = [],
 }) => {
   const [showAllFilters, setShowAllFilters] = useState(false);
   const { resetList } = useContext(DataContext);
@@ -32,7 +33,8 @@ const OverviewFilters = ({
         beerData,
         otherFilters,
         filterDateRange,
-        resetList
+        resetList,
+        filterYears
       );
 
       uniqueOptions[key] = [...new Set(dataForKey.map((item) => item[key]))]
@@ -46,7 +48,7 @@ const OverviewFilters = ({
 
     // Update state with unique filter options
     setFilterOptions(uniqueOptions);
-  }, [beerData, resetList, filterOverview, filterDateRange]);
+  }, [beerData, resetList, filterOverview, filterDateRange, filterYears]);
 
   // Function to handle filter changes; value is an array of selected values
   const handleFilterChange = (key, value) => {

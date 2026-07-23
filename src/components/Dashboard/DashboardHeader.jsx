@@ -1,4 +1,4 @@
-import { formatDate } from '../../utils/';
+import { formatDate, getYearsDateRange } from '../../utils/';
 import FilterTag from './FilterTag';
 
 const DashboardHeader = ({
@@ -6,6 +6,8 @@ const DashboardHeader = ({
   filterDateRange,
   filterOverview,
   setFilterOverview,
+  filterYears = [],
+  setFilterYears,
   totalBeerCount,
   setFilterDateRange,
   onFilterClick,
@@ -24,8 +26,20 @@ const DashboardHeader = ({
     });
   };
 
+  const handleClearYear = (year, e) => {
+    e.stopPropagation();
+    const nextYears = filterYears.filter((y) => y !== year);
+    setFilterYears(nextYears);
+    // Keep the date range in sync with the remaining selected years
+    if (nextYears.length > 0) {
+      setFilterDateRange(getYearsDateRange(nextYears));
+    }
+  };
+
   const handleClearDate = (type, e) => {
     e.stopPropagation();
+    // Clearing a date bound also drops any specific year selection
+    if (filterYears.length > 0) setFilterYears([]);
 
     const knownDates = beerData
       .map((item) => item.created_at?.split(' ')[0])
@@ -46,26 +60,41 @@ const DashboardHeader = ({
           {totalBeerCount !== 1 ? 's' : ''}
         </span>
 
-        <span className="text-xl font-normal text-gray-400">between</span>
-        <FilterTag
-          value={filterDateRange.start ? formatDate(filterDateRange.start) : null}
-          isPlaceholder={!filterDateRange.start}
-          onClear={(e) => handleClearDate('start', e)}
-          onClick={onFilterClick}
-        />
+        {/* Only show the date range when it's one uninterrupted range;
+            with specific years selected, the year tags describe the filter */}
+        {filterYears.length === 0 && (
+          <>
+            <span className="text-xl font-normal text-gray-400">between</span>
+            <FilterTag
+              value={filterDateRange.start ? formatDate(filterDateRange.start) : null}
+              isPlaceholder={!filterDateRange.start}
+              onClear={(e) => handleClearDate('start', e)}
+              onClick={onFilterClick}
+            />
 
-        <span className="text-xl font-normal text-gray-400">and</span>
-        <FilterTag
-          value={filterDateRange.end ? formatDate(filterDateRange.end) : null}
-          isPlaceholder={!filterDateRange.end}
-          onClear={(e) => handleClearDate('end', e)}
-          onClick={onFilterClick}
-        />
+            <span className="text-xl font-normal text-gray-400">and</span>
+            <FilterTag
+              value={filterDateRange.end ? formatDate(filterDateRange.end) : null}
+              isPlaceholder={!filterDateRange.end}
+              onClear={(e) => handleClearDate('end', e)}
+              onClick={onFilterClick}
+            />
+          </>
+        )}
 
         <span className="text-xl font-normal text-gray-400">for</span>
 
-        {activeFilters.length > 0 ? (
+        {activeFilters.length > 0 || filterYears.length > 0 ? (
           <>
+            {filterYears.map((year) => (
+              <FilterTag
+                key={`year-${year}`}
+                label="year"
+                value={year}
+                onClear={(e) => handleClearYear(year, e)}
+                onClick={onFilterClick}
+              />
+            ))}
             {activeFilters.map(([key, value]) => (
               <FilterTag
                 key={`${key}-${value}`}

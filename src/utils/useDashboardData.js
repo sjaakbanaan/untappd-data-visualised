@@ -13,6 +13,8 @@ export const useDashboardData = () => {
     setFilterDateRange,
     filterOverview,
     setFilterOverview,
+    filterYears,
+    setFilterYears,
     isFilterSidebarOpen,
     setIsFilterSidebarOpen,
   } = useContext(DataContext);
@@ -28,11 +30,12 @@ export const useDashboardData = () => {
         beerData,
         filterOverview,
         filterDateRange,
-        resetList
+        resetList,
+        filterYears
       );
       setFilteredData(filteredResults);
     }
-  }, [beerData, filterOverview, filterDateRange, resetList]);
+  }, [beerData, filterOverview, filterDateRange, resetList, filterYears]);
 
   return {
     beerData,
@@ -41,6 +44,8 @@ export const useDashboardData = () => {
     setFilterOverview,
     filterDateRange,
     setFilterDateRange,
+    filterYears,
+    setFilterYears,
     isFilterSidebarOpen,
     setIsFilterSidebarOpen,
     dataLoading,

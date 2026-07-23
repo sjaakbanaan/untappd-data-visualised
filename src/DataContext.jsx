@@ -37,6 +37,8 @@ const DataProvider = ({ children }) => {
     end: getDefaultEndDate(),
   });
   const [filterOverview, setFilterOverview] = useState(resetList);
+  // Selected years (non-contiguous multi-year filtering); empty = inactive
+  const [filterYears, setFilterYears] = useState([]);
 
   // Call this from the Uploader to prevent the DataContext effect from
   // re-fetching and overwriting the data that was just set directly.
@@ -153,9 +155,11 @@ const DataProvider = ({ children }) => {
     setFilterDateRange,
     filterOverview,
     setFilterOverview,
+    filterYears,
+    setFilterYears,
     isFilterSidebarOpen,
     setIsFilterSidebarOpen,
-  }), [beerData, badgeData, dataLoading, skipNextFetch, filterDateRange, filterOverview, isFilterSidebarOpen]);
+  }), [beerData, badgeData, dataLoading, skipNextFetch, filterDateRange, filterOverview, filterYears, isFilterSidebarOpen]);
 
   return (
     <DataContext.Provider value={value}>

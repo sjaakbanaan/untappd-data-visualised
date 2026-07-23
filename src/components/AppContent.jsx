@@ -34,6 +34,8 @@ const AppContent = () => {
     setFilterOverview,
     filterDateRange,
     setFilterDateRange,
+    filterYears,
+    setFilterYears,
     isFilterSidebarOpen,
     setIsFilterSidebarOpen,
     dataLoading,
@@ -76,6 +78,8 @@ const AppContent = () => {
             setFilterDateRange={setFilterDateRange}
             filterOverview={filterOverview}
             setFilterOverview={setFilterOverview}
+            filterYears={filterYears}
+            setFilterYears={setFilterYears}
           />
 
           {!dataLoading &&

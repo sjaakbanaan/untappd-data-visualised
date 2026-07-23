@@ -10,6 +10,8 @@ const FilterSidebar = ({
   setFilterDateRange,
   filterOverview,
   setFilterOverview,
+  filterYears,
+  setFilterYears,
 }) => {
   return (
     <>
@@ -53,13 +55,13 @@ const FilterSidebar = ({
 
         <div className="flex flex-col gap-6">
           <div>
+            {/* Keep the sidebar open so multiple years can be selected */}
             <YearFilterButtons
               beerData={beerData}
               filterDateRange={filterDateRange}
-              setFilterDateRange={(val) => {
-                setFilterDateRange(val);
-                onClose();
-              }}
+              setFilterDateRange={setFilterDateRange}
+              filterYears={filterYears}
+              setFilterYears={setFilterYears}
             />
             <div className="mb-2 block text-sm font-bold text-white">
               Custom date range
@@ -67,7 +69,11 @@ const FilterSidebar = ({
             <DateSelector
               beerData={beerData}
               filterDateRange={filterDateRange}
-              setFilterDateRange={setFilterDateRange}
+              setFilterDateRange={(val) => {
+                // A custom range replaces any specific year selection
+                setFilterYears([]);
+                setFilterDateRange(val);
+              }}
               onDateBlur={onClose}
             />
           </div>
@@ -79,6 +85,7 @@ const FilterSidebar = ({
             filterOverview={filterOverview}
             setFilterOverview={setFilterOverview}
             filterDateRange={filterDateRange}
+            filterYears={filterYears}
           />
         </div>
       </div>

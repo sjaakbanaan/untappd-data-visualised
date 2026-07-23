@@ -1,4 +1,10 @@
-export const filterBeerData = (beerData, filterOverview, filterDateRange, resetList) => {
+export const filterBeerData = (
+  beerData,
+  filterOverview,
+  filterDateRange,
+  resetList,
+  filterYears = []
+) => {
   // Helper function to generate filter functions dynamically.
   // Each filter holds an array of selected values (a plain string is also
   // tolerated for backwards compatibility); an item matches when its value
@@ -32,10 +38,17 @@ export const filterBeerData = (beerData, filterOverview, filterDateRange, resetL
   // can shift dates by a day on non-UTC machines (e.g. CET = UTC+1).
   filterFunctions.date = (item) => {
     const itemDate = item.created_at.split(' ')[0];
-    return (
+    const inRange =
       (!filterDateRange.start || itemDate >= filterDateRange.start) &&
-      (!filterDateRange.end || itemDate <= filterDateRange.end)
-    );
+      (!filterDateRange.end || itemDate <= filterDateRange.end);
+    if (!inRange) return false;
+
+    // With specific years selected, also exclude years within the range that
+    // aren't selected (supports non-contiguous selections like 2022 + 2024)
+    if (filterYears.length > 0) {
+      return filterYears.includes(Number(itemDate.slice(0, 4)));
+    }
+    return true;
   };
 
   // Apply all filters

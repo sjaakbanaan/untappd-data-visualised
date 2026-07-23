@@ -44,6 +44,8 @@ const Dashboard = () => {
     setFilterOverview,
     filterDateRange,
     setFilterDateRange,
+    filterYears,
+    setFilterYears,
     setIsFilterSidebarOpen,
   } = useDashboardData();
 
@@ -63,6 +65,8 @@ const Dashboard = () => {
           filterDateRange={filterDateRange}
           filterOverview={filterOverview}
           setFilterOverview={setFilterOverview}
+          filterYears={filterYears}
+          setFilterYears={setFilterYears}
           totalBeerCount={filteredData.length}
           setFilterDateRange={setFilterDateRange}
           onFilterClick={() => setIsFilterSidebarOpen(true)}
