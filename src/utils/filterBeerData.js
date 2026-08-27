@@ -1,3 +1,8 @@
+export const hasActiveAttributeFilters = (filterOverview = {}) =>
+  Object.values(filterOverview || {}).some((value) =>
+    Array.isArray(value) ? value.length > 0 : value !== '' && value != null
+  );
+
 export const filterBeerData = (
   beerData,
   filterOverview,

@@ -3,7 +3,7 @@ import { getCache, setCache, deleteCache, clearOldCache } from './indexedDB';
 import { getDefaultEndDate } from './getDefaulEndDate';
 import { getDefaultStartDate } from './getDefaultStartDate';
 import { transformRatingData } from './transformRatingData';
-import { filterBeerData } from './filterBeerData';
+import { filterBeerData, hasActiveAttributeFilters } from './filterBeerData';
 import { filterDuplicateBeers } from './filterDuplicateBeers';
 import { getBarChartData } from './getBarChartData';
 import { getBarChartYearData } from './getBarChartYearData';
@@ -54,6 +54,7 @@ export {
   getDefaultStartDate,
   transformRatingData,
   filterBeerData,
+  hasActiveAttributeFilters,
   filterDuplicateBeers,
   getBarChartData,
   getBarChartYearData,

@@ -6,6 +6,8 @@ import { db } from '../../firebase';
 import { useAuth } from '../../context/AuthContext';
 import { useBasicStats } from '../../utils/useBasicStats';
 import { getDateRangeDayCount } from '../../utils/getDateRangeDayCount';
+import { filterBeerData, hasActiveAttributeFilters } from '../../utils/filterBeerData';
+import { expandCompactComparisonCheckins } from '../../utils/comparisonData';
 
 const DEMO_COMPARISON_USER_ID = '__demo_comparison_user__';
 const COMPACT_COMPARISON_KEYS = [
@@ -21,16 +23,6 @@ const COMPACT_COMPARISON_KEYS = [
 ];
 
 const getCheckinDate = (item) => item?.created_at?.split(' ')[0] || null;
-
-const filterDataByDateRange = (data, filterDateRange) =>
-  data.filter((item) => {
-    const itemDate = getCheckinDate(item);
-    return (
-      itemDate &&
-      (!filterDateRange.start || itemDate >= filterDateRange.start) &&
-      (!filterDateRange.end || itemDate <= filterDateRange.end)
-    );
-  });
 
 const hasPublishedComparisonData = (entry) =>
   entry.id === DEMO_COMPARISON_USER_ID ||
@@ -170,13 +162,16 @@ const getTopByValue = (items, key) =>
     return !top || item[key] > top[key] ? item : top;
   }, null);
 
-const buildStatsFromComparisonDays = (days, filterDateRange) => {
-  const filteredDays = days.filter(
-    (day) =>
-      day.date &&
-      (!filterDateRange.start || day.date >= filterDateRange.start) &&
-      (!filterDateRange.end || day.date <= filterDateRange.end)
-  );
+const buildStatsFromComparisonDays = (days, filterDateRange, filterYears = []) => {
+  const filteredDays = days.filter((day) => {
+    if (!day.date) return false;
+    if (filterDateRange.start && day.date < filterDateRange.start) return false;
+    if (filterDateRange.end && day.date > filterDateRange.end) return false;
+    if (filterYears.length > 0 && !filterYears.includes(Number(day.date.slice(0, 4)))) {
+      return false;
+    }
+    return true;
+  });
   const sets = {
     uniqueBeerIds: new Set(),
     breweries: new Set(),
@@ -365,7 +360,13 @@ const buildDemoComparisonData = (data) => {
   return [...demoData, ...bonusCheckins];
 };
 
-const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
+const BasicStats = ({
+  filteredData,
+  filterDateRange,
+  fullBeerData,
+  filterOverview = {},
+  filterYears = [],
+}) => {
   const { user } = useAuth();
   const { stats } = useBasicStats(filteredData, filterDateRange, fullBeerData);
   const [comparisonUsers, setComparisonUsers] = useState([]);
@@ -374,6 +375,7 @@ const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
   const [comparisonMonthCompacts, setComparisonMonthCompacts] = useState([]);
   const [comparisonLoading, setComparisonLoading] = useState(false);
   const [comparisonError, setComparisonError] = useState('');
+  const attributeFiltersActive = hasActiveAttributeFilters(filterOverview);
 
   const comparableUsers = useMemo(
     () =>
@@ -397,11 +399,34 @@ const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
     () => comparableUsers.find((entry) => entry.id === selectedUserId) || null,
     [comparableUsers, selectedUserId]
   );
+  const comparisonCheckins = useMemo(() => {
+    if (comparisonMonthCompacts.length > 0) {
+      return comparisonMonthCompacts.flatMap(expandCompactComparisonCheckins);
+    }
+
+    if (selectedUser?.comparisonStatsCompact) {
+      return expandCompactComparisonCheckins(selectedUser.comparisonStatsCompact);
+    }
+
+    return [];
+  }, [comparisonMonthCompacts, selectedUser]);
+  const comparisonSourceData =
+    comparisonCheckins.length > 0 ? comparisonCheckins : comparisonData;
+  const canApplyAttributeFilters = comparisonSourceData.length > 0;
   const comparisonFilteredData = useMemo(
-    () => filterDataByDateRange(comparisonData, filterDateRange),
-    [comparisonData, filterDateRange]
+    () =>
+      filterBeerData(
+        comparisonSourceData,
+        filterOverview,
+        filterDateRange,
+        filterOverview,
+        filterYears
+      ),
+    [comparisonSourceData, filterDateRange, filterOverview, filterYears]
   );
   const comparisonStatsDays = useMemo(() => {
+    if (canApplyAttributeFilters) return [];
+
     if (comparisonMonthCompacts.length > 0) {
       return comparisonMonthCompacts.flatMap(expandCompactComparisonDays);
     }
@@ -413,36 +438,57 @@ const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
     return Array.isArray(selectedUser?.comparisonStatsDays)
       ? selectedUser.comparisonStatsDays
       : [];
-  }, [comparisonMonthCompacts, selectedUser]);
+  }, [canApplyAttributeFilters, comparisonMonthCompacts, selectedUser]);
   const hasComparisonStatsDays = comparisonStatsDays.length > 0;
   const { stats: rawComparisonStats } = useBasicStats(
     comparisonFilteredData,
     filterDateRange,
-    comparisonData
+    comparisonSourceData
   );
-  const comparisonStats = useMemo(
-    () =>
-      hasComparisonStatsDays
-        ? buildStatsFromComparisonDays(comparisonStatsDays, filterDateRange)
-        : rawComparisonStats,
-    [comparisonStatsDays, filterDateRange, hasComparisonStatsDays, rawComparisonStats]
-  );
+  const comparisonStats = useMemo(() => {
+    if (canApplyAttributeFilters) return rawComparisonStats;
+    if (attributeFiltersActive) return [];
+
+    return hasComparisonStatsDays
+      ? buildStatsFromComparisonDays(comparisonStatsDays, filterDateRange, filterYears)
+      : rawComparisonStats;
+  }, [
+    attributeFiltersActive,
+    canApplyAttributeFilters,
+    comparisonStatsDays,
+    filterDateRange,
+    filterYears,
+    hasComparisonStatsDays,
+    rawComparisonStats,
+  ]);
   const comparisonStatsByKey = useMemo(
     () => new Map(comparisonStats.map((item) => [item.key, item])),
     [comparisonStats]
   );
   const comparisonCoverage = useMemo(() => {
-    const coverage = hasComparisonStatsDays
-      ? getDaysCoverage(comparisonStatsDays)
-      : comparisonData.length > 0
-        ? getDataCoverage(comparisonData)
-        : {
-            firstCheckinDate: selectedUser?.firstCheckinDate || null,
-            lastCheckinDate: selectedUser?.lastCheckinDate || null,
-          };
+    const coverage =
+      comparisonSourceData.length > 0
+        ? getDataCoverage(comparisonSourceData)
+        : hasComparisonStatsDays
+          ? getDaysCoverage(comparisonStatsDays)
+          : {
+              firstCheckinDate: selectedUser?.firstCheckinDate || null,
+              lastCheckinDate: selectedUser?.lastCheckinDate || null,
+            };
 
     return extendCoverageToPublishedDate(coverage, selectedUser);
-  }, [comparisonData, comparisonStatsDays, hasComparisonStatsDays, selectedUser]);
+  }, [
+    comparisonSourceData,
+    comparisonStatsDays,
+    hasComparisonStatsDays,
+    selectedUser,
+  ]);
+  const cannotApplyAttributeFilters =
+    selectedUser &&
+    attributeFiltersActive &&
+    !canApplyAttributeFilters &&
+    !comparisonLoading &&
+    !comparisonError;
   const hasComparisonRows =
     (hasComparisonStatsDays && comparisonStats.length > 0) ||
     comparisonFilteredData.length > 0;
@@ -648,6 +694,23 @@ const BasicStats = ({ filteredData, filterDateRange, fullBeerData }) => {
                 {selectedUser.untappd_username} has public data from {coverageLabel}
               </span>
             )}
+            {cannotApplyAttributeFilters && (
+              <span className={coverageLabel ? 'mt-2 block' : undefined}>
+                {selectedUser.untappd_username}&apos;s public stats can&apos;t be filtered
+                by brewery, country, venue or similar fields yet. Comparison is hidden
+                while those filters are active; it will work after they re-publish with
+                the latest app version.
+              </span>
+            )}
+            {!comparisonLoading &&
+              canApplyAttributeFilters &&
+              comparisonSourceData.length > 0 &&
+              comparisonFilteredData.length === 0 && (
+                <span className={coverageLabel ? 'mt-2 block' : undefined}>
+                  {selectedUser.untappd_username} has no check-ins matching the current
+                  filters.
+                </span>
+              )}
           </div>
         )}
         {comparisonError && (
@@ -688,6 +751,8 @@ BasicStats.propTypes = {
   filteredData: PropTypes.array.isRequired,
   filterDateRange: PropTypes.object.isRequired,
   fullBeerData: PropTypes.array.isRequired,
+  filterOverview: PropTypes.object,
+  filterYears: PropTypes.arrayOf(PropTypes.number),
 };
 
 export default BasicStats;
