@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { formatWrappdDates } from '../utils';
+import { formatWrappdDates } from './formatWrappdDates';
 import { initializeModel, preferredModels } from './aiModelDiscovery';
 import { handleAIError } from './aiErrorHandler';
 import { prepareAnalysisData, buildAnalysisPrompt } from './prepareAnalysisData';

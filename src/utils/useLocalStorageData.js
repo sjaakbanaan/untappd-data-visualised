@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getLocalStorageData } from '../utils/';
+import { getLocalStorageData } from './getLocalStorageData';
 
 export const useLocalStorageData = (key) => {
   const [storedData, setStoredData] = useState(null);

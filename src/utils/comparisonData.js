@@ -2,7 +2,7 @@ import { ref, uploadBytes, deleteObject } from 'firebase/storage';
 import { storage } from '../firebase';
 
 export const COMPARISON_DATA_VERSION = 2;
-export const COMPARISON_STATS_COMPACT_VERSION = 4;
+export const COMPARISON_STATS_COMPACT_VERSION = 5;
 
 const COMPARISON_FIELDS = [
   'bid',
@@ -219,62 +219,91 @@ const CHECKIN_DICTIONARY_KEYS = [
   'breweryStates',
 ];
 
-const compactCheckin = (item, dictionaries) => [
-  dictionaries.uniqueBeerIds.add(item.bid),
-  dictionaries.beerNames.add(item.beer_name),
-  dictionaries.beerUrls.add(item.beer_url),
-  dictionaries.breweries.add(item.brewery_name),
-  dictionaries.breweryCities.add(item.brewery_city),
-  dictionaries.breweryStates.add(item.brewery_state),
-  dictionaries.breweryCountries.add(item.brewery_country),
-  dictionaries.beerStyles.add(item.beer_type),
-  dictionaries.venues.add(item.venue_name),
-  dictionaries.cities.add(item.venue_city),
-  dictionaries.countries.add(item.venue_country),
-  dictionaries.purchaseVenues.add(item.purchase_venue),
-  item.tagged_friends
+const parseFriendIndexes = (rawFriends) => {
+  if (Array.isArray(rawFriends)) {
+    return rawFriends.filter((index) => Number.isInteger(index));
+  }
+
+  return String(rawFriends ?? '')
+    .split(',')
+    .map((value) => value.trim())
+    .filter((value) => value !== '')
+    .map(Number)
+    .filter((index) => Number.isInteger(index));
+};
+
+// Firestore rejects arrays-of-arrays, so each compact check-in is stored as a
+// map with a primitive list. Tagged-friend indexes are a comma-separated string.
+const compactCheckin = (item, dictionaries) => {
+  const friendIndexes = item.tagged_friends
     ? item.tagged_friends
         .split(',')
         .map((friend) => friend.trim())
         .map((friend) => dictionaries.friends.add(friend))
         .filter((index) => index !== null)
-    : [],
-  item.photo_url ? 1 : 0,
-  Number(item.total_toasts) !== 0 ? 1 : 0,
-  Number(item.total_comments) !== 0 ? 1 : 0,
-  Number(item.rating_score) || 0,
-  Number(item.global_rating_score) || 0,
-  item.global_total_checkins ?? null,
-  item.global_unique_users ?? null,
-];
-
-const expandCheckin = (date, checkin, dictionaries) => {
-  const friendIndexes = Array.isArray(checkin[12]) ? checkin[12] : [];
+    : [];
 
   return {
-    bid: dictionaries.uniqueBeerIds?.[checkin[0]],
-    beer_name: dictionaries.beerNames?.[checkin[1]] || '',
-    beer_url: dictionaries.beerUrls?.[checkin[2]] || '',
-    brewery_name: dictionaries.breweries?.[checkin[3]] || '',
-    brewery_city: dictionaries.breweryCities?.[checkin[4]] || '',
-    brewery_state: dictionaries.breweryStates?.[checkin[5]] || '',
-    brewery_country: dictionaries.breweryCountries?.[checkin[6]] || '',
-    beer_type: dictionaries.beerStyles?.[checkin[7]] || '',
-    venue_name: dictionaries.venues?.[checkin[8]] || '',
-    venue_city: dictionaries.cities?.[checkin[9]] || '',
-    venue_country: dictionaries.countries?.[checkin[10]] || '',
-    purchase_venue: dictionaries.purchaseVenues?.[checkin[11]] || '',
+    c: [
+      dictionaries.uniqueBeerIds.add(item.bid),
+      dictionaries.beerNames.add(item.beer_name),
+      dictionaries.beerUrls.add(item.beer_url),
+      dictionaries.breweries.add(item.brewery_name),
+      dictionaries.breweryCities.add(item.brewery_city),
+      dictionaries.breweryStates.add(item.brewery_state),
+      dictionaries.breweryCountries.add(item.brewery_country),
+      dictionaries.beerStyles.add(item.beer_type),
+      dictionaries.venues.add(item.venue_name),
+      dictionaries.cities.add(item.venue_city),
+      dictionaries.countries.add(item.venue_country),
+      dictionaries.purchaseVenues.add(item.purchase_venue),
+      friendIndexes.join(','),
+      item.photo_url ? 1 : 0,
+      Number(item.total_toasts) !== 0 ? 1 : 0,
+      Number(item.total_comments) !== 0 ? 1 : 0,
+      Number(item.rating_score) || 0,
+      Number(item.global_rating_score) || 0,
+      item.global_total_checkins ?? null,
+      item.global_unique_users ?? null,
+    ],
+  };
+};
+
+const expandCheckin = (date, checkin, dictionaries) => {
+  const values = Array.isArray(checkin?.c)
+    ? checkin.c
+    : Array.isArray(checkin)
+      ? checkin
+      : null;
+
+  if (!values) return null;
+
+  const friendIndexes = parseFriendIndexes(values[12]);
+
+  return {
+    bid: dictionaries.uniqueBeerIds?.[values[0]],
+    beer_name: dictionaries.beerNames?.[values[1]] || '',
+    beer_url: dictionaries.beerUrls?.[values[2]] || '',
+    brewery_name: dictionaries.breweries?.[values[3]] || '',
+    brewery_city: dictionaries.breweryCities?.[values[4]] || '',
+    brewery_state: dictionaries.breweryStates?.[values[5]] || '',
+    brewery_country: dictionaries.breweryCountries?.[values[6]] || '',
+    beer_type: dictionaries.beerStyles?.[values[7]] || '',
+    venue_name: dictionaries.venues?.[values[8]] || '',
+    venue_city: dictionaries.cities?.[values[9]] || '',
+    venue_country: dictionaries.countries?.[values[10]] || '',
+    purchase_venue: dictionaries.purchaseVenues?.[values[11]] || '',
     tagged_friends: friendIndexes
       .map((index) => dictionaries.friends?.[index])
       .filter(Boolean)
       .join(', '),
-    photo_url: checkin[13] ? '1' : null,
-    total_toasts: checkin[14] || 0,
-    total_comments: checkin[15] || 0,
-    rating_score: checkin[16] || 0,
-    global_rating_score: checkin[17] || 0,
-    global_total_checkins: checkin[18] ?? null,
-    global_unique_users: checkin[19] ?? null,
+    photo_url: values[13] ? '1' : null,
+    total_toasts: values[14] || 0,
+    total_comments: values[15] || 0,
+    rating_score: values[16] || 0,
+    global_rating_score: values[17] || 0,
+    global_total_checkins: values[18] ?? null,
+    global_unique_users: values[19] ?? null,
     created_at: `${date} 12:00:00`,
   };
 };
@@ -289,7 +318,9 @@ export const expandCompactComparisonCheckins = (compact) => {
   return dayEntries.flatMap(([date, day]) => {
     if (!Array.isArray(day?.ck) || day.ck.length === 0) return [];
 
-    return day.ck.map((checkin) => expandCheckin(date, checkin, compact.dictionaries));
+    return day.ck
+      .map((checkin) => expandCheckin(date, checkin, compact.dictionaries))
+      .filter(Boolean);
   });
 };
 

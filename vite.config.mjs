@@ -18,6 +18,8 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: true,
+    // Mapbox, MapLibre, and Firebase are each well over Vite's 500 kB default.
+    chunkSizeWarningLimit: 2000,
   },
   publicDir: 'public',
 });

@@ -1,4 +1,5 @@
-import { getDefaultStartDate, getDefaultEndDate } from './';
+import { getDefaultEndDate } from './getDefaulEndDate';
+import { getDefaultStartDate } from './getDefaultStartDate';
 
 export const isFilterOverviewSet = (filterOverview, filterDateRange) => {
   for (const key in filterOverview) {

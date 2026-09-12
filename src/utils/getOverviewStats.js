@@ -1,16 +1,16 @@
+import { checkFullDateRange } from './checkFullDateRange';
+import { filterDuplicateBeers } from './filterDuplicateBeers';
+import { getDefaultEndDate } from './getDefaulEndDate';
 import {
-  filterDuplicateBeers,
+  calculateAverageRatingScore,
   getBarChartTopBottomData,
-  statsCountTotal,
-  statsCountUnique,
-  statsCountUniqueFriends,
-  checkFullDateRange,
-  getDefaultEndDate,
-  getVsTheWorld,
-  statsPopularCheckins,
-} from '../utils';
-import { calculateAverageRatingScore } from './getBarChartTopBottomData';
+} from './getBarChartTopBottomData';
 import { getDateRangeDayCount } from './getDateRangeDayCount';
+import { getVsTheWorld } from './getVsTheWorld';
+import { statsCountTotal } from './statsCountTotal';
+import { statsCountUnique } from './statsCountUnique';
+import { statsCountUniqueFriends } from './statsCountUniqueFriends';
+import { statsPopularCheckins } from './statsPopularCheckins';
 
 export const getOverviewStats = (
   filteredData,

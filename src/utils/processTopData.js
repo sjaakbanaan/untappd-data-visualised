@@ -1,4 +1,4 @@
-import { normalizeString } from '.';
+import { normalizeString } from './normalizeString';
 
 export const processTopData = (
   beerData,

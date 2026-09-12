@@ -46,8 +46,18 @@ const Uploader = () => {
       reader.onerror = () => console.log('file reading has failed');
 
       reader.onload = async () => {
+        let rawJson;
         try {
-          const rawJson = JSON.parse(reader.result);
+          rawJson = JSON.parse(reader.result);
+        } catch (error) {
+          // eslint-disable-next-line no-console
+          console.error('Error parsing JSON file:', error);
+          alert('Failed to process JSON. Please ensure it is a valid Untappd export.');
+          setUploading(false);
+          return;
+        }
+
+        try {
           const autoDetectedFormat = detectFormat(rawJson);
           const correctSource =
             autoDetectedFormat === 'scraper_xl' ? 'custom_export' : 'untappd_insider';
@@ -76,36 +86,18 @@ const Uploader = () => {
           const storageRef = ref(storage, `users/${user.uid}/untappd_data.json`);
           await uploadBytes(storageRef, file);
 
-          // 4. Update leaderboard stats
-          let leaderboardUsername = userProfile?.untappd_username;
-
-          if (!leaderboardUsername) {
-            const existingLeaderboardDoc = await getDoc(doc(db, 'leaderboard', user.uid));
-            leaderboardUsername = existingLeaderboardDoc.exists()
-              ? existingLeaderboardDoc.data().untappd_username
-              : null;
-          }
-
-          if (leaderboardUsername) {
-            await updateLeaderboard(user, leaderboardUsername, updatedData);
-          } else {
-            throw new Error(
-              'Could not publish comparison stats because no Untappd username is available.'
-            );
-          }
-
-          // 5. Tell DataContext to skip the next refetch cycle – we already
-          //    set beerData directly, so when updateProfile triggers the
-          //    useEffect (via userProfile dependency), it shouldn't overwrite it.
+          // Tell DataContext to skip the next refetch cycle – we already
+          // set beerData directly, so when updateProfile triggers the
+          // useEffect (via userProfile dependency), it shouldn't overwrite it.
           skipNextFetch();
 
-          // 6. Update last import timestamp + persist detected source format
+          // Update last import timestamp + persist detected source format
           await updateProfile({
             last_import: new Date().toISOString(),
             json_source: correctSource,
           });
 
-          // 7. Update local cache (IndexedDB)
+          // Update local cache (IndexedDB)
           try {
             // Cleanup old localStorage keys if they exist
             clearOldCache('untappd_cache_');
@@ -115,11 +107,31 @@ const Uploader = () => {
             console.warn('Failed to update local cache:', e);
           }
 
+          // Leaderboard/comparison stats are secondary — a failure here
+          // should not look like an invalid JSON upload.
+          try {
+            let leaderboardUsername = userProfile?.untappd_username;
+
+            if (!leaderboardUsername) {
+              const existingLeaderboardDoc = await getDoc(doc(db, 'leaderboard', user.uid));
+              leaderboardUsername = existingLeaderboardDoc.exists()
+                ? existingLeaderboardDoc.data().untappd_username
+                : null;
+            }
+
+            if (leaderboardUsername) {
+              await updateLeaderboard(user, leaderboardUsername, updatedData);
+            }
+          } catch (leaderboardError) {
+            // eslint-disable-next-line no-console
+            console.error('Failed to update leaderboard:', leaderboardError);
+          }
+
           navigate('/');
         } catch (error) {
           // eslint-disable-next-line no-console
           console.error('Error processing or uploading file:', error);
-          alert('Failed to process JSON. Please ensure it is a valid Untappd export.');
+          alert('Failed to finish importing your data. Please try again.');
         } finally {
           setUploading(false);
         }
