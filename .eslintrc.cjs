@@ -77,6 +77,8 @@ module.exports = {
       {
         commonjs: true,
         caseSensitive: true,
+        // Vite query imports (e.g. ?worker&url) are resolved by Vite, not Node.
+        ignore: ['\\?(worker|url|raw|inline)'],
       },
     ],
     'import/extensions': [
