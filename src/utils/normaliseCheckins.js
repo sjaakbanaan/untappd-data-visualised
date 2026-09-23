@@ -1,11 +1,20 @@
 /**
  * normaliseCheckins.js
  *
- * Converts either an Untappd Insider export or an Untappd Scraper XL export
- * into the canonical flat shape the dashboard expects.
+ * Converts either an official Untappd Insider export or an Untappd Scraper XL
+ * export (https://github.com/sjaakbanaan/untappd-scraper-xl) into the
+ * canonical flat shape the dashboard expects.
  *
- * Canonical shape matches the Insider format, so Insider items are
- * essentially a no-op pass-through. Scraper XL items are remapped.
+ * Canonical fields (used everywhere downstream):
+ * - created_at: "YYYY-MM-DD HH:MM:SS" (Europe/Amsterdam wall clock)
+ * - tagged_friends: comma-separated string (e.g. "Alice, Bob")
+ * - flavor_profiles: comma-separated string (e.g. "sweet,fruity")
+ * - rating_score: number
+ *
+ * Official Insider exports historically matched this shape already. Newer
+ * Insider dumps still use flat field names, but ship tagged_friends /
+ * flavor_profiles as arrays and created_at as ISO-8601 with an offset.
+ * Scraper XL uses nested beer/brewery/venue objects and needs a full remap.
  */
 
 // ---------------------------------------------------------------------------
@@ -17,7 +26,7 @@
  * Returns 'scraper_xl' if the item has a nested `beer` object,
  * otherwise 'insider'.
  *
- * @param {Array} data
+ * @param {Array|Object} dataRaw
  * @returns {'insider'|'scraper_xl'}
  */
 export const detectFormat = (dataRaw) => {
@@ -26,8 +35,30 @@ export const detectFormat = (dataRaw) => {
   return data[0] && typeof data[0].beer === 'object' ? 'scraper_xl' : 'insider';
 };
 
+/**
+ * Maps stored profile values (`untappd_insider` / `custom_export`) and
+ * auto-detect labels (`insider` / `scraper_xl`) onto the two handlers.
+ *
+ * @param {string|undefined} format
+ * @param {Array|Object} dataRaw
+ * @returns {'insider'|'scraper_xl'}
+ */
+export const resolveFormat = (format, dataRaw) => {
+  if (format === 'scraper_xl' || format === 'custom_export') return 'scraper_xl';
+  if (format === 'insider' || format === 'untappd_insider') return 'insider';
+  return detectFormat(dataRaw);
+};
+
+/**
+ * Profile / Firestore value for the detected export format.
+ * @param {'insider'|'scraper_xl'} format
+ * @returns {'untappd_insider'|'custom_export'}
+ */
+export const toJsonSource = (format) =>
+  format === 'scraper_xl' ? 'custom_export' : 'untappd_insider';
+
 // ---------------------------------------------------------------------------
-// Scraper XL helpers
+// Shared helpers
 // ---------------------------------------------------------------------------
 
 /**
@@ -61,14 +92,12 @@ const extractIdFromUrl = (url) => {
 };
 
 /**
- * Converts an ISO 8601 UTC date string to the "YYYY-MM-DD HH:MM:SS" format
- * that the Insider export (and the rest of the app) uses.
+ * Converts an ISO 8601 date string to the "YYYY-MM-DD HH:MM:SS" format
+ * that the rest of the app uses for date filtering and day grouping.
  *
- * The Insider export stores timestamps in Europe/Amsterdam local time (CET in
- * winter, CEST in summer). We use Intl.DateTimeFormat to apply the correct
- * offset (either +1 or +2 h depending on the date) instead of a hardcoded
- * +1 h shift, which was causing dates in the CEST period to land on the wrong
- * calendar day when the check-in happened between midnight and 1 am CEST.
+ * Older Insider exports already used Amsterdam wall-clock times without a
+ * timezone. Newer Insider dumps and Scraper XL use ISO-8601. We format via
+ * Europe/Amsterdam so CET/CEST transitions stay on the correct calendar day.
  */
 const amsFmt = new Intl.DateTimeFormat('en-CA', {
   timeZone: 'Europe/Amsterdam',
@@ -84,21 +113,71 @@ const amsFmt = new Intl.DateTimeFormat('en-CA', {
 const isoToFlat = (iso) => {
   if (!iso) return '';
   const d = new Date(iso);
-  // Intl.DateTimeFormat gives us each field already in Amsterdam local time.
+  if (Number.isNaN(d.getTime())) return '';
   const parts = Object.fromEntries(
     amsFmt.formatToParts(d).map(({ type, value }) => [type, value])
   );
-  // en-CA locale formats the date as YYYY-MM-DD, so `parts.year/month/day`
-  // are already zero-padded strings.
   return `${parts.year}-${parts.month}-${parts.day} ${parts.hour}:${parts.minute}:${parts.second}`;
 };
 
+const CANONICAL_CREATED_AT = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/;
+
+/**
+ * Normalises created_at to "YYYY-MM-DD HH:MM:SS".
+ * Leaves already-canonical Insider timestamps untouched; converts ISO values.
+ */
+const toCanonicalCreatedAt = (value) => {
+  if (!value || typeof value !== 'string') return '';
+  if (CANONICAL_CREATED_AT.test(value)) return value;
+  if (value.includes('T')) return isoToFlat(value);
+  return value;
+};
+
+/**
+ * Coerces friends / flavor lists to a comma-separated string.
+ * Accepts legacy Insider strings and newer array exports.
+ */
+const toCommaSeparated = (value, separator = ', ') => {
+  if (Array.isArray(value)) {
+    return value
+      .map((entry) => String(entry).trim())
+      .filter(Boolean)
+      .join(separator);
+  }
+  if (value == null) return '';
+  return String(value);
+};
+
+const toRatingScore = (value) => {
+  if (value === '' || value == null) return 0;
+  const numeric = Number(value);
+  return Number.isFinite(numeric) ? numeric : 0;
+};
+
 // ---------------------------------------------------------------------------
-// Per-format normalisers
+// Official Untappd Insider export
 // ---------------------------------------------------------------------------
 
-const normaliseInsiderItem = (item) => ({ ...item });
+/**
+ * Flat field names already match the dashboard. Coerce the fields whose
+ * shape changed in newer Insider dumps (and keep older string dumps working).
+ */
+const normaliseInsiderItem = (item) => ({
+  ...item,
+  created_at: toCanonicalCreatedAt(item.created_at),
+  tagged_friends: toCommaSeparated(item.tagged_friends, ', '),
+  flavor_profiles: toCommaSeparated(item.flavor_profiles, ','),
+  rating_score: toRatingScore(item.rating_score),
+});
 
+// ---------------------------------------------------------------------------
+// Untappd Scraper XL export
+// ---------------------------------------------------------------------------
+
+/**
+ * Remaps nested Scraper XL check-ins into the canonical flat shape.
+ * @see https://github.com/sjaakbanaan/untappd-scraper-xl
+ */
 const normaliseScraperXlItem = (item) => {
   const beer = item.beer ?? {};
   const brewery = item.brewery ?? {};
@@ -108,7 +187,7 @@ const normaliseScraperXlItem = (item) => {
   return {
     checkin_id: item.checkin_id,
     checkin_url: item.checkin_url,
-    created_at: isoToFlat(item.created_at),
+    created_at: toCanonicalCreatedAt(item.created_at),
 
     // Beer
     beer_name: beer.name ?? '',
@@ -117,7 +196,8 @@ const normaliseScraperXlItem = (item) => {
     beer_ibu: beer.ibu ?? 0,
     beer_url: beer.url ?? '',
     bid: extractIdFromUrl(beer.url),
-    global_rating_score: beer.global_rating != null ? parseFloat(beer.global_rating.toFixed(2)) : null,
+    global_rating_score:
+      beer.global_rating != null ? parseFloat(beer.global_rating.toFixed(2)) : null,
     global_weighted_rating_score: null, // not available in Scraper XL
     global_total_checkins: beer.total_checkins ?? null,
     global_unique_users: beer.unique_users ?? null,
@@ -141,7 +221,7 @@ const normaliseScraperXlItem = (item) => {
     venue_lng: venue.lng ?? null,
 
     // Check-in details
-    rating_score: item.rating ?? 0,
+    rating_score: toRatingScore(item.rating),
     comment: item.comment ?? '',
     serving_type: item.serving_type ?? '',
     photo_url: item.photo_url ?? null,
@@ -150,10 +230,8 @@ const normaliseScraperXlItem = (item) => {
     purchase_venue_country: purchasedAt.country ?? '',
     purchase_venue_lat: purchasedAt.lat ?? null,
     purchase_venue_lng: purchasedAt.lng ?? null,
-    flavor_profiles: Array.isArray(item.flavor) ? item.flavor.join(',') : '',
-    tagged_friends: Array.isArray(item.tagged_friends)
-      ? item.tagged_friends.join(', ')
-      : (item.tagged_friends ?? ''),
+    flavor_profiles: toCommaSeparated(item.flavor, ','),
+    tagged_friends: toCommaSeparated(item.tagged_friends, ', '),
     total_toasts: item.toasts?.count ?? 0,
     total_comments: item.comment_count ?? 0,
   };
@@ -167,20 +245,21 @@ const normaliseScraperXlItem = (item) => {
  * Normalises an array of check-ins from either export format into the
  * canonical flat shape the dashboard uses.
  *
- * @param {Array}                   data    Raw parsed JSON array
- * @param {'insider'|'scraper_xl'}  format  Format hint (falls back to auto-detect)
- * @returns {Array}                         Normalised array
+ * @param {Array|Object} dataRaw  Raw parsed JSON (array or `{ checkins: [] }`)
+ * @param {string}       [format] Format hint (`insider` / `untappd_insider` /
+ *                                `scraper_xl` / `custom_export`); auto-detects
+ *                                when omitted or unrecognised
+ * @returns {Array}
  */
 export const normaliseCheckins = (dataRaw, format) => {
   const data = Array.isArray(dataRaw?.checkins) ? dataRaw.checkins : dataRaw;
-  const resolvedFormat = format ?? detectFormat(data);
+  if (!Array.isArray(data)) return [];
 
-  if (resolvedFormat === 'scraper_xl' || resolvedFormat === 'custom_export') {
-    if (!Array.isArray(data)) return [];
+  const resolvedFormat = resolveFormat(format, dataRaw);
+
+  if (resolvedFormat === 'scraper_xl') {
     return data.map(normaliseScraperXlItem);
   }
 
-  // 'insider' — pass through (field names already match)
-  if (!Array.isArray(data)) return [];
   return data.map(normaliseInsiderItem);
 };

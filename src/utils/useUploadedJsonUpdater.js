@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import countriesData from '../data/countries.json';
-import { normaliseCheckins, detectFormat } from './normaliseCheckins';
+import { normaliseCheckins } from './normaliseCheckins';
 
 // Function to translate country names - moved outside hook to keep it stable
 const translateCountries = (originalName, countriesData) => {
@@ -12,8 +12,9 @@ export const useUploadedJsonUpdater = () => {
   const [beerData, setBeerData] = useState(null);
 
   const manipulateData = useCallback((data, userDetails) => {
-    const formatHint = userDetails?.json_source ?? detectFormat(data);
-    const normalisedData = normaliseCheckins(data, formatHint);
+    // json_source is 'untappd_insider' | 'custom_export'; normaliseCheckins
+    // resolves those (and auto-detects when missing) onto the two handlers.
+    const normalisedData = normaliseCheckins(data, userDetails?.json_source);
 
     const uniqueCheckinIds = new Set();
 

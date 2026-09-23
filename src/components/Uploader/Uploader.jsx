@@ -14,7 +14,7 @@ import {
   clearOldCache,
 } from '../../utils/';
 import { extractBadges } from '../../utils/extractBadges';
-import { detectFormat } from '../../utils/normaliseCheckins';
+import { detectFormat, toJsonSource } from '../../utils/normaliseCheckins';
 import { updateLeaderboard } from '../../utils/updateLeaderboard';
 import { DataContext } from '../../DataContext';
 import NotificationBar from '../UI/NotificationBar';
@@ -58,9 +58,7 @@ const Uploader = () => {
         }
 
         try {
-          const autoDetectedFormat = detectFormat(rawJson);
-          const correctSource =
-            autoDetectedFormat === 'scraper_xl' ? 'custom_export' : 'untappd_insider';
+          const correctSource = toJsonSource(detectFormat(rawJson));
 
           // Use userProfile from AuthContext instead of local state
           const currentSettings = {

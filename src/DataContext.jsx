@@ -4,7 +4,7 @@ import { useAuth } from './context/AuthContext';
 import { storage } from './firebase';
 import { useUploadedJsonUpdater, getCache, setCache, clearOldCache } from './utils';
 import { extractBadges } from './utils/extractBadges';
-import { detectFormat } from './utils/normaliseCheckins';
+import { detectFormat, toJsonSource } from './utils/normaliseCheckins';
 import { getDefaultStartDate } from './utils/getDefaultStartDate';
 import { getDefaultEndDate } from './utils/getDefaulEndDate';
 
@@ -102,8 +102,7 @@ const DataProvider = ({ children }) => {
           }
         }
 
-        const autoDetectedFormat = detectFormat(rawJson);
-        const correctSource = autoDetectedFormat === 'scraper_xl' ? 'custom_export' : 'untappd_insider';
+        const correctSource = toJsonSource(detectFormat(rawJson));
 
         // Persist json_source to Firestore if it changed
         if (userProfile?.json_source !== correctSource) {
