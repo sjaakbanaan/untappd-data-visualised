@@ -14,6 +14,21 @@ const formatDate = (iso) => {
   });
 };
 
+const getSortValue = (entry, key) => {
+  if (key === 'lastUpdated') {
+    const time = entry.lastUpdated ? new Date(entry.lastUpdated).getTime() : 0;
+    return Number.isFinite(time) ? time : 0;
+  }
+  return entry[key] ?? 0;
+};
+
+const compareBySortKeyDesc = (a, b, key) => getSortValue(b, key) - getSortValue(a, key);
+
+const formatSortValue = (entry, key) => {
+  if (key === 'lastUpdated') return formatDate(entry.lastUpdated);
+  return (entry[key] ?? 0).toLocaleString();
+};
+
 const LeaderboardPage = () => {
   const [rawEntries, setRawEntries] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -64,13 +79,13 @@ const LeaderboardPage = () => {
 
   // Sort client-side — instant, no re-fetch, no Firestore index needed
   const entries = useMemo(() => {
-    const sorted = [...rawEntries].sort((a, b) => (b[sortKey] ?? 0) - (a[sortKey] ?? 0));
+    const sorted = [...rawEntries].sort((a, b) => compareBySortKeyDesc(a, b, sortKey));
     return sortDir === 'asc' ? sorted.reverse() : sorted;
   }, [rawEntries, sortKey, sortDir]);
 
   // True rank by sortKey desc — always #1 = highest, regardless of display direction
   const rankMap = useMemo(() => {
-    const sorted = [...rawEntries].sort((a, b) => (b[sortKey] ?? 0) - (a[sortKey] ?? 0));
+    const sorted = [...rawEntries].sort((a, b) => compareBySortKeyDesc(a, b, sortKey));
     const map = {};
     sorted.forEach((entry, i) => {
       map[entry.id] = i + 1;
@@ -81,7 +96,9 @@ const LeaderboardPage = () => {
   // Podium is always top 3 by CURRENT sort key - keeps dashboard consistent
   const podiumEntries = useMemo(
     () =>
-      [...rawEntries].sort((a, b) => (b[sortKey] ?? 0) - (a[sortKey] ?? 0)).slice(0, 3),
+      [...rawEntries]
+        .sort((a, b) => compareBySortKeyDesc(a, b, sortKey))
+        .slice(0, 3),
     [rawEntries, sortKey]
   );
 
@@ -164,9 +181,17 @@ const LeaderboardPage = () => {
                     {entry.untappd_username}
                   </span>
                   <span
-                    className={`font-black ${idx === 0 ? 'text-4xl text-yellow-500' : 'text-3xl text-gray-300'}`}
+                    className={`font-black ${
+                      sortKey === 'lastUpdated'
+                        ? idx === 0
+                          ? 'text-xl text-yellow-500'
+                          : 'text-lg text-gray-300'
+                        : idx === 0
+                          ? 'text-4xl text-yellow-500'
+                          : 'text-3xl text-gray-300'
+                    }`}
                   >
-                    {(entry[sortKey] ?? 0).toLocaleString()}
+                    {formatSortValue(entry, sortKey)}
                   </span>
                 </div>
               ))}
@@ -210,8 +235,20 @@ const LeaderboardPage = () => {
                       <span className="opacity-30">↕</span>
                     )}
                   </th>
-                  <th className="hidden px-6 py-4 text-right md:table-cell">
-                    Last Updated
+                  <th
+                    className={`hidden cursor-pointer px-6 py-4 text-right transition-colors hover:text-yellow-400 md:table-cell ${sortKey === 'lastUpdated' ? 'text-yellow-500' : ''}`}
+                    onClick={() => handleSort('lastUpdated')}
+                  >
+                    Last Updated{' '}
+                    {sortKey === 'lastUpdated' ? (
+                      sortDir === 'desc' ? (
+                        '↓'
+                      ) : (
+                        '↑'
+                      )
+                    ) : (
+                      <span className="opacity-30">↕</span>
+                    )}
                   </th>
                 </tr>
               </thead>
@@ -252,7 +289,9 @@ const LeaderboardPage = () => {
                     >
                       {(entry.totalCheckins ?? 0).toLocaleString()}
                     </td>
-                    <td className="hidden px-6 py-4 text-right text-gray-600 md:table-cell">
+                    <td
+                      className={`hidden px-6 py-4 text-right md:table-cell ${sortKey === 'lastUpdated' ? 'font-bold text-yellow-400' : 'text-gray-600'}`}
+                    >
                       {formatDate(entry.lastUpdated)}
                     </td>
                   </tr>
