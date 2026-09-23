@@ -16,7 +16,8 @@ export const preferredModels = [
 export const discoverAvailableModels = async (apiKey) => {
   try {
     const listResponse = await fetch(
-      `https://generativelanguage.googleapis.com/v1/models?key=${apiKey}`
+      'https://generativelanguage.googleapis.com/v1/models',
+      { headers: { 'x-goog-api-key': apiKey } }
     );
 
     if (!listResponse.ok) {
