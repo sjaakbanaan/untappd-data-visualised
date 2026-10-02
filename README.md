@@ -67,6 +67,7 @@ https://github.com/user-attachments/assets/fe72a847-d21c-464c-9d70-6891316fec89
 - 12-09-2026: v3.7.2 Improved Uploader error handling, bug fixes and package updates.
 - 23-09-2026: v3.7.4 Fixed broken Insider upload flow. 
 - 23-09-2026: v3.7.5 fixed broken map in Wrappd
+- 03-10-2026: v3.7.5 AI Beer Analysis updated to latest models and improved output
 
 ## Known bugs
 

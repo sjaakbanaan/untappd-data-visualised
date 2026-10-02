@@ -2,6 +2,21 @@
  * Prepares beer data for AI analysis
  */
 export const prepareAnalysisData = (beerData) => {
+  const countries = beerData.reduce((acc, item) => {
+    const country = item.venue_country;
+    if (!country) return acc;
+
+    if (!acc[country]) {
+      acc[country] = { beers: 0, days: new Set() };
+    }
+
+    acc[country].beers += 1;
+    const day = item.created_at?.split(' ')[0];
+    if (day) acc[country].days.add(day);
+
+    return acc;
+  }, {});
+
   return {
     totalCheckins: beerData.length,
     uniqueBeers: [
@@ -25,7 +40,13 @@ export const prepareAnalysisData = (beerData) => {
       acc[type] = (acc[type] || 0) + 1;
       return acc;
     }, {}),
-    countries: [...new Set(beerData.map((item) => item.brewery_country))],
+    countries: Object.entries(countries)
+      .map(([name, data]) => ({
+        name,
+        beers: data.beers,
+        days: data.days.size,
+      }))
+      .sort((a, b) => b.beers - a.beers),
     dateRange: {
       first: beerData[0]?.created_at,
       last: beerData[beerData.length - 1]?.created_at,
@@ -84,7 +105,12 @@ export const buildAnalysisPrompt = (analysisData, beerData, formatWrappdDates) =
     - Beer types consumed: ${Object.entries(analysisData.beerTypes)
       .map(([type, count]) => `${type}: ${count}`)
       .join(', ')}
-    - Countries: ${analysisData.countries.join(', ')}
+    - Countries (where the beers were drunk): ${analysisData.countries
+      .map(
+        ({ name, beers, days }) =>
+          `${name} (${beers} ${beers === 1 ? 'beer' : 'beers'} over ${days} ${days === 1 ? 'day' : 'days'})`
+      )
+      .join(', ')}
     - Date range: ${analysisData.dateRange.first} to ${analysisData.dateRange.last}
 
     Favorite Breweries (by check-in count):
@@ -112,9 +138,10 @@ export const buildAnalysisPrompt = (analysisData, beerData, formatWrappdDates) =
     5. Tell the user their top 3 favorite brewery origin countries, tell them about it, but if the user drank a lot of beers from the same country, it's probably the country they live in, so better to focus on the rest.
     6. Tell the user their top 3 favorite beer types, tell them about it, etc.
     7. Don't number the responses, just write them out
-    8. Focus on facts, around 2000 characters
+    8. Focus on facts, around 2500 characters
     9. Keep it engaging and conversational, as if you're sharing insights with a friend.
     10. If the date range is a full or half year, emphasize that like 'the last 6 months' or 'the last year' or 'in 2024'.
+    12. See if the user went on holiday based on the Countries data, if so, mention it.
     11. Make use of markdown formatting for the response, like **bold**, *italic*, etc.
   `;
 };
