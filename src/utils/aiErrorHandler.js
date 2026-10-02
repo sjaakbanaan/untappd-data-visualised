@@ -15,7 +15,12 @@ export const handleAIError = async (
       error.message.includes('not supported for generateContent'))
   ) {
     const modelsToAttempt =
-      availableModels.length > 0 ? availableModels : preferredModels;
+      availableModels.length > 0
+        ? [
+            ...preferredModels.filter((name) => availableModels.includes(name)),
+            ...availableModels.filter((name) => !preferredModels.includes(name)),
+          ]
+        : preferredModels;
 
     for (const modelName of modelsToAttempt) {
       try {

@@ -2,12 +2,12 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 export const preferredModels = [
+  'gemini-3.8-flash',
+  'gemini-3.7-flash',
+  'gemini-3.6-flash',
+  'gemini-3.5-flash',
   'gemini-2.5-flash',
   'gemini-2.5-pro',
-  'gemini-2.0-flash',
-  'gemini-1.5-flash',
-  'gemini-1.5-pro',
-  'gemini-pro',
 ];
 
 /**
@@ -50,8 +50,8 @@ export const discoverAvailableModels = async (apiKey) => {
  * Selects the best available model from discovered models
  */
 export const selectBestModel = (availableModels, genAI) => {
-  // Use preferred model if available, otherwise use first available
-  const preferredModel = availableModels.find((name) => preferredModels.includes(name));
+  // Walk the preference list so a newer pinned model wins over API list order
+  const preferredModel = preferredModels.find((name) => availableModels.includes(name));
   const modelToUse = preferredModel || availableModels[0] || preferredModels[0];
 
   return genAI.getGenerativeModel({ model: modelToUse });

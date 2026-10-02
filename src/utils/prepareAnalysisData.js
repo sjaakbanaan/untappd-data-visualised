@@ -73,6 +73,7 @@ export const buildAnalysisPrompt = (analysisData, beerData, formatWrappdDates) =
   return `
     Analyze this beer drinking data and provide 3-5 striking, interesting facts about the user's beer consumption patterns for the given date range: ${formatWrappdDates(analysisData.dateRange.first, analysisData.dateRange.last)}
     Focus on unique insights, trends, or surprising statistics that would be engaging to share.
+    These people are experienced Untappd users, so the amount of beers is not impressive, so don't say things like 'Wow, so many beers!'. Also drinking unique beers is what these people do, no comments about that. Stay factual, no 'ass licking', but also not too serious.
 
     Data Summary:
     - Total check-ins: ${analysisData.totalCheckins}
