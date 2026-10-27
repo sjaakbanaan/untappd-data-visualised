@@ -68,6 +68,7 @@ https://github.com/user-attachments/assets/fe72a847-d21c-464c-9d70-6891316fec89
 - 23-09-2026: v3.7.4 Fixed broken Insider upload flow. 
 - 23-09-2026: v3.7.5 fixed broken map in Wrappd
 - 03-10-2026: v3.7.6 AI Beer Analysis updated to latest models and improved output
+- 27-10-2026: v3.7.7 Insiders export changed the date_created format recently, the app now supports the old and new format.
 
 ## Known bugs
 
