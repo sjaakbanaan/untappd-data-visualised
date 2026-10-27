@@ -6,15 +6,18 @@
  * canonical flat shape the dashboard expects.
  *
  * Canonical fields (used everywhere downstream):
- * - created_at: "YYYY-MM-DD HH:MM:SS" (Europe/Amsterdam wall clock)
+ * - created_at: "YYYY-MM-DD HH:MM:SS"
  * - tagged_friends: comma-separated string (e.g. "Alice, Bob")
  * - flavor_profiles: comma-separated string (e.g. "sweet,fruity")
  * - rating_score: number
  *
  * Official Insider exports historically matched this shape already. Newer
  * Insider dumps still use flat field names, but ship tagged_friends /
- * flavor_profiles as arrays and created_at as ISO-8601 with an offset.
- * Scraper XL uses nested beer/brewery/venue objects and needs a full remap.
+ * flavor_profiles as arrays and created_at as ISO-8601 with an offset
+ * ("2023-10-05T10:39:09+01:00"). The clock digits are the same check-in time
+ * as the legacy "2023-10-05 10:39:09" value, so the offset is not applied.
+ * Scraper XL uses nested beer/brewery/venue objects and UTC timestamps
+ * ("...Z"), which are converted to Europe/Amsterdam wall time.
  */
 
 // ---------------------------------------------------------------------------
@@ -92,12 +95,11 @@ const extractIdFromUrl = (url) => {
 };
 
 /**
- * Converts an ISO 8601 date string to the "YYYY-MM-DD HH:MM:SS" format
- * that the rest of the app uses for date filtering and day grouping.
+ * Converts a UTC ISO timestamp ("2023-10-07T14:49:21.000Z", as used by
+ * Scraper XL) to "YYYY-MM-DD HH:MM:SS" in Europe/Amsterdam.
  *
- * Older Insider exports already used Amsterdam wall-clock times without a
- * timezone. Newer Insider dumps and Scraper XL use ISO-8601. We format via
- * Europe/Amsterdam so CET/CEST transitions stay on the correct calendar day.
+ * hourCycle h23 keeps midnight as 00:00:00. Some engines format hour 00 as
+ * 24 when hour12 is false, and "24:00:00" is an Invalid Date downstream.
  */
 const amsFmt = new Intl.DateTimeFormat('en-CA', {
   timeZone: 'Europe/Amsterdam',
@@ -107,7 +109,7 @@ const amsFmt = new Intl.DateTimeFormat('en-CA', {
   hour: '2-digit',
   minute: '2-digit',
   second: '2-digit',
-  hour12: false,
+  hourCycle: 'h23',
 });
 
 const isoToFlat = (iso) => {
@@ -117,20 +119,39 @@ const isoToFlat = (iso) => {
   const parts = Object.fromEntries(
     amsFmt.formatToParts(d).map(({ type, value }) => [type, value])
   );
-  return `${parts.year}-${parts.month}-${parts.day} ${parts.hour}:${parts.minute}:${parts.second}`;
+  if (!parts.year || !parts.month || !parts.day || parts.hour == null) return '';
+  const hour = parts.hour === '24' ? '00' : parts.hour;
+  return `${parts.year}-${parts.month}-${parts.day} ${hour}:${parts.minute}:${parts.second}`;
 };
 
 const CANONICAL_CREATED_AT = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/;
 
 /**
+ * Newer official exports: "2023-10-05T10:39:09+01:00", with an optional
+ * fraction and an offset written as ±HH:MM or ±HHMM. The date and clock
+ * match the legacy "2023-10-05 10:39:09" string; applying the offset would
+ * move summer check-ins by an hour and can push late-evening ones onto the
+ * next calendar day.
+ */
+const OFFSET_WALL_CLOCK =
+  /^(\d{4}-\d{2}-\d{2})[T ](\d{2}:\d{2}:\d{2})(?:\.\d+)?[+-]\d{2}:?\d{2}$/i;
+
+/**
  * Normalises created_at to "YYYY-MM-DD HH:MM:SS".
- * Leaves already-canonical Insider timestamps untouched; converts ISO values.
+ * Legacy Insider timestamps are kept. Offset ISO timestamps keep their clock
+ * time. UTC "Z" timestamps (Scraper XL) are converted to Amsterdam wall time.
  */
 const toCanonicalCreatedAt = (value) => {
-  if (!value || typeof value !== 'string') return '';
-  if (CANONICAL_CREATED_AT.test(value)) return value;
-  if (value.includes('T')) return isoToFlat(value);
-  return value;
+  if (value == null) return '';
+  const trimmed = String(value).trim();
+  if (!trimmed) return '';
+  if (CANONICAL_CREATED_AT.test(trimmed)) return trimmed;
+
+  const offsetMatch = trimmed.match(OFFSET_WALL_CLOCK);
+  if (offsetMatch) return `${offsetMatch[1]} ${offsetMatch[2]}`;
+
+  if (trimmed.includes('T') || trimmed.includes('t')) return isoToFlat(trimmed);
+  return trimmed;
 };
 
 /**
